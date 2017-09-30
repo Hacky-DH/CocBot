@@ -146,6 +146,9 @@
     <ClInclude Include="android.h">
       <Filter>Kernal\Android</Filter>
     </ClInclude>
+    <ClInclude Include="Const.h">
+      <Filter>全局变量</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cocBotDlg.cpp">

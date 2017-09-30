@@ -40,6 +40,9 @@ public:
 	long bindHwnd;								//绑定窗口
 	CString appPlayerInstallDir;				//模拟器安装路径
 	CWinThread* pThread=NULL;
+private:
+	CString m_base_path;/*根路径*/
+	CString m_file_path;/*文件路径*/
 public:
 
 	int SwitchNo;								//切换编号
@@ -167,7 +170,7 @@ public://功能函数
 	/*控制ocr 范围*/
 	int MakeRect(long srcX,long* x1,long* x2);
 	/*等待某个图片*/
-	long WaitPic(long x1,long y1,long x2,long y2, LPCTSTR path, LPCTSTR picName, int timesOut, bool Isclick=true);
+	long WaitPic(long x1,long y1,long x2,long y2, LPCTSTR picName, int timesOut, bool Isclick=true);
 	/*adb 点击*/
 	int adbClick(int x, int y);
 	/*adb 滑动*/
@@ -209,6 +212,8 @@ public://功能函数
 	int script_main();
 	/*设置句柄*/
 	int SetBindHwnd();
+	/*设置文件路径*/
+	void SetPath(const CString& path);
 };
 
 

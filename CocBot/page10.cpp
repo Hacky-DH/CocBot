@@ -50,6 +50,7 @@ void page10::OnDownload()
 	//MFC    
 	//用默认浏览器打开网页  
 	//如果找不到默认浏览器，则默认用IE打开  
+	ShellExecute(NULL, _T("open"), _T("https://github.com/WallBreaker2/CocBot.git"), NULL, NULL, SW_SHOWNORMAL);//
 	ShellExecute(NULL, _T("open"), _T("https://pan.baidu.com/s/1i5bmWXf"), NULL, NULL, SW_SHOWNORMAL);//
 }
 

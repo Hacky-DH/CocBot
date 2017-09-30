@@ -847,6 +847,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	path = GetExePath() + "Config.ini";
 	script[0].coc.LoadSets(path);
 	UpdateWindowSet();
+	script[0].SetLog("这是一个免费软件，如果你支付了费用，那么你可能上当受骗！", true, REDCOLOR, false);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 

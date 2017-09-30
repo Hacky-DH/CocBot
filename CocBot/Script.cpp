@@ -136,10 +136,8 @@ int CScript::SelectSolider(int type)
 	const int maxY = 597;
 	int x, y;
 	CString str;
-	//dm.SetPath("\Pic\\attack\\solider");
-	CString base_path = GetExePath() + "Pic\\attack\\solider\\";
-	str.Format("%ssolider_%d.bmp|%ssolider_%d_2.bmp", base_path,type,base_path,type);
-
+	SetPath("Pic\\attack\\solider");
+	str.Format("solider_%d.bmp|solider_%d_2.bmp", type,type);
 	int loc_ret=ImageLoc(25, 570, 833, 650,str,0.95, x, y);
 	long x1 = 0, x2 = 0;
 	CString armyNum;
@@ -178,8 +176,8 @@ int CScript::SelectSpell(int type)
 	const int maxY = 597;
 	int x, y;
 	CString str;
-	CString base_path = GetExePath() + "Pic\\attack\\spell\\";
-	str.Format("%sspell_%d.bmp",base_path, type);
+	SetPath("Pic\\attack\\spell\\");
+	str.Format("spell_%d.bmp", type);
 	ImageLoc(25, 570, 833, 650, str, 0.95, x, y);
 	long x1 = 0, x2 = 0;
 	int solider_num = 0;
@@ -219,8 +217,8 @@ int CScript::SelectHero(int type)
 	const int maxY = 597;
 	int x, y;
 	CString str;
-	CString base_path = GetExePath() + "Pic\\attack\\king\\";
-	str.Format("%sking_%d.bmp", base_path, type);
+	SetPath("Pic\\attack\\king\\");
+	str.Format("king_%d.bmp", type);
 	ImageLoc(25, 570, 833, 650, str, 0.95, x, y);
 	if (x > 0)
 	{
@@ -235,10 +233,24 @@ int CScript::SelectHero(int type)
 
 int CScript::ImageLoc(long x1, long y1, long x2, long y2, const char* file, double sim, int&ret_x, int&ret_y)
 {
+	ret_x = ret_y = -1;
+	using namespace std;
+	vector<string>vstr;
+	string mfile;
+	_split(file, vstr, "|");
+	if (vstr.size() == 0)return -1;
+	for (int i=0;i<vstr.size();i++)
+	{
+		mfile += m_file_path;
+		mfile += file;
+		mfile += "|";
+		
+	}
+	mfile.pop_back();
 	void* p = (void*)dm.GetScreenData(x1, y1, x2, y2);
 	int retx, rety;
-	int ret = ::ImageLoc(x2 - x1, y2 - y1, p, file, sim, &retx, &rety);
-	ret_x = ret_y = -1;
+	int ret = ::ImageLoc(x2 - x1, y2 - y1, p, mfile.c_str(), sim, &retx, &rety);
+	
 	if (ret == 1)
 	{
 		retx += x1;
@@ -420,16 +432,23 @@ int CScript::CheckArmyNum(int* trainT)
 {
 
 
-	if (checkMainScreen() != 1)
+	VARIANT x, y;
+	SetPath("Pic\\others");
+	int retx, rety;
+	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
+	if (retx>0)
 	{
+		LeftClick(retx, rety);
+	}
+	else {
+		SetLog("cant loc army view btn.");
 		return -1;
 	}
-	VARIANT x, y;
-	dm.SetPath("\Pic\\others");
-	dm.MoveTo(34, 519);
-	Dealy(20);
-	dm.LeftClick();
-	Dealy(1500);
+	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
+	{
+		SetLog("cant loc close_view.bmp.");
+		return -1;
+	}
 	CString armyStr, M_time, time_str, spells_str, clancastle_str, clan_spell, ret_str;
 	float ret = 0, NowCount = 0, AllCount = 1;
 	dm.UseDict(0);
@@ -486,28 +505,12 @@ int CScript::CheckArmyNum(int* trainT)
 		Dealy(100);
 
 	}
-	dm.SetPath("\Pic\\others");
-	VARIANT ex, ey;
-	for (int i = 0; i <= 10; i++)
+	SetPath("Pic\\others\\");
+	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, true))
 	{
-		if (dm.FindPic(753, 36, 842, 156, "Esc_Army.bmp", "0f0f0f", 0.90, 1, &ex, &ey) > 0)
-		{
-
-			dm.MoveTo(ex.lVal, ey.lVal);
-			Dealy(20);
-			dm.LeftClick();
-			break;
-		}
-		Dealy(200);
-		if (i >= 10)
-		{
-			dm.MoveTo(812, 94);
-			Dealy(20);
-			dm.LeftClick();
-			Dealy(1000);
-		}
+		SetLog("cant loc close_view.bmp.");
+		return -1;
 	}
-
 	if (ret >= _ttoi(coc.getSets("MinTroopRet")))
 	{
 		return 1;
@@ -589,16 +592,25 @@ int CScript::SpeedTrain()
 int CScript::MakeArmy()
 {
 	VARIANT x, y;
-	if (checkMainScreen() != 1)
+	Dealy(2000);
+	/*打开 训练界面*/
+	SetPath("Pic\\others\\");
+	int retx, rety;
+	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
+	if (retx > 0)
 	{
-		checkScreenError();
-		Dealy(2000);
+		LeftClick(retx, rety);
 	}
-	if (checkMainScreen() != 1) return-1;
-	dm.MoveTo(34, 519);
-	Dealy(20);
-	dm.LeftClick();
-	Dealy(1500);
+	else {
+		SetLog("cant loc army view btn.");
+		return -1;
+	}
+	/*等待界面打开*/
+	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
+	{
+		SetLog("cant loc army view.");
+		return -1;
+	}
 	unsigned int army_num[30] = { 0 };/*士兵数量*/
 
 	army_num[1] = _ttoi(coc.getSets("Barbarin"));
@@ -624,7 +636,7 @@ int CScript::MakeArmy()
 	army_num[21] = _ttoi(coc.getSets("HealingSpell"));
 	army_num[22] = _ttoi(coc.getSets("RageSpell"));
 	army_num[23] = _ttoi(coc.getSets("JumpSpell"));
-	army_num[24] = _ttoi(coc.getSets("FreezeSpell"));
+	army_num[24] = _ttoi(coc.getSets("FreezeSpell")); 
 	army_num[25] = _ttoi(coc.getSets("CloneSpell"));
 	army_num[26] = _ttoi(coc.getSets("PoisonSpell"));
 	army_num[27] = _ttoi(coc.getSets("EarthquakeSpell"));
@@ -636,22 +648,23 @@ int CScript::MakeArmy()
 	attackArmy.giant = army_num[3];
 	attackArmy.goblin = army_num[4];
 	attackArmy.wallbreaker = army_num[5];
-	//
-	int retx, rety;
-	dm.SetPath("\Pic\\others");
-	dm.MoveTo(34, 519);
-	Dealy(200);
-	dm.LeftClick();
-	long ex = 0, ey = 0;
-	if (WaitPic(25, 63, 211, 134, "\Pic\\others", "trainView1.bmp", 50, false) != 1)
+
+	/*打开训练页*/
+	SetPath("Pic\\others\\");
+	ImageLoc(259, 82, 342, 109, "army_view_2.bmp", 0.95, retx, rety);
+	if (retx > 0)
+		LeftClick(retx, rety);
+	else
 	{
-		SetLog("WaitPic false", true, REDCOLOR, false);
-		return 0;
+		SetLog("cant loc army_view btn.");
+		return -1;
 	}
-	dm.MoveTo(295, 96);
-	Dealy(20);
-	dm.LeftClick();
-	Dealy(1000);
+	if (WaitPic(259, 82, 342, 109, "army_view_2_click.bmp", 2000, true) != 1)
+	{
+		SetLog("wait view 2 time out.");
+		return -1;
+	}
+	/*ocr*/
 	dm.UseDict(0);
 	CString str, now, right;
 	float NowCount = 0, AllCount = 1;
@@ -677,21 +690,19 @@ int CScript::MakeArmy()
 	}
 	ClearArmy();
 
-
-	CString pic_name, base_path;
 	int TrainArmyStyle = 0;
 	TrainArmyStyle = _ttoi(coc.getSets("TrainArmyStyle"));
+	CString pic_name;
 	if (TrainArmyStyle == 0)/*自定义造兵*/
 	{
-		dm.SetPath("\Pic\\others\\solider");
-		base_path = GetExePath() + "Pic\\others\\solider\\";
+		SetPath("Pic\\others\\solider\\");
 		for (int i = 1; i <= 12; i++)
 		{
 			if (army_num[i] == 0)/*无需此造兵*/
 			{
 				continue;
 			}
-			pic_name.Format("%ssolider_%d.bmp",base_path, i);
+			pic_name.Format("solider_%d.bmp", i);
 			//dm.FindPic(21, 335, 839, 548, pic_name, "0f0f0f", 0.85, 0, &x, &y);
 			ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
 			if (retx > 0)
@@ -718,7 +729,7 @@ int CScript::MakeArmy()
 			{
 				continue;
 			}
-			pic_name.Format("%ssolider_%d.bmp", base_path, i);
+			pic_name.Format("solider_%d.bmp", i);
 			//dm.FindPic(21, 335, 839, 548, pic_name, "0f0f0f", 0.85, 0, &x, &y);
 			ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
 			if (retx > 0)
@@ -786,11 +797,21 @@ int CScript::MakeArmy()
 		}
 	}
 
-	Dealy(1000);
-	dm.MoveTo(493, 94);
-	Dealy(20);
-	dm.LeftClick();
-	Dealy(1500);
+	/*打开 spell 页*/
+	SetPath("Pic\\others\\");
+	ImageLoc(445, 83, 559, 114, "army_view_3.bmp", 0.95, retx, rety);
+	if (retx > 0)
+		LeftClick(retx, rety);
+	else
+	{
+		SetLog("cant loc army_view 3 btn.");
+		return -1;
+	}
+	if (WaitPic(445, 83, 559, 114, "army_view_3_click.bmp", 2000, true) != 1)
+	{
+		SetLog("wait view 3 time out.");
+		return -1;
+	}
 	dm.SetPath("\Pic\\others\\solider");
 	for (int i = 20; i <= 29; i++)/*make spell*/
 	{
@@ -816,9 +837,7 @@ int CScript::MakeArmy()
 		}
 	}
 
-	dm.MoveTo(812, 94);
-	Dealy(20);
-	dm.LeftClick();
+	WaitPic(795, 72, 841, 116, "close_view.bmp", 2000, true);
 	Dealy(1000);
 
 
@@ -2718,19 +2737,19 @@ int CScript::MakeRect(long srcX, long* x1, long* x2)
 }
 
 
-long CScript::WaitPic(long x1, long y1, long x2, long y2, LPCTSTR path, LPCTSTR picName, int timesOut, bool Isclick)
+long CScript::WaitPic(long x1, long y1, long x2, long y2, LPCTSTR picName, int timesOut, bool Isclick)
 {
-	VARIANT x, y;
+	int x, y;
 	long result = 0;
-	dm.SetPath(path);
 	DWORD t1 = GetTickCount();
 	do
 	{
-		dm.FindPic(x1, y1, x2, y2, picName, "0f0f0f", 0.9, 0, &x, &y);
+		
+		ImageLoc(x1, y1, x2, y2, picName, 0.95, x, y);
 		Dealy(20);
 
-	} while (x.lVal <= 0&&GetTickCount()-t1>timesOut);
-	if (x.lVal&&y.lVal > 0)
+	} while (x <= 0&&GetTickCount()-t1<timesOut);
+	if (x > 0)
 	{
 		result = 1;
 	}
@@ -2740,7 +2759,7 @@ long CScript::WaitPic(long x1, long y1, long x2, long y2, LPCTSTR path, LPCTSTR 
 	}
 	if (Isclick == true && result == 1)
 	{
-		dm.MoveTo(x.lVal, y.lVal);
+		dm.MoveTo(x, y);
 		Dealy(20);
 		dm.LeftClick();
 	}
@@ -3154,6 +3173,7 @@ int CScript::SwitchCoc()
 int CScript::Attack()
 {
 	int Ret = 0;
+	Dealy(3000);
 	if (_ttoi(coc.getSets("Attack")) != 1) return 0;
 	SetLog("Attack");
 	MakeArmy();
@@ -3200,6 +3220,7 @@ int CScript::script_init()
 	SetLog("初始化...", true, BLACKCOLOR, true);
 	coc.Initialize();
 	townLevel = _ttoi(coc.getSets("townLevel"))+2;
+	m_base_path = GetExePath();
 	//这是切换信息初始化
 	//a.主账号
 	cocInfo[0].IsSwitch = true;
@@ -3438,6 +3459,16 @@ int CScript::script_main()
 		if (IsSwitch) scriptInfo = ShouldSwitch;
 	}
 	return 0;
+}
+
+void CScript::SetPath(const CString& path)
+{
+	if (path.Find(':') == 1)/*绝对路径*/
+		m_file_path = path;
+	else/*相对路径*/
+		m_file_path = m_base_path + path;
+	if (m_file_path.Right(1) != "\\")
+		m_file_path.Append("\\");
 }
 
 static unsigned  EntryScript(LPVOID pParam)

@@ -199,6 +199,7 @@
     <ClInclude Include="Cdmsoft.h" />
     <ClInclude Include="CocBot.h" />
     <ClInclude Include="CocBotDlg.h" />
+    <ClInclude Include="Const.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="Login.h" />

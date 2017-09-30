@@ -122,7 +122,7 @@ const LPCTSTR IPADRESS =					"112.74.36.23";
 //交流
 const LPCTSTR QQGROUPNAME =					"584618461";
 //脚本版本
-const LPCTSTR cocBotVer =					"6.170924";
+const LPCTSTR cocBotVer =					"6.170930";
 //插件版本
 #define DM_VER_5							"5.1423"
 #define DM_VER_6							"6.1538"
