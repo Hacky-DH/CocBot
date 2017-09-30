@@ -192,6 +192,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="android.h" />
     <ClInclude Include="botFunction.h" />
     <ClInclude Include="botHelp.h" />
     <ClInclude Include="botLib.h" />
@@ -219,6 +220,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="android.cpp" />
     <ClCompile Include="botFunction.cpp" />
     <ClCompile Include="botHelp.cpp" />
     <ClCompile Include="CocBot.cpp" />

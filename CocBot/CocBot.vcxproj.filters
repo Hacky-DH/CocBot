@@ -58,6 +58,9 @@
     <Filter Include="Kernal\图像识别">
       <UniqueIdentifier>{dfafbc4b-b46f-47db-a732-e3f9b54143f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kernal\Android">
+      <UniqueIdentifier>{bd6ae7b5-af1a-413a-9950-2cead20f10e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\CocBot.rc2">
@@ -140,6 +143,9 @@
     <ClInclude Include="Login.h">
       <Filter>UI\头文件</Filter>
     </ClInclude>
+    <ClInclude Include="android.h">
+      <Filter>Kernal\Android</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cocBotDlg.cpp">
@@ -204,6 +210,9 @@
     </ClCompile>
     <ClCompile Include="Login.cpp">
       <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="android.cpp">
+      <Filter>Kernal\Android</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

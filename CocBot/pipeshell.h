@@ -14,15 +14,15 @@ public:
 public:
 	//启动 shell，如果成功则进入#状态，可以使用RunCmd执行命令
 	/*可在文件后面直接附加命令*/
-	BOOL Start(CString cmdStr);
+	BOOL start(CString cmdStr);
 	//这里输入的是在adb shell状态下的批处理命令，如果有多条请以\n分隔
 	BOOL RunCmd(const CString&strCmdline);
 
 	//退出shell命令状态，关闭进程
-	BOOL Stop();
+	BOOL stop();
 
-	//读取输出结果,调用前请务必调用Stop先结束
-	CString GetOutput();
+	//读取输出结果,调用前请务必调用stop先结束
+	CString get_result();
 
 public:
 	BOOL Loop();

@@ -1772,9 +1772,9 @@ void CcocBotDlg::OnBnClickedUpdataList()
 	if (pag1.app_player_type == APP_PLAYER_LIGHTING)
 	{
 		if (app_player_ld_install_dir.GetLength() < 5) return;
-		script[MAX_THREAD_COUNT].adb.Start(app_player_ld_install_dir + "\\dnconsole.exe list2");
-		script[MAX_THREAD_COUNT].adb.Stop();
-		str = script[MAX_THREAD_COUNT].adb.GetOutput();
+		script[MAX_THREAD_COUNT].adb.start(app_player_ld_install_dir + "\\dnconsole.exe list2");
+		script[MAX_THREAD_COUNT].adb.stop();
+		str = script[MAX_THREAD_COUNT].adb.get_result();
 		if (str.GetLength() <= 4) return;
 		_split(str.GetBuffer(), vstr1, "\n");
 		str.ReleaseBuffer();

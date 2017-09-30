@@ -1568,7 +1568,7 @@ public:
 		InvokeHelper(0xe3, DISPATCH_METHOD, VT_I4, (void*)&result, parms, file, content);
 		return result;
 	}
-	long Stop(long id)
+	long stop(long id)
 	{
 		long result;
 		static BYTE parms[] = VTS_I4 ;

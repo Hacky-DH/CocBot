@@ -846,15 +846,15 @@ int CScript::adbCmd(CString strCmd)
 		return 0;
 	}
 	//先adb device
-	adb.Start(appPlayerInstallDir+"\\HD-Adb.exe devices");
-	adb.Stop();
-	SetLog(adb.GetOutput());
+	adb.start(appPlayerInstallDir+"\\HD-Adb.exe devices");
+	adb.stop();
+	SetLog(adb.get_result());
 	//2.选择对应的端口进行连接
 
-	adb.Start(appPlayerInstallDir + "\\HD-Adb.exe shell");
+	adb.start(appPlayerInstallDir + "\\HD-Adb.exe shell");
 	adb.RunCmd(strCmd);
-	adb.Stop();
-	CString adb_error = adb.GetOutput();
+	adb.stop();
+	CString adb_error = adb.get_result();
 	SetLog(adb_error, false, REDCOLOR, true);
 	if (adb_error.Find("error: device not found") >= 0)
 	{
@@ -867,10 +867,10 @@ int CScript::adbCmd(CString strCmd)
 		{
 			SetLog(_T("error:kill adb.exe 失败 请检查Adb 路径！ "), true, RGB(0xff, 0x00, 0x00), true);
 		}
-		adb.Start(appPlayerInstallDir + "\\HD_Adb.exe shell");
+		adb.start(appPlayerInstallDir + "\\HD_Adb.exe shell");
 		adb.RunCmd(strCmd);
-		adb.Stop();
-		SetLog(adb.GetOutput(), false, REDCOLOR, true);
+		adb.stop();
+		SetLog(adb.get_result(), false, REDCOLOR, true);
 
 	}
 	else if (adb_error.Find("device offline") >= 0)
@@ -884,10 +884,10 @@ int CScript::adbCmd(CString strCmd)
 		{
 			SetLog(_T("error:kill adb.exe 失败 请检查Adb 路径！ "), true, RGB(0xff, 0x00, 0x00), true);
 		}
-		adb.Start(appPlayerInstallDir + "\\HD_Adb.exe shell");
+		adb.start(appPlayerInstallDir + "\\HD_Adb.exe shell");
 		adb.RunCmd(strCmd);
-		adb.Stop();
-		SetLog(adb.GetOutput(), false, REDCOLOR, true);
+		adb.stop();
+		SetLog(adb.get_result(), false, REDCOLOR, true);
 
 	}
 
@@ -902,9 +902,10 @@ int CScript::adbCmd(int index, CString cmd)
 	str += "\"shell ";
 	str += cmd;
 	str += "\"";
-	adb.Start(appPlayerInstallDir+"\\dnconsole.exe"+str);
-	adb.Stop();
-	out = adb.GetOutput();
+	adb.start(appPlayerInstallDir+"\\dnconsole.exe"+str);
+	adb.stop();
+	out = adb.get_result();
+	SetLog(out);
 	if (out.Find("error: device not found") >= 0)
 	{
 		SetLog(_T("error: device not found,try to kill adb.exe!"), true, RGB(0xff, 0x00, 0x00), true);
@@ -916,9 +917,9 @@ int CScript::adbCmd(int index, CString cmd)
 		{
 			SetLog(_T("error:kill adb.exe 失败 请检查Adb 路径！ "), true, RGB(0xff, 0x00, 0x00), true);
 		}
-		adb.Start(appPlayerInstallDir + "\\dnconsole.exe" + str);
-		adb.Stop();
-		out = adb.GetOutput();
+		adb.start(appPlayerInstallDir + "\\dnconsole.exe" + str);
+		adb.stop();
+		out = adb.get_result();
 		SetLog(out);
 
 	}
@@ -2447,8 +2448,8 @@ int CScript::SetClientWindowSize(int x, int y)
 
 		break;
 	case APP_PLAYER_LIGHTING:
-		adb.Start(appPlayerInstallDir+"\\dnconsole.exe modify --index %d --resolution 850,667,160 --cpu 1 --memory 1024");
-		adb.Stop();
+		adb.start(appPlayerInstallDir+"\\dnconsole.exe modify --index %d --resolution 850,667,160 --cpu 1 --memory 1024");
+		adb.stop();
 		break;
 
 	default:
@@ -2957,8 +2958,8 @@ int CScript::LaunchAppPlayer(int wParam)
 		{
 		
 			str.Format(" launch --index %d", wParam);
-			adb.Start(appPlayerInstallDir+"\\dnconsole.exe"+str);
-			adb.Stop();
+			adb.start(appPlayerInstallDir+"\\dnconsole.exe"+str);
+			adb.stop();
 		}
 		else
 		{
@@ -3014,15 +3015,15 @@ int CScript::QuitAppPlayer(int wParam)
 		{
 
 			str.Format(" quit --index %d", wParam);
-			adb.Start(appPlayerInstallDir+"\\dnconsole.exe" + str);
-			adb.Stop();
+			adb.start(appPlayerInstallDir+"\\dnconsole.exe" + str);
+			adb.stop();
 		}
 		else
 		{
 			AfxMessageBox("PathFile not Exists");
 			IsThreadRun = false;
 		}
-		str = adb.GetOutput();
+		str = adb.get_result();
 		if (str.GetLength() <= 4) return 0;
 		break;
 
@@ -3635,9 +3636,9 @@ CString CScript::getList2(int x, int y)
 	vector<string> vstr1, vstr2;
 	if (AppPlayerType==APP_PLAYER_LIGHTING)
 	{
-		adb.Start(appPlayerInstallDir + "\\dnconsole.exe list2");
-		adb.Stop();
-		str = adb.GetOutput();
+		adb.start(appPlayerInstallDir + "\\dnconsole.exe list2");
+		adb.stop();
+		str = adb.get_result();
 		if (str.GetLength() <= 4) return "";
 		_split(str.GetBuffer(), vstr1, "\n");
 		str.ReleaseBuffer();

@@ -18,7 +18,7 @@ CPipeShell::~CPipeShell(void)
 }
 //启动shell，如果成功则进入#状态，可以使用RunCmd执行命令
 
-BOOL CPipeShell::Start(CString cmdStr)
+BOOL CPipeShell::start(CString cmdStr)
 {
 	/*clear out put*/
 	m_strOutput.Empty();
@@ -104,7 +104,7 @@ BOOL CPipeShell::RunCmd(const CString&strCmdline)
 	return bSuccess;
 }
 //退出shell命令状态，关闭进程。不能通过TerminateProcess方式结束，否则会有读取不全的情况
-BOOL CPipeShell::Stop()
+BOOL CPipeShell::stop()
 {
 	RunCmd("exit\nexit");
 	WaitForSingleObject(hThread, INFINITE);
@@ -117,8 +117,8 @@ BOOL CPipeShell::Stop()
 
 	//return TRUE;
 }
-//读取输出结果,调用前请务必调用Stop先结束
-CString CPipeShell::GetOutput()
+//读取输出结果,调用前请务必调用stop先结束
+CString CPipeShell::get_result()
 {
 	WaitForSingleObject(hThread, 0xffff);
 
