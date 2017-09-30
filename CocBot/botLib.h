@@ -6,7 +6,7 @@
 
 #endif
 #ifdef _DEBUG
-#pragma comment(lib,"botLib.lib")
+#pragma comment(lib,"../botLib.lib")
 #else
 #pragma comment(lib,"../Release/botLib")
 #endif
