@@ -1,5 +1,5 @@
 
-// CocBot.h : PROJECT_NAME 应用程序的主头文件
+// newcocbot.h : PROJECT_NAME 应用程序的主头文件
 //
 
 #pragma once
@@ -11,22 +11,28 @@
 #include "resource.h"		// 主符号
 
 
-// CCocBotApp: 
-// 有关此类的实现，请参阅 CocBot.cpp
+// CcocBotApp:
+// 有关此类的实现，请参阅 cocBot.cpp
 //
 
-class CCocBotApp : public CWinApp
+class CcocBotApp : public CWinApp
 {
 public:
-	CCocBotApp();
+	CcocBotApp();
 
 // 重写
 public:
+	HMODULE m_hRichEdit;
 	virtual BOOL InitInstance();
 
 // 实现
 
 	DECLARE_MESSAGE_MAP()
+	int ExitInstance();
+	/*注册插件*/
+	bool RegistryDll(const char* szDllPath);
+	/*破解*/
+	int CrackDm(const char* crackDllName);
 };
 
-extern CCocBotApp theApp;
+extern CcocBotApp theApp;

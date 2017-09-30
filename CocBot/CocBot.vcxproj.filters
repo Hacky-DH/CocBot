@@ -7,48 +7,57 @@
     </Filter>
     <Filter Include="头文件">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="资源文件">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CocBot.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="CocBotDlg.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CocBot.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="CocBotDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="CocBot.rc">
-      <Filter>资源文件</Filter>
-    </ResourceCompile>
+    <Filter Include="lua">
+      <UniqueIdentifier>{69d85757-72ae-48b1-bdd5-54e4d7b3c945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{487e55ba-a9ca-4ce6-a842-2750672dc483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\源文件">
+      <UniqueIdentifier>{2bc034ff-7557-4144-8fe3-c0ddea563180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\头文件">
+      <UniqueIdentifier>{5104656a-a436-4d20-a24c-57c1cfa9f608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="全局变量">
+      <UniqueIdentifier>{a238ef50-5b69-4148-939e-7ca821e3d35c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="程序入口">
+      <UniqueIdentifier>{3218fb3a-7b40-4a05-81ca-b9ccd57349c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="程序入口\头文件">
+      <UniqueIdentifier>{e6333f18-4506-4b53-bdc3-1a7654583ed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="程序入口\源文件">
+      <UniqueIdentifier>{a045d12d-bd99-47fc-9a2a-6ee8f426e5e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="脚本模块">
+      <UniqueIdentifier>{ebb2cc82-7bcd-4795-9434-b27ea729e6e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="脚本模块\头文件">
+      <UniqueIdentifier>{b0c9683c-7f04-47dd-8d15-22c457c8819f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="脚本模块\源文件">
+      <UniqueIdentifier>{e38561dd-6bb2-4f86-b320-06752acf5810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernal">
+      <UniqueIdentifier>{6fc66da5-4998-4ba5-824b-d7cb3bf3a048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernal\匿名管道">
+      <UniqueIdentifier>{7cbde6b2-b655-4d3d-85a0-d96b492a639f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernal\杂项">
+      <UniqueIdentifier>{fdd5d6d2-ea3f-40fa-a696-e60216d5ccf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernal\图像识别">
+      <UniqueIdentifier>{dfafbc4b-b46f-47db-a732-e3f9b54143f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\CocBot.rc2">
@@ -56,8 +65,158 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cocBotDlg.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cocBot.h">
+      <Filter>程序入口\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="botFunction.h">
+      <Filter>脚本模块\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>脚本模块\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>全局变量</Filter>
+    </ClInclude>
+    <ClInclude Include="page1.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="page2.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="page3.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="page4.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="page5.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="page6.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="page7.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="page8.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="page9.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="page10.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pipeshell.h">
+      <Filter>Kernal\匿名管道</Filter>
+    </ClInclude>
+    <ClInclude Include="botLib.h">
+      <Filter>Kernal\图像识别</Filter>
+    </ClInclude>
+    <ClInclude Include="Cdmsoft.h">
+      <Filter>Kernal\图像识别</Filter>
+    </ClInclude>
+    <ClInclude Include="botHelp.h">
+      <Filter>Kernal\杂项</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_func.h">
+      <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Login.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cocBotDlg.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cocBot.cpp">
+      <Filter>程序入口\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="botFunction.cpp">
+      <Filter>脚本模块\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>脚本模块\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="global.cpp">
+      <Filter>全局变量</Filter>
+    </ClCompile>
+    <ClCompile Include="page1.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="page2.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="page3.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="page4.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="page5.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="page6.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="page7.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="page8.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="page9.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="page10.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pipshell.cpp">
+      <Filter>Kernal\匿名管道</Filter>
+    </ClCompile>
+    <ClCompile Include="botHelp.cpp">
+      <Filter>Kernal\杂项</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_func.cpp">
+      <Filter>lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="cocBot.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
     <Image Include="res\CocBot.ico">
       <Filter>资源文件</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
 </Project>
