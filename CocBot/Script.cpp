@@ -4,7 +4,7 @@
 #include "botLib.h"
 #define AVOID_ZERO(x) ((x)==0?1:(x))
 CScript::CScript()
-	
+
 {
 	scriptVer = cocBotVer;
 	scriptInfo = 0;
@@ -71,7 +71,7 @@ bool CScript::CreateDm(int type)
 void CScript::Dealy(unsigned long mSeconds)
 {
 	DWORD t1 = GetTickCount();
-	for (; GetTickCount() - t1<mSeconds;)
+	for (; GetTickCount() - t1 < mSeconds;)
 	{
 		if (false == IsThreadRun) break;
 		Sleep(1);
@@ -137,12 +137,12 @@ int CScript::SelectSolider(int type)
 	int x, y;
 	CString str;
 	SetPath("Pic\\attack\\solider");
-	str.Format("solider_%d.bmp|solider_%d_2.bmp", type,type);
-	int loc_ret=ImageLoc(25, 570, 833, 650,str,0.95, x, y);
+	str.Format("solider_%d.bmp|solider_%d_2.bmp", type, type);
+	int loc_ret = ImageLoc(25, 570, 833, 650, str, 0.95, x, y);
 	long x1 = 0, x2 = 0;
 	CString armyNum;
 	int solider_num = 0;
-	if (loc_ret==1)
+	if (loc_ret == 1)
 	{
 		dm.UseDict(DICT_COC_ATTACKARMY);
 		MakeRect(x, &x1, &x2);
@@ -239,18 +239,18 @@ int CScript::ImageLoc(long x1, long y1, long x2, long y2, const char* file, doub
 	string mfile;
 	_split(file, vstr, "|");
 	if (vstr.size() == 0)return -1;
-	for (int i=0;i<vstr.size();i++)
+	for (int i = 0; i < vstr.size(); i++)
 	{
 		mfile += m_file_path;
 		mfile += file;
 		mfile += "|";
-		
+
 	}
 	mfile.pop_back();
 	void* p = (void*)dm.GetScreenData(x1, y1, x2, y2);
 	int retx, rety;
 	int ret = ::ImageLoc(x2 - x1, y2 - y1, p, mfile.c_str(), sim, &retx, &rety);
-	
+
 	if (ret == 1)
 	{
 		retx += x1;
@@ -343,7 +343,7 @@ int CScript::ClearAdvirtisment()
 int CScript::WaitForMainScreen()
 {
 	//if (lua_call_script("test.lua") == 0)
-		//return 1;
+	//	return 1;
 	dm.SetPath(_T("\Pic\\others\\checkMainScreen"));
 	int waitTime = 0;
 	VARIANT x, y;
@@ -436,7 +436,7 @@ int CScript::CheckArmyNum(int* trainT)
 	SetPath("Pic\\others");
 	int retx, rety;
 	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
-	if (retx>0)
+	if (retx > 0)
 	{
 		LeftClick(retx, rety);
 	}
@@ -636,7 +636,7 @@ int CScript::MakeArmy()
 	army_num[21] = _ttoi(coc.getSets("HealingSpell"));
 	army_num[22] = _ttoi(coc.getSets("RageSpell"));
 	army_num[23] = _ttoi(coc.getSets("JumpSpell"));
-	army_num[24] = _ttoi(coc.getSets("FreezeSpell")); 
+	army_num[24] = _ttoi(coc.getSets("FreezeSpell"));
 	army_num[25] = _ttoi(coc.getSets("CloneSpell"));
 	army_num[26] = _ttoi(coc.getSets("PoisonSpell"));
 	army_num[27] = _ttoi(coc.getSets("EarthquakeSpell"));
@@ -707,7 +707,7 @@ int CScript::MakeArmy()
 			ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
 			if (retx > 0)
 			{
-				dm.MoveTo(retx,rety);
+				dm.MoveTo(retx, rety);
 				for (int j = 1; j <= army_num[i]; j++)
 				{
 
@@ -746,7 +746,7 @@ int CScript::MakeArmy()
 			{
 				SetLog("Not Find  " + pic_name, true, REDCOLOR, false);
 			}
-	
+
 			Dealy(200);
 		}
 	}
@@ -865,7 +865,7 @@ int CScript::adbCmd(CString strCmd)
 		return 0;
 	}
 	//先adb device
-	adb.start(appPlayerInstallDir+"\\HD-Adb.exe devices");
+	adb.start(appPlayerInstallDir + "\\HD-Adb.exe devices");
 	adb.stop();
 	SetLog(adb.get_result());
 	//2.选择对应的端口进行连接
@@ -921,7 +921,7 @@ int CScript::adbCmd(int index, CString cmd)
 	str += "\"shell ";
 	str += cmd;
 	str += "\"";
-	adb.start(appPlayerInstallDir+"\\dnconsole.exe"+str);
+	adb.start(appPlayerInstallDir + "\\dnconsole.exe" + str);
 	adb.stop();
 	out = adb.get_result();
 	SetLog(out);
@@ -1142,7 +1142,7 @@ int CScript::Attack_Intel()
 	Dealy(1000);
 	if (false == IsThreadRun) return -1;
 	long AttackSpeed = 10, AttackChangeDealy = 10;
-	AttackSpeed = _ttoi(coc.getSets("AttackSpeed"))/2;
+	AttackSpeed = _ttoi(coc.getSets("AttackSpeed")) / 2;
 	AttackSpeed = (AttackSpeed + 1) * 10;
 	AttackChangeDealy = _ttoi(coc.getSets("AttackGird"));
 	AttackChangeDealy = (AttackChangeDealy + 1) * 10;
@@ -1150,7 +1150,7 @@ int CScript::Attack_Intel()
 	SetLog(_T("定位下兵位置"));
 	//寻找所有下兵色块
 	//全部
-	CString res,str;
+	CString res, str;
 
 	res = dm.FindColorBlockEx(35, 27, 794, 567, "a7b052-050f0f|9cb24a-0f0f0f|bad058-050f0f", 0.99, 70, 10, 10);
 	if (res.GetLength() <= 0) return -1;
@@ -1161,7 +1161,7 @@ int CScript::Attack_Intel()
 	/*初始化*/
 	VARIANT tempx, tempy;
 	/*获取所有坐标*/
-	for (int i=0;i<nPos;i++)
+	for (int i = 0; i < nPos; i++)
 	{
 		dm.GetResultPos(res, i, &tempx, &tempy);
 		allx[i] = tempx.lVal;
@@ -1179,7 +1179,7 @@ int CScript::Attack_Intel()
 		x[i] = allx[bestIndex];
 		y[i] = ally[bestIndex];
 	}
-	
+
 	/*到这里，之前的大量坐标已经不需要了，删除*/
 	delete[]allx, delete[]ally;
 	SetLog(_T("定位完成"));
@@ -1265,14 +1265,14 @@ int CScript::Attack_Intel()
 	}
 
 	dm.FindMultiColor(18, 568, 834, 617, "6C4CB4-040404", "0|0|6C4CB4-040404,4|-1|7253BC-060704,-8|16|D59486-0B1012,7|15|E48A61-040202,8|12|F39A6E-030503,11|12|F4A074-040404,23|13|6C44B6-040202,26|21|6840B0,31|21|6C48BB-040303", 0.9, 1, &vx, &vy);//archer king
-	if (vx.lVal> 0)
+	if (vx.lVal > 0)
 	{
 		SetLog("释放女王", true, BLUECOLOR, false);
 		dm.MoveTo(vx.lVal, vy.lVal);
 		Dealy(20);
 		dm.LeftClick();
 		Dealy(200);
-		dm.MoveTo(x[120],y[120]);
+		dm.MoveTo(x[120], y[120]);
 		Dealy(20);
 		dm.LeftClick();
 	}
@@ -1280,11 +1280,11 @@ int CScript::Attack_Intel()
 	if (vx.lVal > 0)
 	{
 		SetLog("守护者", true, BLUECOLOR, false);
-		dm.MoveTo(vx.llVal,vy.lVal);
+		dm.MoveTo(vx.llVal, vy.lVal);
 		Dealy(20);
 		dm.LeftClick();
 		Dealy(200);
-		dm.MoveTo(x[180],y[180]);
+		dm.MoveTo(x[180], y[180]);
 		Dealy(20);
 		dm.LeftClick();
 	}
@@ -1679,7 +1679,7 @@ int CScript::Attack_Equal()
 	}
 
 	Dealy(2000);
-	
+
 	return 0;
 }
 
@@ -1709,7 +1709,7 @@ int CScript::CheckDeadbase()
 	VARIANT x, y;
 	int ElixirType = 0;
 	ElixirType = _ttoi(coc.getSets("SearchDeadbaseElixir"));
-	int result=-1;
+	int result = -1;
 	CString str_i, deadbase_pic;
 	if (townLevel >= 7)
 	{
@@ -1740,7 +1740,7 @@ int CScript::CheckDeadbase()
 	else
 	{
 		dm.SetPath(_T("\Pic\\weak\\deadbase"));
-		
+
 		str_i = "d_*.bmp";
 		deadbase_pic = dm.MatchPicName(str_i);
 
@@ -1756,7 +1756,7 @@ int CScript::CheckDeadbase()
 	{
 		if (townLevel >= 10)
 		{
-			str_i=dm.FindColorBlockEx(30, 30, 800, 620, "a7b052-050f0f|9cb24a-050f0f|bad058-050f0f|adbc52-050f0f", 1, 30, 6, 6);
+			str_i = dm.FindColorBlockEx(30, 30, 800, 620, "a7b052-050f0f|9cb24a-050f0f|bad058-050f0f|adbc52-050f0f", 1, 30, 6, 6);
 			int count = dm.GetResultCount(str_i);
 			str_i.Format("attack count:%d", count);
 			SetLog(str_i);
@@ -2364,7 +2364,7 @@ int CScript::ConnectAppPlayer()
 	long IsBind = 0;
 
 	CString str;
-	
+
 	CString bindstr[5] = { "" };
 	//****************** check and bind ****************//
 	switch (AppPlayerType)
@@ -2467,7 +2467,7 @@ int CScript::SetClientWindowSize(int x, int y)
 
 		break;
 	case APP_PLAYER_LIGHTING:
-		adb.start(appPlayerInstallDir+"\\dnconsole.exe modify --index %d --resolution 850,667,160 --cpu 1 --memory 1024");
+		adb.start(appPlayerInstallDir + "\\dnconsole.exe modify --index %d --resolution 850,667,160 --cpu 1 --memory 1024");
 		adb.stop();
 		break;
 
@@ -2744,11 +2744,11 @@ long CScript::WaitPic(long x1, long y1, long x2, long y2, LPCTSTR picName, int t
 	DWORD t1 = GetTickCount();
 	do
 	{
-		
+
 		ImageLoc(x1, y1, x2, y2, picName, 0.95, x, y);
 		Dealy(20);
 
-	} while (x <= 0&&GetTickCount()-t1<timesOut);
+	} while (x <= 0 && GetTickCount() - t1 < timesOut);
 	if (x > 0)
 	{
 		result = 1;
@@ -2870,7 +2870,7 @@ int CScript::checkMainScreen()
 	Dealy(1000);
 	int ret = 0;
 	VARIANT x, y;
-	
+
 	for (int i = 0; i < 5; i++)
 	{
 		dm.FindMultiColor(12, 5, 837, 51, "3abded-0f0f0f", "30|-1|37bfed-0f0f0f,786|7|fff655-0f0f0f,796|9|ffec22-0f0f0f", 1.0, 0, &x, &y);
@@ -2962,7 +2962,7 @@ int CScript::LaunchAppPlayer(int wParam)
 	case  APP_PLAYER_BLUESTACKS:
 		if (PathFileExists(appPlayerInstallDir))
 		{
-			ShellExecute(NULL, "open", appPlayerInstallDir+"\\HD-StartLauncher.exe", NULL, NULL, SW_NORMAL);
+			ShellExecute(NULL, "open", appPlayerInstallDir + "\\HD-StartLauncher.exe", NULL, NULL, SW_NORMAL);
 		}
 		else
 		{
@@ -2975,9 +2975,9 @@ int CScript::LaunchAppPlayer(int wParam)
 	case APP_PLAYER_LIGHTING:
 		if (PathFileExists(appPlayerInstallDir))
 		{
-		
+
 			str.Format(" launch --index %d", wParam);
-			adb.start(appPlayerInstallDir+"\\dnconsole.exe"+str);
+			adb.start(appPlayerInstallDir + "\\dnconsole.exe" + str);
 			adb.stop();
 		}
 		else
@@ -2986,7 +2986,7 @@ int CScript::LaunchAppPlayer(int wParam)
 			IsThreadRun = false;
 		}
 
-	
+
 		break;
 	default:
 		break;
@@ -3034,7 +3034,7 @@ int CScript::QuitAppPlayer(int wParam)
 		{
 
 			str.Format(" quit --index %d", wParam);
-			adb.start(appPlayerInstallDir+"\\dnconsole.exe" + str);
+			adb.start(appPlayerInstallDir + "\\dnconsole.exe" + str);
 			adb.stop();
 		}
 		else
@@ -3202,7 +3202,7 @@ int CScript::Attack()
 
 		}
 		/*等待返回*/
-		Ret= WaitForReturnHome();
+		Ret = WaitForReturnHome();
 		return Ret;
 	}
 	else/*搜索失败*/
@@ -3215,11 +3215,11 @@ int CScript::Attack()
 int CScript::script_init()
 {
 	CString str;
-	int ret = 0,temp;
+	int ret = 0, temp;
 	//1.变量初始化
 	SetLog("初始化...", true, BLACKCOLOR, true);
 	coc.Initialize();
-	townLevel = _ttoi(coc.getSets("townLevel"))+2;
+	townLevel = _ttoi(coc.getSets("townLevel")) + 2;
 	m_base_path = GetExePath();
 	//这是切换信息初始化
 	//a.主账号
@@ -3313,16 +3313,16 @@ int CScript::script_init()
 	//检测句柄
 	ret = SetBindHwnd();
 	temp = 120;
-	if (ret<=0) /*模拟器未打开，自动打开并等待，最长120s*/
+	if (ret <= 0) /*模拟器未打开，自动打开并等待，最长120s*/
 	{
 		LaunchAppPlayer(AppPlayerIndex);
-		while (_ttoi(getList2(AppPlayerIndex,4))==0&&IsThreadRun&&temp>0)//等待模拟器启动完成
+		while (_ttoi(getList2(AppPlayerIndex, 4)) == 0 && IsThreadRun&&temp > 0)//等待模拟器启动完成
 		{
 			Dealy(1000);
 			temp--;
 		}
 		ret = SetBindHwnd();
-		if (temp==0)/*超时*/
+		if (temp == 0)/*超时*/
 		{
 			SetLog("time out!", true, REDCOLOR, false);
 			IsThreadRun = false;
@@ -3521,6 +3521,9 @@ CScript*  StartOneScript(CScript *script_info, int index, const char* configFile
 	if (index >= 0) script_info->AppPlayerIndex = index;
 	//2.设置配置路径
 	if (configFile) script_info->coc.SetPath(configFile);
+	//加载配置
+	if (configFile)
+		script_info->coc.LoadSets(configFile);
 	//3.设置窗口句柄
 	//if (appHwnd > 0) script_info->bindHwnd = appHwnd;
 	//4.线程标志
@@ -3643,7 +3646,7 @@ int CScript::SetBindHwnd()
 		nHwnd = (long) ::FindWindow(nullptr, "BlueStacks App Player");
 		break;
 	case APP_PLAYER_LIGHTING:
-		nHwnd = _ttoi(getList2(AppPlayerIndex,3));
+		nHwnd = _ttoi(getList2(AppPlayerIndex, 3));
 		break;
 	default:
 		break;
@@ -3665,7 +3668,7 @@ CString CScript::getList2(int x, int y)
 	CString str;
 	using namespace std;
 	vector<string> vstr1, vstr2;
-	if (AppPlayerType==APP_PLAYER_LIGHTING)
+	if (AppPlayerType == APP_PLAYER_LIGHTING)
 	{
 		adb.start(appPlayerInstallDir + "\\dnconsole.exe list2");
 		adb.stop();

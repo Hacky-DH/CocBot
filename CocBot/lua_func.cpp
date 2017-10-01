@@ -9,23 +9,31 @@ int SetLog(lua_State* L)
 	int bshow = luaL_checknumber(L, 2);
 	LPCTSTR color = luaL_checklstring(L, 3, NULL);
 	int bsave = luaL_checknumber(L, 4);
+	lua_pop(L, 4);/*弹出*/
+	
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);/*取模拟器编号栈顶*/
 	CString str;
+	
 	str = color;
 	str.MakeLower();
 	DWORD ncolor;
-	str = script[0].dm.RGB2BGR(color);
+	str = script[index].dm.RGB2BGR(color);
 	sscanf_s(str, "%x", &ncolor);
-	script[0].SetLog(log_str, bshow, ncolor, bsave);
-	lua_pop(L, 4);
+	script[index].SetLog(log_str, bshow, ncolor, bsave);
+	
 	return 0;
 }
 
 int GetColor(lua_State* L)
 {
+
 	int x, y;
 	x = luaL_checknumber(L, 1);
 	y = luaL_checknumber(L, 2);
-	CString str = script[0].dm.GetColor(x, y);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	CString str = script[index].dm.GetColor(x, y);
 	lua_pop(L, 2);
 	lua_pushlstring(L, str, str.GetLength());
 	return 1;
@@ -37,9 +45,11 @@ int Tap(lua_State* L)
 	int x, y;
 	x = luaL_checknumber(L, 1);
 	y = luaL_checknumber(L, 2);
-	script[0].dm.MoveTo(x, y);
-	script[0].Dealy(20);
-	script[0].dm.LeftClick();
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	script[index].dm.MoveTo(x, y);
+	script[index].Dealy(20);
+	script[index].dm.LeftClick();
 	lua_pop(L, 2);
 	return 0;
 }
@@ -49,7 +59,9 @@ int FindColor(lua_State* L)
 	LPCTSTR color = luaL_checklstring(L, 1, NULL);
 	double sim = luaL_checknumber(L, 2);
 	VARIANT vx, vy;
-	script[0].dm.FindColor(0, 0, 850, 667, color, sim, 0, &vx, &vy);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	script[index].dm.FindColor(0, 0, 850, 667, color, sim, 0, &vx, &vy);
 	lua_pop(L, 2);
 	lua_pushnumber(L, vx.lVal);
 	lua_pushnumber(L, vy.lVal);
@@ -66,7 +78,9 @@ int FindColorEx(lua_State* L)
 	LPCTSTR color = luaL_checklstring(L, 5, NULL);
 	double sim = luaL_checknumber(L, 6);
 	VARIANT vx, vy;
-	script[0].dm.FindColor(x1, y1, x2, y2, color, sim, 0, &vx, &vy);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	script[index].dm.FindColor(x1, y1, x2, y2, color, sim, 0, &vx, &vy);
 	lua_pop(L, 6);
 	lua_pushnumber(L, vx.lVal);
 	lua_pushnumber(L, vy.lVal);
@@ -79,7 +93,9 @@ int FindMultiColor(lua_State* L)
 	LPCTSTR offset_color = luaL_checklstring(L, 2, NULL);
 	double sim = luaL_checknumber(L, 3);
 	VARIANT vx, vy;
-	script[0].dm.FindMultiColor(0, 0, 850, 667, first_color, offset_color, sim, 0, &vx, &vy);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	script[index].dm.FindMultiColor(0, 0, 850, 667, first_color, offset_color, sim, 0, &vx, &vy);
 	lua_pop(L, 3);
 	lua_pushnumber(L, vx.lVal);
 	lua_pushnumber(L, vy.lVal);
@@ -97,7 +113,9 @@ int FindMultiColorEx(lua_State* L)
 	LPCTSTR offset_color = luaL_checklstring(L, 6, NULL);
 	double sim = luaL_checknumber(L, 7);
 	VARIANT vx, vy;
-	script[0].dm.FindMultiColor(x1, y1, x2, y2, first_color, offset_color, sim, 0, &vx, &vy);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	script[index].dm.FindMultiColor(x1, y1, x2, y2, first_color, offset_color, sim, 0, &vx, &vy);
 	lua_pop(L, 7);
 	lua_pushnumber(L, vx.lVal);
 	lua_pushnumber(L, vy.lVal);
@@ -110,7 +128,9 @@ int FindPic(lua_State* L)
 	LPCTSTR delta_color = luaL_checklstring(L, 2, NULL);
 	double sim = luaL_checknumber(L, 3);
 	VARIANT vx, vy;
-	script[0].dm.FindPic(0, 0, 850, 677, pic_name, delta_color, sim, 0, &vx, &vy);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	script[index].dm.FindPic(0, 0, 850, 677, pic_name, delta_color, sim, 0, &vx, &vy);
 	lua_pop(L, 3);
 	lua_pushnumber(L, vx.lVal);
 	lua_pushnumber(L, vy.lVal);
@@ -127,23 +147,25 @@ int FindPicEx(lua_State* L)
 	LPCTSTR pic_name = luaL_checklstring(L, 5, NULL);
 	LPCTSTR delta_color = luaL_checklstring(L, 6, NULL);
 	double sim = luaL_checknumber(L, 7);
-	void* p = (void*)script[0].dm.GetScreenData(x1, y1, x2, y2);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	void* p = (void*)script[index].dm.GetScreenData(x1, y1, x2, y2);
 	int retx, rety;
 	int ret=ImageLoc(x2-x1,y2-y1,p, pic_name, sim, &retx, &rety);
 	lua_pop(L, 7);
 	switch (ret)
 	{
 	case 1:
-		script[0].SetLog("ok");
+		script[index].SetLog("ok");
 		break;
 	case 0:
-		script[0].SetLog("not ok");
+		script[index].SetLog("not ok");
 		break;
 	case -1:
-		script[0].SetLog("src mat false");
+		script[index].SetLog("src mat false");
 		break;
 	case -2:
-		script[0].SetLog("temp mat false");
+		script[index].SetLog("temp mat false");
 		break;
 	default:
 		break;
@@ -161,7 +183,9 @@ int FindPicEx(lua_State* L)
 int SetPath(lua_State* L)
 {
 	LPCTSTR path = luaL_checklstring(L, 1, NULL);
-	script[0].dm.SetPath(path);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	script[index].dm.SetPath(path);
 	lua_pop(L, 1);
 	return 0;
 }
@@ -170,7 +194,9 @@ int Dealy(lua_State* L)
 {
 	int seconds = luaL_checknumber(L, 1);
 	if (seconds < 0)seconds = 1;
-	script[0].Dealy(seconds);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	script[index].Dealy(seconds);
 	lua_pop(L, 1);
 	return 0;
 }
@@ -179,7 +205,9 @@ int SelectSolider(lua_State* L)
 {
 	int type = luaL_checknumber(L, 1);
 	type = type < 0 || type>20 ? 1 : type;
-	int lua_ret=script[0].SelectSolider(type);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	int lua_ret=script[index].SelectSolider(type);
 	lua_pop(L, 1);
 	lua_pushnumber(L, lua_ret);
 	return 1;
@@ -193,7 +221,9 @@ int GetAttackPos(lua_State* L)
 	x2 = luaL_checknumber(L, 3);
 	y2 = luaL_checknumber(L, 4);
 	CString str;
-	str=script[0].dm.FindColorBlockEx(x1, y1, x2, y2, "a7b052-050f0f|9cb24a-050f0f|bad058-050f0f|adbc52-050f0f", 1, 30, 6, 6);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	str=script[index].dm.FindColorBlockEx(x1, y1, x2, y2, "a7b052-050f0f|9cb24a-050f0f|bad058-050f0f|adbc52-050f0f", 1, 30, 6, 6);
 	lua_pop(L,4);
 	using namespace std;
 	vector<string> vstr, vstrx, vstry;
@@ -233,10 +263,12 @@ int GetAttackPosEx(lua_State* L)
 	y2 = luaL_checknumber(L, 4);
 	CString str;
 	DWORD t1 = GetTickCount();
-	str = script[0].dm.FindColorBlockEx(x1, y1, x2, y2, "a7b052-050f0f|9cb24a-050f0f|bad058-050f0f|adbc52-050f0f", 1, 30, 6, 6);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	str = script[index].dm.FindColorBlockEx(x1, y1, x2, y2, "a7b052-050f0f|9cb24a-050f0f|bad058-050f0f|adbc52-050f0f", 1, 30, 6, 6);
 	CString str2;
 	str2.Format("FindColorBlockEx(%d, %d, %d, %d} time:%dms", x1, y1, x2, y2, GetTickCount() - t1);
-	script[0].SetLog(str2);
+	script[index].SetLog(str2);
 	lua_pop(L, 4);/*弹出无用的数据*/
 	using namespace std;
 	vector<string> vstr, vstrx, vstry;
@@ -294,7 +326,9 @@ int SelectSpell(lua_State* L)
 {
 	int type = luaL_checknumber(L, 1);
 	type = type < 0 || type>10 ? 1 : type;
-	int lua_ret = script[0].SelectSpell(type);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	int lua_ret = script[index].SelectSpell(type);
 	lua_pop(L, 1);
 	lua_pushnumber(L, lua_ret);
 	return 1;
@@ -304,7 +338,9 @@ int SelectHero(lua_State* L)
 {
 	int type = luaL_checknumber(L, 1);
 	type = type < 0 || type>3 ? 1 : type;
-	int lua_ret = script[0].SelectHero(type);
+	lua_getglobal(L, "g_app_player_index");
+	int index = luaL_checknumber(L, -1);
+	int lua_ret = script[index].SelectHero(type);
 	lua_pop(L, 1);
 	lua_pushnumber(L, lua_ret);
 	return 1;
