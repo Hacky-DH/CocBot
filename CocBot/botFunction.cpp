@@ -12,7 +12,7 @@ CString CbotFunction::GetPath()
 	CString now_path = filePath;
 	return now_path;
 }
-CString CbotFunction::GetExePath()
+CString CbotFunction::GetCurrentPath()
 {
 	TCHAR tcExePath[MAX_PATH] = { 0 };
 	::GetModuleFileName(NULL, tcExePath, MAX_PATH);  // 设置ini路径到exe同一目录下  

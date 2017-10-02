@@ -5,4 +5,6 @@ CString gcurrent_path;
 
 CScript script[MAX_THREAD_COUNT + 1];
 
-lua_State* glua;
+//lua_State* glua;
+
+_LUA glua[MAX_THREAD_COUNT];

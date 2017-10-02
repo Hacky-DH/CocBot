@@ -122,7 +122,3 @@ public:
 
 
 
-
-//其它全局函数
-
- CString GetExePath();

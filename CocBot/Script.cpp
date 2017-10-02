@@ -34,7 +34,7 @@ long CScript::GetScriptState()
 }
 
 
-CString CScript::GetExePath()
+CString CScript::GetCurrentPath()
 {
 	TCHAR tcExePath[MAX_PATH] = { 0 };
 	::GetModuleFileName(NULL, tcExePath, MAX_PATH);
@@ -924,7 +924,7 @@ int CScript::adbCmd(int index, CString cmd)
 	adb.start(appPlayerInstallDir + "\\dnconsole.exe" + str);
 	adb.stop();
 	out = adb.get_result();
-	SetLog(out);
+	SetLog(out,true,RGB(0xff,0,0),true);
 	if (out.Find("error: device not found") >= 0)
 	{
 		SetLog(_T("error: device not found,try to kill adb.exe!"), true, RGB(0xff, 0x00, 0x00), true);
@@ -1699,7 +1699,7 @@ int CScript::SetLog(CString logStr, bool IsShow, COLORREF color, bool IsSave)
 int CScript::Attack_lua()
 {
 	/*调用lua脚本*/
-	lua_call_script(coc.getSets("AttackLuaName"));
+	glua[AppPlayerIndex].call_script(coc.getSets("AttackLuaName"));
 	return 0;
 }
 
@@ -2430,7 +2430,7 @@ int CScript::SetClientWindowSize(int x, int y)
 {
 	//
 	CString path;
-	path = coc.GetExePath();
+	path = coc.GetCurrentPath();
 	path += "Config.ini";
 	const int max_size = 512;
 	char buffer[max_size] = { 0 };
@@ -2483,7 +2483,7 @@ int CScript::StartCoc()
 	CString cocVer, str;
 	str.Format("%d", AppCocID);
 	char buffer[128] = { 0 };
-	GetPrivateProfileString("version", str, "", buffer, 128, coc.GetExePath() + "CocVersion.ini");
+	GetPrivateProfileString("version", str, "", buffer, 128,GetCurrentPath() + "CocVersion.ini");
 
 	adbRunApp(buffer);
 	SetLog("启动部落冲突", true, BLUECOLOR, false);
@@ -2496,7 +2496,7 @@ int CScript::StopCoc()
 	CString cocVer, str;
 	str.Format("%d", AppCocID);
 	char buffer[128] = { 0 };
-	GetPrivateProfileString("Version", str, "", buffer, 128, coc.GetExePath() + "CocVersion.ini");
+	GetPrivateProfileString("Version", str, "", buffer, 128, coc.GetCurrentPath() + "CocVersion.ini");
 	cocVer = buffer;
 	using namespace std;
 	vector<string> vstr;
@@ -3002,7 +3002,7 @@ int CScript::QuitAppPlayer(int wParam)
 	const int max_size = 512;
 	char buffer[max_size] = { 0 };
 	CString path, str;
-	path = coc.GetExePath();
+	path = coc.GetCurrentPath();
 	path += "Config.ini";
 	int ret = 0;
 	CString process_name[8] = {};
@@ -3220,7 +3220,7 @@ int CScript::script_init()
 	SetLog("初始化...", true, BLACKCOLOR, true);
 	coc.Initialize();
 	townLevel = _ttoi(coc.getSets("townLevel")) + 2;
-	m_base_path = GetExePath();
+	m_base_path = GetCurrentPath();
 	//这是切换信息初始化
 	//a.主账号
 	cocInfo[0].IsSwitch = true;
@@ -3515,6 +3515,7 @@ static unsigned  EntryScript(LPVOID pParam)
 
 CScript*  StartOneScript(CScript *script_info, int index, const char* configFile)
 {
+
 	if (script_info == NULL)
 		return NULL;
 	//1.序号
@@ -3523,7 +3524,11 @@ CScript*  StartOneScript(CScript *script_info, int index, const char* configFile
 	if (configFile) script_info->coc.SetPath(configFile);
 	//加载配置
 	if (configFile)
-		script_info->coc.LoadSets(configFile);
+		if (script_info->coc.LoadSets(configFile) == false)
+		{
+			AfxMessageBox("加载配置文件失败");
+			return NULL;
+		}
 	//3.设置窗口句柄
 	//if (appHwnd > 0) script_info->bindHwnd = appHwnd;
 	//4.线程标志

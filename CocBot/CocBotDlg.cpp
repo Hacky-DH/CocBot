@@ -18,22 +18,7 @@
 //*****  全局函数 ***********//
 
 
-CString GetExePath()
-{
-	TCHAR tcExePath[MAX_PATH] = { 0 };
-	::GetModuleFileName(NULL, tcExePath, MAX_PATH);  // 设置ini路径到exe同一目录下  
 
-													 //_tcsrchr() 反向搜索获得最后一个'\\'的位置，并返回该位置的指针  
-	TCHAR *pFind = _tcsrchr(tcExePath, '\\');
-	if (pFind == NULL)
-	{
-		return 0;
-	}
-	*pFind = '\0';
-	CString szIniPath = tcExePath;
-	szIniPath = szIniPath + _T("\\");
-	return szIniPath;
-}
 
 
 
@@ -158,7 +143,7 @@ void CcocBotDlg::SaveConfig(CString fileName)
 	CString winText, str;
 	if (fileName.GetLength() <= 4)
 	{
-		fileName = GetExePath() + "Config.ini";
+		fileName = GetCurrentPath() + "Config.ini";
 	}
 
 	winText = "";
@@ -707,7 +692,7 @@ BOOL CcocBotDlg::OnInitDialog()
 			if (title.Right(1) == "\\")title.Delete(title.GetLength() - 1, 1);
 			//将模拟器路径载入内存
 			app_player_bs_install_dir = title;
-			SetConfig1("多开控制", "AppPlayerInstallDir", title, GetExePath() + "Config.ini");
+			SetConfig1("多开控制", "AppPlayerInstallDir", title, GetCurrentPath() + "Config.ini");
 			title = "检测到BlueStacks App Player path:";
 			title += buf;
 			title += "\nversion:";
@@ -736,7 +721,7 @@ BOOL CcocBotDlg::OnInitDialog()
 		if (title.Right(1) == "\\")title.Delete(title.GetLength() - 1, 1);
 		//将模拟器路径载入内存
 		app_player_ld_install_dir = title;
-		SetConfig1("多开控制", "AppPlayerInstallDir", title, GetExePath() + "Config.ini");
+		SetConfig1("多开控制", "AppPlayerInstallDir", title, GetCurrentPath() + "Config.ini");
 		if (title.GetLength() > 0)
 		{
 			title = "检测到雷电模拟器 path:";
@@ -757,7 +742,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	
 	/******************************/
 	
-	path = GetExePath();
+	path = GetCurrentPath();
 	script[0].coc.SetPath(path);
 	str_show = script[0].coc.ReadFile("Instruction.txt");
 	pag10.Instruction.SetWindowTextA(str_show);
@@ -781,7 +766,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	vector <string> vstr1, vstr2;
 	//加载常用配置
 	script[MAX_THREAD_COUNT].SetLog("加载常用配置", true, BLACKCOLOR, true);
-	path =GetExePath();
+	path =GetCurrentPath();
 	path += "常用配置";
 	path += "\\";
 	script[0].coc.FileSearch(path,"*.ini");
@@ -805,7 +790,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	//加载捐兵字库
 	script[MAX_THREAD_COUNT].SetLog("加载捐兵字库", true, BLACKCOLOR, true);
 
-	path =GetExePath();
+	path =GetCurrentPath();
 	path += "Dict";
 	path += "\\coc_donate.txt";
 	string result = script[0].coc.ReadFileWithoutPath(path);
@@ -819,12 +804,13 @@ BOOL CcocBotDlg::OnInitDialog()
 	
 	script[MAX_THREAD_COUNT].SetLog("加载完成", true, BLACKCOLOR, true);
 	/*lua*/
-	lua_init(0);
+	for (int i = 0; i < MAX_THREAD_COUNT; i++)
+		glua[i].set_index(i);
 	/*设置全局路径*/
-	gcurrent_path = GetExePath();
+	gcurrent_path = GetCurrentPath();
 
 	/*加载lua攻击脚本*/
-	path = GetExePath();
+	path = GetCurrentPath();
 	path += "Function\\Lua";
 	path += "\\";
 	script[0].coc.SearchStr.Empty();
@@ -844,7 +830,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	IsInit = true;
 	OnBnClickedResetSize();
 	/*加载配置文件，刷新设置*/
-	path = GetExePath() + "Config.ini";
+	path = GetCurrentPath() + "Config.ini";
 	script[0].coc.LoadSets(path);
 	UpdateWindowSet();
 	script[0].SetLog("这是一个免费软件，如果你支付了费用，那么你可能上当受骗！", true, REDCOLOR, false);
@@ -1081,9 +1067,8 @@ void CcocBotDlg::OnClose()
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
 
-	if (glua) { lua_close(glua); glua = NULL; }
 	CbotFunction bot;
-	bot.SetPath(GetExePath());
+	bot.SetPath(GetCurrentPath());
 	SaveConfig();
 	//bot.WriteFile(_T("BotSet.cbt"), save_str);
 
@@ -1119,7 +1104,7 @@ LRESULT CcocBotDlg::OnLoadOutConfig(WPARAM wParam, LPARAM lParam)
 	// TODO: 在此添加控件通知处理程序代码
 	CString path;
 	CbotFunction* bot = new CbotFunction;
-	path = GetExePath();
+	path = GetCurrentPath();
 	bot->SetPath(path);
 	SaveConfig();
 	CString filename;
@@ -1358,9 +1343,9 @@ void CcocBotDlg::OnBnClickedStartStopBot()
 		m_StartStopButton.EnableWindow(FALSE);
 		script[0].scriptInfo = SCRIPT_STATE_IN_RUN;
 		CString path;
-		path = fbot.GetExePath();
+		path = fbot.GetCurrentPath();
 
-		script[0].coc.SetPath(GetExePath() + "Config.ini");
+		script[0].coc.SetPath(GetCurrentPath() + "Config.ini");
 		SaveConfig();//界面配
 		if (pag1.app_player_type == APP_PLAYER_BLUESTACKS)
 		{
@@ -1377,15 +1362,14 @@ void CcocBotDlg::OnBnClickedStartStopBot()
 				script[index].AppPlayerType = pag1.app_player_type;
 				script[index].appPlayerInstallDir = app_player_ld_install_dir;
 				str = m_list.GetItemText(index, 2);
-				if (str.GetLength() < 4)
+				if (str.GetLength() == 0)str = GetCurrentPath() + "Config.ini";
+				if (PathFileExists(str) == false)
 				{
-					script[index].coc.SetPath(GetExePath() + "Config.ini");
+					//配置文件不存在，请重新设置！
+					MessageBox("配置文件不存在，请重新设置！");
+					return;
 				}
-				else
-				{
-					script[index].coc.SetPath(str);
-				}
-				StartOneScript(&script[index], index);
+				StartOneScript(&script[index], index,str);
 
 			}
 		}
@@ -1447,7 +1431,7 @@ LRESULT CcocBotDlg::oneKeySet(WPARAM wParam, LPARAM lParam)
 {
 	CString str, winText;
 
-	str = GetExePath();
+	str = GetCurrentPath();
 	str += "常用配置\\";
 	pag1.m_list.GetText(pag1.m_list.GetCurSel(), winText);
 	str += winText;
@@ -1515,7 +1499,7 @@ LRESULT CcocBotDlg::SetLog(WPARAM wParam, LPARAM lParam)
 	if (info->IsSave == true)
 	{
 		CString path;
-		path = GetExePath();
+		path = GetCurrentPath();
 		path += "Log\\";
 		path += strTime;
 		path += ".log";
@@ -1764,7 +1748,7 @@ void CcocBotDlg::OnBnClickedUpdataList()
 	// TODO: 在此添加控件通知处理程序代码
 	//首次加载包含的模拟器
 	CString path, str;
-	path = GetExePath();
+	path = GetCurrentPath();
 	path += "Config.ini";
 	const int max_size = 512;
 	char buffer[max_size] = { 0 };

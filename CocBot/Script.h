@@ -67,7 +67,7 @@ public:
 	 */
 	long scriptInfo;
 	// mode path
-	CString GetExePath();
+	CString GetCurrentPath();
 public://功能函数
 	//创建大漠
 	bool CreateDm(int type=0);
@@ -224,7 +224,7 @@ public://功能函数
 
 static unsigned  EntryScript(LPVOID pParam);
 //开始一个脚本  index -序号，appHwnd-窗口句柄，configFile-配置文件
-CScript*	StartOneScript(CScript *script_info,int index=-1,const char* configFile=nullptr);
+CScript*	StartOneScript(CScript *script_info,int index=0,const char* configFile=nullptr);
 
 BOOL        StopOneScript(CScript*  script_info);
 

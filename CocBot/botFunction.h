@@ -21,7 +21,7 @@ public:
 	CString ReadFile(CString _in_FileName);
 	CString ReadFileWithoutPath(CString _in_PathAndFlieName);
 	CString GetPath();
-	CString GetExePath();
+	CString GetCurrentPath();
 	/*获取某个信息*/
 	CString getSets(const CString& key);
 	int getSetsInt(const CString& key);

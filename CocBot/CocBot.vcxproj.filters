@@ -149,6 +149,9 @@
     <ClInclude Include="Const.h">
       <Filter>全局变量</Filter>
     </ClInclude>
+    <ClInclude Include="_lua.h">
+      <Filter>lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cocBotDlg.cpp">
@@ -216,6 +219,9 @@
     </ClCompile>
     <ClCompile Include="android.cpp">
       <Filter>Kernal\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="_lua.cpp">
+      <Filter>lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

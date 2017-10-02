@@ -37,8 +37,4 @@ int GetAttackPosEx(lua_State* L);
 int SelectSpell(lua_State* L);
 /*选择英雄*/
 int SelectHero(lua_State* L);
-/*创建lua栈,并作必要初始化*/
-int lua_init(int index);
-/*调用一个脚本*/
-int lua_call_script(CString file);
 #endif

@@ -93,3 +93,20 @@ void Split(const CString& s, vector<CString>&v, const CString& c)
 	return (y % 100) * 100000000 + month * 1000000 + d * 10000 + h * 100 + minutes;
 	
 }
+
+ CString GetCurrentPath()
+ {
+	 TCHAR tcExePath[MAX_PATH] = { 0 };
+	 ::GetModuleFileName(NULL, tcExePath, MAX_PATH);  // 设置ini路径到exe同一目录下  
+
+													  //_tcsrchr() 反向搜索获得最后一个'\\'的位置，并返回该位置的指针  
+	 TCHAR *pFind = _tcsrchr(tcExePath, '\\');
+	 if (pFind == NULL)
+	 {
+		 return 0;
+	 }
+	 *pFind = '\0';
+	 CString szIniPath = tcExePath;
+	 szIniPath = szIniPath + _T("\\");
+	 return szIniPath;
+ }

@@ -13,4 +13,5 @@ void _split(const std::string& s, vector<string>& v, const std::string& c);
 /*获取网络时间，格式：20|17 07 03 20 04 */
 int GetNetTime(char* res,unsigned int nLen);
 /**/
+CString GetCurrentPath();
 #endif
