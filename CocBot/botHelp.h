@@ -12,6 +12,6 @@ void _split(const std::string& s, vector<string>& v, const std::string& c);
 //void Split(const CString& s, vector<CString>&v, const CString& c);
 /*获取网络时间，格式：20|17 07 03 20 04 */
 int GetNetTime(char* res,unsigned int nLen);
-/**/
+/*获取程序根目录*/
 CString GetCurrentPath();
 #endif

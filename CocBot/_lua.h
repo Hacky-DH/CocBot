@@ -22,7 +22,7 @@ public:
 	void create_stack();
 	/*销毁栈*/
 	void close_stack();
-	/*设置编号*/
+	/*设置编号,全局只需设置一次*/
 	void set_index(int index);
 	/*调用脚本*/
 	int call_script(CString script_name);

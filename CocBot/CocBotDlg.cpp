@@ -7,7 +7,7 @@
 #include "cocBotDlg.h"
 #include "afxdialogex.h"
 #include "lua_func.h"
-#include "botLib.h"
+#include "ImageLib.h"
 
 
 #ifdef _DEBUG
@@ -752,7 +752,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	m_IconStart = AfxGetApp()->LoadIcon(IDI_ICON4);
 	m_IconStop = AfxGetApp()->LoadIcon(IDI_ICON5);
 	m_StartStopButton.SetIcon(m_IconStart);
-	// 启动定时器，ID为1，定时时间为200ms   
+
 	if (IsFirstUsePrograme() == TRUE)
 	{
 		MessageBox("欢迎首次使用cocBot,使用前务必阅读使用教程！", "提示", MB_ICONINFORMATION);
@@ -803,12 +803,10 @@ BOOL CcocBotDlg::OnInitDialog()
 	}
 	
 	script[MAX_THREAD_COUNT].SetLog("加载完成", true, BLACKCOLOR, true);
-	/*lua*/
+	/*lua 编号初始化*/
 	for (int i = 0; i < MAX_THREAD_COUNT; i++)
 		glua[i].set_index(i);
-	/*设置全局路径*/
-	gcurrent_path = GetCurrentPath();
-
+	
 	/*加载lua攻击脚本*/
 	path = GetCurrentPath();
 	path += "Function\\Lua";
@@ -825,8 +823,7 @@ BOOL CcocBotDlg::OnInitDialog()
 			pag4.m_lua_list.AddString(vstr1[i].c_str());
 		}
 	}
-	SetTimer(1, 1000, NULL);
-	SetTimer(2, 500, NULL);
+	
 	IsInit = true;
 	OnBnClickedResetSize();
 	/*加载配置文件，刷新设置*/
@@ -834,6 +831,9 @@ BOOL CcocBotDlg::OnInitDialog()
 	script[0].coc.LoadSets(path);
 	UpdateWindowSet();
 	script[0].SetLog("这是一个免费软件，如果你支付了费用，那么你可能上当受骗！", true, REDCOLOR, false);
+	// 启动定时器
+	SetTimer(1, 1000, NULL);
+	SetTimer(2, 500, NULL);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 

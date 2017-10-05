@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "lua_func.h"
-#include "botLib.h"
+#include "ImageLib.h"
 
 
 int SetLog(lua_State* L)

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Script.h"
 #include "lua_func.h"
-#include "botLib.h"
+#include "ImageLib.h"
 #define AVOID_ZERO(x) ((x)==0?1:(x))
 CScript::CScript()
 

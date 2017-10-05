@@ -125,9 +125,6 @@
     <ClInclude Include="pipeshell.h">
       <Filter>Kernal\匿名管道</Filter>
     </ClInclude>
-    <ClInclude Include="botLib.h">
-      <Filter>Kernal\图像识别</Filter>
-    </ClInclude>
     <ClInclude Include="Cdmsoft.h">
       <Filter>Kernal\图像识别</Filter>
     </ClInclude>
@@ -151,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="_lua.h">
       <Filter>lua</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLib.h">
+      <Filter>Kernal\图像识别</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

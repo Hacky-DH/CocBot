@@ -84,7 +84,11 @@ public://功能函数
 	int SelectSpell(int type);
 	/*选择英雄*/
 	int SelectHero(int type);
-	/*opencv图像识别*/
+	/*opencv图像识别
+	1.前4个参数为屏幕范围
+	2.file:文件名
+	3.sim:精度
+	4.坐标*/
 	int ImageLoc(long x1, long y1, long x2, long y2, const char* file, double sim, int&ret_x, int&ret_y);
 	/*对下兵位置进行修复*/
 	int RepairPos(long x, long y, int type, long* resultX, long* resultY);

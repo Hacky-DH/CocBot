@@ -7,12 +7,10 @@
 
 
 /*全局变量*/
-/*程序运行目录*/
-extern CString gcurrent_path;
+
 /*脚本*/
 extern  CScript script[MAX_THREAD_COUNT + 1];
-/*lua*/
-//extern lua_State* glua;
+/*lua 自动管理类*/
 extern _LUA glua[MAX_THREAD_COUNT];
 
 
