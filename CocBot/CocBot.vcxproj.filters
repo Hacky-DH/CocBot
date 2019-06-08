@@ -46,19 +46,19 @@
     <Filter Include="脚本模块\源文件">
       <UniqueIdentifier>{e38561dd-6bb2-4f86-b320-06752acf5810}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kernal">
+    <Filter Include="core">
       <UniqueIdentifier>{6fc66da5-4998-4ba5-824b-d7cb3bf3a048}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kernal\匿名管道">
+    <Filter Include="core\匿名管道">
       <UniqueIdentifier>{7cbde6b2-b655-4d3d-85a0-d96b492a639f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kernal\杂项">
+    <Filter Include="core\杂项">
       <UniqueIdentifier>{fdd5d6d2-ea3f-40fa-a696-e60216d5ccf5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kernal\图像识别">
+    <Filter Include="core\图像识别">
       <UniqueIdentifier>{dfafbc4b-b46f-47db-a732-e3f9b54143f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kernal\Android">
+    <Filter Include="core\Android">
       <UniqueIdentifier>{bd6ae7b5-af1a-413a-9950-2cead20f10e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -123,13 +123,13 @@
       <Filter>UI\头文件</Filter>
     </ClInclude>
     <ClInclude Include="pipeshell.h">
-      <Filter>Kernal\匿名管道</Filter>
+      <Filter>core\匿名管道</Filter>
     </ClInclude>
     <ClInclude Include="Cdmsoft.h">
-      <Filter>Kernal\图像识别</Filter>
+      <Filter>core\图像识别</Filter>
     </ClInclude>
     <ClInclude Include="botHelp.h">
-      <Filter>Kernal\杂项</Filter>
+      <Filter>core\杂项</Filter>
     </ClInclude>
     <ClInclude Include="lua_func.h">
       <Filter>lua</Filter>
@@ -141,7 +141,7 @@
       <Filter>UI\头文件</Filter>
     </ClInclude>
     <ClInclude Include="android.h">
-      <Filter>Kernal\Android</Filter>
+      <Filter>core\Android</Filter>
     </ClInclude>
     <ClInclude Include="Const.h">
       <Filter>全局变量</Filter>
@@ -150,7 +150,7 @@
       <Filter>lua</Filter>
     </ClInclude>
     <ClInclude Include="ImageLib.h">
-      <Filter>Kernal\图像识别</Filter>
+      <Filter>core\图像识别</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,10 +203,10 @@
       <Filter>UI\源文件</Filter>
     </ClCompile>
     <ClCompile Include="pipshell.cpp">
-      <Filter>Kernal\匿名管道</Filter>
+      <Filter>core\匿名管道</Filter>
     </ClCompile>
     <ClCompile Include="botHelp.cpp">
-      <Filter>Kernal\杂项</Filter>
+      <Filter>core\杂项</Filter>
     </ClCompile>
     <ClCompile Include="lua_func.cpp">
       <Filter>lua</Filter>
@@ -218,7 +218,7 @@
       <Filter>UI\源文件</Filter>
     </ClCompile>
     <ClCompile Include="android.cpp">
-      <Filter>Kernal\Android</Filter>
+      <Filter>core\Android</Filter>
     </ClCompile>
     <ClCompile Include="_lua.cpp">
       <Filter>lua</Filter>
@@ -233,8 +233,5 @@
     <Image Include="res\CocBot.ico">
       <Filter>资源文件</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
   </ItemGroup>
 </Project>

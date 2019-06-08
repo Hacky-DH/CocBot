@@ -5,11 +5,6 @@
 #define DLL_IMPORT extern "C" __declspec(dllimport) /*µ¼Èëº¯Êý*/
 
 #endif
-#ifdef _DEBUG
-#pragma comment(lib,"../Debug/botLib.lib")
-#else
-#pragma comment(lib,"../Release/ImageLib")
-#endif
 
 DLL_IMPORT int  ImageLoc(int width, int height, void* pimg, const char* temp_file, double match_rate, int *ret_x, int*ret_y);
 
