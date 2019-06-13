@@ -46,14 +46,14 @@ END_MESSAGE_MAP()
 
 void page10::OnDownload()
 {
-	// TODO: 在此添加控件通知处理程序代码
-	//MFC    
 	//用默认浏览器打开网页  
 	//如果找不到默认浏览器，则默认用IE打开  
-	ShellExecute(NULL, _T("open"), _T("https://github.com/WallBreaker2/CocBot.git"), NULL, NULL, SW_SHOWNORMAL);//
-	ShellExecute(NULL, _T("open"), _T("https://pan.baidu.com/s/1i5bmWXf"), NULL, NULL, SW_SHOWNORMAL);//
+	ShellExecute(NULL, _T("open"), _T("https://github.com/Hacky-DH/CocBot"), NULL, NULL, SW_SHOWNORMAL);
+	//原作者release的地址
+	//ShellExecute(NULL, _T("open"), _T("https://pan.baidu.com/s/1i5bmWXf"), NULL, NULL, SW_SHOWNORMAL);
+	//提取码: y3yi
+	ShellExecute(NULL, _T("open"), _T("https://pan.baidu.com/s/1a34-r0bk0v30qkbMNlHS-g"), NULL, NULL, SW_SHOWNORMAL);
 }
-
 
 void page10::OnPaint()
 {

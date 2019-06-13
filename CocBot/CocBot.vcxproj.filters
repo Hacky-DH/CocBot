@@ -233,5 +233,23 @@
     <Image Include="res\CocBot.ico">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="res\coc_bot.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\my.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\icon3.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\Start.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\Stop.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\test.manifest" />
   </ItemGroup>
 </Project>
