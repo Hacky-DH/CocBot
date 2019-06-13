@@ -17,11 +17,6 @@
 #define SetConfig2(a,b,c,d) script[0].coc.setSetsInt((b),(c))
 //*****  全局函数 ***********//
 
-
-
-
-
-
 // 用于应用程序“关于”
 //菜单项的 CAboutDlg 对话框
 
@@ -69,19 +64,11 @@ CcocBotDlg::CcocBotDlg(CWnd* pParent /*=NULL*/)
 	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON2);
 	//初始化
 	script[MAX_THREAD_COUNT].pProgress = &(pag9.m_progress);
-
-
-
-
 }
 
 
 CcocBotDlg::~CcocBotDlg()
 {
-
-
-
-
 }
 
 
@@ -381,7 +368,6 @@ void CcocBotDlg::SaveConfig(CString fileName)
 
 void CcocBotDlg::UpdateWindowSet()
 {
-	
 	pag1.townLevel.SetCurSel(_ttoi(script[0].coc.getSets("townLevel")));
 	pag1.GameVersion.SetCurSel(_ttoi(script[0].coc.getSets("GameVersion")));
 	pag1.OffLine.SetCheck(_ttoi(script[0].coc.getSets("OffLine")));
@@ -615,7 +601,6 @@ BOOL CcocBotDlg::OnInitDialog()
 	title += "  当前版本号<<";
 	title += cocBotVer;
 	title += ">>";
-	title += " qq群：584618461";
 	SetWindowText(title);
 	main_tab.InsertItem(0, TEXT("快速设置"));
 	main_tab.InsertItem(1, TEXT("训练设置"));
@@ -644,7 +629,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	main_tab.GetClientRect(&rc);
 	//调整子对话框在父窗口中的位置
 	rc.top += 40;
-	
+
 	//获取窗口最大
 	GetWindowRect(&rect_max);
 	//设置子对话框尺寸并移动到指定位置
@@ -704,10 +689,6 @@ BOOL CcocBotDlg::OnInitDialog()
 		{
 			script[MAX_THREAD_COUNT].SetLog("无法读取值");
 		}
-
-
-
-
 		key.Close();
 	}
 	nchars = 255;
@@ -739,15 +720,15 @@ BOOL CcocBotDlg::OnInitDialog()
 	InitlizeList();
 	//***************** 从配置中读取所需配置 ****************//
 	CString str_show, path;
-	
+
 	/******************************/
-	
+
 	path = GetCurrentPath();
 	script[0].coc.SetPath(path);
 	str_show = script[0].coc.ReadFile("Instruction.txt");
 	pag10.Instruction.SetWindowTextA(str_show);
 	script[MAX_THREAD_COUNT].SetLog("当前版本：" + script[MAX_THREAD_COUNT].scriptVer, 1, RGB(0x00, 0x00, 0xff), false);
-	script[MAX_THREAD_COUNT].SetLog("交流群：584618461", true, RGB(0x00, 0x00, 0xff), false);
+	//script[MAX_THREAD_COUNT].SetLog("交流群：584618461", true, RGB(0x00, 0x00, 0xff), false);
 	//SetBackgroundColor(RGB(0Xc0, 0xc0, 0xc0));
 	m_IconStart = AfxGetApp()->LoadIcon(IDI_ICON4);
 	m_IconStop = AfxGetApp()->LoadIcon(IDI_ICON5);
@@ -801,12 +782,12 @@ BOOL CcocBotDlg::OnInitDialog()
 		_split(vstr1[i], vstr2, "$");
 		pag5.InputKeyWord.AddString(vstr2[1].c_str());
 	}
-	
+
 	script[MAX_THREAD_COUNT].SetLog("加载完成", true, BLACKCOLOR, true);
 	/*lua 编号初始化*/
 	for (int i = 0; i < MAX_THREAD_COUNT; i++)
 		glua[i].set_index(i);
-	
+
 	/*加载lua攻击脚本*/
 	path = GetCurrentPath();
 	path += "Function\\Lua";
@@ -823,7 +804,7 @@ BOOL CcocBotDlg::OnInitDialog()
 			pag4.m_lua_list.AddString(vstr1[i].c_str());
 		}
 	}
-	
+
 	IsInit = true;
 	OnBnClickedResetSize();
 	/*加载配置文件，刷新设置*/
@@ -878,9 +859,7 @@ void CcocBotDlg::OnPaint()
 	}
 	else
 	{
-
 		CDialogEx::OnPaint();
-
 	}
 }
 
@@ -921,11 +900,9 @@ BOOL CcocBotDlg::InitSocket()
 
 void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 {
-	// TODO: 在此添加控件通知处理程序代码
 	switch (main_tab.GetCurSel())
 	{
 	case 0:
-
 		pag1.ShowWindow(true);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(FALSE);
@@ -936,9 +913,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
-
 		break;
-
 	case 1:
 		pag1.ShowWindow(FALSE);
 		pag2.ShowWindow(true);
@@ -950,7 +925,6 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
-
 		break;
 	case 2:
 		pag1.ShowWindow(FALSE);
@@ -963,7 +937,6 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
-
 		break;
 	case 3:
 		pag1.ShowWindow(FALSE);
@@ -976,7 +949,6 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
-
 		break;
 	case 4:
 		pag1.ShowWindow(FALSE);
@@ -989,7 +961,6 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
-
 		break;
 	case 5:
 		pag1.ShowWindow(FALSE);
@@ -1002,7 +973,6 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
-
 		break;
 	case 6:
 		pag1.ShowWindow(FALSE);
@@ -1015,7 +985,6 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
-
 		break;
 	case 7:
 		pag1.ShowWindow(FALSE);
@@ -1028,7 +997,6 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(true);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
-
 		break;
 	case 8:
 		pag1.ShowWindow(FALSE);
@@ -1041,7 +1009,6 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(FALSE);
 		pag9.ShowWindow(true);
 		pag10.ShowWindow(FALSE);
-
 		break;
 	case 9:
 		pag1.ShowWindow(FALSE);
@@ -1054,11 +1021,8 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag8.ShowWindow(FALSE);
 		pag9.ShowWindow(false);
 		pag10.ShowWindow(true);
-
 		break;
-
 	}
-
 	*pResult = 0;
 }
 
@@ -1272,7 +1236,7 @@ void CcocBotDlg::OnScreenCapture()
 	// TODO: 在此添加控件通知处理程序代码
 
 
-	
+
 }
 
 
@@ -1660,9 +1624,9 @@ void CcocBotDlg::OnNMRClickList1(NMHDR *pNMHDR, LRESULT *pResult)
 	NM_LISTVIEW* pMListView = (NM_LISTVIEW*)pNMHDR;
 	row = pMListView->iItem;
 	col = pMListView->iSubItem;
-	CMenu  *pContextMenu = menu.GetSubMenu(0); //获取第一个弹出菜单，所以第一个菜单必须有子菜单 
+	CMenu  *pContextMenu = menu.GetSubMenu(0); //获取第一个弹出菜单，所以第一个菜单必须有子菜单
 	CPoint point1;//定义一个用于确定光标位置的位置  
-	GetCursorPos(&point1);//获取当前光标的位置，以便使得菜单可以跟随光标  
+	GetCursorPos(&point1);//获取当前光标的位置，以便使得菜单可以跟随光标 
 	if (row >= MAX_THREAD_COUNT)
 	{
 		return;
