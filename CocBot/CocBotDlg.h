@@ -31,19 +31,19 @@ public:
 private:
 	SOCKET m_socket;
 	CTabCtrl main_tab;
-	CListCtrl m_list;
+	CListCtrl m_list; //多开列表
 	CButton m_StartStopButton;
 	CString app_player_bs_install_dir, app_player_ld_install_dir;//bs,雷电模拟器安装路径/根目录
-	page1 pag1;//page class
-	page2 pag2;
-	page3 pag3;
-	page4 pag4;
-	page5 pag5;
-	page6 pag6;
-	page7 pag7;
-	page8 pag8;
-	page9 pag9;
-	page10 pag10;
+	page1 pag1;   //快速设置
+	page2 pag2;   //训练设置
+	page3 pag3;   //搜索设置
+	page4 pag4;   //攻击设置
+	page5 pag5;   //捐兵请求
+	page6 pag6;   //升级设置
+	page7 pag7;   //高级设置
+	page8 pag8;   //统计
+	page9 pag9;   //实时日志
+	page10 pag10; //关于
 	Graphic m_graphic;
 	bool IsInit;
 	

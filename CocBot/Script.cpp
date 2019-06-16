@@ -3545,12 +3545,11 @@ CScript*  StartOneScript(CScript *script_info, int index, const char* configFile
 	return script_info;
 }
 
-BOOL         StopOneScript(CScript  *script_info)
+BOOL StopOneScript(CScript  *script_info)
 {
 	if (script_info == NULL) return FALSE;
 
 	// 设置标志位
-	script_info->IsThreadRun = false;
 	//script_info->scriptInfo = -10;
 	script_info->IsThreadRun = false;
 	// 等待最多3秒,如果超时,就强制结束线程.危险.(有资源泄漏)
@@ -3564,60 +3563,51 @@ BOOL         StopOneScript(CScript  *script_info)
 	}
 	//释放大漠对象
 	script_info->dm = NULL;
-
-
 	return TRUE;
 }
 
-BOOL         SuspendOneScript(CScript* script_info)
+BOOL SuspendOneScript(CScript* script_info)
 {
 	if (script_info == NULL) return FALSE;
 	script_info->pThread->SuspendThread();
-
 	return TRUE;
 }
 
-BOOL         ResumOneScript(CScript* script_info)
+BOOL ResumOneScript(CScript* script_info)
 {
 	if (script_info == NULL) return FALSE;
 	script_info->pThread->ResumeThread();
-
 	return TRUE;
 }
 
-BOOL         SuspendAllScript(CScript* script_info[])
+BOOL SuspendAllScript(CScript* script_info[])
 {
 	for (int i = 0; i < MAX_THREAD_COUNT; i++)
 	{
 		if (script_info == NULL) continue;;
 		script_info[i]->pThread->SuspendThread();
 	}
-
-
 	return TRUE;
 }
 
-BOOL         ResumAllScript(CScript* script_info[])
+BOOL ResumAllScript(CScript* script_info[])
 {
 	for (int i = 0; i < MAX_THREAD_COUNT; i++)
 	{
 		if (script_info == NULL) continue;
 		script_info[i]->pThread->ResumeThread();
 	}
-
-
 	return TRUE;
 }
 
-BOOL          StopAllScript(CScript * all_script_info[])
+BOOL StopAllScript(CScript * all_script_info[])
 {
 	// 先把所有标志位置0
 	int i;
 	for (i = 0; i < MAX_THREAD_COUNT; ++i)
 	{
-
 		if (all_script_info[i] == NULL) continue;
-		all_script_info[i]->IsThreadRun = 0;
+		all_script_info[i]->IsThreadRun = false;
 	}
 
 	// 等待所有
@@ -3636,7 +3626,6 @@ BOOL          StopAllScript(CScript * all_script_info[])
 		//消去地址
 		all_script_info[i] = NULL;
 	}
-
 	return TRUE;
 }
 

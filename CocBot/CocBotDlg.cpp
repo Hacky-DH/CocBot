@@ -1029,8 +1029,6 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 
 void CcocBotDlg::OnClose()
 {
-	// TODO: 在此添加消息处理程序代码和/或调用默认值
-
 	CbotFunction bot;
 	bot.SetPath(GetCurrentPath());
 	SaveConfig();
@@ -1052,7 +1050,6 @@ void CcocBotDlg::OnClose()
 	KillTimer(1);
 	KillTimer(2);
 	CDialogEx::OnClose();
-
 }
 
 
@@ -1118,10 +1115,10 @@ void CcocBotDlg::InitlizeList(void)
 	//****************** donate keyword list **************//
 	pag5.ListKeyWord.SetExtendedStyle(LVS_ICON | LVS_REPORT | LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT);
 	pag5.ListKeyWord.InsertColumn(0, "选择", LVCFMT_CENTER, 50);
-	pag5.ListKeyWord.InsertColumn(1, "关键词", LVCFMT_LEFT, 150);
-	pag5.ListKeyWord.InsertColumn(2, "捐赠", LVCFMT_LEFT, 50);
-
-	for (int i = 0; i < 21; i++)
+	pag5.ListKeyWord.InsertColumn(1, "关键词", LVCFMT_LEFT, 100);
+	pag5.ListKeyWord.InsertColumn(2, "捐赠", LVCFMT_LEFT, 95);
+	
+	for (int i = 0; i < sizeof(ARMYNAME) / sizeof(LPCTSTR); i++)
 	{
 		str.Format("%d", i);
 		pag5.ListKeyWord.InsertItem(i, str);
@@ -1150,16 +1147,16 @@ void CcocBotDlg::InitlizeList(void)
 	//MutliLog
 	pag7.m_list1.SetExtendedStyle(LVS_ICON | LVS_REPORT | LVS_EX_CHECKBOXES);
 	pag7.m_list1.InsertColumn(0, _T("选定"), LVCFMT_CENTER, 50);
-	pag7.m_list1.InsertColumn(1, _T("版本"), LVCFMT_LEFT, 100);
-	pag7.m_list1.InsertColumn(2, _T("配置路径"), LVCFMT_CENTER, 200);
+	pag7.m_list1.InsertColumn(1, _T("版本"), LVCFMT_LEFT, 80);
+	pag7.m_list1.InsertColumn(2, _T("配置路径"), LVCFMT_CENTER, 180);
 	pag7.m_list1.InsertColumn(3, _T("序号"), LVCFMT_CENTER, 50);
-	for (int i = 0; i < MAX_SWITCH_COUNT - 1; i++)
+	for (int i = 1; i < MAX_SWITCH_COUNT; i++)
 	{
-		str.Format("%d", i + 1);
+		str.Format("%d", i);
 		pag7.m_list1.InsertItem(i, str);
 	}
 	pag7.Clear.AddString("重置所有");
-	for (int i = 0; i < MAX_SWITCH_COUNT; i++)
+	for (int i = 1; i < MAX_SWITCH_COUNT; i++)
 	{
 		str.Format("第 %d行", i);
 		pag7.Clear.AddString(str);
@@ -1169,8 +1166,8 @@ void CcocBotDlg::InitlizeList(void)
 	m_list.InsertColumn(0, "索引", LVCFMT_LEFT, 40);
 	m_list.InsertColumn(1, "标题", LVCFMT_LEFT, 100);
 	m_list.InsertColumn(2, "配置文件", LVCFMT_LEFT, 100);
-	m_list.InsertColumn(3, "状态", LVCFMT_LEFT, 200);
-	m_list.InsertColumn(4, "hParent", LVCFMT_LEFT, 100);
+	m_list.InsertColumn(3, "状态", LVCFMT_LEFT, 235);
+	m_list.InsertColumn(4, "hParent", LVCFMT_LEFT, 70);
 	for (int i = 0; i < MAX_THREAD_COUNT; i++)
 	{
 		str.Format("%d", i);
@@ -1233,10 +1230,7 @@ void CcocBotDlg::OnTimer(UINT_PTR nIDEvent)
 
 void CcocBotDlg::OnScreenCapture()
 {
-	// TODO: 在此添加控件通知处理程序代码
-
-
-
+	// TODO:
 }
 
 
@@ -1650,8 +1644,6 @@ void CcocBotDlg::OnNMRClickList1(NMHDR *pNMHDR, LRESULT *pResult)
 	::SendMessage(GetSafeHwnd(), WM_BINDSET_SAVE_CONFIG, 0, 0);
 	pContextMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, point1.x, point1.y, this); //在指定位置显示弹出菜单
 	*pResult = 0;
-
-	*pResult = 0;
 }
 
 
@@ -1739,7 +1731,7 @@ void CcocBotDlg::OnBnClickedUpdataList()
 			}*/
 			m_list.SetItemText(n, 0, vstr2[0].c_str());/* index */
 			m_list.SetItemText(n, 1, vstr2[1].c_str());/* title */
-			m_list.SetItemText(n, 4, vstr2[2].c_str());/* title */
+			m_list.SetItemText(n, 4, vstr2[2].c_str());/* handle */
 		}
 	}
 }

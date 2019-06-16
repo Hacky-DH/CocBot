@@ -66,10 +66,6 @@ END_MESSAGE_MAP()
 
 void page1::OnBsOrOtherChange()
 {
-	// TODO: 在此添加控件通知处理程序代码
-
-	
-	
 }
 
 
@@ -95,7 +91,6 @@ void page1::OnSelectFile()
 	filename= bot->SelectFile("配置文件(*.ini)|*.ini||");
 	delete bot;
 	LoadInSet.SetWindowTextA(filename);
-	
 }
 
 
