@@ -117,8 +117,6 @@ const LPCTSTR EXTR_NEED_COLOR2 = "4|0|ffffff-050505,10|0|96c800-0F0F0F,1|3|88c00
 #define  APP_PLAYER_LIGHTING      1
 //夜神模拟器
 //#define   APP_PLAYER_NIGHT             2
-//服务器IP
-const LPCTSTR IPADRESS =					"112.74.36.23";
 //交流
 const LPCTSTR QQGROUPNAME =					"";
 //脚本版本

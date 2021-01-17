@@ -272,9 +272,6 @@
     <Image Include="res\Start.ico" />
     <Image Include="res\Stop.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="res\test.manifest" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

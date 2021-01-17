@@ -16,8 +16,6 @@ BEGIN_MESSAGE_MAP(CcocBotApp, CWinApp)
 END_MESSAGE_MAP()
 
 
-// CnewcocbotApp 构造
-
 CcocBotApp::CcocBotApp()
 {
 	EnableHtmlHelp();
@@ -30,12 +28,8 @@ CcocBotApp::CcocBotApp()
 }
 
 
-// 唯一的一个 CnewcocbotApp 对象
-
 CcocBotApp theApp;
 
-
-// CnewcocbotApp 初始化
 
 BOOL CcocBotApp::InitInstance()
 {
@@ -70,17 +64,17 @@ BOOL CcocBotApp::InitInstance()
 
 	//
 	m_hRichEdit=LoadLibrary(_T("RICHED20.DLL"));
-	
+
 	//皮肤
 	//skinppLoadSkin(_T("blue.ssk"));//blue.ssk为项目下的皮肤文件
 
 	// 步骤1 设置COM组件线程模型为sta
 	CoInitialize(NULL);
-	 
+
 	//2.确定路径
 	CString modePath;
 	::AfxGetModuleFileName(NULL, modePath);
-	
+
 	modePath = modePath.Left(modePath.ReverseFind(_T('\\')));
 
 	//3.这里开始注册大漠
@@ -93,12 +87,12 @@ BOOL CcocBotApp::InitInstance()
 	}
 
 	//4.下面开始破解大漠
-	
+
 	if (CrackDm("dm.dll")<=0)
 	{
 		::MessageBox(NULL, "破解插件失败！", "提示", MB_OK | MB_ICONERROR);
 	}
-	
+
 	//5.检查版本号
 	Cdmsoft dm;
 	if (dm.CreateDispatch("dm.dmsoft")==FALSE)
@@ -126,17 +120,17 @@ BOOL CcocBotApp::InitInstance()
 	//登录对话框
 	CLogin login;
 	//主对话框
-	CcocBotDlg dlg; 
+	CcocBotDlg dlg;
 
 	//设置为主对话框
 	m_pMainWnd = &dlg;
 
-	
+
 	INT_PTR nResponse = 0;
 	//登陆
 	//***************************************************************
-	
-	/*do 
+
+	/*do
 	{
 		nResponse = login.DoModal();
 		if (IDOK != nResponse) return FALSE;
@@ -160,12 +154,12 @@ BOOL CcocBotApp::InitInstance()
 			MessageBox(NULL, "密码不正确！", "", MB_OK | MB_ICONINFORMATION);
 			continue;
 		}
-	
+
 		break;
-	
+
 
 	} while (true);
-	
+
 	*/
 	//***************************************************************
 	nResponse = dlg.DoModal();
@@ -191,9 +185,9 @@ BOOL CcocBotApp::InitInstance()
 	if (pShellManager != NULL)
 	{
 		delete pShellManager;
-		
+
 	}
-	
+
 	// 由于对话框已关闭，所以将返回 FALSE 以便退出应用程序，
 	// 而不是启动应用程序的消息泵。
 	return FALSE;

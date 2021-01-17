@@ -1,8 +1,4 @@
-﻿
-// newcocbotDlg.cpp : 实现文件
-//
-
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "cocBot.h"
 #include "cocBotDlg.h"
 #include "afxdialogex.h"
@@ -54,14 +50,11 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CnewcocbotDlg 对话框
-
-
 CcocBotDlg::CcocBotDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CcocBotDlg::IDD, pParent)
 	, IsInit(false)
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON2);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON);
 	//初始化
 	script[MAX_THREAD_COUNT].pProgress = &(pag9.m_progress);
 }
@@ -120,7 +113,6 @@ static UINT indicators[] =
 	ID_INDICATOR_NUM,
 	ID_INDICATOR_SCRL
 };
-// CnewcocbotDlg 消息处理程序
 
 
 
@@ -730,8 +722,8 @@ BOOL CcocBotDlg::OnInitDialog()
 	script[MAX_THREAD_COUNT].SetLog("当前版本：" + script[MAX_THREAD_COUNT].scriptVer, 1, RGB(0x00, 0x00, 0xff), false);
 	//script[MAX_THREAD_COUNT].SetLog("交流群：584618461", true, RGB(0x00, 0x00, 0xff), false);
 	//SetBackgroundColor(RGB(0Xc0, 0xc0, 0xc0));
-	m_IconStart = AfxGetApp()->LoadIcon(IDI_ICON4);
-	m_IconStop = AfxGetApp()->LoadIcon(IDI_ICON5);
+	m_IconStart = AfxGetApp()->LoadIcon(IDI_START);
+	m_IconStop = AfxGetApp()->LoadIcon(IDI_STOP);
 	m_StartStopButton.SetIcon(m_IconStart);
 
 	if (IsFirstUsePrograme() == TRUE)
@@ -1117,7 +1109,7 @@ void CcocBotDlg::InitlizeList(void)
 	pag5.ListKeyWord.InsertColumn(0, "选择", LVCFMT_CENTER, 50);
 	pag5.ListKeyWord.InsertColumn(1, "关键词", LVCFMT_LEFT, 100);
 	pag5.ListKeyWord.InsertColumn(2, "捐赠", LVCFMT_LEFT, 95);
-	
+
 	for (int i = 0; i < sizeof(ARMYNAME) / sizeof(LPCTSTR); i++)
 	{
 		str.Format("%d", i);
@@ -1619,8 +1611,8 @@ void CcocBotDlg::OnNMRClickList1(NMHDR *pNMHDR, LRESULT *pResult)
 	row = pMListView->iItem;
 	col = pMListView->iSubItem;
 	CMenu  *pContextMenu = menu.GetSubMenu(0); //获取第一个弹出菜单，所以第一个菜单必须有子菜单
-	CPoint point1;//定义一个用于确定光标位置的位置  
-	GetCursorPos(&point1);//获取当前光标的位置，以便使得菜单可以跟随光标 
+	CPoint point1;//定义一个用于确定光标位置的位置
+	GetCursorPos(&point1);//获取当前光标的位置，以便使得菜单可以跟随光标
 	if (row >= MAX_THREAD_COUNT)
 	{
 		return;
