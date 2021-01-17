@@ -120,9 +120,9 @@ const LPCTSTR EXTR_NEED_COLOR2 = "4|0|ffffff-050505,10|0|96c800-0F0F0F,1|3|88c00
 //服务器IP
 const LPCTSTR IPADRESS =					"112.74.36.23";
 //交流
-const LPCTSTR QQGROUPNAME =					"584618461";
+const LPCTSTR QQGROUPNAME =					"";
 //脚本版本
-const LPCTSTR cocBotVer =					"6.190613";
+const LPCTSTR cocBotVer =					"6.210117";
 //插件版本
 #define DM_VER_5							"5.1423"
 #define DM_VER_6							"6.1538"
