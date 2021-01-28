@@ -1,2 +1,2 @@
 # CocBot
-Build by Visual studio 2017 VC14.1
+Build by Visual studio 2019
