@@ -748,7 +748,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	str_show.ReleaseBuffer();
 	if (vstr1.size() > 0)
 	{
-		for (int i = 0; i < vstr1.size(); i++)
+		for (size_t i = 0; i < vstr1.size(); i++)
 		{
 			quick.m_list.AddString(vstr1[i].c_str());
 		}
@@ -768,7 +768,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	path += "\\coc_donate.txt";
 	string result = script[0].coc.ReadFileWithoutPath(path);
 	_split(result, vstr1, "\r\n");
-	for (int i = 0; i < vstr1.size(); i++)
+	for (size_t i = 0; i < vstr1.size(); i++)
 	{
 		str_show = vstr1[i].c_str();
 		_split(vstr1[i], vstr2, "$");
@@ -791,7 +791,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	str_show.ReleaseBuffer();
 	if (vstr1.size() > 0)
 	{
-		for (int i = 0; i < vstr1.size(); i++)
+		for (size_t i = 0; i < vstr1.size(); i++)
 		{
 			pag4.m_lua_list.AddString(vstr1[i].c_str());
 		}
@@ -1712,7 +1712,7 @@ void CcocBotDlg::OnBnClickedUpdataList()
 		_split(str.GetBuffer(), vstr1, "\n");
 		str.ReleaseBuffer();
 		int n = 0;
-		for (int i = 0; i < vstr1.size(); i++)
+		for (size_t i = 0; i < vstr1.size(); i++)
 		{
 			if (vstr1[i].length() <= 1) break;
 			_split(vstr1[i], vstr2, ",");
