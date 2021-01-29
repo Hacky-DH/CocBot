@@ -1,11 +1,7 @@
-
-// cocbotDlg.h : 头文件
-//
-
 #pragma once
 #include "afxcmn.h"
 #include "afxwin.h"
-#include "win_quick.h"
+#include "tab_quickset.h"
 #include "page2.h"
 #include "page3.h"
 #include "page4.h"
@@ -16,15 +12,16 @@
 #include "page9.h"
 #include "page10.h"
 #include "Graphic.h"
-#include "Script.h" 
-// CcocBotDlg 对话框
+#include "Script.h"
+
+// 主窗口
 class CcocBotDlg : public CDialogEx
 {
-// 构造
 public:
-	CcocBotDlg(CWnd* pParent = NULL);	// 标准构造函数
-	~CcocBotDlg();                       // 标准析构函数
-// 对话框数据
+	CcocBotDlg(CWnd* pParent = NULL);
+	~CcocBotDlg();
+	
+	// 对话框数据
 	enum { IDD = IDD_NEWCOCBOT_DIALOG };
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
@@ -34,7 +31,7 @@ private:
 	CListCtrl m_list; //多开列表
 	CButton m_StartStopButton;
 	CString app_player_bs_install_dir, app_player_ld_install_dir;//bs,雷电模拟器安装路径/根目录
-	win_quick quick;   //快速设置
+	TabQuickSet quick;   //快速设置
 	page2 pag2;   //训练设置
 	page3 pag3;   //搜索设置
 	page4 pag4;   //攻击设置

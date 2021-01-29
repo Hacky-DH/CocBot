@@ -1,30 +1,30 @@
-// win_quick.cpp : 实现文件
+// tab_quickset.cpp : 实现文件
 //
 
 #include "stdafx.h"
 #include "cocBot.h"
 
-#include "win_quick.h"
+#include "tab_quickset.h"
 
 #include "afxdialogex.h"
 
 
-// win_quick 对话框
+// TabQuickSet 对话框
 
-IMPLEMENT_DYNAMIC(win_quick, CDialogEx)
+IMPLEMENT_DYNAMIC(TabQuickSet, CDialogEx)
 
-win_quick::win_quick(CWnd* pParent /*=NULL*/)
-	: CDialogEx(win_quick::IDD, pParent)
+TabQuickSet::TabQuickSet(CWnd* pParent /*=NULL*/)
+	: CDialogEx(TabQuickSet::IDD, pParent)
 	, app_player_type(FALSE)
 {
 	app_player_type = 1;
 }
 
-win_quick::~win_quick()
+TabQuickSet::~TabQuickSet()
 {
 }
 
-void win_quick::DoDataExchange(CDataExchange* pDX)
+void TabQuickSet::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 
@@ -48,42 +48,42 @@ void win_quick::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(win_quick, CDialog)
+BEGIN_MESSAGE_MAP(TabQuickSet, CDialog)
 
-	ON_CBN_SELCHANGE(IDC_COMBO1, &win_quick::OnBsOrOtherChange)
-	ON_BN_CLICKED(IDC_BUTTON10, &win_quick::OnLoadInConfig)
-	ON_BN_CLICKED(IDC_BUTTON11, &win_quick::OnLoadOutConfig)
-	ON_BN_CLICKED(IDC_BUTTON2, &win_quick::OnSelectFile)
+	ON_CBN_SELCHANGE(IDC_COMBO1, &TabQuickSet::OnBsOrOtherChange)
+	ON_BN_CLICKED(IDC_BUTTON10, &TabQuickSet::OnLoadInConfig)
+	ON_BN_CLICKED(IDC_BUTTON11, &TabQuickSet::OnLoadOutConfig)
+	ON_BN_CLICKED(IDC_BUTTON2, &TabQuickSet::OnSelectFile)
 	ON_WM_PAINT()
-	ON_BN_CLICKED(IDC_BT_QUICKSET, &win_quick::OnBnClickedBtQuickset)
-	ON_BN_CLICKED(IDC_CHECK_BS, &win_quick::OnBnClickedCheckBs)
-	ON_BN_CLICKED(IDC_CHECK_LD, &win_quick::OnBnClickedCheckLd)
+	ON_BN_CLICKED(IDC_BT_QUICKSET, &TabQuickSet::OnBnClickedBtQuickset)
+	ON_BN_CLICKED(IDC_CHECK_BS, &TabQuickSet::OnBnClickedCheckBs)
+	ON_BN_CLICKED(IDC_CHECK_LD, &TabQuickSet::OnBnClickedCheckLd)
 END_MESSAGE_MAP()
 
 
-// win_quick 消息处理程序
+// TabQuickSet 消息处理程序
 
 
-void win_quick::OnBsOrOtherChange()
+void TabQuickSet::OnBsOrOtherChange()
 {
 }
 
 
-void win_quick::OnLoadInConfig()
+void TabQuickSet::OnLoadInConfig()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	::SendMessage(hParent, WM_LOAD_IN_CONFIG, 0, 0);
 }
 
 
-void win_quick::OnLoadOutConfig()
+void TabQuickSet::OnLoadOutConfig()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	::SendMessage(hParent, WM_LOAD_OUT_CONFIG, 0, 0);
 }
 
 
-void win_quick::OnSelectFile()
+void TabQuickSet::OnSelectFile()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	CbotFunction* bot = new CbotFunction;
@@ -94,7 +94,7 @@ void win_quick::OnSelectFile()
 }
 
 
-void win_quick::OnPaint()
+void TabQuickSet::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 					   // TODO: 在此处添加消息处理程序代码
@@ -102,7 +102,7 @@ void win_quick::OnPaint()
 }
 
 
-BOOL win_quick::OnInitDialog()
+BOOL TabQuickSet::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
@@ -112,7 +112,7 @@ BOOL win_quick::OnInitDialog()
 }
 
 
-void win_quick::OnBnClickedBtQuickset()
+void TabQuickSet::OnBnClickedBtQuickset()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	::SendMessage(hParent, WM_PAGE_1_TEST_MESSAGE, 0, 0);
@@ -120,7 +120,7 @@ void win_quick::OnBnClickedBtQuickset()
 }
 
 
-void win_quick::OnBnClickedCheckBs()
+void TabQuickSet::OnBnClickedCheckBs()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
@@ -128,7 +128,7 @@ void win_quick::OnBnClickedCheckBs()
 }
 
 
-void win_quick::OnBnClickedCheckLd()
+void TabQuickSet::OnBnClickedCheckLd()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);

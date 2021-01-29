@@ -149,7 +149,7 @@
     <ClInclude Include="ImageLib.h">
       <Filter>core\图像识别</Filter>
     </ClInclude>
-    <ClInclude Include="win_quick.h">
+    <ClInclude Include="tab_quickset.h">
       <Filter>UI\头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -220,7 +220,7 @@
     <ClCompile Include="_lua.cpp">
       <Filter>lua</Filter>
     </ClCompile>
-    <ClCompile Include="win_quick.cpp">
+    <ClCompile Include="tab_quickset.cpp">
       <Filter>UI\源文件</Filter>
     </ClCompile>
   </ItemGroup>
