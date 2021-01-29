@@ -72,9 +72,9 @@ public://功能函数
 	//创建大漠
 	bool CreateDm(int type=0);
 	//延迟
-	void Dealy(unsigned long mSeconds);
+	void Delay(unsigned long mSeconds);
 	//随机延迟
-	void DealyRandTime(unsigned long minDeaySeconds, unsigned long maxDealySeconds);
+	void DelayRandTime(unsigned long minDeaySeconds, unsigned long maxDelaySeconds);
 	//鼠标左键单击
 	void LeftClick(long x, long y);
 	int KillAdb();

@@ -29,7 +29,7 @@ void page5::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT1, DonateMinSendGetRet);
 	DDX_Control(pDX, IDC_COMBO1, DonateType);
 	DDX_Control(pDX, IDC_EDIT2, DonateCount);
-	DDX_Control(pDX, IDC_EDIT3, DonateDealy);
+	DDX_Control(pDX, IDC_EDIT3, DonateDelay);
 	DDX_Control(pDX, IDC_CHECK3, IsBarbarin);
 	DDX_Control(pDX, IDC_CHECK4, IsArcher);
 	DDX_Control(pDX, IDC_CHECK5, IsGiant);

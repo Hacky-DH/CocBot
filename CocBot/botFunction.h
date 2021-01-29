@@ -31,7 +31,7 @@ public:
 	bool LoadSets(CString file);
 	/*保存设置到文件*/
 	bool SaveSets(CString file);
-	unsigned int Dealy(long DelayCount);
+	unsigned int Delay(long DelayCount);
 	CString GetNowTime(int type);
 	long Initialize();
 	void ScreenCapture(CString _in_file_name);

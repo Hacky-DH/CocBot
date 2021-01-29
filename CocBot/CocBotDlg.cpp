@@ -219,8 +219,8 @@ void CcocBotDlg::SaveConfig(CString fileName)
 	SetConfig1("搜索设置", "SearchMinElixir", winText, fileName);
 	pag3.SearchMinDarkElixir.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "SearchMinDarkElixir", winText, fileName);
-	pag3.SearchDealy.GetWindowTextA(winText);
-	SetConfig1("搜索设置", "SearchDealy", winText, fileName);
+	pag3.SearchDelay.GetWindowTextA(winText);
+	SetConfig1("搜索设置", "SearchDelay", winText, fileName);
 	pag3.SearchWait.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "SearchWait", winText, fileName);
 	pag3.SearchMaxCount.GetWindowTextA(winText);
@@ -284,8 +284,8 @@ void CcocBotDlg::SaveConfig(CString fileName)
 	SetConfig1("捐兵/请求", "DonateMinSendGetRet", winText, fileName);
 	pag5.DonateCount.GetWindowTextA(winText);
 	SetConfig1("捐兵/请求", "DonateCount", winText, fileName);
-	pag5.DonateDealy.GetWindowTextA(winText);
-	SetConfig1("捐兵/请求", "DonateDealy", winText, fileName);
+	pag5.DonateDelay.GetWindowTextA(winText);
+	SetConfig1("捐兵/请求", "DonateDelay", winText, fileName);
 	pag5.requestWords.GetWindowTextA(winText);
 	SetConfig1("捐兵/请求", "requestWords", winText, fileName);
 	SetConfig2("捐兵/请求", "IsChangeWords", pag5.IsChangeWords.GetCheck(), fileName);
@@ -414,7 +414,7 @@ void CcocBotDlg::UpdateWindowSet()
 	pag3.SearchMinGold.SetWindowText(script[0].coc.getSets("SearchMinGold"));
 	pag3.SearchMinElixir.SetWindowText(script[0].coc.getSets("SearchMinElixir"));
 	pag3.SearchMinDarkElixir.SetWindowText(script[0].coc.getSets("SearchMinDarkElixir"));
-	pag3.SearchDealy.SetWindowText(script[0].coc.getSets("SearchDealy"));
+	pag3.SearchDelay.SetWindowText(script[0].coc.getSets("SearchDelay"));
 	pag3.SearchWait.SetWindowText(script[0].coc.getSets("SearchWait"));
 	pag3.SearchMaxCount.SetWindowText(script[0].coc.getSets("SearchMaxCount"));
 	pag3.MinTroophs.SetWindowText(script[0].coc.getSets("MinTroophs"));
@@ -459,7 +459,7 @@ void CcocBotDlg::UpdateWindowSet()
 	pag5.DonateType.SetCurSel(_ttoi(script[0].coc.getSets("DonateType")));
 	pag5.DonateMinSendGetRet.SetWindowText(script[0].coc.getSets("DonateMinSendGetRet"));
 	pag5.DonateCount.SetWindowText(script[0].coc.getSets("DonateCount"));
-	pag5.DonateDealy.SetWindowText(script[0].coc.getSets("DonateDealy"));
+	pag5.DonateDelay.SetWindowText(script[0].coc.getSets("DonateDelay"));
 	pag5.IsDonateSendGetRet.SetCheck(_ttoi(script[0].coc.getSets("IsDonateSendGetRet")));
 	pag5.IsDonateNotFull.SetCheck(_ttoi(script[0].coc.getSets("IsDonateNotFull")));
 	pag5.requestWords.SetWindowText(script[0].coc.getSets("requestWords"));

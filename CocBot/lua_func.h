@@ -26,7 +26,7 @@ int FindPicEx(lua_State* L);
 /*设置资源路径*/
 int SetPath(lua_State* L);
 /*延迟*/
-int Dealy(lua_State* L);
+int Delay(lua_State* L);
 /*获取某个士兵数量并选择*/
 int SelectSolider(lua_State* L);
 /*获取所有可下兵的位置*/

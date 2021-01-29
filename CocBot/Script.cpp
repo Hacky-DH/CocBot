@@ -68,7 +68,7 @@ bool CScript::CreateDm(int type)
 }
 
 
-void CScript::Dealy(unsigned long mSeconds)
+void CScript::Delay(unsigned long mSeconds)
 {
 	DWORD t1 = GetTickCount();
 	for (; GetTickCount() - t1 < mSeconds;)
@@ -79,27 +79,27 @@ void CScript::Dealy(unsigned long mSeconds)
 }
 
 
-void CScript::DealyRandTime(unsigned long minDeaySeconds, unsigned long maxDealySeconds)
+void CScript::DelayRandTime(unsigned long minDeaySeconds, unsigned long maxDelaySeconds)
 {
 	CString str;
 	DWORD s = GetTickCount() / 2555;
 	srand(s);
-	if (minDeaySeconds >= maxDealySeconds)
+	if (minDeaySeconds >= maxDelaySeconds)
 	{
-		maxDealySeconds = minDeaySeconds + 10;
+		maxDelaySeconds = minDeaySeconds + 10;
 	}
-	long resultRand = minDeaySeconds + (rand() % (maxDealySeconds - minDeaySeconds));
+	long resultRand = minDeaySeconds + (rand() % (maxDelaySeconds - minDeaySeconds));
 	str.Format("随机延迟:%ld s", resultRand);
 	SetLog(str, true, BLUECOLOR, false);
 	resultRand *= 1000;
-	Dealy(resultRand);
+	Delay(resultRand);
 }
 
 
 void CScript::LeftClick(long x, long y)
 {
 	dm.MoveTo(x, y);
-	Dealy(10);
+	Delay(10);
 	dm.LeftClick();
 }
 
@@ -157,7 +157,7 @@ int CScript::SelectSolider(int type)
 			}
 		}
 		dm.MoveTo(x, 608);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 		solider_num = _ttoi(armyNum);
 		if (solider_num == 0)solider_num = 1;
@@ -198,7 +198,7 @@ int CScript::SelectSpell(int type)
 			}
 		}
 		dm.MoveTo(x, 608);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 		solider_num = _ttoi(armyNum);
 		if (solider_num == 0)solider_num = 1;
@@ -239,7 +239,7 @@ int CScript::ImageLoc(long x1, long y1, long x2, long y2, const char* file, doub
 	string mfile;
 	_split(file, vstr, "|");
 	if (vstr.size() == 0)return -1;
-	for (int i = 0; i < vstr.size(); i++)
+	for (size_t i = 0; i < vstr.size(); i++)
 	{
 		mfile += m_file_path;
 		mfile += file;
@@ -292,7 +292,7 @@ int CScript::AttackArea(long x1, long y1, long x2, long y2, long type, long* res
 {
 	*result_x = 0;
 	*result_y = 0;
-	dm.SetPath(_T("\Pic\\attack\\normal"));
+	dm.SetPath(_T("\\Pic\\attack\\normal"));
 	CString PicName;
 	CString result;
 	PicName = dm.MatchPicName("d_*.bmp");
@@ -319,7 +319,7 @@ int CScript::AttackArea(long x1, long y1, long x2, long y2, long type, long* res
 int CScript::ClearAdvirtisment()
 {
 
-	dm.SetPath("\Advirtisment");
+	dm.SetPath("\\Advirtisment");
 	CString pic_name;
 	VARIANT x, y;
 	pic_name = dm.MatchPicName("*.bmp");
@@ -328,7 +328,7 @@ int CScript::ClearAdvirtisment()
 		if (dm.FindPic(0, 0, 850, 667, pic_name, "0f0f0f", 0.85, 0, &x, &y))
 		{
 			dm.MoveTo(x.lVal + 5, y.lVal + 5);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
 			//SetLog("发现广告，尝试清除", true, RGB(0xff, 0x00, 0x00), false);
 			return 1;
@@ -344,7 +344,7 @@ int CScript::WaitForMainScreen()
 {
 	//if (lua_call_script("test.lua") == 0)
 	//	return 1;
-	dm.SetPath(_T("\Pic\\others\\checkMainScreen"));
+	dm.SetPath(_T("\\Pic\\others\\checkMainScreen"));
 	int waitTime = 0;
 	VARIANT x, y;
 	CString showStr;
@@ -357,7 +357,7 @@ int CScript::WaitForMainScreen()
 			ClearAdvirtisment();
 		}
 
-		dm.SetPath(_T("\Pic\\others\\checkMainScreen"));
+		dm.SetPath(_T("\\Pic\\others\\checkMainScreen"));
 		dm.FindMultiColor(12, 5, 837, 51, "3abded-0f0f0f", "30|-1|37bfed-0f0f0f,786|7|fff655-0f0f0f,796|9|ffec22-0f0f0f", 1.0, 0, &x, &y);
 		//成功
 		if (x.lVal > 0)
@@ -383,7 +383,7 @@ int CScript::WaitForMainScreen()
 		}
 		waitTime++;
 
-		Dealy(1000);
+		Delay(1000);
 	} while (IsThreadRun);
 	return -1;
 }
@@ -392,35 +392,35 @@ int CScript::WaitForMainScreen()
 int CScript::RequestHelp()
 {
 	VARIANT x, y;
-	dm.SetPath("\Pic\\others\\RequestHelp");
+	dm.SetPath("\\Pic\\others\\RequestHelp");
 	dm.FindPic(638, 495, 796, 572, "RequestHelp.bmp", "0f0f0f", 0.9, 0, &x, &y);
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
-		Dealy(1500);
+		Delay(1500);
 		dm.FindMultiColor(357, 133, 509, 173, "ffffff-0f0f0f", "63|6|ffffff-0f0f0f", 1.0, 1, &x, &y);
 		if (x.lVal > 0)
 		{
 			LeftClick(x.lVal, y.lVal);
-			Dealy(1000);
+			Delay(1000);
 			if (_ttoi(coc.getSets("IsChangeWords")) == 1)
 			{
 				dm.SendString(bindHwnd, coc.getSets("requestWords"));
 			}
-			Dealy(1000);
+			Delay(1000);
 		}
 		dm.FindMultiColor(442, 194, 596, 262, "c9e870-0f0f0f", "68|0|c8e870-0f0f0f,2|30|5dac10-0f0f0f,73|30|5cac10-0f0f0f", 1.0, 1, &x, &y);
 		if (x.lVal > 0)
 		{
 			dm.MoveTo(x.lVal, y.lVal);
-			Dealy(20); dm.LeftClick();
+			Delay(20); dm.LeftClick();
 		}
 		else
 		{
 			dm.MoveTo(811, 92);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
 		}
 	}
@@ -452,7 +452,7 @@ int CScript::CheckArmyNum(int* trainT)
 	CString armyStr, M_time, time_str, spells_str, clancastle_str, clan_spell, ret_str;
 	float ret = 0, NowCount = 0, AllCount = 1;
 	dm.UseDict(0);
-	Dealy(200);
+	Delay(200);
 	armyStr = dm.Ocr(75, 134, 155, 157, "ffffff-050505", 0.85);
 	if (armyStr.GetLength() <= 0) armyStr = "0/240";
 	using namespace std;
@@ -502,7 +502,7 @@ int CScript::CheckArmyNum(int* trainT)
 	if (_ttoi(coc.getSets("RequestArmy")) == 1)
 	{
 		RequestHelp();
-		Dealy(100);
+		Delay(100);
 
 	}
 	SetPath("Pic\\others\\");
@@ -531,7 +531,7 @@ void CScript::ClearArmy()
 		dm.FindColor(18, 150, 833, 185, "de0306-0f0f0f", 1.0, 0, &x, &y);
 		if (x.lVal < 0)
 		{
-			Dealy(500);
+			Delay(500);
 		}
 		dm.FindColor(18, 150, 833, 185, "de0306-0f0f0f", 1.0, 0, &x, &y);
 		if (x.lVal < 0)
@@ -544,7 +544,7 @@ void CScript::ClearArmy()
 			dm.MoveTo(x.lVal, y.lVal);
 			for (int i = 0; i <= 10; i++)
 			{
-				Dealy(25);
+				Delay(25);
 				dm.LeftClick();
 			}
 		}
@@ -565,22 +565,22 @@ int CScript::SpeedTrain()
 	if (nowh >= _ttoi(str_begin) && nowh <= _ttoi(str_end))
 	{
 		VARIANT x, y;
-		dm.SetPath("\Pic\\others");
+		dm.SetPath("\\Pic\\others");
 		dm.FindPic(695, 262, 831, 328, "speed_1.bmp", "0f0f0f", 0.85, 0, &x, &y);
 		if (x.lVal > 0)
 		{
 			dm.MoveTo(x.lVal, y.lVal);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
-			Dealy(2500);
+			Delay(2500);
 		}
 		dm.FindPic(347, 372, 514, 454, "speed_2.bmp", "0f0f0f", 0.85, 0, &x, &y);
 		if (x.lVal > 0)
 		{
 			dm.MoveTo(x.lVal, y.lVal);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
-			Dealy(2500);
+			Delay(2500);
 			return 1;
 		}
 	}
@@ -592,7 +592,7 @@ int CScript::SpeedTrain()
 int CScript::MakeArmy()
 {
 	VARIANT x, y;
-	Dealy(2000);
+	Delay(2000);
 	/*打开 训练界面*/
 	SetPath("Pic\\others\\");
 	int retx, rety;
@@ -683,7 +683,7 @@ int CScript::MakeArmy()
 	if (NowCount * 100 / AllCount >= _ttoi(coc.getSets("MinTroopRet")))
 	{
 		dm.MoveTo(814, 53);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 		checkScreenError();
 		return 1;
@@ -708,10 +708,10 @@ int CScript::MakeArmy()
 			if (retx > 0)
 			{
 				dm.MoveTo(retx, rety);
-				for (int j = 1; j <= army_num[i]; j++)
+				for (unsigned int j = 1; j <= army_num[i]; j++)
 				{
 
-					Dealy(50);
+					Delay(50);
 					dm.LeftClick();
 				}
 			}
@@ -722,7 +722,7 @@ int CScript::MakeArmy()
 		}
 		//adbCmd("input swipe 798 499 50 467");
 		adbSwipe(798, 499, 50, 467);
-		Dealy(1000);
+		Delay(1000);
 		for (int i = 13; i <= 19; i++)/*黑水兵*/
 		{
 			if (army_num[i] == 0)
@@ -735,10 +735,10 @@ int CScript::MakeArmy()
 			if (retx > 0)
 			{
 				dm.MoveTo(retx, rety);
-				for (int j = 1; j <= army_num[i]; j++)
+				for (unsigned int j = 1; j <= army_num[i]; j++)
 				{
 
-					Dealy(50);
+					Delay(50);
 					dm.LeftClick();
 				}
 			}
@@ -747,7 +747,7 @@ int CScript::MakeArmy()
 				SetLog("Not Find  " + pic_name, true, REDCOLOR, false);
 			}
 
-			Dealy(200);
+			Delay(200);
 		}
 	}
 	if (_ttoi(coc.getSets("IsSpeedUp")) == 1)
@@ -756,11 +756,11 @@ int CScript::MakeArmy()
 	}
 	if (TrainArmyStyle >= 1)
 	{
-		dm.SetPath("\Pic\\others");
+		dm.SetPath("\\Pic\\others");
 		dm.MoveTo(697, 96);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
-		Dealy(1500);
+		Delay(1500);
 		switch (TrainArmyStyle)
 		{
 		case 1:
@@ -768,7 +768,7 @@ int CScript::MakeArmy()
 			if (x.lVal > 0)
 			{
 				dm.MoveTo(x.lVal, y.lVal);
-				Dealy(20);
+				Delay(20);
 				dm.LeftClick();
 			}
 			break;
@@ -777,7 +777,7 @@ int CScript::MakeArmy()
 			if (x.lVal > 0)
 			{
 				dm.MoveTo(x.lVal, y.lVal);
-				Dealy(20);
+				Delay(20);
 				dm.LeftClick();
 			}
 			break;
@@ -786,7 +786,7 @@ int CScript::MakeArmy()
 			if (x.lVal > 0)
 			{
 				dm.MoveTo(x.lVal, y.lVal);
-				Dealy(20);
+				Delay(20);
 				dm.LeftClick();
 			}
 			break;
@@ -812,7 +812,7 @@ int CScript::MakeArmy()
 		SetLog("wait view 3 time out.");
 		return -1;
 	}
-	dm.SetPath("\Pic\\others\\solider");
+	dm.SetPath("\\Pic\\others\\solider");
 	for (int i = 20; i <= 29; i++)/*make spell*/
 	{
 		if (army_num[i] == 0)
@@ -824,10 +824,10 @@ int CScript::MakeArmy()
 		if (army_num[i] != 0 && x.lVal > 0)
 		{
 			dm.MoveToEx(x.lVal, y.lVal, 5, 5);
-			for (int j = 1; j <= army_num[i]; j++)
+			for (unsigned int j = 1; j <= army_num[i]; j++)
 			{
 
-				Dealy(50);
+				Delay(50);
 				dm.LeftClick();
 			}
 		}
@@ -838,7 +838,7 @@ int CScript::MakeArmy()
 	}
 
 	WaitPic(795, 72, 841, 116, "close_view.bmp", 2000, true);
-	Dealy(1000);
+	Delay(1000);
 
 
 
@@ -859,7 +859,7 @@ int CScript::adbCmd(CString strCmd)
 	if (AppPlayerType == APP_PLAYER_LIGHTING)
 	{
 		//::SendMessage(hParennt, TH_UPDATA_APP_PLAYER_INFO, 0, 0);
-		//Dealy(1000);
+		//Delay(1000);
 		//雷电专用
 		adbCmd(AppPlayerIndex, strCmd);
 		return 0;
@@ -957,7 +957,7 @@ int CScript::GetResource()
 {
 	CString gold, water, oil, troophs;
 	dm.UseDict(2);
-	Dealy(20);
+	Delay(20);
 	gold = dm.Ocr(652, 19, 811, 45, "ffffff-030303", 0.8);
 	water = dm.Ocr(655, 69, 806, 91, "ffffff-030303", 0.8);
 	oil = dm.Ocr(702, 120, 800, 140, "ffffff-030303", 0.8);
@@ -986,7 +986,7 @@ int CScript::send_LightngSpell()
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal - 30);
-		Dealy(100);
+		Delay(100);
 		dm.LeftClick();
 		return 1;
 	}
@@ -1007,8 +1007,8 @@ int CScript::LightingAttack(long darkelixir)
 		return 0;
 	}
 	VARIANT dx1, dy1;
-	Dealy(200);
-	dm.SetPath("\Pic\\attack\\DarkElixir");
+	Delay(200);
+	dm.SetPath("\\Pic\\attack\\DarkElixir");
 	CString dark_pic;
 	dark_pic = dm.MatchPicName("*.bmp");
 	if (dark_pic.GetLength() >= 3)
@@ -1032,10 +1032,10 @@ int CScript::LightingAttack(long darkelixir)
 
 				for (int k = 0; k <= UseLightingCount; k++)
 				{
-					Dealy(20);
+					Delay(20);
 					dm.LeftClick();
 				}
-				Dealy(3000);
+				Delay(3000);
 			}
 		}
 
@@ -1070,10 +1070,10 @@ int CScript::WaitForReturnHome()
 	CString str_t;
 	do
 	{
-		dm.SetPath(_T("\Pic\\attack"));
+		dm.SetPath(_T("\\Pic\\attack"));
 		if (false == IsThreadRun) return -1;
 		dm.FindPic(392, 520, 462, 562, "return.bmp", "141414", 0.9, 0, &x, &y);
-		Dealy(100);
+		Delay(100);
 
 		strGold = dm.Ocr(46, 65, 121, 84, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.85);
 		strElixir = dm.Ocr(44, 96, 121, 114, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.85);
@@ -1109,28 +1109,28 @@ int CScript::WaitForReturnHome()
 			{
 				if (LightingAttack(ntDark))
 				{
-					Dealy(2000);
+					Delay(2000);
 				}
 			}
 
 			break;
 		}
-		Dealy(1000);
+		Delay(1000);
 	} while (nTime <= 255);
 	SetLog("返回村庄", true, RGB(0xff, 0x00, 0xff), true);
 	dm.MoveTo(x.lVal, y.lVal);
-	Dealy(20);
+	Delay(20);
 	dm.LeftClick();
 	dm.MoveTo(66, 530);
-	Dealy(20);
+	Delay(20);
 	dm.LeftClick();
-	Dealy(2000);
+	Delay(2000);
 	dm.MoveTo(500, 396);
-	Dealy(20);
+	Delay(20);
 	dm.LeftClick();
-	Dealy(200);
+	Delay(200);
 	dm.MoveTo(427, 540);
-	Dealy(2000);
+	Delay(2000);
 	dm.LeftClick();
 	return 0;
 }
@@ -1139,14 +1139,14 @@ int CScript::WaitForReturnHome()
 int CScript::Attack_Intel()
 {
 
-	Dealy(1000);
+	Delay(1000);
 	if (false == IsThreadRun) return -1;
-	long AttackSpeed = 10, AttackChangeDealy = 10;
+	long AttackSpeed = 10, AttackChangeDelay = 10;
 	AttackSpeed = _ttoi(coc.getSets("AttackSpeed")) / 2;
 	AttackSpeed = (AttackSpeed + 1) * 10;
-	AttackChangeDealy = _ttoi(coc.getSets("AttackGird"));
-	AttackChangeDealy = (AttackChangeDealy + 1) * 10;
-	dm.SetPath(_T("\Pic\\attack"));
+	AttackChangeDelay = _ttoi(coc.getSets("AttackGird"));
+	AttackChangeDelay = (AttackChangeDelay + 1) * 10;
+	dm.SetPath(_T("\\Pic\\attack"));
 	SetLog(_T("定位下兵位置"));
 	//寻找所有下兵色块
 	//全部
@@ -1199,7 +1199,7 @@ int CScript::Attack_Intel()
 			LeftClick(x[i], y[i]);
 		}
 	}
-	Dealy(AttackChangeDealy);
+	Delay(AttackChangeDelay);
 	/*野蛮人*/
 	solider_num = SelectSolider(BARBARIN);
 	if (solider_num > 0)
@@ -1209,10 +1209,10 @@ int CScript::Attack_Intel()
 		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
 		{
 			LeftClick(x[i], y[i]);
-			Dealy(AttackSpeed);
+			Delay(AttackSpeed);
 		}
 	}
-	Dealy(AttackChangeDealy);
+	Delay(AttackChangeDelay);
 	/*炸弹人*/
 	solider_num = SelectSolider(WALLBREAKER);
 	if (solider_num > 0)
@@ -1222,10 +1222,10 @@ int CScript::Attack_Intel()
 		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
 		{
 			LeftClick(x[i], y[i]);
-			Dealy(AttackSpeed);
+			Delay(AttackSpeed);
 		}
 	}
-	Dealy(AttackChangeDealy);
+	Delay(AttackChangeDelay);
 	/*弓箭手*/
 	solider_num = SelectSolider(ARCHER);
 	if (solider_num > 0)
@@ -1235,10 +1235,10 @@ int CScript::Attack_Intel()
 		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
 		{
 			LeftClick(x[i], y[i]);
-			Dealy(AttackSpeed);
+			Delay(AttackSpeed);
 		}
 	}
-	Dealy(AttackChangeDealy);
+	Delay(AttackChangeDelay);
 	/*哥布林*/
 	solider_num = SelectSolider(GOBLIN);
 	if (solider_num > 0)
@@ -1248,7 +1248,7 @@ int CScript::Attack_Intel()
 		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
 		{
 			LeftClick(x[i], y[i]);
-			Dealy(AttackSpeed);
+			Delay(AttackSpeed);
 		}
 	}
 	/*释放 援军双王*/
@@ -1256,12 +1256,12 @@ int CScript::Attack_Intel()
 	dm.FindMultiColor(25, 570, 827, 652, "84bce0-0f0f0f", "-26|22|5f97ce-0f0f0f,27|24|6297cc-0f0f0f,-11|45|4b6e8f-0f0f0f,17|42|4a6f95-0f0f0f", 0.9, 1, &vx, &vy);//释放 援军
 	if (vx.lVal > 0)
 	{
-		SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Dealy(20); dm.LeftClick(); Dealy(200); dm.MoveTo(x[0], y[0]); Dealy(20); dm.LeftClick();
+		SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0], y[0]); Delay(20); dm.LeftClick();
 	}
 	dm.FindMultiColor(18, 568, 834, 617, "e7b463-0f0f0f", "21|13|e8a540-0f0f0f,-7|13|e0bf76-0f0f0f,4|9|e89268-0f0f0f,8|10|ea946e-0f0f0f", 0.9, 1, &vx, &vy);//bar barin king
 	if (vx.lVal > 0)
 	{
-		SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Dealy(20); dm.LeftClick(); Dealy(200); dm.MoveTo(x[0], y[0]); Dealy(20); dm.LeftClick();
+		SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0], y[0]); Delay(20); dm.LeftClick();
 	}
 
 	dm.FindMultiColor(18, 568, 834, 617, "6C4CB4-040404", "0|0|6C4CB4-040404,4|-1|7253BC-060704,-8|16|D59486-0B1012,7|15|E48A61-040202,8|12|F39A6E-030503,11|12|F4A074-040404,23|13|6C44B6-040202,26|21|6840B0,31|21|6C48BB-040303", 0.9, 1, &vx, &vy);//archer king
@@ -1269,11 +1269,11 @@ int CScript::Attack_Intel()
 	{
 		SetLog("释放女王", true, BLUECOLOR, false);
 		dm.MoveTo(vx.lVal, vy.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
-		Dealy(200);
+		Delay(200);
 		dm.MoveTo(x[120], y[120]);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	dm.FindMultiColor(18, 568, 834, 617, GRAND_WARDEN_COLOR1, GRAND_WARDEN_COLOR2, 0.9, 0, &vx, &vy);
@@ -1281,11 +1281,11 @@ int CScript::Attack_Intel()
 	{
 		SetLog("守护者", true, BLUECOLOR, false);
 		dm.MoveTo(vx.llVal, vy.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
-		Dealy(200);
+		Delay(200);
 		dm.MoveTo(x[180], y[180]);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	/************************* 再检查一下哪些还没下完 ***********************************/
@@ -1300,7 +1300,7 @@ int CScript::Attack_Intel()
 			LeftClick(x[i], y[i]);
 		}
 	}
-	Dealy(AttackChangeDealy);
+	Delay(AttackChangeDelay);
 	/*野蛮人*/
 	solider_num = SelectSolider(BARBARIN);
 	if (solider_num > 0)
@@ -1310,10 +1310,10 @@ int CScript::Attack_Intel()
 		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
 		{
 			LeftClick(x[i], y[i]);
-			Dealy(AttackSpeed);
+			Delay(AttackSpeed);
 		}
 	}
-	Dealy(AttackChangeDealy);
+	Delay(AttackChangeDelay);
 	/*炸弹人*/
 	solider_num = SelectSolider(WALLBREAKER);
 	if (solider_num > 0)
@@ -1323,10 +1323,10 @@ int CScript::Attack_Intel()
 		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
 		{
 			LeftClick(x[i], y[i]);
-			Dealy(AttackSpeed);
+			Delay(AttackSpeed);
 		}
 	}
-	Dealy(AttackChangeDealy);
+	Delay(AttackChangeDelay);
 	/*弓箭手*/
 	solider_num = SelectSolider(ARCHER);
 	if (solider_num > 0)
@@ -1336,10 +1336,10 @@ int CScript::Attack_Intel()
 		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
 		{
 			LeftClick(x[i], y[i]);
-			Dealy(AttackSpeed);
+			Delay(AttackSpeed);
 		}
 	}
-	Dealy(AttackChangeDealy);
+	Delay(AttackChangeDelay);
 	/*哥布林*/
 	solider_num = SelectSolider(GOBLIN);
 	if (solider_num > 0)
@@ -1349,19 +1349,19 @@ int CScript::Attack_Intel()
 		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
 		{
 			LeftClick(x[i], y[i]);
-			Dealy(AttackSpeed);
+			Delay(AttackSpeed);
 		}
 	}
 	/*释放 援军双王*/
 	dm.FindMultiColor(25, 570, 827, 652, "84bce0-0f0f0f", "-26|22|5f97ce-0f0f0f,27|24|6297cc-0f0f0f,-11|45|4b6e8f-0f0f0f,17|42|4a6f95-0f0f0f", 0.9, 1, &vx, &vy);//释放 援军
 	if (vx.lVal > 0)
 	{
-		SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Dealy(20); dm.LeftClick(); Dealy(200); dm.MoveTo(x[0], y[0]); Dealy(20); dm.LeftClick();
+		SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0], y[0]); Delay(20); dm.LeftClick();
 	}
 	dm.FindMultiColor(18, 568, 834, 617, "e7b463-0f0f0f", "21|13|e8a540-0f0f0f,-7|13|e0bf76-0f0f0f,4|9|e89268-0f0f0f,8|10|ea946e-0f0f0f", 0.9, 1, &vx, &vy);//bar barin king
 	if (vx.lVal > 0)
 	{
-		SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Dealy(20); dm.LeftClick(); Dealy(200); dm.MoveTo(x[0], y[0]); Dealy(20); dm.LeftClick();
+		SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0], y[0]); Delay(20); dm.LeftClick();
 	}
 
 	dm.FindMultiColor(18, 568, 834, 617, "6C4CB4-040404", "0|0|6C4CB4-040404,4|-1|7253BC-060704,-8|16|D59486-0B1012,7|15|E48A61-040202,8|12|F39A6E-030503,11|12|F4A074-040404,23|13|6C44B6-040202,26|21|6840B0,31|21|6C48BB-040303", 0.9, 1, &vx, &vy);//archer king
@@ -1369,11 +1369,11 @@ int CScript::Attack_Intel()
 	{
 		SetLog("释放女王", true, BLUECOLOR, false);
 		dm.MoveTo(vx.lVal, vy.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
-		Dealy(200);
+		Delay(200);
 		dm.MoveTo(x[120], y[120]);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	dm.FindMultiColor(18, 568, 834, 617, GRAND_WARDEN_COLOR1, GRAND_WARDEN_COLOR2, 0.9, 0, &vx, &vy);
@@ -1381,29 +1381,29 @@ int CScript::Attack_Intel()
 	{
 		SetLog("守护者", true, BLUECOLOR, false);
 		dm.MoveTo(vx.llVal, vy.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
-		Dealy(200);
+		Delay(200);
 		dm.MoveTo(x[180], y[180]);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
-	Dealy(2000);
+	Delay(2000);
 	return 0;
 }
 
 
 int CScript::Attack_Equal()
 {
-	Dealy(2000);
+	Delay(2000);
 	if (false == IsThreadRun) return -1;
 	CString xyStr, usestr;
-	long AttackSpeed = 10, AttackChangeDealy = 10;
+	long AttackSpeed = 10, AttackChangeDelay = 10;
 	AttackSpeed = _ttoi(coc.getSets("AttackSpeed"));
 	AttackSpeed = (AttackSpeed + 1) * 10;
-	AttackChangeDealy = _ttoi(coc.getSets("AttackGird"));
-	AttackChangeDealy = (AttackChangeDealy + 1) * 10;
-	dm.SetPath(_T("\Pic\\attack"));
+	AttackChangeDelay = _ttoi(coc.getSets("AttackGird"));
+	AttackChangeDelay = (AttackChangeDelay + 1) * 10;
+	dm.SetPath(_T("\\Pic\\attack"));
 	SetLog(_T("定位下兵位置"), true, BLUECOLOR, false);
 	//VARIANT x1, y1;
 	int solider_num = 0; //
@@ -1445,7 +1445,7 @@ int CScript::Attack_Equal()
 		if (false == IsThreadRun) return -1;
 	}
 	SetLog(_T("定位完成"), true, BLUECOLOR, false);
-	Dealy(200);
+	Delay(200);
 	GetArmyMsg();
 	VARIANT xg, yg;
 	for (int j = 0; j <= 3; j++)
@@ -1460,68 +1460,68 @@ int CScript::Attack_Equal()
 			//distance = MAXATTACKCOUNT / (solider_num / (4 - j) + 1);
 			// distance*count=ldis
 			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
-			Dealy(100);
+			Delay(100);
 			for (int i = distance; i < MAXATTACKCOUNT; i += distance)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 				if (false == IsThreadRun) return -1;
 			}
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 		solider_num = SelectSolider(BARBARIN);
 		if (solider_num > 0)
 		{
 			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
-			Dealy(100);
+			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 				if (false == IsThreadRun) return -1;
 			}
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 		solider_num = SelectSolider(WALLBREAKER);
 		if (solider_num > 0)
 		{
 			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
-			Dealy(100);
+			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 			}
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 		//goblin
 		solider_num = SelectSolider(GOBLIN);
 		if (solider_num > 0)
 		{
 			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
-			Dealy(100);
+			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 				if (false == IsThreadRun) return -1;
 			}
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 		//archer
 		solider_num = SelectSolider(ARCHER);
 		if (solider_num > 0)
 		{
 			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
-			Dealy(100);
+			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 				if (false == IsThreadRun) return -1;
 			}
@@ -1530,11 +1530,11 @@ int CScript::Attack_Equal()
 		if (solider_num > 0)
 		{
 			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
-			Dealy(100);
+			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 				if (false == IsThreadRun) return -1;
 			}
@@ -1547,12 +1547,12 @@ int CScript::Attack_Equal()
 		dm.FindMultiColor(25, 570, 827, 652, "84bce0-0f0f0f", "-26|22|5f97ce-0f0f0f,27|24|6297cc-0f0f0f,-11|45|4b6e8f-0f0f0f,17|42|4a6f95-0f0f0f", 0.9, 1, &xg, &yg);//释放 援军
 		if (xg.lVal > 0)
 		{
-			SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(xg.lVal, yg.lVal); Dealy(20); dm.LeftClick(); Dealy(200); dm.MoveTo(x[0][1], y[0][1]); Dealy(20); dm.LeftClick();
+			SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(xg.lVal, yg.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0][1], y[0][1]); Delay(20); dm.LeftClick();
 		}
 		dm.FindMultiColor(18, 568, 834, 617, "e7b463-0f0f0f", "21|13|e8a540-0f0f0f,-7|13|e0bf76-0f0f0f,4|9|e89268-0f0f0f,8|10|ea946e-0f0f0f", 0.9, 1, &xg, &yg);//bar barin king
 		if (xg.lVal > 0)
 		{
-			SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(xg.lVal, yg.lVal); Dealy(20); dm.LeftClick(); Dealy(200); dm.MoveTo(x[0][1], y[0][1]); Dealy(20); dm.LeftClick();
+			SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(xg.lVal, yg.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0][1], y[0][1]); Delay(20); dm.LeftClick();
 		}
 
 		dm.FindMultiColor(18, 568, 834, 617, "6C4CB4-040404", "0|0|6C4CB4-040404,4|-1|7253BC-060704,-8|16|D59486-0B1012,7|15|E48A61-040202,8|12|F39A6E-030503,11|12|F4A074-040404,23|13|6C44B6-040202,26|21|6840B0,31|21|6C48BB-040303", 0.9, 1, &xg, &yg);//archer king
@@ -1560,11 +1560,11 @@ int CScript::Attack_Equal()
 		{
 			SetLog("释放女王", true, BLUECOLOR, false);
 			dm.MoveTo(xg.lVal, yg.lVal);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
-			Dealy(200);
+			Delay(200);
 			dm.MoveTo(x[0][1], y[0][1]);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
 		}
 		dm.FindMultiColor(18, 568, 834, 617, GRAND_WARDEN_COLOR1, GRAND_WARDEN_COLOR2, 0.9, 0, &xg, &yg);
@@ -1572,14 +1572,14 @@ int CScript::Attack_Equal()
 		{
 			SetLog("守护者", true, BLUECOLOR, false);
 			dm.MoveTo(xg.lVal, yg.lVal);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
-			Dealy(200);
+			Delay(200);
 			dm.MoveTo(x[0][1], y[0][1]);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 	}
 	SetLog("释放剩余兵种", true, BLUECOLOR, false);
 	for (int j = 0; j <= 3; j++)
@@ -1589,64 +1589,64 @@ int CScript::Attack_Equal()
 		solider_num = SelectSolider(GIANT);
 		if (solider_num > 0)
 		{
-			Dealy(100);
+			Delay(100);
 			for (int i = 0; i < solider_num / (4 - j); i++)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 				if (false == IsThreadRun) return -1;
 			}
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 		solider_num = SelectSolider(BARBARIN);
 		if (solider_num > 0)
 		{
-			Dealy(50);
+			Delay(50);
 			for (int i = 0; i <= 20; i++)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 				if (false == IsThreadRun) return -1;
 			}
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 		solider_num = SelectSolider(WALLBREAKER);
 		if (solider_num > 0)
 		{
-			Dealy(100);
+			Delay(100);
 			for (int i = 0; i <= solider_num / (4 - j); i++)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 			}
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 		//goblin
 		solider_num = SelectSolider(GOBLIN);
 		if (solider_num > 0)
 		{
-			Dealy(50);
+			Delay(50);
 			for (int i = 0; i <= solider_num / (4 - j); i++)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 				if (false == IsThreadRun) return -1;
 			}
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 		//archer
 		solider_num = SelectSolider(2);
 		if (solider_num > 0)
 		{
-			Dealy(50);
+			Delay(50);
 			for (int i = 0; i <= solider_num / (4 - j); i++)
 			{
 				dm.MoveTo(x[j][i], y[j][i]);
-				Dealy(AttackSpeed);
+				Delay(AttackSpeed);
 				dm.LeftClick();
 				if (false == IsThreadRun) return -1;
 			}
@@ -1655,12 +1655,12 @@ int CScript::Attack_Equal()
 		dm.FindMultiColor(25, 570, 827, 652, "84bce0-0f0f0f", "-26|22|5f97ce-0f0f0f,27|24|6297cc-0f0f0f,-11|45|4b6e8f-0f0f0f,17|42|4a6f95-0f0f0f", 0.9, 1, &xg, &yg);//释放 援军
 		if (xg.lVal > 0)
 		{
-			SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(xg.lVal, yg.lVal); Dealy(20); dm.LeftClick(); Dealy(200); dm.MoveTo(x[0][1], y[0][1]); Dealy(20); dm.LeftClick();
+			SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(xg.lVal, yg.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0][1], y[0][1]); Delay(20); dm.LeftClick();
 		}
 		dm.FindMultiColor(18, 568, 834, 617, "e7b463-0f0f0f", "21|13|e8a540-0f0f0f,-7|13|e0bf76-0f0f0f,4|9|e89268-0f0f0f,8|10|ea946e-0f0f0f", 0.9, 1, &xg, &yg);//bar barin king
 		if (xg.lVal > 0)
 		{
-			SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(xg.lVal, yg.lVal); Dealy(20); dm.LeftClick(); Dealy(200); dm.MoveTo(x[0][1], y[0][1]); Dealy(20); dm.LeftClick();
+			SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(xg.lVal, yg.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0][1], y[0][1]); Delay(20); dm.LeftClick();
 		}
 
 		dm.FindMultiColor(18, 568, 834, 617, "6C4CB4-040404", "0|0|6C4CB4-040404,4|-1|7253BC-060704,-8|16|D59486-0B1012,7|15|E48A61-040202,8|12|F39A6E-030503,11|12|F4A074-040404,23|13|6C44B6-040202,26|21|6840B0,31|21|6C48BB-040303", 0.9, 1, &xg, &yg);//archer king
@@ -1668,17 +1668,17 @@ int CScript::Attack_Equal()
 		{
 			SetLog("释放女王", true, BLUECOLOR, false);
 			dm.MoveTo(xg.lVal, yg.lVal);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
-			Dealy(200);
+			Delay(200);
 			dm.MoveTo(x[0][1], y[0][1]);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
 		}
-		Dealy(AttackChangeDealy);
+		Delay(AttackChangeDelay);
 	}
 
-	Dealy(2000);
+	Delay(2000);
 
 	return 0;
 }
@@ -1713,7 +1713,7 @@ int CScript::CheckDeadbase()
 	CString str_i, deadbase_pic;
 	if (townLevel >= 7)
 	{
-		dm.SetPath(_T("\Pic\\normal\\deadbase"));
+		dm.SetPath(_T("\\Pic\\normal\\deadbase"));
 		str_i = "d_*.bmp";
 		switch (ElixirType)
 		{
@@ -1739,7 +1739,7 @@ int CScript::CheckDeadbase()
 	}
 	else
 	{
-		dm.SetPath(_T("\Pic\\weak\\deadbase"));
+		dm.SetPath(_T("\\Pic\\weak\\deadbase"));
 
 		str_i = "d_*.bmp";
 		deadbase_pic = dm.MatchPicName(str_i);
@@ -1769,7 +1769,7 @@ int CScript::CheckDeadbase()
 
 int CScript::CheckDefends()
 {
-	dm.SetPath(_T("\Pic\\normal\\defends"));
+	dm.SetPath(_T("\\Pic\\normal\\defends"));
 	int IsTooHigh = 0;
 	CString str;
 	CString match_str, leftStr;
@@ -1877,15 +1877,15 @@ int CScript::SearchFish()
 	//进攻按钮
 	VARIANT x, y;
 	dm.MoveTo(59, 601);
-	Dealy(200);
+	Delay(200);
 	dm.LeftClick();
-	Dealy(2000);
+	Delay(2000);
 	//搜索按钮
 	dm.FindMultiColor(128, 476, 326, 563, "e85d0d-0a0800", "44|1|e75d0d-0a0800,105|-3|e55d0d-0a0800,-11|12|dd590d-0a0800,120|14|dd590d-0a0800", 0.95, 0, &x, &y);
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(200);
+		Delay(200);
 		dm.LeftClick();
 	}
 	else
@@ -1893,7 +1893,7 @@ int CScript::SearchFish()
 		SetLog("error,can't find search button!", true, REDCOLOR, false);
 		return -1;
 	}
-	Dealy(200);
+	Delay(200);
 	const int maxStrLen = 7;
 	int search_i = 0;
 	int type = 0;
@@ -1909,7 +1909,7 @@ int CScript::SearchFish()
 	SearchMaxCount = _ttoi(coc.getSets("SearchMaxCount"));
 	DeBugSearchShoot = _ttoi(coc.getSets("DeBugSearchShoot"));
 	type = _ttoi(coc.getSets("SearchType"));
-	long SearchDealy = _ttoi(coc.getSets("SearchDealy")) * 1000;
+	long SearchDelay = _ttoi(coc.getSets("SearchDelay")) * 1000;
 	long SearchWait = _ttoi(coc.getSets("SearchWait")) * 5;
 	if (SearchWait / 5 < 20)
 	{
@@ -1936,12 +1936,12 @@ int CScript::SearchFish()
 				return 0;
 			}
 			search_i = search_i + 1;
-			Dealy(200);
+			Delay(200);
 		} while (x.lVal < 0);
-		Dealy(100);
+		Delay(100);
 		SearchCount_str.Format("%ld", SearchCount);
 		dm.UseDict(1);
-		Dealy(SearchDealy);
+		Delay(SearchDelay);
 		G_gold = dm.Ocr(46, 65, 121, 84, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.8);
 		G_water = dm.Ocr(44, 96, 121, 114, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.8);
 		G_oil = dm.Ocr(44, 117, 113, 145, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.8);
@@ -1957,35 +1957,35 @@ int CScript::SearchFish()
 				{
 					fight_value = 0;
 					dm.MoveTo(767, 517);
-					Dealy(200);
+					Delay(200);
 					dm.LeftClick();
 					SetLog(_T("防御过高"), true, BLUECOLOR, false);
-					Dealy(1000);
+					Delay(1000);
 				}
 			}
 			else
 			{
 				if (DeBugSearchShoot == 1)
 				{
-					dm.SetPath("\Debug\\Search");
+					dm.SetPath("\\Debug\\Search");
 					SearchCount_str.Format("%ld", SearchCount);
 					dm.Capture(0, 0, 840, 650, SearchCount_str + ".bmp");
 				}
 				fight_value = 0;
 				dm.MoveTo(767, 517);
-				Dealy(200);
+				Delay(200);
 				dm.LeftClick();
 				SetLog(_T("不是死鱼"), true, BLUECOLOR, false);
-				Dealy(1000);
+				Delay(1000);
 			}
 		}
 		else
 		{
 			fight_value = 0;
 			dm.MoveTo(767, 517);
-			Dealy(200);
+			Delay(200);
 			dm.LeftClick();
-			Dealy(1000);
+			Delay(1000);
 		}
 		if (false == IsThreadRun)
 		{
@@ -2011,13 +2011,13 @@ void CScript::CollectResource()
 		if (x.lVal > 0)
 		{
 			dm.MoveTo(x.lVal, y.lVal);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
-			Dealy(100);
+			Delay(100);
 		}
-		Dealy(60);
+		Delay(60);
 	}
-	Dealy(500);
+	Delay(500);
 	for (int s = 1; s < 3; s++)
 	{
 		//dm.FindPic(75, 41, 680, 528, "gold.bmp", "0f0f0f", 0.9, 0, &x, &y);
@@ -2025,13 +2025,13 @@ void CScript::CollectResource()
 		if (x.lVal > 0)
 		{
 			dm.MoveTo(x.lVal, y.lVal);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
-			Dealy(100);
+			Delay(100);
 		}
-		Dealy(60);
+		Delay(60);
 	}
-	Dealy(500);
+	Delay(500);
 	for (int s = 1; s < 3; s++)
 	{
 		//dm.FindPic(75, 41, 680, 528, "darkelixir.bmp", "0f0f0f", 0.9, 0, &x, &y);
@@ -2039,12 +2039,12 @@ void CScript::CollectResource()
 		if (x.lVal > 0)
 		{
 			dm.MoveTo(x.lVal, y.lVal);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
-			Dealy(200);
+			Delay(200);
 		}
 	}
-	Dealy(1000);
+	Delay(1000);
 }
 
 
@@ -2058,7 +2058,7 @@ int CScript::DonateArmy()
 	int should_donate = 0;
 	long FindY = 0;
 	//1.设置字库
-	dm.SetPath("\Pic\\others\\DonateArmy");
+	dm.SetPath("\\Pic\\others\\DonateArmy");
 	dm.UseDict(DICT_COC_DONATE);
 	VARIANT x, y;
 	long fx = 0, fy = 0;
@@ -2067,7 +2067,7 @@ int CScript::DonateArmy()
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	else
@@ -2114,7 +2114,7 @@ int CScript::DonateArmy()
 	long lastY = 84;
 	long y1, y2;
 	y1 = y2 = 0;
-	Dealy(2000);
+	Delay(2000);
 	//4.寻找“增援”按钮
 	//捐助按钮
 	for (lastY = 84; lastY < 660; )
@@ -2156,9 +2156,9 @@ int CScript::DonateArmy()
 
 		//8.点击 “增援”
 		dm.MoveTo(fx, fy);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
-		Dealy(2000);
+		Delay(2000);
 		//find small red x
 		dm.FindMultiColor(716, 3, 760, 663, "ffffff", "19|1|cd151d-050505,35|4|ffffff", 1.0, 1, &x, &y);
 		if (x.lVal > 0)
@@ -2202,7 +2202,7 @@ int CScript::DonateArmy()
 				if (WantDonate[n] != 1) continue;
 				if (vstr1[1].length() == 0) continue;
 				_split(vstr1[1], vstr2, ",");
-				for (int index = 0; index < vstr2.size(); index++)
+				for (size_t index = 0; index < vstr2.size(); index++)
 				{
 					NeedDonate[index] = donateStr.Find(vstr2[index].c_str()) + 1;
 				}
@@ -2225,16 +2225,16 @@ int CScript::DonateArmy()
 
 			LeftClick(735, y.lVal);
 		}
-		Dealy(1500);
+		Delay(1500);
 	}
 
 	dm.FindMultiColor(714, 1, 764, 537, "ffffff-0f0f0f", "-6|-1|f88088-0f0f0f,1|17|ffffff-0f0f0f", 0.9, 1, &x, &y);
 	dm.MoveTo(x.lVal, y.lVal);
-	Dealy(20);
+	Delay(20);
 	dm.LeftClick();
-	Dealy(2000);
+	Delay(2000);
 	dm.MoveTo(333, 346);
-	Dealy(20);
+	Delay(20);
 	dm.LeftClick();
 	return 0;
 }
@@ -2248,7 +2248,7 @@ int CScript::IdentifyIsDonate(int* array, int type /* = 2 */)
 int CScript::UpGradeWall()
 {
 	if (_ttoi(coc.getSets("UpgradeWall")) != 1) return-1;
-	dm.SetPath(_T("\Pic\\normal\\wall"));
+	dm.SetPath(_T("\\Pic\\normal\\wall"));
 	long UpgradeWallMinGold = _ttoi(coc.getSets("UpgradeWallMinGold"));
 	long UpgradeWallMinElixir = _ttoi(coc.getSets("UpgradeWallMinElixir"));
 	int UpgradeWallUseType = _ttoi(coc.getSets("UpgradeWallUseType"));
@@ -2308,15 +2308,15 @@ int CScript::UpGradeWall()
 	}
 	_split(wallPoint.GetBuffer(), help, "|");
 	wallPoint.ReleaseBuffer();
-	for (int i = 0; i < help.size(); i++)
+	for (size_t i = 0; i < help.size(); i++)
 	{
 		str = help[i].c_str();
 		SetLog(str);
 		_split(help[i], strHelp, ",");
 		dm.MoveTo(_ttoi(strHelp[1].c_str()), _ttoi(strHelp[2].c_str()));
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
-		Dealy(500);
+		Delay(500);
 		for (int j = 0; j < 10; j++)
 		{
 			dm.FindMultiColor(357, 523, 432, 552, "ffffb7-050f0f", "0|2|ffffb7-05090f,-1|3|f9f9b4-05090f,0|3|ffffb7-05090f,1|3|faf9b6-05090f,0|7|ffffb7-05090f,4|2|ffffb7-05090f,4|6|fefeb8-05090f,6|1|eae59b-05090f", 0.9, 0, &x, &y);
@@ -2327,14 +2327,14 @@ int CScript::UpGradeWall()
 				if (x.lVal > 0)
 				{
 					dm.MoveTo(x.lVal, y.lVal);
-					Dealy(20);
+					Delay(20);
 					dm.LeftClick();
-					Dealy(1000);
+					Delay(1000);
 					dm.FindPic(352, 474, 537, 507, dm.MatchPicName(buttonStr), "0f0f0f", 0.85, 0, &x, &y);
 					if (x.lVal > 0)
 					{
 						dm.MoveTo(x.lVal, y.lVal);
-						Dealy(20);
+						Delay(20);
 						dm.LeftClick();
 						return 1;
 						break;
@@ -2343,7 +2343,7 @@ int CScript::UpGradeWall()
 			}
 			else
 			{
-				Dealy(100);
+				Delay(100);
 			}
 		}
 
@@ -2515,14 +2515,14 @@ int CScript::ControlTroophs()
 
 	SetLog(_T("降杯"), true, REDCOLOR, false);
 	dm.MoveTo(59, 601);
-	Dealy(200);
+	Delay(200);
 	dm.LeftClick();
-	Dealy(2000);
+	Delay(2000);
 	dm.MoveTo(218, 515);
-	Dealy(200);
+	Delay(200);
 
 	dm.LeftClick();
-	Dealy(200);
+	Delay(200);
 	VARIANT x, y;
 	int search_i = 0;
 	long SearchCount = 0;
@@ -2548,31 +2548,31 @@ int CScript::ControlTroophs()
 			return 0;
 		}
 		search_i = search_i + 1;
-		Dealy(200);
+		Delay(200);
 	} while (x.lVal < 0);
-	Dealy(100);
+	Delay(100);
 
 	for (int i = 1; i <= 17; i++)
 	{
 		if (SelectSolider(i) != 0)
 		{
 			dm.MoveTo(80, 338);
-			Dealy(20);
+			Delay(20);
 			dm.LeftClick();
 			break;
 		}
 	}
-	Dealy(1000);
+	Delay(1000);
 	dm.MoveTo(66, 530);
-	Dealy(20);
+	Delay(20);
 	dm.LeftClick();
-	Dealy(2000);
+	Delay(2000);
 	dm.MoveTo(500, 396);
-	Dealy(20);
+	Delay(20);
 	dm.LeftClick();
-	Dealy(200);
+	Delay(200);
 	dm.MoveTo(427, 540);
-	Dealy(2000);
+	Delay(2000);
 	dm.LeftClick();
 	return 0;
 }
@@ -2591,7 +2591,7 @@ int CScript::ZoomOut()
 			return 0;
 		}
 		dm.KeyPress(40);
-		Dealy(100);
+		Delay(100);
 
 	}
 	adbSwipe(400, 100, 400, 600);
@@ -2608,7 +2608,7 @@ bool CScript::HideKey()
 int CScript::AddDict()
 {
 	long ret = 0;
-	dm.SetPath("\Dict");
+	dm.SetPath("\\Dict");
 	ret += dm.SetDict(DICT_COC_ARMY, "coc_army.bak"); //设置字库 0
 	ret += dm.SetDict(DICT_COC_FISH, "cocfish.txt");      //设置字库 1
 	ret += dm.SetDict(DICT_COC_RESOURCE, "cocresource.bak");  //设置字库 2
@@ -2663,7 +2663,7 @@ int CScript::GetArmyMsg()
 		for (int i = 1; i <= 12; i++)
 		{
 			str.Format("solider_%d.bmp", i);
-			dm.SetPath("\Pic\\attack\\solider");
+			dm.SetPath("\\Pic\\attack\\solider");
 			dm.FindPic(25, 570, 833, 644, str, "0f0f0f", 0.9, 0, &x, &y);
 			long x1 = 0, x2 = 0;
 			if (x.lVal > 0)
@@ -2746,7 +2746,7 @@ long CScript::WaitPic(long x1, long y1, long x2, long y2, LPCTSTR picName, int t
 	{
 
 		ImageLoc(x1, y1, x2, y2, picName, 0.95, x, y);
-		Dealy(20);
+		Delay(20);
 
 	} while (x <= 0 && GetTickCount() - t1 < timesOut);
 	if (x > 0)
@@ -2760,7 +2760,7 @@ long CScript::WaitPic(long x1, long y1, long x2, long y2, LPCTSTR picName, int t
 	if (Isclick == true && result == 1)
 	{
 		dm.MoveTo(x, y);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 
@@ -2837,7 +2837,7 @@ int CScript::DonateClick(int type, int count, int y0)
 	const long x1 = 322;
 	const long x2 = 757;
 	CString str;
-	dm.SetPath("\Pic\\others\\DonateArmy");
+	dm.SetPath("\\Pic\\others\\DonateArmy");
 
 	str.Format("d%d.bmp", type + 1);
 	if (type >= 19)
@@ -2849,11 +2849,11 @@ int CScript::DonateClick(int type, int count, int y0)
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(20);
+		Delay(20);
 		for (int j = 1; j <= count; j++)
 		{
 			dm.LeftClick();
-			Dealy(100);
+			Delay(100);
 		}
 		return 1;
 	}
@@ -2867,7 +2867,7 @@ int CScript::DonateClick(int type, int count, int y0)
 int CScript::checkMainScreen()
 {
 	checkScreenError();
-	Dealy(1000);
+	Delay(1000);
 	int ret = 0;
 	VARIANT x, y;
 
@@ -2885,7 +2885,7 @@ int CScript::checkMainScreen()
 		}
 		else
 		{
-			Dealy(500);
+			Delay(500);
 		}
 
 	}
@@ -2895,7 +2895,7 @@ int CScript::checkMainScreen()
 
 int CScript::checkScreenError()
 {
-	dm.SetPath(_T("\Pic\\others\\checkMainScreen"));
+	dm.SetPath(_T("\\Pic\\others\\checkMainScreen"));
 	VARIANT x, y;
 	CString str;
 	//close
@@ -2904,7 +2904,7 @@ int CScript::checkScreenError()
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	//<<
@@ -2913,7 +2913,7 @@ int CScript::checkScreenError()
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	//ok
@@ -2921,7 +2921,7 @@ int CScript::checkScreenError()
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	//close red x
@@ -2930,7 +2930,7 @@ int CScript::checkScreenError()
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	//船
@@ -2938,7 +2938,7 @@ int CScript::checkScreenError()
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	//回营
@@ -2946,7 +2946,7 @@ int CScript::checkScreenError()
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
-		Dealy(20);
+		Delay(20);
 		dm.LeftClick();
 	}
 	return 0;
@@ -3086,7 +3086,7 @@ int CScript::RestartScript()
 	//6..设置错误提示
 	TRACE("6..设置错误提示");
 	dm.SetShowErrorMsg(_ttoi(coc.getSets("SetShowErrorMsg")));
-	Dealy(500);
+	Delay(500);
 
 	//7..绑定模拟器
 	TRACE("7..绑定模拟器");
@@ -3112,7 +3112,7 @@ int CScript::RestartScript()
 		IsThreadRun = false;
 		return 0;
 	}
-	Dealy(5000);
+	Delay(5000);
 	TRACE("8..添加字库");
 	//8..添加字库
 	AddDict();
@@ -3133,7 +3133,7 @@ int CScript::WaitForTrainArmy()
 		str.Format("剩余时间：%dm %ds.", st / 60, st % 60);
 		SetLog(str, false, BLUECOLOR, false);
 		if (false == IsThreadRun) return-1;
-		Dealy(1000);
+		Delay(1000);
 		st--;
 	} while (st > 0);
 	scriptInfo = SCRIPT_STATE_IN_RUN;
@@ -3161,7 +3161,7 @@ int CScript::SwitchCoc()
 	//3.改变coc 版本编号
 	AppCocID = cocInfo[SwitchNo].AppID;
 	//4.等等一会 30s
-	Dealy(30000);
+	Delay(30000);
 	//5.启动 coc
 	StartCoc();
 	//6.设置脚本信息为正常
@@ -3173,11 +3173,11 @@ int CScript::SwitchCoc()
 int CScript::Attack()
 {
 	int Ret = 0;
-	Dealy(3000);
+	Delay(3000);
 	if (_ttoi(coc.getSets("Attack")) != 1) return 0;
 	SetLog("Attack");
 	MakeArmy();
-	Dealy(3000);
+	Delay(3000);
 	if (IsThreadRun == false)  return 0;
 	Ret = SearchFish();
 	if (Ret == 1)/*搜索成功*/
@@ -3301,7 +3301,7 @@ int CScript::script_init()
 	//4.设置错误提示
 
 	dm.SetShowErrorMsg(_ttoi(coc.getSets("SetShowErrorMsg")));
-	Dealy(500);
+	Delay(500);
 
 	//5.检查adb路径是否正确
 	if (!PathFileExists(appPlayerInstallDir))
@@ -3318,7 +3318,7 @@ int CScript::script_init()
 		LaunchAppPlayer(AppPlayerIndex);
 		while (_ttoi(getList2(AppPlayerIndex, 4)) == 0 && IsThreadRun&&temp > 0)//等待模拟器启动完成
 		{
-			Dealy(1000);
+			Delay(1000);
 			temp--;
 		}
 		ret = SetBindHwnd();
@@ -3342,16 +3342,16 @@ int CScript::script_init()
 		SetLog("设置好了分辨率，现在需要关闭模拟器");
 		QuitAppPlayer(AppPlayerIndex);
 		//等待5秒m
-		Dealy(5000);
+		Delay(5000);
 		//打开模拟器
 		LaunchAppPlayer(AppPlayerIndex);
 		//等等30s
 		SetLog("打开模拟器,等等30s");
-		Dealy(3000);
+		Delay(3000);
 		temp = 120;
 		while (_ttoi(getList2(AppPlayerIndex, 4)) == 0 && IsThreadRun&&temp > 0)//等待模拟器启动完成
 		{
-			Dealy(1000);
+			Delay(1000);
 			temp--;
 		}
 		ret = SetBindHwnd();
@@ -3410,7 +3410,7 @@ int CScript::script_main()
 	//缩放主屏幕
 	Ret = ZoomOut();
 	if (false == IsThreadRun) return 0;
-	Dealy(1000);
+	Delay(1000);
 	if (false == IsThreadRun) return 0;
 	//资源统计
 	Statistics();
@@ -3446,7 +3446,7 @@ int CScript::script_main()
 
 	if (false == IsThreadRun) return 0;
 	//随机延迟
-	DealyRandTime(15, 60);
+	DelayRandTime(15, 60);
 	if (false == IsThreadRun) return 0;
 	//捐兵
 	DonateArmy();

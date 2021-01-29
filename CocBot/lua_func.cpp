@@ -48,7 +48,7 @@ int Tap(lua_State* L)
 	lua_getglobal(L, "g_app_player_index");
 	int index = luaL_checknumber(L, -1);
 	script[index].dm.MoveTo(x, y);
-	script[index].Dealy(20);
+	script[index].Delay(20);
 	script[index].dm.LeftClick();
 	lua_pop(L, 2);
 	return 0;
@@ -190,13 +190,13 @@ int SetPath(lua_State* L)
 	return 0;
 }
 
-int Dealy(lua_State* L)
+int Delay(lua_State* L)
 {
 	int seconds = luaL_checknumber(L, 1);
 	if (seconds < 0)seconds = 1;
 	lua_getglobal(L, "g_app_player_index");
 	int index = luaL_checknumber(L, -1);
-	script[index].Dealy(seconds);
+	script[index].Delay(seconds);
 	lua_pop(L, 1);
 	return 0;
 }

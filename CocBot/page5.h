@@ -26,7 +26,7 @@ public:
 	CEdit DonateMinSendGetRet;
 	CComboBox DonateType;
 	CEdit DonateCount;
-	CEdit DonateDealy;
+	CEdit DonateDelay;
 	CButton IsBarbarin;
 	CButton IsArcher;
 	CButton IsGiant;

@@ -78,7 +78,7 @@ void _LUA::init()
 	lua_register(m_lua_state, "FindPic", FindPic);
 	lua_register(m_lua_state, "FindPicEx", FindPicEx);
 	lua_register(m_lua_state, "SetPath", SetPath);
-	lua_register(m_lua_state, "Dealy", Dealy);
+	lua_register(m_lua_state, "Delay", Delay);
 	lua_register(m_lua_state, "SelectSolider", SelectSolider);
 	lua_register(m_lua_state, "GetAttackPos", GetAttackPos);
 	lua_register(m_lua_state, "GetAttackPosEx", GetAttackPosEx);

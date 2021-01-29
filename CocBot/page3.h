@@ -48,7 +48,7 @@ public:
 	CComboBox InfernoLevel;
 	CButton EagleArtillery;
 	CComboBox EagleArtilleryLevel;
-	CEdit SearchDealy;
+	CEdit SearchDelay;
 	CEdit SearchWait;
 	CEdit SearchMaxCount;
 	CButton IsWaitSpell;

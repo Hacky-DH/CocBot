@@ -164,7 +164,7 @@ void CbotFunction::setSetsInt(CString key, int value)
 	m_map[key] = str;
 }
 
-unsigned int CbotFunction::Dealy(long DelayCount)
+unsigned int CbotFunction::Delay(long DelayCount)
 {
 	DWORD j = GetTickCount();
 	for (;;)
