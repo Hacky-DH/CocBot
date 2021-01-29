@@ -1557,7 +1557,7 @@ LRESULT CcocBotDlg::SelectAppPlayer(WPARAM wParam, LPARAM lParam)
 	case 1:
 		if (app_player_ld_install_dir.GetLength() < 5)
 		{
-			MessageBox("你的电脑未安装雷电模拟器.请先安装！", "错误", MB_ICONERROR);
+			MessageBox("你的电脑未安装雷电模拟器.请先安装！https://www.ldmnq.com/", "错误", MB_ICONERROR);
 		}
 		else if (PathFileExists(app_player_ld_install_dir) == FALSE)
 		{
