@@ -216,7 +216,7 @@
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="Login.h" />
     <ClInclude Include="lua_func.h" />
-    <ClInclude Include="page1.h" />
+    <ClInclude Include="win_quick.h" />
     <ClInclude Include="page10.h" />
     <ClInclude Include="page2.h" />
     <ClInclude Include="page3.h" />
@@ -243,7 +243,7 @@
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="lua_func.cpp" />
-    <ClCompile Include="page1.cpp" />
+    <ClCompile Include="win_quick.cpp" />
     <ClCompile Include="page10.cpp" />
     <ClCompile Include="page2.cpp" />
     <ClCompile Include="page3.cpp" />

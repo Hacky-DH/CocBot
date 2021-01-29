@@ -3,15 +3,15 @@
 #include "afxeditbrowsectrl.h"
 
 
-// page1 对话框
+// win_quick 对话框
 
-class page1 : public CDialogEx
+class win_quick : public CDialogEx
 {
-	DECLARE_DYNAMIC(page1)
+	DECLARE_DYNAMIC(win_quick)
 
 public:
-	page1(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~page1();
+	win_quick(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~win_quick();
 
 // 对话框数据
 	enum { IDD = IDD_DIALOG1 };

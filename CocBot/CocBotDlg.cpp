@@ -127,21 +127,21 @@ void CcocBotDlg::SaveConfig(CString fileName)
 
 	winText = "";
 	//1.快速设置
-	//WritePrivateProfileINT("快速设置", "townLevel", pag1.townLevel.GetCurSel(), fileName);
-	SetConfig2("快速设置", "townLevel", pag1.townLevel.GetCurSel(), fileName);
-	SetConfig2("快速设置", "GameVersion", pag1.GameVersion.GetCurSel(), fileName);
-	SetConfig2("快速设置", "OffLine", pag1.OffLine.GetCheck(), fileName);
-	SetConfig2("快速设置", "DonateArmy", pag1.DonateArmy.GetCheck(), fileName);
-	SetConfig2("快速设置", "Attack", pag1.Attack.GetCheck(), fileName);
-	SetConfig2("快速设置", "RequestArmy", pag1.RequestArmy.GetCheck(), fileName);
-	SetConfig2("快速设置", "UpgradeWall", pag1.UpgradeWall.GetCheck(), fileName);
-	SetConfig2("快速设置", "UpgradeHeros", pag1.UpgradeHeros.GetCheck(), fileName);
-	SetConfig2("快速设置", "ControlTroophs", pag1.ControlTroophs.GetCheck(), fileName);
-	SetConfig2("快速设置", "LightingDarkElixir", pag1.LightingDarkElixir.GetCheck(), fileName);
-	SetConfig2("快速设置", "RemoveTree", pag1.RemoveTree.GetCheck(), fileName);
-	SetConfig2("快速设置", "RearmAll", pag1.RearmAll.GetCheck(), fileName);
+	//WritePrivateProfileINT("快速设置", "townLevel", quick.townLevel.GetCurSel(), fileName);
+	SetConfig2("快速设置", "townLevel", quick.townLevel.GetCurSel(), fileName);
+	SetConfig2("快速设置", "GameVersion", quick.GameVersion.GetCurSel(), fileName);
+	SetConfig2("快速设置", "OffLine", quick.OffLine.GetCheck(), fileName);
+	SetConfig2("快速设置", "DonateArmy", quick.DonateArmy.GetCheck(), fileName);
+	SetConfig2("快速设置", "Attack", quick.Attack.GetCheck(), fileName);
+	SetConfig2("快速设置", "RequestArmy", quick.RequestArmy.GetCheck(), fileName);
+	SetConfig2("快速设置", "UpgradeWall", quick.UpgradeWall.GetCheck(), fileName);
+	SetConfig2("快速设置", "UpgradeHeros", quick.UpgradeHeros.GetCheck(), fileName);
+	SetConfig2("快速设置", "ControlTroophs", quick.ControlTroophs.GetCheck(), fileName);
+	SetConfig2("快速设置", "LightingDarkElixir", quick.LightingDarkElixir.GetCheck(), fileName);
+	SetConfig2("快速设置", "RemoveTree", quick.RemoveTree.GetCheck(), fileName);
+	SetConfig2("快速设置", "RearmAll", quick.RearmAll.GetCheck(), fileName);
 	SetConfig1("快速设置", "QuickSetShow", winText, fileName);
-	pag1.LoadOutSet.GetWindowText(winText);
+	quick.LoadOutSet.GetWindowText(winText);
 	SetConfig1("快速设置", "LoadOutSet", winText, fileName);
 	//2.训练设置
 	SetConfig2("训练设置", "TrainArmyStyle", pag2.TrainArmyStyle.GetCurSel(), fileName);
@@ -360,21 +360,21 @@ void CcocBotDlg::SaveConfig(CString fileName)
 
 void CcocBotDlg::UpdateWindowSet()
 {
-	pag1.townLevel.SetCurSel(_ttoi(script[0].coc.getSets("townLevel")));
-	pag1.GameVersion.SetCurSel(_ttoi(script[0].coc.getSets("GameVersion")));
-	pag1.OffLine.SetCheck(_ttoi(script[0].coc.getSets("OffLine")));
-	pag1.RequestArmy.SetCheck(_ttoi(script[0].coc.getSets("license")));
-	pag1.RequestArmy.SetCheck(_ttoi(script[0].coc.getSets("RequestArmy")));
-	pag1.Attack.SetCheck(_ttoi(script[0].coc.getSets("Attack")));
-	pag1.DonateArmy.SetCheck(_ttoi(script[0].coc.getSets("DonateArmy")));
-	pag1.UpgradeWall.SetCheck(_ttoi(script[0].coc.getSets("UpgradeWall")));
-	pag1.UpgradeHeros.SetCheck(_ttoi(script[0].coc.getSets("UpgradeHeros")));
-	pag1.ControlTroophs.SetCheck(_ttoi(script[0].coc.getSets("ControlTroophs")));
-	pag1.LightingDarkElixir.SetCheck(_ttoi(script[0].coc.getSets("LightingDarkElixir")));
-	pag1.RemoveTree.SetCheck(_ttoi(script[0].coc.getSets("RemoveTree")));
-	pag1.RearmAll.SetCheck(_ttoi(script[0].coc.getSets("RearmAll")));
-	pag1.LoadInSet.SetWindowText(script[0].coc.getSets("LoadInSet"));
-	pag1.LoadOutSet.SetWindowText(script[0].coc.getSets("LoadOutSet"));
+	quick.townLevel.SetCurSel(_ttoi(script[0].coc.getSets("townLevel")));
+	quick.GameVersion.SetCurSel(_ttoi(script[0].coc.getSets("GameVersion")));
+	quick.OffLine.SetCheck(_ttoi(script[0].coc.getSets("OffLine")));
+	quick.RequestArmy.SetCheck(_ttoi(script[0].coc.getSets("license")));
+	quick.RequestArmy.SetCheck(_ttoi(script[0].coc.getSets("RequestArmy")));
+	quick.Attack.SetCheck(_ttoi(script[0].coc.getSets("Attack")));
+	quick.DonateArmy.SetCheck(_ttoi(script[0].coc.getSets("DonateArmy")));
+	quick.UpgradeWall.SetCheck(_ttoi(script[0].coc.getSets("UpgradeWall")));
+	quick.UpgradeHeros.SetCheck(_ttoi(script[0].coc.getSets("UpgradeHeros")));
+	quick.ControlTroophs.SetCheck(_ttoi(script[0].coc.getSets("ControlTroophs")));
+	quick.LightingDarkElixir.SetCheck(_ttoi(script[0].coc.getSets("LightingDarkElixir")));
+	quick.RemoveTree.SetCheck(_ttoi(script[0].coc.getSets("RemoveTree")));
+	quick.RearmAll.SetCheck(_ttoi(script[0].coc.getSets("RearmAll")));
+	quick.LoadInSet.SetWindowText(script[0].coc.getSets("LoadInSet"));
+	quick.LoadOutSet.SetWindowText(script[0].coc.getSets("LoadOutSet"));
 	pag2.TrainArmyStyle.SetCurSel(_ttoi(script[0].coc.getSets("TrainArmyStyle")));
 	pag2.IsClearArmy.SetCurSel(_ttoi(script[0].coc.getSets("IsClearArmy")));
 	pag2.IsAddArmy.SetCurSel(_ttoi(script[0].coc.getSets("IsAddArmy")));
@@ -604,7 +604,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	main_tab.InsertItem(7, TEXT("统计"));
 	main_tab.InsertItem(8, TEXT("实时日志"));
 	main_tab.InsertItem(9, TEXT("关于"));
-	pag1.Create(IDD_DIALOG1, this);
+	quick.Create(IDD_DIALOG1, this);
 	pag2.Create(IDD_DIALOG2, this);
 	pag3.Create(IDD_DIALOG3, this);
 	pag4.Create(IDD_DIALOG4, this);
@@ -625,7 +625,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	//获取窗口最大
 	GetWindowRect(&rect_max);
 	//设置子对话框尺寸并移动到指定位置
-	pag1.MoveWindow(&rc);
+	quick.MoveWindow(&rc);
 	pag2.MoveWindow(&rc);
 	pag3.MoveWindow(&rc);
 	pag4.MoveWindow(&rc);
@@ -635,7 +635,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	pag8.MoveWindow(&rc);
 	pag9.MoveWindow(&rc);
 	pag10.MoveWindow(&rc);
-	pag1.ShowWindow(true);
+	quick.ShowWindow(true);
 	pag2.ShowWindow(FALSE);
 	pag3.ShowWindow(FALSE);
 	pag4.ShowWindow(FALSE);
@@ -652,7 +652,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	{
 		script[index].hParennt = GetSafeHwnd();
 	}
-	pag1.hParent = GetSafeHwnd();
+	quick.hParent = GetSafeHwnd();
 	menu.LoadMenu(IDR_MENU1);
 
 	//================检测模拟器=====================
@@ -750,7 +750,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	{
 		for (int i = 0; i < vstr1.size(); i++)
 		{
-			pag1.m_list.AddString(vstr1[i].c_str());
+			quick.m_list.AddString(vstr1[i].c_str());
 		}
 		script[MAX_THREAD_COUNT].SetLog("加载完成", true, BLACKCOLOR, true);
 	}
@@ -895,7 +895,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	switch (main_tab.GetCurSel())
 	{
 	case 0:
-		pag1.ShowWindow(true);
+		quick.ShowWindow(true);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
@@ -907,7 +907,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag10.ShowWindow(FALSE);
 		break;
 	case 1:
-		pag1.ShowWindow(FALSE);
+		quick.ShowWindow(FALSE);
 		pag2.ShowWindow(true);
 		pag3.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
@@ -919,7 +919,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag10.ShowWindow(FALSE);
 		break;
 	case 2:
-		pag1.ShowWindow(FALSE);
+		quick.ShowWindow(FALSE);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(true);
 		pag4.ShowWindow(FALSE);
@@ -931,7 +931,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag10.ShowWindow(FALSE);
 		break;
 	case 3:
-		pag1.ShowWindow(FALSE);
+		quick.ShowWindow(FALSE);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(FALSE);
 		pag4.ShowWindow(true);
@@ -943,7 +943,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag10.ShowWindow(FALSE);
 		break;
 	case 4:
-		pag1.ShowWindow(FALSE);
+		quick.ShowWindow(FALSE);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
@@ -955,7 +955,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag10.ShowWindow(FALSE);
 		break;
 	case 5:
-		pag1.ShowWindow(FALSE);
+		quick.ShowWindow(FALSE);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
@@ -967,7 +967,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag10.ShowWindow(FALSE);
 		break;
 	case 6:
-		pag1.ShowWindow(FALSE);
+		quick.ShowWindow(FALSE);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
@@ -979,7 +979,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag10.ShowWindow(FALSE);
 		break;
 	case 7:
-		pag1.ShowWindow(FALSE);
+		quick.ShowWindow(FALSE);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
@@ -991,7 +991,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag10.ShowWindow(FALSE);
 		break;
 	case 8:
-		pag1.ShowWindow(FALSE);
+		quick.ShowWindow(FALSE);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
@@ -1003,7 +1003,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag10.ShowWindow(FALSE);
 		break;
 	case 9:
-		pag1.ShowWindow(FALSE);
+		quick.ShowWindow(FALSE);
 		pag2.ShowWindow(FALSE);
 		pag3.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
@@ -1026,7 +1026,7 @@ void CcocBotDlg::OnClose()
 	SaveConfig();
 	//bot.WriteFile(_T("BotSet.cbt"), save_str);
 
-	if (pag1.app_player_type == APP_PLAYER_BLUESTACKS)
+	if (quick.app_player_type == APP_PLAYER_BLUESTACKS)
 	{
 		StopOneScript(&script[0]);
 	}
@@ -1061,7 +1061,7 @@ LRESULT CcocBotDlg::OnLoadOutConfig(WPARAM wParam, LPARAM lParam)
 	bot->SetPath(path);
 	SaveConfig();
 	CString filename;
-	pag1.LoadOutSet.GetWindowTextA(filename);
+	quick.LoadOutSet.GetWindowTextA(filename);
 	if (filename.GetLength() < 1)
 	{
 		filename = "导出";
@@ -1082,7 +1082,7 @@ LRESULT CcocBotDlg::OnLoadInConfig(WPARAM wParam, LPARAM lParam)
 {
 	// TODO: 在此添加控件通知处理程序代码
 	CString str_config, file_path;
-	pag1.LoadInSet.GetWindowTextA(file_path);
+	quick.LoadInSet.GetWindowTextA(file_path);
 	if (file_path.GetLength() > 3)
 	{
 		if (file_path.Right(4) != ".ini")
@@ -1250,7 +1250,7 @@ void CcocBotDlg::OnBnClickedShowHideAppPlayer()
 	CString winText;
 	long window_hwnd = 0;
 	int index = 0;
-	switch (pag1.app_player_type)
+	switch (quick.app_player_type)
 	{
 	case APP_PLAYER_BLUESTACKS:
 		window_hwnd = dmx.FindWindow("", "BlueStacks App Player");
@@ -1297,9 +1297,9 @@ void CcocBotDlg::OnBnClickedStartStopBot()
 
 		script[0].coc.SetPath(GetCurrentPath() + "Config.ini");
 		SaveConfig();//界面配
-		if (pag1.app_player_type == APP_PLAYER_BLUESTACKS)
+		if (quick.app_player_type == APP_PLAYER_BLUESTACKS)
 		{
-			script[0].AppPlayerType = pag1.app_player_type;
+			script[0].AppPlayerType = quick.app_player_type;
 			script[0].appPlayerInstallDir = app_player_bs_install_dir;
 			StartOneScript(&script[0], 0);
 		}
@@ -1309,7 +1309,7 @@ void CcocBotDlg::OnBnClickedStartStopBot()
 			{
 				if (m_list.GetCheck(index) == 0) continue;
 				if (m_list.GetItemText(index, 1).GetLength() <= 0) continue; //模拟器未创建
-				script[index].AppPlayerType = pag1.app_player_type;
+				script[index].AppPlayerType = quick.app_player_type;
 				script[index].appPlayerInstallDir = app_player_ld_install_dir;
 				str = m_list.GetItemText(index, 2);
 				if (str.GetLength() == 0)str = GetCurrentPath() + "Config.ini";
@@ -1328,13 +1328,13 @@ void CcocBotDlg::OnBnClickedStartStopBot()
 		contorl_script = INRUN;
 		m_StartStopButton.SetIcon(m_IconStop);
 		m_StartStopButton.EnableWindow(TRUE);
-		pag1.check_bs.EnableWindow(FALSE);
+		quick.check_bs.EnableWindow(FALSE);
 	}
 	else
 	{
 		m_StartStopButton.EnableWindow(FALSE);
 		contorl_script = STOP;
-		if (pag1.app_player_type == APP_PLAYER_BLUESTACKS)
+		if (quick.app_player_type == APP_PLAYER_BLUESTACKS)
 		{
 			StopOneScript(&script[0]);
 		}
@@ -1383,7 +1383,7 @@ LRESULT CcocBotDlg::oneKeySet(WPARAM wParam, LPARAM lParam)
 
 	str = GetCurrentPath();
 	str += "常用配置\\";
-	pag1.m_list.GetText(pag1.m_list.GetCurSel(), winText);
+	quick.m_list.GetText(quick.m_list.GetCurSel(), winText);
 	str += winText;
 	if (str.Find(".ini") <= 0)
 	{
@@ -1702,7 +1702,7 @@ void CcocBotDlg::OnBnClickedUpdataList()
 	char buffer[max_size] = { 0 };
 	using namespace std;
 	vector<string> vstr1, vstr2;
-	if (pag1.app_player_type == APP_PLAYER_LIGHTING)
+	if (quick.app_player_type == APP_PLAYER_LIGHTING)
 	{
 		if (app_player_ld_install_dir.GetLength() < 5) return;
 		script[MAX_THREAD_COUNT].adb.start(app_player_ld_install_dir + "\\dnconsole.exe list2");

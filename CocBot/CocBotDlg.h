@@ -5,7 +5,7 @@
 #pragma once
 #include "afxcmn.h"
 #include "afxwin.h"
-#include "page1.h"
+#include "win_quick.h"
 #include "page2.h"
 #include "page3.h"
 #include "page4.h"
@@ -34,7 +34,7 @@ private:
 	CListCtrl m_list; //多开列表
 	CButton m_StartStopButton;
 	CString app_player_bs_install_dir, app_player_ld_install_dir;//bs,雷电模拟器安装路径/根目录
-	page1 pag1;   //快速设置
+	win_quick quick;   //快速设置
 	page2 pag2;   //训练设置
 	page3 pag3;   //搜索设置
 	page4 pag4;   //攻击设置
