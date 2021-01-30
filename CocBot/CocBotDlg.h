@@ -31,7 +31,7 @@ private:
 	CListCtrl m_list; //多开列表
 	CButton m_StartStopButton;
 	CString app_player_bs_install_dir, app_player_ld_install_dir;//bs,雷电模拟器安装路径/根目录
-	TabQuickSet quick;   //快速设置
+	TabQuickSet quickset;   //快速设置
 	page2 pag2;   //训练设置
 	page3 pag3;   //搜索设置
 	page4 pag4;   //攻击设置
