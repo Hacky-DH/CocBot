@@ -66,21 +66,18 @@ void TabQuickSet::OnBsOrOtherChange()
 
 void TabQuickSet::OnLoadInConfig()
 {
-	// TODO: 在此添加控件通知处理程序代码
 	::SendMessage(hParent, WM_LOAD_IN_CONFIG, 0, 0);
 }
 
 
 void TabQuickSet::OnLoadOutConfig()
 {
-	// TODO: 在此添加控件通知处理程序代码
 	::SendMessage(hParent, WM_LOAD_OUT_CONFIG, 0, 0);
 }
 
 
 void TabQuickSet::OnSelectFile()
 {
-	// TODO: 在此添加控件通知处理程序代码
 	CbotFunction* bot = new CbotFunction;
 	CString filename;
 	filename= bot->SelectFile("配置文件(*.ini)|*.ini||");
@@ -91,17 +88,13 @@ void TabQuickSet::OnSelectFile()
 
 void TabQuickSet::OnPaint()
 {
-	CPaintDC dc(this); // device context for painting
-					   // TODO: 在此处添加消息处理程序代码
-					   // 不为绘图消息调用 CDialog::OnPaint()
+	CPaintDC dc(this);
 }
 
 
 BOOL TabQuickSet::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
-
-	// TODO:  在此添加额外的初始化
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 异常: OCX 属性页应返回 FALSE
 }
@@ -109,15 +102,12 @@ BOOL TabQuickSet::OnInitDialog()
 
 void TabQuickSet::OnBnClickedBtQuickset()
 {
-	// TODO: 在此添加控件通知处理程序代码
 	::SendMessage(hParent, WM_PAGE_1_TEST_MESSAGE, 0, 0);
-
 }
 
 
 void TabQuickSet::OnBnClickedCheckBs()
 {
-	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
 	::SendMessage(hParent, WM_SELECT_APP_PLAYER, app_player_type, 0);
 }
@@ -125,7 +115,6 @@ void TabQuickSet::OnBnClickedCheckBs()
 
 void TabQuickSet::OnBnClickedCheckLd()
 {
-	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
 	::SendMessage(hParent, WM_SELECT_APP_PLAYER, app_player_type, 0);
 }
