@@ -153,7 +153,7 @@ public://功能函数
 	/*连接模拟器*/
 	int ConnectAppPlayer();
 	/*设置分辨率*/
-	int SetClientWindowSize(int x=850,int y=667);
+	int SetAppResolution(int x=850,int y=667);
 	/*打开游戏*/
 	int StartCoc();
 	/*关闭游戏*/

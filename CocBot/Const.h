@@ -199,7 +199,9 @@ const COLORREF BLACKCOLOR =					RGB(0X00, 0X00, 0X00);
 #define DEFAULT_ACCOUNT						"cocBot"
 #define DEFAULT_PASSWORD					"123456"
 
-
+// Ä£ÄâÆ÷·Ö±æÂÊ
+constexpr int APP_RESOLUTION_X = 850;
+constexpr int APP_RESOLUTION_Y = 667;
 
 
 #endif

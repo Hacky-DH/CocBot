@@ -325,7 +325,7 @@ int CScript::ClearAdvirtisment()
 	pic_name = dm.MatchPicName("*.bmp");
 	if (pic_name.GetLength() > 4)
 	{
-		if (dm.FindPic(0, 0, 850, 667, pic_name, "0f0f0f", 0.85, 0, &x, &y))
+		if (dm.FindPic(0, 0, APP_RESOLUTION_X, APP_RESOLUTION_Y, pic_name, "0f0f0f", 0.85, 0, &x, &y))
 		{
 			dm.MoveTo(x.lVal + 5, y.lVal + 5);
 			Delay(20);
@@ -2426,9 +2426,8 @@ int CScript::ConnectAppPlayer()
 }
 
 
-int CScript::SetClientWindowSize(int x, int y)
+int CScript::SetAppResolution(int x, int y)
 {
-	//
 	CString path;
 	path = coc.GetCurrentPath();
 	path += "Config.ini";
@@ -2440,22 +2439,22 @@ int CScript::SetClientWindowSize(int x, int y)
 	DWORD w = x;
 	DWORD h = y;
 	dm.GetClientSize(bindHwnd, &xw, &yw);
-	if ((xw.lVal != 850) || (yw.lVal != 667))
+	if ((xw.lVal != APP_RESOLUTION_X) || (yw.lVal != APP_RESOLUTION_Y))
 	{
-
-		str.Format("错误的分辨率：%ld,%ld", xw.lVal, yw.lVal);
+		str.Format("错误的分辨率：%ld,%ld，关闭模拟器再设置新的分辨率", xw.lVal, yw.lVal);
 		SetLog(str, true, BLUECOLOR, false);
+		QuitAppPlayer(AppPlayerIndex);
+		Delay(3000);
 	}
 	else
 	{
-		return 0;//normal
+		return 0;
 	}
 	switch (AppPlayerType)
 	{
 	case APP_PLAYER_BLUESTACKS:
-
-		key.Create(HKEY_LOCAL_MACHINE, _T("SOFTWARE\\BlueStacks\\Guests\\Android\\FrameBuffer\\0"));
-
+		key.Create(HKEY_LOCAL_MACHINE, 
+			_T("SOFTWARE\\BlueStacks\\Guests\\Android\\FrameBuffer\\0"));
 		key.SetDWORDValue(_T("Width"), w);
 		key.SetDWORDValue(_T("Height"), h);
 		key.SetDWORDValue(_T("GuestWidth"), w);
@@ -2463,18 +2462,18 @@ int CScript::SetClientWindowSize(int x, int y)
 		key.SetDWORDValue(_T("WindowWidth"), w);
 		key.SetDWORDValue(_T("WindowHeight"), h);
 		key.Close();
-
-
 		break;
 	case APP_PLAYER_LIGHTING:
-		adb.start(appPlayerInstallDir + "\\dnconsole.exe modify --index %d --resolution 850,667,160 --cpu 1 --memory 1024");
+		str.Format("\\dnconsole.exe modify --index %d --resolution %d,%d,160"
+			" --cpu 1 --memory 1024", AppPlayerIndex,
+			APP_RESOLUTION_X, APP_RESOLUTION_Y);
+		adb.start(appPlayerInstallDir + str);
 		adb.stop();
 		break;
-
 	default:
 		break;
 	}
-	return 1;//set
+	return 1;
 }
 
 
@@ -2975,7 +2974,6 @@ int CScript::LaunchAppPlayer(int wParam)
 	case APP_PLAYER_LIGHTING:
 		if (PathFileExists(appPlayerInstallDir))
 		{
-
 			str.Format(" launch --index %d", wParam);
 			adb.start(appPlayerInstallDir + "\\dnconsole.exe" + str);
 			adb.stop();
@@ -3215,7 +3213,6 @@ int CScript::Attack()
 int CScript::script_init()
 {
 	CString str;
-	int ret = 0, temp;
 	//1.变量初始化
 	SetLog("初始化...", true, BLACKCOLOR, true);
 	coc.Initialize();
@@ -3288,26 +3285,23 @@ int CScript::script_init()
 		army_capacity = 200;
 		break;
 	}
-	//2.创建大漠对象
 
+	//2.创建大漠对象
 	if (false == CreateDm())
 	{
 		IsThreadRun = false;
 		AfxMessageBox(_T("启动失败，请检查插件是否注册！"), MB_OK);
 	}
 
-
 	//3.检测插件版本
-
-	if (dm.Ver() != DM_VER_5&&dm.Ver() != DM_VER_6)
+	if (dm.Ver() != DM_VER_5 && dm.Ver() != DM_VER_6)
 	{
-
 		IsThreadRun = false;
 		AfxMessageBox(_T("启动失败，插件版本不正确，请检查插件是否注册！"), MB_OK);
 		return 0;
 	}
-	//4.设置错误提示
 
+	//4.设置错误提示
 	dm.SetShowErrorMsg(_ttoi(coc.getSets("SetShowErrorMsg")));
 	Delay(500);
 
@@ -3318,60 +3312,45 @@ int CScript::script_init()
 		IsThreadRun = false;
 		return 0;
 	}
-	//检测句柄
-	ret = SetBindHwnd();
-	temp = 120;
-	if (ret <= 0) /*模拟器未打开，自动打开并等待，最长120s*/
-	{
-		LaunchAppPlayer(AppPlayerIndex);
-		while (_ttoi(getList2(AppPlayerIndex, 4)) == 0 && IsThreadRun&&temp > 0)//等待模拟器启动完成
-		{
-			Delay(1000);
-			temp--;
-		}
+
+	int ret = 0;
+	//等待模拟器启动完成
+	auto waitAppPlayer = [&]() {
 		ret = SetBindHwnd();
-		if (temp == 0)/*超时*/
+		int left_time = 300;
+		if (ret <= 0) /*模拟器未打开，自动打开并等待，最长300s*/
 		{
-			SetLog("time out!", true, REDCOLOR, false);
-			IsThreadRun = false;
-			return -1;
+			SetLog("打开模拟器，最长等待300s");
+			LaunchAppPlayer(AppPlayerIndex);
+			Delay(5000);
+			while (_ttoi(getList2(AppPlayerIndex, 4)) == 0 &&
+				IsThreadRun && left_time > 0)
+			{
+				Delay(1000);
+				left_time--;
+			}
+			ret = SetBindHwnd();
+			if (left_time == 0)
+			{
+				IsThreadRun = false;
+				SetLog("启动模拟器超时!", true, REDCOLOR, false);
+				return -1;
+			}
 		}
+		return 0;
+	};
+	if (0 != waitAppPlayer()) {
+		return -1;
 	}
+	
 	//6.设置分辨率
-	ret = SetClientWindowSize(850, 667);
-
-	if (ret == 0)
-	{
-		//分辨率正常
-	}
-	else if (ret == 1)
-	{
-		//设置好了分辨率，现在需要关闭模拟器
-		SetLog("设置好了分辨率，现在需要关闭模拟器");
-		QuitAppPlayer(AppPlayerIndex);
-		//等待5秒m
-		Delay(5000);
-		//打开模拟器
-		LaunchAppPlayer(AppPlayerIndex);
-		//等等30s
-		SetLog("打开模拟器,等等30s");
-		Delay(3000);
-		temp = 120;
-		while (_ttoi(getList2(AppPlayerIndex, 4)) == 0 && IsThreadRun&&temp > 0)//等待模拟器启动完成
-		{
-			Delay(1000);
-			temp--;
-		}
-		ret = SetBindHwnd();
-		if (temp == 0)/*超时*/
-		{
-			SetLog("time out!", true, REDCOLOR, false);
-			IsThreadRun = false;
+	if (0 != SetAppResolution(APP_RESOLUTION_X, APP_RESOLUTION_Y)) {
+		if (0 != waitAppPlayer()) {
 			return -1;
 		}
 	}
-	//7.绑定模拟器
 
+	//7.绑定模拟器
 	ret = ConnectAppPlayer();
 	if (ret == -1)
 	{
@@ -3635,7 +3614,6 @@ BOOL StopAllScript(CScript * all_script_info[])
 
 int CScript::SetBindHwnd()
 {
-
 	long nHwnd = 0;
 	switch (AppPlayerType)
 	{
@@ -3662,6 +3640,9 @@ int CScript::SetBindHwnd()
 
 CString CScript::getList2(int x, int y)
 {
+	// 获取雷电多模拟器list的信息
+	// x 是第x个模拟器
+	// y 是模拟器的信息，index,name,_,hwnd,is_run,_,_
 	CString str;
 	using namespace std;
 	vector<string> vstr1, vstr2;
