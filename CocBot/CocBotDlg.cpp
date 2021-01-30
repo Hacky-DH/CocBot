@@ -587,7 +587,6 @@ BOOL CcocBotDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
-	// TODO: 在此添加额外的初始化代码
 	CString title;
 	GetWindowText(title);
 	title += "  当前版本号<<";
@@ -614,17 +613,15 @@ BOOL CcocBotDlg::OnInitDialog()
 	pag8.Create(IDD_DIALOG8, this);
 	pag9.Create(IDD_DIALOG9, this);
 	pag10.Create(IDD_DIALOG10, this);
-	if (m_graphic.Create(IDD_DIALOG_GRAPHIC, this) == FALSE) exit(-2);
+	m_graphic.Create(IDD_DIALOG_GRAPHIC, this);
 	//m_graphic.ShowWindow(TRUE);
-	//获得IDC_TABTEST客户区大小
+
+	GetWindowRect(&rect_max);
 	CRect rc;
 	main_tab.GetClientRect(&rc);
-	//调整子对话框在父窗口中的位置
-	rc.top += 40;
-
-	//获取窗口最大
-	GetWindowRect(&rect_max);
+	TRACE("main tab (%d, %d, %d, %d)", rc.left, rc.top, rc.Width(), rc.Height());
 	//设置子对话框尺寸并移动到指定位置
+	rc += CPoint(12,40);
 	quickset.MoveWindow(&rc);
 	pag2.MoveWindow(&rc);
 	pag3.MoveWindow(&rc);
