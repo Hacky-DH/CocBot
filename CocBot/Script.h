@@ -21,9 +21,7 @@ struct COCINFO
 class CScript
 {
 public:
-	//构造函数
 	CScript();
-	//析构函数
 	~CScript();
 public:
 	Cdmsoft			dm;							//大漠对象
@@ -54,8 +52,9 @@ public:
 	int townLevel = 9;							//主城等级
 	bool IsOffLine;								//是否下线等等
 	bool IsSwitch;								//是否切换
+	bool IsDelay;                               //是否随机延迟
 	long GetScriptState();
-	int army_camp = 200;						//兵营容量
+	int army_capacity = 200;						//兵营容量
 	/* scriptStateCode = 0 : normal not start
 	   scriptStateCode = 1 : normal start and run
 	   scriptStateCode = 2 : switch start and run

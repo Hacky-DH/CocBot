@@ -3,8 +3,8 @@
 #include "lua_func.h"
 #include "ImageLib.h"
 #define AVOID_ZERO(x) ((x)==0?1:(x))
-CScript::CScript()
 
+CScript::CScript()
 {
 	scriptVer = cocBotVer;
 	scriptInfo = 0;
@@ -1459,7 +1459,7 @@ int CScript::Attack_Equal()
 		{
 			//distance = MAXATTACKCOUNT / (solider_num / (4 - j) + 1);
 			// distance*count=ldis
-			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
+			distance = army_capacity / 4 / AVOID_ZERO(solider_num / (4 - j));
 			Delay(100);
 			for (int i = distance; i < MAXATTACKCOUNT; i += distance)
 			{
@@ -1473,7 +1473,7 @@ int CScript::Attack_Equal()
 		solider_num = SelectSolider(BARBARIN);
 		if (solider_num > 0)
 		{
-			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
+			distance = army_capacity / 4 / AVOID_ZERO(solider_num / (4 - j));
 			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
@@ -1487,7 +1487,7 @@ int CScript::Attack_Equal()
 		solider_num = SelectSolider(WALLBREAKER);
 		if (solider_num > 0)
 		{
-			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
+			distance = army_capacity / 4 / AVOID_ZERO(solider_num / (4 - j));
 			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
@@ -1501,7 +1501,7 @@ int CScript::Attack_Equal()
 		solider_num = SelectSolider(GOBLIN);
 		if (solider_num > 0)
 		{
-			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
+			distance = army_capacity / 4 / AVOID_ZERO(solider_num / (4 - j));
 			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
@@ -1516,7 +1516,7 @@ int CScript::Attack_Equal()
 		solider_num = SelectSolider(ARCHER);
 		if (solider_num > 0)
 		{
-			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
+			distance = army_capacity / 4 / AVOID_ZERO(solider_num / (4 - j));
 			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
@@ -1529,7 +1529,7 @@ int CScript::Attack_Equal()
 		solider_num = SelectSolider(WIZARD);
 		if (solider_num > 0)
 		{
-			distance = army_camp / 4 / AVOID_ZERO(solider_num / (4 - j));
+			distance = army_capacity / 4 / AVOID_ZERO(solider_num / (4 - j));
 			Delay(100);
 			for (int i = 1; i < MAXATTACKCOUNT; i += distance)
 			{
@@ -3244,40 +3244,48 @@ int CScript::script_init()
 	IsOffLine = _ttoi(coc.getSets("OffLine"));
 	//是否切换
 	IsSwitch = _ttoi(coc.getSets("IsSwitchMode"));
+	//是否随机延迟
+	IsDelay = _ttoi(coc.getSets("IsDelay"));
 	switch (townLevel)/*初始化总人口*/
 	{
 	case 2:
-		army_camp = 40;
+		army_capacity = 30;
 		break;
 	case 3:
-		army_camp = 60;
+		army_capacity = 2 * 35;
 		break;
 	case 4:
-		army_camp = 80;
+		army_capacity = 2 * 40;
 		break;
 	case 5:
-		army_camp = 120;
+		army_capacity = 3 * 45;
 		break;
 	case 6:
-		army_camp = 150;
+		army_capacity = 3 * 50;
 		break;
 	case 7:
-		army_camp = 200;
+		army_capacity = 4 * 50;
 		break;
 	case 8:
-		army_camp = 200;
+		army_capacity = 4 * 50;
 		break;
 	case 9:
-		army_camp = 220;
+		army_capacity = 4 * 55;
 		break;
 	case 10:
-		army_camp = 240;
+		army_capacity = 4 * 60;
 		break;
 	case 11:
-		army_camp = 220;
+		army_capacity = 4 * 65;
+		break;
+	case 12:
+		army_capacity = 4 * 70;
+		break;
+	case 13:
+		army_capacity = 4 * 75;
 		break;
 	default:
-		army_camp = 200;
+		army_capacity = 200;
 		break;
 	}
 	//2.创建大漠对象
@@ -3471,12 +3479,9 @@ void CScript::SetPath(const CString& path)
 		m_file_path.Append("\\");
 }
 
-static unsigned  EntryScript(LPVOID pParam)
+static unsigned EntryScript(LPVOID pParam)
 {
 	CScript *script_info = (CScript *)pParam;
-
-
-	//脚本初始化
 	script_info->script_init();
 
 	// 开始脚本循环
@@ -3515,9 +3520,8 @@ static unsigned  EntryScript(LPVOID pParam)
 
 CScript*  StartOneScript(CScript *script_info, int index, const char* configFile)
 {
-
-	if (script_info == NULL)
-		return NULL;
+	if (script_info == nullptr)
+		return nullptr;
 	//1.序号
 	if (index >= 0) script_info->AppPlayerIndex = index;
 	//2.设置配置路径
@@ -3527,19 +3531,18 @@ CScript*  StartOneScript(CScript *script_info, int index, const char* configFile
 		if (script_info->coc.LoadSets(configFile) == false)
 		{
 			AfxMessageBox("加载配置文件失败");
-			return NULL;
+			return nullptr;
 		}
 	//3.设置窗口句柄
 	//if (appHwnd > 0) script_info->bindHwnd = appHwnd;
 	//4.线程标志
-	script_info->IsThreadRun = true;
 	script_info->IsThreadRun = true;
 	script_info->scriptInfo = 1;
 	// 5.创建线程
 	script_info->pThread = AfxBeginThread(EntryScript, (void*)script_info, 0, 0);
 	if (script_info->pThread->m_hThread == INVALID_HANDLE_VALUE)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	return script_info;
