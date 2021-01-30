@@ -5,11 +5,7 @@
 class CbotFunction
 {
 private:
-	
 	CString filePath;
-
-	
-	
 public:
 	CTime tm;
 	CString  SearchStr;

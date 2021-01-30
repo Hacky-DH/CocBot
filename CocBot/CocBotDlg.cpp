@@ -1283,8 +1283,6 @@ void CcocBotDlg::OnBnClickedShowHideAppPlayer()
 
 void CcocBotDlg::OnBnClickedStartStopBot()
 {
-	// TODO: 在此添加控件通知处理程序代码
-	CString str;
 	if (contorl_script == NOTSTART)
 	{
 		m_StartStopButton.EnableWindow(FALSE);
@@ -1293,7 +1291,7 @@ void CcocBotDlg::OnBnClickedStartStopBot()
 		path = fbot.GetCurrentPath();
 
 		script[0].coc.SetPath(GetCurrentPath() + "Config.ini");
-		SaveConfig();//界面配
+		SaveConfig();
 		if (quickset.app_player_type == APP_PLAYER_BLUESTACKS)
 		{
 			script[0].AppPlayerType = quickset.app_player_type;
@@ -1308,20 +1306,17 @@ void CcocBotDlg::OnBnClickedStartStopBot()
 				if (m_list.GetItemText(index, 1).GetLength() <= 0) continue; //模拟器未创建
 				script[index].AppPlayerType = quickset.app_player_type;
 				script[index].appPlayerInstallDir = app_player_ld_install_dir;
-				str = m_list.GetItemText(index, 2);
-				if (str.GetLength() == 0)str = GetCurrentPath() + "Config.ini";
-				if (PathFileExists(str) == false)
+				CString config_file = m_list.GetItemText(index, 2);
+				if (config_file.GetLength() == 0)
+					config_file = GetCurrentPath() + "Config.ini";
+				if (PathFileExists(config_file) == false)
 				{
-					//配置文件不存在，请重新设置！
 					MessageBox("配置文件不存在，请重新设置！");
 					return;
 				}
-				StartOneScript(&script[index], index,str);
-
+				StartOneScript(&script[index], index, config_file);
 			}
 		}
-
-
 		contorl_script = INRUN;
 		m_StartStopButton.SetIcon(m_IconStop);
 		m_StartStopButton.EnableWindow(TRUE);
@@ -1343,8 +1338,6 @@ void CcocBotDlg::OnBnClickedStartStopBot()
 				StopOneScript(&script[index]);
 			}
 		}
-
-
 		contorl_script = NOTSTART;
 		m_StartStopButton.SetIcon(m_IconStart);
 		m_StartStopButton.EnableWindow(TRUE);
