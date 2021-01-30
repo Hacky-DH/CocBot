@@ -1,6 +1,3 @@
-// tab_quickset.cpp : 实现文件
-//
-
 #include "stdafx.h"
 #include "cocBot.h"
 
@@ -8,8 +5,6 @@
 
 #include "afxdialogex.h"
 
-
-// TabQuickSet 对话框
 
 IMPLEMENT_DYNAMIC(TabQuickSet, CDialogEx)
 

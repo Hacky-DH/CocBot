@@ -76,7 +76,7 @@ void Graphic::OnBnClickedLoadPos()
 		return;
 	}
 
-	DWORD file_len = file.GetLength();
+	DWORD file_len = static_cast<DWORD>(file.GetLength());
 	char* buff = new char[file_len + 1];
 	file.Read(buff, file_len);
 	file.Close();

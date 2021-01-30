@@ -3,21 +3,18 @@
 #include "afxeditbrowsectrl.h"
 
 
-// TabQuickSet 对话框
-
 class TabQuickSet : public CDialogEx
 {
 	DECLARE_DYNAMIC(TabQuickSet)
 
 public:
-	TabQuickSet(CWnd* pParent = NULL);   // 标准构造函数
+	TabQuickSet(CWnd* pParent = NULL);
 	virtual ~TabQuickSet();
 
-// 对话框数据
-	enum { IDD = IDD_DIALOG1 };
+	enum { IDD = IDD_DIALOG_QUICKSET };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
+	virtual void DoDataExchange(CDataExchange* pDX);
 
 	DECLARE_MESSAGE_MAP()
 public:

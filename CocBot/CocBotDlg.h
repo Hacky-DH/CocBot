@@ -22,7 +22,7 @@ public:
 	~CcocBotDlg();
 	
 	// 对话框数据
-	enum { IDD = IDD_NEWCOCBOT_DIALOG };
+	enum { IDD = IDD_COCBOT_DIALOG };
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
 private:

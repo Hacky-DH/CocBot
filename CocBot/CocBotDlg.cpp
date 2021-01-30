@@ -81,7 +81,7 @@ BEGIN_MESSAGE_MAP(CcocBotDlg, CDialogEx)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CcocBotDlg::OnTcnSelchangeTab1)
 	ON_WM_CLOSE()
 	ON_WM_TIMER()
-	ON_BN_CLICKED(IDC_BUTTON5, &CcocBotDlg::OnScreenCapture)
+	ON_BN_CLICKED(IDC_BUTTON_SCREEN, &CcocBotDlg::OnScreenCapture)
 	ON_BN_CLICKED(IDC_SHOW_HIDE_WINDOW, &CcocBotDlg::OnBnClickedShowHideAppPlayer)
 	ON_BN_CLICKED(IDC_START_STOP_BOT, &CcocBotDlg::OnBnClickedStartStopBot)
 	ON_BN_CLICKED(IDC_PAUSEBOT, &CcocBotDlg::OnBnClickedPausebot)
@@ -604,7 +604,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	main_tab.InsertItem(7, TEXT("统计"));
 	main_tab.InsertItem(8, TEXT("实时日志"));
 	main_tab.InsertItem(9, TEXT("关于"));
-	quick.Create(IDD_DIALOG1, this);
+	quick.Create(IDD_DIALOG_QUICKSET, this);
 	pag2.Create(IDD_DIALOG2, this);
 	pag3.Create(IDD_DIALOG3, this);
 	pag4.Create(IDD_DIALOG4, this);
