@@ -139,7 +139,7 @@ void CcocBotDlg::SaveConfig(CString fileName)
 	SetConfig2("快速设置", "ControlTroophs", quickset.ControlTroophs.GetCheck(), fileName);
 	SetConfig2("快速设置", "LightingDarkElixir", quickset.LightingDarkElixir.GetCheck(), fileName);
 	SetConfig2("快速设置", "RemoveTree", quickset.RemoveTree.GetCheck(), fileName);
-	SetConfig2("快速设置", "RearmAll", quickset.RearmAll.GetCheck(), fileName);
+	SetConfig2("快速设置", "IsDelay", quickset.IsDelay.GetCheck(), fileName);
 	SetConfig1("快速设置", "QuickSetShow", winText, fileName);
 	quickset.LoadOutSet.GetWindowText(winText);
 	SetConfig1("快速设置", "LoadOutSet", winText, fileName);
@@ -372,7 +372,7 @@ void CcocBotDlg::UpdateWindowSet()
 	quickset.ControlTroophs.SetCheck(_ttoi(script[0].coc.getSets("ControlTroophs")));
 	quickset.LightingDarkElixir.SetCheck(_ttoi(script[0].coc.getSets("LightingDarkElixir")));
 	quickset.RemoveTree.SetCheck(_ttoi(script[0].coc.getSets("RemoveTree")));
-	quickset.RearmAll.SetCheck(_ttoi(script[0].coc.getSets("RearmAll")));
+	quickset.IsDelay.SetCheck(_ttoi(script[0].coc.getSets("IsDelay")));
 	quickset.LoadInSet.SetWindowText(script[0].coc.getSets("LoadInSet"));
 	quickset.LoadOutSet.SetWindowText(script[0].coc.getSets("LoadOutSet"));
 	pag2.TrainArmyStyle.SetCurSel(_ttoi(script[0].coc.getSets("TrainArmyStyle")));

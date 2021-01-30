@@ -30,7 +30,7 @@ public:
 	CButton ControlTroophs;
 	CButton LightingDarkElixir;
 	CButton RemoveTree;
-	CButton RearmAll;
+	CButton IsDelay;
 	CEdit LoadOutSet;
 	
 	

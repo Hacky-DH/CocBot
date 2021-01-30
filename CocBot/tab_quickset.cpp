@@ -33,7 +33,7 @@ void TabQuickSet::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK7, ControlTroophs);
 	DDX_Control(pDX, IDC_CHECK8, LightingDarkElixir);
 	DDX_Control(pDX, IDC_CHECK9, RemoveTree);
-	DDX_Control(pDX, IDC_CHECK10, RearmAll);
+	DDX_Control(pDX, IDC_CHECK_DELAY, IsDelay);
 	DDX_Control(pDX, IDC_EDIT3, LoadOutSet);
 	DDX_Control(pDX, IDC_EDIT5, LoadInSet);
 	DDX_Control(pDX, IDC_COMBO6, townLevel);
