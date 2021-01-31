@@ -81,6 +81,8 @@ void CScript::Delay(unsigned long mSeconds)
 
 void CScript::DelayRandTime(unsigned long minDeaySeconds, unsigned long maxDelaySeconds)
 {
+	if (!IsDelay)
+		return;
 	CString str;
 	DWORD s = GetTickCount() / 2555;
 	srand(s);
@@ -3372,7 +3374,6 @@ int CScript::script_init()
 
 int CScript::script_main()
 {
-
 	int Ret = -1;
 	//¼ì²â²å¼þ°æ±¾
 	if (dm.Ver() != DM_VER_5&&dm.Ver() != DM_VER_6)
