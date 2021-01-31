@@ -963,19 +963,13 @@ int CScript::GetResource()
 	water = dm.Ocr(655, 69, 806, 91, "ffffff-030303", 0.8);
 	oil = dm.Ocr(702, 120, 800, 140, "ffffff-030303", 0.8);
 	troophs = dm.Ocr(61, 78, 125, 104, "ffffff-030303", 0.8);
-	if (LootRecord[SwitchNo].IsFirstRecord == true)
+	if (LootRecord[SwitchNo].IsFirstRecord)
 	{
-
-		LootRecord[SwitchNo].SetStartResource(_ttoi(gold), _ttoi(water), _ttoi(oil), _ttoi(troophs));
-
-		LootRecord[SwitchNo].SetNowResource(_ttoi(gold), _ttoi(water), _ttoi(oil), _ttoi(troophs));
-
+		LootRecord[SwitchNo].SetStartResource(_ttoi(gold), _ttoi(water),
+			_ttoi(oil), _ttoi(troophs));
 	}
-	else
-	{
-		LootRecord[SwitchNo].SetNowResource(_ttoi(gold), _ttoi(water), _ttoi(oil), _ttoi(troophs));
-	}
-
+	LootRecord[SwitchNo].SetNowResource(_ttoi(gold), _ttoi(water),
+		_ttoi(oil), _ttoi(troophs));
 	return 0;
 }
 
