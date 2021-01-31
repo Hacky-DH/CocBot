@@ -138,7 +138,7 @@ int CScript::SelectSolider(int type)
 	const int maxY = 597;
 	int x, y;
 	CString str;
-	SetPath("Pic\\attack\\solider");
+	SetPath("\\Pic\\attack\\solider");
 	str.Format("solider_%d.bmp|solider_%d_2.bmp", type, type);
 	int loc_ret = ImageLoc(25, 570, 833, 650, str, 0.95, x, y);
 	long x1 = 0, x2 = 0;
@@ -158,11 +158,9 @@ int CScript::SelectSolider(int type)
 				armyNum = armyNum.Right(armyNum.GetLength() - 1);
 			}
 		}
-		dm.MoveTo(x, 608);
-		Delay(20);
-		dm.LeftClick();
+		LeftClick(x, 610, 20);
 		solider_num = _ttoi(armyNum);
-		if (solider_num == 0)solider_num = 1;
+		if (solider_num == 0) solider_num = 1;
 	}
 	else
 	{
@@ -2497,7 +2495,7 @@ int CScript::ControlTroophs()
 		LootRecord[SwitchNo].NowTroophs <= _ttoi(coc.getSets("MaxTroophs")))
 		return 0;
 
-	SetLog(_T("½µ±­"), true, REDCOLOR, false);
+	SetLog(_T("×Ô¶¯½µ±­"), true, REDCOLOR, false);
 	LeftClick(63, 610, 200);// µã»÷½ø¹¥°´Å¥
 	Delay(2000);
 	LeftClick(675, 413, 200);// µã»÷ËÑË÷°´Å¥
@@ -2531,7 +2529,6 @@ int CScript::ControlTroophs()
 	} while (x.lVal < 0);
 	Delay(100);
 
-	//287, 611
 	for (int i = 1; i <= 17; i++)
 	{
 		if (SelectSolider(i) != 0)
