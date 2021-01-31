@@ -2479,16 +2479,12 @@ int CScript::StartCoc()
 
 int CScript::StopCoc()
 {
-	CString cocVer, str;
+	CString str;
 	str.Format("%d", AppCocID);
 	char buffer[128] = { 0 };
-	GetPrivateProfileString("Version", str, "", buffer, 128, coc.GetCurrentPath() + "CocVersion.ini");
-	cocVer = buffer;
-	using namespace std;
-	vector<string> vstr;
-	_split(cocVer.GetBuffer(), vstr, "/");
-	cocVer.ReleaseBuffer();
-	adbCloseApp(vstr[0].c_str());
+	GetPrivateProfileString("version", str, "", buffer, 128,
+		coc.GetCurrentPath() + "CocVersion.ini");
+	adbCloseApp(buffer);
 	SetLog("Í£Ö¹²¿Âä³åÍ»", true, BLUECOLOR, false);
 	return 0;
 }
@@ -2816,11 +2812,29 @@ int CScript::adbRunApp(CString packageNameAndClassName)
 }
 
 
-int CScript::adbCloseApp(CString packageName)
+int CScript::adbCloseApp(CString packageNameAndClassName)
 {
-	CString buffer = "am force-stop ";
-	buffer += packageName;
-	adbCmd(buffer);
+	CString str;
+	vector<CString> vstr;
+	Split(packageNameAndClassName, vstr, "/");
+	CString packageName = vstr[0];
+	TRACE("adbCloseApp packageName %s\n", packageName);
+	switch (AppPlayerType)
+	{
+	case APP_PLAYER_BLUESTACKS:
+		str = "am force-stop ";
+		str += packageName;
+		adbCmd(str);
+		break;
+	case APP_PLAYER_LIGHTING:
+		str.Format("\\dnconsole.exe killapp --index %d --packagename %s",
+			AppPlayerIndex, packageName);
+		adb.start(appPlayerInstallDir + str);
+		adb.stop();
+		break;
+	default:
+		break;
+	}
 	return 0;
 }
 

@@ -185,7 +185,7 @@ public://功能函数
 	/*adb 启动应用*/
 	int adbRunApp(CString packageNameAndClassName);
 	/*adb 关闭应用*/
-	int adbCloseApp(CString packageName);
+	int adbCloseApp(CString packageNameAndClassName);
 	/*统计*/
 	int Statistics();
 	/*捐兵点击*/
