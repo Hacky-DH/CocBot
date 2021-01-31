@@ -35,8 +35,8 @@ void _split(const std::string& s, std::vector<std::string>& v, const std::string
 	}
 	if (pos1 != s.length())
 		v[index] = s.substr(pos1, pos2 - pos1);
-	index++;
 }
+
 void Split(const CString& s, vector<CString>&v, const CString& c)
 {
 	int cout = 0;
@@ -47,13 +47,11 @@ void Split(const CString& s, vector<CString>&v, const CString& c)
 	pos1 = 0;
 	while (-1 != pos2)
 	{
-		//v.push_back(s.substr(pos1, pos2 - pos1));
 		cout++;
 		pos1 = pos2 + clen;
 		pos2 = s.Find(c, pos1);
 	}
 	if (pos1 != s.GetLength())
-		//v.push_back(s.substr(pos1));
 		cout++;
 	//*¼Ó½øÈ¥
 	pos2 = s.Find(c);
@@ -62,14 +60,12 @@ void Split(const CString& s, vector<CString>&v, const CString& c)
 	int index = 0;
 	while (-1 != pos2)
 	{
-		v[index] = s.Mid(pos1, pos2 - pos1);
-		index++;
+		v[index++] = s.Mid(pos1, pos2 - pos1);
 		pos1 = pos2 + clen;
 		pos2 = s.Find(c, pos1);
 	}
 	if (pos1 != s.GetLength())
-		v[index] = s.Mid(pos1, pos2 - pos1);
-	index++;
+		v[index] = s.Mid(pos1, s.GetLength() - pos1);
 }
 
  int GetNetTime(char*res,unsigned int nLen)
