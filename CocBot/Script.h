@@ -75,7 +75,7 @@ public://功能函数
 	//随机延迟
 	void DelayRandTime(unsigned long minDeaySeconds, unsigned long maxDelaySeconds);
 	//鼠标左键单击
-	void LeftClick(long x, long y);
+	void LeftClick(long x, long y, unsigned long delay=10);
 	int KillAdb();
 	/*选择士兵，返回数量*/
 	int SelectSolider(int type);

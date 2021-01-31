@@ -98,10 +98,10 @@ void CScript::DelayRandTime(unsigned long minDeaySeconds, unsigned long maxDelay
 }
 
 
-void CScript::LeftClick(long x, long y)
+void CScript::LeftClick(long x, long y, unsigned long delay)
 {
 	dm.MoveTo(x, y);
-	Delay(10);
+	Delay(delay);
 	dm.LeftClick();
 }
 
