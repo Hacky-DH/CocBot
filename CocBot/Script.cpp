@@ -2392,15 +2392,16 @@ int CScript::ConnectAppPlayer()
 			bindstr[2], bindstr[3], _ttoi(bindstr[4]));
 		if (IsBind == 1)
 		{
-			str = "成功连接模拟器";
 			BindInfo = 1;
+			str = "成功连接模拟器";
+			SetLog(str);
 		}
 		else
 		{
-			str.Format("连接模拟器失败 GetLastError=%ld", dm.GetLastError());
 			BindInfo = -1;
+			str.Format("连接模拟器失败 GetLastError=%ld", dm.GetLastError());
+			SetLog(str, true, REDCOLOR, true);
 		}
-		SetLog(str);
 	}
 	else
 	{
@@ -3082,8 +3083,6 @@ int CScript::RestartScript()
 	ret = ConnectAppPlayer();
 	if (ret == -1)
 	{
-		SetLog("链接模拟器失败!", true, RGB(0xff, 0x00, 0xff), true);
-
 		IsThreadRun = false;
 		return 0;
 	}
@@ -3338,8 +3337,6 @@ int CScript::script_init()
 	ret = ConnectAppPlayer();
 	if (ret == -1)
 	{
-		SetLog("链接模拟器失败!", true, RGB(0xff, 0x00, 0xff), true);
-
 		IsThreadRun = false;
 		return 0;
 	}
