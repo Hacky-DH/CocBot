@@ -619,7 +619,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	GetWindowRect(&rect_max);
 	CRect rc;
 	main_tab.GetClientRect(&rc);
-	TRACE("main tab (%d, %d, %d, %d)", rc.left, rc.top, rc.Width(), rc.Height());
+	TRACE("main tab (%d, %d, %d, %d)\n", rc.left, rc.top, rc.Width(), rc.Height());
 	//设置子对话框尺寸并移动到指定位置
 	rc += CPoint(12,40);
 	quickset.MoveWindow(&rc);

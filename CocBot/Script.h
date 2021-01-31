@@ -183,7 +183,7 @@ public://功能函数
 	/*adb 文字输入*/
 	int adbInputText(CString text);
 	/*adb 启动应用*/
-	int adbRunApp(CString bagNameAndClassName);
+	int adbRunApp(CString packageNameAndClassName);
 	/*adb 关闭应用*/
 	int adbCloseApp(CString packageName);
 	/*统计*/

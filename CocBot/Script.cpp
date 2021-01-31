@@ -2468,8 +2468,9 @@ int CScript::StartCoc()
 	CString cocVer, str;
 	str.Format("%d", AppCocID);
 	char buffer[128] = { 0 };
-	GetPrivateProfileString("version", str, "", buffer, 128,GetCurrentPath() + "CocVersion.ini");
-
+	GetPrivateProfileString("version", str, "", buffer, 128,
+		GetCurrentPath() + "CocVersion.ini");
+	TRACE("start coc %d %s\n", AppCocID, buffer);
 	adbRunApp(buffer);
 	SetLog("启动部落冲突", true, BLUECOLOR, false);
 	return 0;
@@ -2598,7 +2599,7 @@ int CScript::AddDict()
 	ret += dm.SetDict(DICT_COC_FISH, "cocfish.txt");      //设置字库 1
 	ret += dm.SetDict(DICT_COC_RESOURCE, "cocresource.bak");  //设置字库 2
 	ret += dm.SetDict(DICT_COC_TROOPTH, "cocbein.bak");      //设置字库 3
-									   //dm.SetDict(4, "OnlineTime.txt");   //设置字库 4
+			//dm.SetDict(4, "OnlineTime.txt");   //设置字库 4
 	ret += dm.SetDict(DICT_COC_DONATE, "coc_donate.txt");   //设置字库 5
 	ret += dm.SetDict(DICT_COC_ATTACKARMY, "AttackArmy.txt");
 	return ret;
@@ -2789,12 +2790,28 @@ int CScript::adbInputText(CString text)
 }
 
 
-int CScript::adbRunApp(CString bagNameAndClassName)
+int CScript::adbRunApp(CString packageNameAndClassName)
 {
-
-	CString str = "am start -n ";
-	str += bagNameAndClassName;
-	adbCmd(str);
+	CString str;
+	vector<CString> vstr;
+	switch (AppPlayerType)
+	{
+	case APP_PLAYER_BLUESTACKS:
+		str = "am start -n ";
+		str += packageNameAndClassName;
+		adbCmd(str);
+		break;
+	case APP_PLAYER_LIGHTING:
+		Split(packageNameAndClassName, vstr, "/");
+		str.Format("\\dnconsole.exe runapp --index %d --packagename %s",
+			AppPlayerIndex, vstr[0]);
+		TRACE("adbRunApp %s\n", str);
+		adb.start(appPlayerInstallDir + str);
+		adb.stop();
+		break;
+	default:
+		break;
+	}
 	return 0;
 }
 
@@ -3344,6 +3361,7 @@ int CScript::script_init()
 
 	//9.再打开coc
 	StartCoc();
+
 	//10.到这里初始化工作已经结束，接下是主线任务
 	return 1;
 }
