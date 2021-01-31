@@ -426,10 +426,9 @@ int CScript::RequestHelp()
 
 int CScript::CheckArmyNum(int* trainT)
 {
-
-
 	VARIANT x, y;
-	SetPath("Pic\\others");
+	// 点击查看军队
+	SetPath("\\Pic\\others");
 	int retx, rety;
 	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
 	if (retx > 0)
@@ -437,48 +436,38 @@ int CScript::CheckArmyNum(int* trainT)
 		LeftClick(retx, rety);
 	}
 	else {
-		SetLog("cant loc army view btn.");
-		return -1;
+		LeftClick(39, 517);
 	}
 	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
 	{
-		SetLog("cant loc close_view.bmp.");
+		SetLog("找不到 close_view.bmp.");
 		return -1;
 	}
 	CString armyStr, M_time, time_str, spells_str, clancastle_str, clan_spell, ret_str;
-	float ret = 0, NowCount = 0, AllCount = 1;
+	int NowCount = 0, AllCount = 1;
 	dm.UseDict(0);
 	Delay(200);
 	armyStr = dm.Ocr(75, 134, 155, 157, "ffffff-050505", 0.85);
-	if (armyStr.GetLength() <= 0) armyStr = "0/240";
-	using namespace std;
-	vector<string> vstr;
-	_split(armyStr.GetBuffer(), vstr, "/");
-	armyStr.ReleaseBuffer();
-	vstr.size() == 2 ? AllCount = _ttoi(vstr[1].c_str()) : AllCount = 240;
-	NowCount = _ttoi(vstr[0].c_str());
-	AllCount > 0 ? ret = ((float)NowCount * 100) / (float)AllCount : ret = 0.0;
-
+	if (armyStr.IsEmpty())
+		armyStr.Format("0/%d", army_capacity);
+	vector<CString> vstr;
+	Split(armyStr, vstr, "/");
+	AllCount = vstr.size() == 2 ?  _ttoi(vstr[1]) : army_capacity;
+	NowCount = _ttoi(vstr[0]);
+	float ret = AllCount > 0 ? (((float)NowCount * 100) / (float)AllCount) : 0.0;
 	LootRecord[SwitchNo].ArmyRet = ret;
-	int pos = 0;
-	pos = (int)ret;
-	if (pos > 100)
-	{
-		pos = 0;
-	}
+	int pos = ret > 100 ? 0 : (int)ret;
 	if (pProgress) pProgress->SetPos(pos);
 	M_time = dm.Ocr(730, 137, 831, 153, "ffffff-050505", 0.85);
 	spells_str = dm.Ocr(75, 283, 125, 302, "ffffff-050505", 0.85);
 	clancastle_str = dm.Ocr(184, 436, 238, 456, "ffffff-050505", 0.85);
 	clan_spell = dm.Ocr(522, 433, 560, 452, "ffffff-050505", 0.85);
 	dm.FindPic(730, 137, 831, 153, "minutes_1.bmp|minutes_1.bmp", "0f0f0f", 0.9, 0, &x, &y);
-	if (M_time.GetLength() <= 0)
+	if (M_time.IsEmpty())
 	{
-		time_str = "0";
+		 M_time = time_str = "0";
 	}
-
-	x.lVal > 0 ? M_time += _T("分钟") : M_time += "秒";
-
+	M_time += x.lVal > 0 ?  _T("分钟") : _T("秒");
 	if (M_time.Find(_T("分钟")) != -1)
 	{
 		time_str = M_time.Left(M_time.Find(_T("分钟")));
@@ -491,31 +480,27 @@ int CScript::CheckArmyNum(int* trainT)
 		}
 	}
 	*trainT = _ttoi(time_str);
-	ret_str.Format("%f", ret);
-	ret_str += "%";
-	SetLog(_T("[兵营人口]" + armyStr + "(" + ret_str + ")[造兵时间]" + M_time), true, RGB(0x00, 0x00, 0xff), false);
-	SetLog("[法术] " + spells_str + " [部落援军] " + clancastle_str + " [部落法术] " + clan_spell, true, RGB(0x00, 0x00, 0xff), false);
+	ret_str.Format("[兵营人口] %s(%0.2f%%) [造兵时间]%s", armyStr, ret, M_time);
+	SetLog(ret_str, true, BLUECOLOR, false);
+	ret_str.Format("[法术] %s [部落援军] %s [部落法术] %s", spells_str, clancastle_str, clan_spell);
+	SetLog(ret_str, true, BLUECOLOR, false);
 	if (_ttoi(coc.getSets("RequestArmy")) == 1)
 	{
 		RequestHelp();
 		Delay(100);
-
 	}
-	SetPath("Pic\\others\\");
+	SetPath("\\Pic\\others\\");
 	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, true))
 	{
-		SetLog("cant loc close_view.bmp.");
+		SetLog("找不到 close_view.bmp.");
 		return -1;
 	}
-	if (ret >= _ttoi(coc.getSets("MinTroopRet")))
+	ImageLoc(797, 75, 835, 110, "close_view.bmp", 0.95, retx, rety);
+	if (retx > 0)
 	{
-		return 1;
+		LeftClick(retx, rety);
 	}
-	else
-	{
-		return 0;
-
-	}
+	return ret >= _ttoi(coc.getSets("MinTroopRet")) ? 1 : 0;
 }
 
 
@@ -3409,15 +3394,12 @@ int CScript::script_main()
 	if (false == IsThreadRun) return 0;
 	//检测主屏幕
 	if (WaitForMainScreen() < 0) return -1;
-
 	//造兵
 	if (trainTime == 0 && LootRecord[SwitchNo].ArmyRet <= 95)
 	{
 		SetLog("补兵", true, BLUECOLOR, false);
 		MakeArmy();
 	}
-
-
 	if (false == IsThreadRun) return 0;
 	//随机延迟
 	DelayRandTime(15, 60);
