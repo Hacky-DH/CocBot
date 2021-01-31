@@ -358,17 +358,17 @@ int CScript::WaitForMainScreen()
 		{
 			ClearAdvirtisment();
 		}
-
 		dm.SetPath(_T("\\Pic\\others\\checkMainScreen"));
-		dm.FindMultiColor(12, 5, 837, 51, "3abded-0f0f0f", "30|-1|37bfed-0f0f0f,786|7|fff655-0f0f0f,796|9|ffec22-0f0f0f", 1.0, 0, &x, &y);
+		dm.FindMultiColor(12, 5, 837, 51, "3abded-0f0f0f",
+			"30|-1|37bfed-0f0f0f,786|7|fff655-0f0f0f,796|9|ffec22-0f0f0f",
+			1.0, 0, &x, &y);
 		//成功
 		if (x.lVal > 0)
 		{
 			return 1;
 		}
-
-		showStr.Format("加载村庄中,请等待：%ds", 60 - waitTime);
-		if (waitTime % 5 == 0)
+		showStr.Format("加载村庄中,请等待：%ds", 300 - waitTime);
+		if (waitTime % 10 == 0)
 		{
 			checkScreenError();
 			SetLog(showStr, true, BLUECOLOR, false);
@@ -377,14 +377,13 @@ int CScript::WaitForMainScreen()
 		{
 			SetLog(showStr, false, BLUECOLOR, false);
 		}
-		if (waitTime >= 60)
+		if (waitTime >= 300)
 		{
 			scriptInfo = ShouldRestart;
 			SetLog(_T("未发现村庄，尝试重启"), true, REDCOLOR, true);
 			return -1;
 		}
 		waitTime++;
-
 		Delay(1000);
 	} while (IsThreadRun);
 	return -1;
@@ -2944,7 +2943,8 @@ int CScript::checkScreenError()
 	}
 	//close red x
 	const int x1 = 563, y1 = 3, x2 = 846, y2 = 301;
-	dm.FindMultiColor(x1, y1, x2, y2, "ff8d95-050505", "12|1|ff8d95-050505,21|1|ff8d95-050505,11|11|ffffff-050505,12|11|ffffff-050505,-1|21|ed1115-050505,24|20|eb1115-050505", 0.9, 0, &x, &y);
+	dm.FindMultiColor(x1, y1, x2, y2, "ff8d95-050505",
+		"12|1|ff8d95-050505,21|1|ff8d95-050505,11|11|ffffff-050505,12|11|ffffff-050505,-1|21|ed1115-050505,24|20|eb1115-050505", 0.9, 0, &x, &y);
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
@@ -2952,7 +2952,8 @@ int CScript::checkScreenError()
 		dm.LeftClick();
 	}
 	//船
-	dm.FindMultiColor(490, 3, 802, 222, "612028-080808", "0|1|602028-080808,-1|3|5d1e26-080808,-1|5|5c1c24-080808,-1|6|5b1c24-080808", 0.9, 0, &x, &y);
+	dm.FindMultiColor(490, 3, 802, 222,
+		"612028-080808", "0|1|602028-080808,-1|3|5d1e26-080808,-1|5|5c1c24-080808,-1|6|5b1c24-080808", 0.9, 0, &x, &y);
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
@@ -2960,7 +2961,8 @@ int CScript::checkScreenError()
 		dm.LeftClick();
 	}
 	//回营
-	dm.FindMultiColor(12, 560, 112, 650, "eeebd6-030706", "67|-2|f1f2d9-030706,17|2|832b18-030706,56|8|c44e2d-030706,31|24|ffad8f-051312,48|22|ffc0a1-051312", 0.9, 0, &x, &y);
+	dm.FindMultiColor(12, 560, 112, 650,
+		"eeebd6-030706", "67|-2|f1f2d9-030706,17|2|832b18-030706,56|8|c44e2d-030706,31|24|ffad8f-051312,48|22|ffc0a1-051312", 0.9, 0, &x, &y);
 	if (x.lVal > 0)
 	{
 		dm.MoveTo(x.lVal, y.lVal);
