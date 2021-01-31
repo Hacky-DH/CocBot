@@ -347,7 +347,9 @@ void CGameInfo::InitlizeDetail()
 	StartDarkElixir = 0;
 	ArmyRet = 0;
 }
-long CGameInfo::SetStartResource(long _in_StartGold, long _in_StartElixir, long _in_StartDarkElixir, long _in_StartTroophs)
+
+long CGameInfo::SetStartResource(long _in_StartGold, long _in_StartElixir,
+	long _in_StartDarkElixir, long _in_StartTroophs)
 {
 	CString strDay, strH;
 	CTime tm;
@@ -362,10 +364,10 @@ long CGameInfo::SetStartResource(long _in_StartGold, long _in_StartElixir, long 
 		StartDarkElixir = _in_StartDarkElixir;
 		StartTroophs = _in_StartTroophs;
 
-
-		ntime = _ttoi(strDay) * 24 * 60 + _ttoi(strH.Left(2)) * 60 + _ttoi(strH.Mid(3, 2));
+		ntime = _ttoi(strDay) * 24 * 60 + _ttoi(strH.Left(2)) * 60
+			+ _ttoi(strH.Mid(3, 2));
 		StartTime = ntime;
-		if (StartGold*StartElixir != 0)
+		if (StartGold * StartElixir != 0)
 		{
 			IsFirstRecord = false;
 			IsRecordSuccess = true;
@@ -373,17 +375,15 @@ long CGameInfo::SetStartResource(long _in_StartGold, long _in_StartElixir, long 
 		}
 		else
 		{
-
 			IsFirstRecord = true;
 			return 0;
 		}
-
-
 	}
-
 	return 1;
 }
-long CGameInfo::SetNowResource(long _in_NowGold, long _in_NowElixir, long _in_NowDarkElixir, long _in_NowTroophs)
+
+long CGameInfo::SetNowResource(long _in_NowGold, long _in_NowElixir,
+	long _in_NowDarkElixir, long _in_NowTroophs)
 {
 	NowGold = _in_NowGold;
 	NowElixir = _in_NowElixir;
@@ -399,15 +399,17 @@ long CGameInfo::SetNowResource(long _in_NowGold, long _in_NowElixir, long _in_No
 	strDay = tm.Format("%d");
 	strH = tm.Format("%X");
 	long ntime = 0;
-	ntime = _ttoi(strDay) * 24 * 60 + _ttoi(strH.Left(2)) * 60 + _ttoi(strH.Mid(3, 2));
+	ntime = _ttoi(strDay) * 24 * 60 + _ttoi(strH.Left(2)) * 60
+		+ _ttoi(strH.Mid(3, 2));
 	NowTime = ntime;
 	RunTime = NowTime - StartTime;
-	if (NowGold*NowElixir != 0)
+	if (NowGold * NowElixir != 0)
 	{
 		return 1;
 	}
 	return 0;
 }
+
 long CGameInfo::GetLootGold()
 {
 	return LootGold;
