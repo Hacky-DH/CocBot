@@ -2838,7 +2838,8 @@ int CScript::Statistics()
 {
 	GetResource();
 	if (hParennt == NULL) return -1;
-	::SendMessage(hParennt, TH_STASTICS, (WPARAM)&LootRecord[SwitchNo], AppPlayerIndex * 3 + SwitchNo);
+	::SendMessage(hParennt, TH_STASTICS, (WPARAM)&LootRecord[SwitchNo],
+		AppPlayerIndex * 3 + SwitchNo);
 	return 0;
 }
 
