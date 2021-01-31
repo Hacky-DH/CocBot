@@ -2493,26 +2493,25 @@ int CScript::StopCoc()
 
 int CScript::ControlTroophs()
 {
-	if (_ttoi(coc.getSets("ControlTroophs")) == 0 || LootRecord[SwitchNo].NowTroophs <= _ttoi(coc.getSets("MaxTroophs"))) return 0;
-
+	if (_ttoi(coc.getSets("ControlTroophs")) == 0 || 
+		LootRecord[SwitchNo].NowTroophs <= _ttoi(coc.getSets("MaxTroophs")))
+		return 0;
 
 	SetLog(_T("降杯"), true, REDCOLOR, false);
-	dm.MoveTo(59, 601);
+	dm.MoveTo(63, 610);
 	Delay(200);
-	dm.LeftClick();
+	dm.LeftClick(); // 点击进攻按钮
 	Delay(2000);
-	dm.MoveTo(218, 515);
+	dm.MoveTo(675, 413);
+	Delay(200);
+	dm.LeftClick(); // 点击搜索按钮
 	Delay(200);
 
-	dm.LeftClick();
-	Delay(200);
 	VARIANT x, y;
 	int search_i = 0;
 	long SearchCount = 0;
 	CString str1, str2, str3, G_gold, G_water, G_oil, SearchCount_str;
-
 	long SearchWait = _ttoi(coc.getSets("SearchWait")) * 5;
-
 	SearchCount++;
 	search_i = 0;
 	do
@@ -2521,13 +2520,14 @@ int CScript::ControlTroophs()
 		{
 			return 0;
 		}
-		dm.FindMultiColor(702, 481, 840, 544, "f0b028-0f0f0f", "71|-4|f0b028-0f0f0f,3|31|d84d00-0f0f0f,87|34|d84800-0f0f0f", 0.9, 0, &x, &y);
+		dm.FindMultiColor(702, 481, 840, 544, 
+			"f0b028-0f0f0f", "71|-4|f0b028-0f0f0f,3|31|d84d00-0f0f0f,87|34|d84800-0f0f0f",
+			0.9, 0, &x, &y);
 		if (search_i >= SearchWait)
 		{
 			SetLog(_T("卡白云时间过长！尝试重新启动"), true, REDCOLOR, false);
 			StopCoc();
 			scriptInfo = ShouldRestart;
-			//IsThreadRun = false;
 			return 0;
 		}
 		search_i = search_i + 1;
