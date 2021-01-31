@@ -217,7 +217,7 @@ int CScript::SelectHero(int type)
 	const int maxY = 597;
 	int x, y;
 	CString str;
-	SetPath("Pic\\attack\\king\\");
+	SetPath("\\Pic\\attack\\king\\");
 	str.Format("king_%d.bmp", type);
 	ImageLoc(25, 570, 833, 650, str, 0.95, x, y);
 	if (x > 0)
@@ -225,10 +225,7 @@ int CScript::SelectHero(int type)
 		LeftClick(x, y);
 		return 1;
 	}
-	else
-	{
-		return 0;
-	}
+	return 0;
 }
 
 int CScript::ImageLoc(long x1, long y1, long x2, long y2, const char* file, double sim, int&ret_x, int&ret_y)
