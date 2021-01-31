@@ -3069,33 +3069,26 @@ int CScript::RestartScript()
 	//2.
 	scriptInfo = SCRIPT_STATE_IN_RUN;
 	//3.先解绑窗口，再把之前创建的对象释放了
-	TRACE("3.先解绑窗口，再把之前创建的对象释放了");
 	dm.UnBindWindow();
 	dm.ReleaseDispatch();
 	dm = NULL;
-	//4.重新创建一个
-	TRACE("4.创建大漠对象");
+	//4.重新创建一个大漠对象
 	if (false == CreateDm())
 	{
 		IsThreadRun = false;
 		AfxMessageBox(_T("启动失败，请检查插件是否注册！"), MB_OK);
 	}
 	//5..检测插件版本
-	TRACE("5..检测插件版本");
 	if (dm.Ver() != DM_VER_5)
 	{
-
 		IsThreadRun = false;
 		AfxMessageBox(_T("启动失败，插件版本不正确，请检查插件是否注册！"), MB_OK);
 		return 0;
 	}
 	//6..设置错误提示
-	TRACE("6..设置错误提示");
 	dm.SetShowErrorMsg(_ttoi(coc.getSets("SetShowErrorMsg")));
 	Delay(500);
-
 	//7..绑定模拟器
-	TRACE("7..绑定模拟器");
 	ret = SetBindHwnd();
 	if (ret <= 0)
 	{
@@ -3112,17 +3105,14 @@ int CScript::RestartScript()
 	if (ret == -2)
 	{
 		SetLog("请检查模拟器是否打开!", true, RGB(0xff, 0x00, 0xff), true);
-
 		IsThreadRun = false;
 		return 0;
 	}
-	Delay(5000);
-	TRACE("8..添加字库");
+	Delay(3000);
 	//8..添加字库
 	AddDict();
 	//9.
 	StartCoc();
-
 	return 1;
 }
 
@@ -3493,9 +3483,7 @@ static unsigned EntryScript(LPVOID pParam)
 		}
 		//判断脚本是否需要停止，如果不需要，则进入下一轮循环
 	} while (script_info->IsThreadRun);
-
 	return 1;
-
 }
 
 CScript*  StartOneScript(CScript *script_info, int index, const char* configFile)
