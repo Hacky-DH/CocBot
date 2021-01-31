@@ -2401,6 +2401,7 @@ int CScript::ConnectAppPlayer()
 			BindInfo = -1;
 			str.Format("Á¬½ÓÄ£ÄâÆ÷Ê§°Ü GetLastError=%ld", dm.GetLastError());
 			SetLog(str, true, REDCOLOR, true);
+			AfxMessageBox(str, MB_OK);
 		}
 	}
 	else
