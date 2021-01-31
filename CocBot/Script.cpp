@@ -1999,10 +1999,12 @@ void CScript::CollectResource()
 {
 	SetLog("收集资源", true, BLUECOLOR, false);
 	VARIANT x, y;
-
-	for (int s = 1; s < 3; s++)
+	// 点一次就可以收集所有的了
+	for (int s = 1; s < 2; s++)
 	{
-		dm.FindMultiColor(74, 51, 734, 603, "d8dcb8-050808", "15|1|d8dcb8-050808, 5|10|403048, 8|11|4b3854-050808, -3|13|b8c088,16|13|b8c088-050505", 0.9, 0, &x, &y);
+		dm.FindMultiColor(74, 51, 734, 603, "d8dcb8-050808",
+			"15|1|d8dcb8-050808, 5|10|403048, 8|11|4b3854-050808, -3|13|b8c088,16|13|b8c088-050505",
+			0.9, 0, &x, &y);
 		if (x.lVal > 0)
 		{
 			dm.MoveTo(x.lVal, y.lVal);
@@ -2013,10 +2015,12 @@ void CScript::CollectResource()
 		Delay(60);
 	}
 	Delay(500);
-	for (int s = 1; s < 3; s++)
+	for (int s = 1; s < 2; s++)
 	{
 		//dm.FindPic(75, 41, 680, 528, "gold.bmp", "0f0f0f", 0.9, 0, &x, &y);
-		dm.FindMultiColor(74, 51, 734, 603, "d6dcb8-050808", "16|2|d0dbb8-050808,6|4|f031d8-080808,9|4|ef35df-090909,5|9|d653c8-090909,7|10|df58d0-090909", 0.9, 0, &x, &y);
+		dm.FindMultiColor(74, 51, 734, 603, "d6dcb8-050808", 
+			"16|2|d0dbb8-050808,6|4|f031d8-080808,9|4|ef35df-090909,5|9|d653c8-090909,7|10|df58d0-090909",
+			0.9, 0, &x, &y);
 		if (x.lVal > 0)
 		{
 			dm.MoveTo(x.lVal, y.lVal);
@@ -2027,10 +2031,12 @@ void CScript::CollectResource()
 		Delay(60);
 	}
 	Delay(500);
-	for (int s = 1; s < 3; s++)
+	for (int s = 1; s < 2; s++)
 	{
 		//dm.FindPic(75, 41, 680, 528, "darkelixir.bmp", "0f0f0f", 0.9, 0, &x, &y);
-		dm.FindMultiColor(74, 51, 734, 603, "d3dcb8-090909", "15|0|d4dcb8-090909,5|5|ffe848-090909,6|5|ffed48-090909,9|5|ffe418-090909", 0.9, 0, &x, &y);
+		dm.FindMultiColor(74, 51, 734, 603, "d3dcb8-090909", 
+			"15|0|d4dcb8-090909,5|5|ffe848-090909,6|5|ffed48-090909,9|5|ffe418-090909",
+			0.9, 0, &x, &y);
 		if (x.lVal > 0)
 		{
 			dm.MoveTo(x.lVal, y.lVal);
