@@ -2488,11 +2488,14 @@ int CScript::StopCoc()
 
 int CScript::ControlTroophs()
 {
-	if (_ttoi(coc.getSets("ControlTroophs")) == 0 || 
-		LootRecord[SwitchNo].NowTroophs <= _ttoi(coc.getSets("MaxTroophs")))
-		return 0;
+	long NowTroophs = LootRecord[SwitchNo].NowTroophs;
+	long MaxTroophs = _ttol(coc.getSets("MaxTroophs"));
+	if (_ttoi(coc.getSets("ControlTroophs")) == 0 || NowTroophs <= MaxTroophs)
+		return 1;
 
-	SetLog(_T("自动降杯"), true, REDCOLOR, false);
+	CString str;
+	str.Format("自动降杯（%d > %d）", NowTroophs, MaxTroophs);
+	SetLog(str, true, REDCOLOR, false);
 	LeftClick(63, 610, 200);// 点击进攻按钮
 	Delay(2000);
 	LeftClick(675, 413, 200);// 点击搜索按钮
@@ -2502,7 +2505,7 @@ int CScript::ControlTroophs()
 	int search_i = 0;
 	long SearchCount = 0;
 	CString str1, str2, str3, G_gold, G_water, G_oil, SearchCount_str;
-	long SearchWait = _ttoi(coc.getSets("SearchWait")) * 5;
+	long SearchWait = _ttol(coc.getSets("SearchWait")) * 5;
 	SearchCount++;
 	search_i = 0;
 	do
@@ -2526,14 +2529,19 @@ int CScript::ControlTroophs()
 	} while (x.lVal < 0);
 	Delay(100);
 
-	for (int i = 1; i <= 17; i++)
+	int i;
+	for (i = 1; i <= 3; i++)
 	{
-		if (SelectSolider(i) != 0)
+		if (SelectHero(i) != 0)
 		{
 			LeftClick(7, 305, 20); // 点击进攻位置，最做左面边缘
 			Delay(500);
 			break;
 		}
+	}
+	if (i > 3) {
+		SetLog("没有可用的英雄", true, REDCOLOR, false);
+		return 1;
 	}
 	LeftClick(54, 533, 20); // 结束战斗
 	Delay(1000);
