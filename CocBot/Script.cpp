@@ -2362,9 +2362,7 @@ int CScript::ConnectAppPlayer()
 {
 	int BindInfo = 0;
 	long IsBind = 0;
-
 	CString str;
-
 	CString bindstr[5] = { "" };
 	//****************** check and bind ****************//
 	switch (AppPlayerType)
@@ -2376,21 +2374,13 @@ int CScript::ConnectAppPlayer()
 		bindstr[2] = "windows";
 		bindstr[3] = "";
 		bindstr[4] = "0";
-
 		break;
 	case APP_PLAYER_LIGHTING:
-
-
-		SetLog(str);
 		bindstr[0] = "dx.graphic.opengl";
 		bindstr[1] = "windows";
 		bindstr[2] = "windows";
 		bindstr[3] = "";
 		bindstr[4] = "4";
-
-
-
-
 		break;
 	default:
 		BindInfo = -2;
@@ -2398,30 +2388,24 @@ int CScript::ConnectAppPlayer()
 	}
 	if (bindHwnd > 0)
 	{
-
-		IsBind = dm.BindWindowEx(bindHwnd, bindstr[0], bindstr[1], bindstr[2], bindstr[3], _ttoi(bindstr[4]));
-		str.Format("BindWindowEx=%ld", IsBind);
+		IsBind = dm.BindWindowEx(bindHwnd, bindstr[0], bindstr[1],
+			bindstr[2], bindstr[3], _ttoi(bindstr[4]));
 		if (IsBind == 1)
 		{
+			str = "成功连接模拟器";
 			BindInfo = 1;
-
 		}
 		else
 		{
-			str.Format("GetLastError=%ld", dm.GetLastError());
-			SetLog(str);
+			str.Format("连接模拟器失败 GetLastError=%ld", dm.GetLastError());
 			BindInfo = -1;
 		}
-
-
+		SetLog(str);
 	}
 	else
 	{
-
 		BindInfo = -2;//no hwnd
 	}
-
-
 	return BindInfo;//-1:Bind False ,-2,No Hwnd
 }
 
