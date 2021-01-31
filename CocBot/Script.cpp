@@ -2498,13 +2498,9 @@ int CScript::ControlTroophs()
 		return 0;
 
 	SetLog(_T("降杯"), true, REDCOLOR, false);
-	dm.MoveTo(63, 610);
-	Delay(200);
-	dm.LeftClick(); // 点击进攻按钮
+	LeftClick(63, 610, 200);// 点击进攻按钮
 	Delay(2000);
-	dm.MoveTo(675, 413);
-	Delay(200);
-	dm.LeftClick(); // 点击搜索按钮
+	LeftClick(675, 413, 200);// 点击搜索按钮
 	Delay(200);
 
 	VARIANT x, y;
@@ -2535,28 +2531,22 @@ int CScript::ControlTroophs()
 	} while (x.lVal < 0);
 	Delay(100);
 
+	//287, 611
 	for (int i = 1; i <= 17; i++)
 	{
 		if (SelectSolider(i) != 0)
 		{
-			dm.MoveTo(80, 338);
-			Delay(20);
-			dm.LeftClick();
+			LeftClick(7, 305, 20); // 点击进攻位置，最做左面边缘
+			Delay(500);
 			break;
 		}
 	}
+	LeftClick(54, 533, 20); // 结束战斗
 	Delay(1000);
-	dm.MoveTo(66, 530);
-	Delay(20);
-	dm.LeftClick();
-	Delay(2000);
-	dm.MoveTo(500, 396);
-	Delay(20);
-	dm.LeftClick();
-	Delay(200);
-	dm.MoveTo(427, 540);
-	Delay(2000);
-	dm.LeftClick();
+	LeftClick(515, 387, 20); // 确定
+	Delay(500);
+	LeftClick(426, 528, 20); // 回营
+	Delay(3000);
 	return 0;
 }
 
