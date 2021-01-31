@@ -572,28 +572,26 @@ int CScript::SpeedTrain()
 
 int CScript::MakeArmy()
 {
-	VARIANT x, y;
-	Delay(2000);
-	/*打开 训练界面*/
-	SetPath("Pic\\others\\");
 	int retx, rety;
+	VARIANT x, y;
+	// 打开训练界面
+	Delay(1000);
+	SetPath("\\Pic\\others");
 	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
 	if (retx > 0)
 	{
 		LeftClick(retx, rety);
 	}
 	else {
-		SetLog("cant loc army view btn.");
-		return -1;
+		LeftClick(39, 517);
 	}
-	/*等待界面打开*/
 	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
 	{
-		SetLog("cant loc army view.");
+		SetLog("找不到 close_view.bmp.");
 		return -1;
 	}
+	
 	unsigned int army_num[30] = { 0 };/*士兵数量*/
-
 	army_num[1] = _ttoi(coc.getSets("Barbarin"));
 	army_num[2] = _ttoi(coc.getSets("Archer"));
 	army_num[3] = _ttoi(coc.getSets("Giant"));
