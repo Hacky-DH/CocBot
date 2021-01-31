@@ -2969,14 +2969,12 @@ int CScript::LaunchAppPlayer(int wParam)
 			AfxMessageBox("PathFile not Exists");
 			IsThreadRun = false;
 		}
-
-
 		break;
 	default:
 		break;
 	}
 
-	SetLog("打开模拟器", true, RGB(0xff, 0x00, 0x00), false);
+	SetLog("打开模拟器", true, REDCOLOR, false);
 	return 1;
 }
 
@@ -2993,7 +2991,6 @@ int CScript::QuitAppPlayer(int wParam)
 	switch (AppPlayerType)
 	{
 	case  APP_PLAYER_BLUESTACKS:
-
 		process_name[0] = "HD-Agent.exe";
 		process_name[1] = "HD-BlockDevice.exe";
 		process_name[2] = "HD-Frontend.exe";
@@ -3009,32 +3006,26 @@ int CScript::QuitAppPlayer(int wParam)
 			{
 				ret += 1;
 			}
-
 		}
-
 		break;
 	case APP_PLAYER_LIGHTING:
 		if (PathFileExists(appPlayerInstallDir))
 		{
-
 			str.Format(" quit --index %d", wParam);
 			adb.start(appPlayerInstallDir + "\\dnconsole.exe" + str);
 			adb.stop();
 		}
 		else
 		{
-			AfxMessageBox("PathFile not Exists");
 			IsThreadRun = false;
 		}
 		str = adb.get_result();
 		if (str.GetLength() <= 4) return 0;
 		break;
-
 	default:
 		break;
 	}
-
-	SetLog("关闭模拟器", true, RGB(0xff, 0x00, 0x00), false);
+	SetLog("关闭模拟器", true, REDCOLOR, false);
 	return ret;
 }
 
@@ -3343,14 +3334,10 @@ int CScript::script_init()
 	}
 	if (ret == -2)
 	{
-		SetLog("请检查模拟器是否打开!", true, RGB(0xff, 0x00, 0xff), true);
-
+		SetLog("请检查模拟器是否打开!", true, REDCOLOR, true);
 		IsThreadRun = false;
 		return 0;
 	}
-
-
-
 
 	//8.添加字库
 	AddDict();
