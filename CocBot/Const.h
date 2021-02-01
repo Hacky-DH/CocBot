@@ -79,37 +79,50 @@ const LPCTSTR GRAND_WARDEN_COLOR2 = "9|1|ffd8b0-030f0f,-4|7|9e44b0-050f0f,16|9|a
 //DONATE
 const LPCTSTR EXTR_NEED_COLOR1 = "95c800-0F0F0F";
 const LPCTSTR EXTR_NEED_COLOR2 = "4|0|ffffff-050505,10|0|96c800-0F0F0F,1|3|88c002-0F0F0F,4|4|ffffff-050505";
+
 //军队编号
-#define BARBARIN  1
-#define ARCHER  2
-#define GIANT  3
-#define GOBLIN  4
-#define WALLBREAKER  5
-#define WIZARD  6
-#define BALLON  7
-#define HHEALER  8
-#define DRAGON  9
-#define PEKA  10
-#define BABYDRAGON  11
-#define MINIOR  12
-#define MINION  13
-#define HOGRIDER  14
-#define VALKYRIE  15
-#define GOLEM  16
-#define WITCH  17
-#define LAVAHOUND  18
-#define BOWLER  19
-//咒语编号
-#define LIGHTINGSPELL  1
-#define HEALINGSPELL  2
-#define RAGESPELL  3
-#define JUMPSPELL  4
-#define FREEZESPELL  5
-#define CLONESPELL  6
-#define POISON  7
-#define EARTHQUAKESPELL  8
-#define HASTESPELL  9
-#define SKELETONSPELL  10
+enum ARMY_INDEX :int {
+	BARBARIN = 1,
+	ARCHER,
+	GIANT,
+	GOBLIN,
+	WALLBREAKER,
+	BALLON,
+	WIZARD,
+	HHEALER,
+	DRAGON,
+	PEKA = 10,
+	BABYDRAGON,
+	MINIOR,
+	ELECTRO_DRAGON,
+	YETI,
+	MINION,
+	HOGRIDER,
+	VALKYRIE,
+	GOLEM,
+	WITCH,
+	LAVAHOUND=20,
+	BOWLER,
+	ICE_GOLEM,
+	HEAD_HUNTER
+};
+
+//法术编号
+enum SPELL_INDEX :int {
+	LIGHTING = 1,
+	HEALING,
+	RAGE,
+	JUMP,
+	FREEZE,
+	CLONE,
+	INVISIBILITY,
+	POISON,
+	EARTHQUAKE,
+	HASTE = 10,
+	SKELETON,
+	BAT
+};
+
 //模拟器相关
 //BlueStacks App Player
 #define APP_PLAYER_BLUESTACKS    0
