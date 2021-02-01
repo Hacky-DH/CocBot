@@ -125,6 +125,8 @@ void TabTrain::TotalInput()
 	TotalArmy += _ttoi(winText) * 10;
 	Miner.GetWindowTextA(winText);
 	TotalArmy += _ttoi(winText) * 6;
+	ElectroDragon.GetWindowTextA(winText);
+	TotalArmy += _ttoi(winText) * 30;
 	Yeti.GetWindowTextA(winText);
 	TotalArmy += _ttoi(winText) * 18;
 	Minion.GetWindowTextA(winText);
