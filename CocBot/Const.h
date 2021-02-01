@@ -153,6 +153,7 @@ const LPCTSTR ARMYNAME[]
 	"飞龙宝宝",
 	"掘地矿工",
 	"雷电飞龙",
+	"大雪怪",
 	"亡灵",
 	"野猪骑士",
 	"瓦基丽武神",
@@ -161,9 +162,11 @@ const LPCTSTR ARMYNAME[]
 	"熔岩猎犬",
 	"巨石投手",
 	"戈仑冰人",
+	"英雄猎手",
 	"随意",
 	"救命"
 };
+
 //常用颜色
 const COLORREF REDCOLOR =					RGB(0XFF, 0X00, 0X00);
 const COLORREF GREENCOLOR =					RGB(0X00, 0XFF, 0X00);
