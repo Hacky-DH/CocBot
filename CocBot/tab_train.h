@@ -6,10 +6,9 @@ class TabTrain : public CDialog
 	DECLARE_DYNAMIC(TabTrain)
 
 public:
-	TabTrain(CWnd* pParent = NULL);   // 标准构造函数
+	TabTrain(CWnd* pParent = NULL);
 	virtual ~TabTrain();
 
-// 对话框数据
 	enum { IDD = IDD_DIALOG_TRAIN };
 
 protected:
@@ -20,6 +19,7 @@ public:
 	CComboBox TrainArmyStyle;
 	CComboBox IsClearArmy;
 	CComboBox IsAddArmy;
+	CStatic AllCount;
 	CEdit Barbarin;
 	CEdit Archer;
 	CEdit Giant;
@@ -34,7 +34,6 @@ public:
 	CEdit Miner;
 	CEdit Minion;
 	CEdit HogRider;
-	// wushen
 	CEdit Valkyrie;
 	CEdit Golem;
 	CEdit Witch;
@@ -52,17 +51,19 @@ public:
 	CEdit SkeletonSpell;
 	// army train speed up
 	CButton IsSpeedUp;
-	// SpeedUp train
 	CEdit SpeedUpBegin;
-	// SpeedUp train
 	CEdit SpeedUpEnd;
-	CStatic AllCount;
+	CEdit ElectroDragon;
+	CEdit Yeti;
+	CEdit IceGolem;
+	CEdit Headhunter;
 private:
 	CString m_strLine;
 	CPoint m_ptOrigin;
 public:
-	afx_msg void OnEnChangeEdit1();
 	void TotalInput();
+	afx_msg void OnPaint();
+	afx_msg void OnEnChangeEdit1();
 	afx_msg void OnEnChangeEdit2();
 	afx_msg void OnEnChangeEdit3();
 	afx_msg void OnEnChangeEdit4();
@@ -81,5 +82,8 @@ public:
 	afx_msg void OnEnChangeEdit17();
 	afx_msg void OnEnChangeEdit18();
 	afx_msg void OnEnChangeEdit19();
-	afx_msg void OnPaint();
+	afx_msg void OnEnChangeEdit33();
+	afx_msg void OnEnChangeEdit32();
+	afx_msg void OnEnChangeEdit34();
+	afx_msg void OnEnChangeEdit35();
 };

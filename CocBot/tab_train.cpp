@@ -1,4 +1,4 @@
-// TabTrain.cpp : ÊµÏÖÎÄ¼ş
+ï»¿// TabTrain.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 
 
-// TabTrain ¶Ô»°¿ò
+// TabTrain å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(TabTrain, CDialog)
 
@@ -62,10 +62,15 @@ void TabTrain::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT30, SpeedUpBegin);
 	DDX_Control(pDX, IDC_EDIT31, SpeedUpEnd);
 	DDX_Control(pDX, IDC_AllCount, AllCount);
+	DDX_Control(pDX, IDC_EDIT33, ElectroDragon);
+	DDX_Control(pDX, IDC_EDIT32, Yeti);
+	DDX_Control(pDX, IDC_EDIT34, IceGolem);
+	DDX_Control(pDX, IDC_EDIT35, Headhunter);
 }
 
 
 BEGIN_MESSAGE_MAP(TabTrain, CDialog)
+	ON_WM_PAINT()
 	ON_EN_CHANGE(IDC_EDIT1, &TabTrain::OnEnChangeEdit1)
 	ON_EN_CHANGE(IDC_EDIT2, &TabTrain::OnEnChangeEdit2)
 	ON_EN_CHANGE(IDC_EDIT3, &TabTrain::OnEnChangeEdit3)
@@ -85,24 +90,11 @@ BEGIN_MESSAGE_MAP(TabTrain, CDialog)
 	ON_EN_CHANGE(IDC_EDIT17, &TabTrain::OnEnChangeEdit17)
 	ON_EN_CHANGE(IDC_EDIT18, &TabTrain::OnEnChangeEdit18)
 	ON_EN_CHANGE(IDC_EDIT19, &TabTrain::OnEnChangeEdit19)
-	ON_WM_PAINT()
+	ON_EN_CHANGE(IDC_EDIT33, &TabTrain::OnEnChangeEdit33)
+	ON_EN_CHANGE(IDC_EDIT32, &TabTrain::OnEnChangeEdit32)
+	ON_EN_CHANGE(IDC_EDIT34, &TabTrain::OnEnChangeEdit34)
+	ON_EN_CHANGE(IDC_EDIT35, &TabTrain::OnEnChangeEdit35)
 END_MESSAGE_MAP()
-
-
-// TabTrain ÏûÏ¢´¦Àí³ÌĞò
-
-
-
-void TabTrain::OnEnChangeEdit1()
-{
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
-	TotalInput();
-}
 
 
 void TabTrain::TotalInput()
@@ -111,271 +103,193 @@ void TabTrain::TotalInput()
 	int TotalArmy = 0;
 	Barbarin.GetWindowTextA(winText);
 	TotalArmy += _ttoi(winText);
-
 	Archer.GetWindowTextA(winText);
 	TotalArmy += _ttoi(winText);
 	Giant.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*5;
+	TotalArmy += _ttoi(winText) * 5;
 	Goblin.GetWindowTextA(winText);
 	TotalArmy += _ttoi(winText);
 	WallBreaker.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*2;
+	TotalArmy += _ttoi(winText) * 2;
 	Ballon.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*5;
+	TotalArmy += _ttoi(winText) * 5;
 	Wizard.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*4;
+	TotalArmy += _ttoi(winText) * 4;
 	Healer.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*14;
+	TotalArmy += _ttoi(winText) * 14;
 	Dragon.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*20;
+	TotalArmy += _ttoi(winText) * 20;
 	Peka.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*25;
+	TotalArmy += _ttoi(winText) * 25;
 	BabyDragon.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*10;
+	TotalArmy += _ttoi(winText) * 10;
 	Miner.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*5;
+	TotalArmy += _ttoi(winText) * 6;
+	Yeti.GetWindowTextA(winText);
+	TotalArmy += _ttoi(winText) * 18;
 	Minion.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*2;
+	TotalArmy += _ttoi(winText) * 2;
 	HogRider.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*5;
+	TotalArmy += _ttoi(winText) * 5;
 	Valkyrie.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*8;
+	TotalArmy += _ttoi(winText) * 8;
 	Golem.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*30;
+	TotalArmy += _ttoi(winText) * 30;
 	Witch.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*12;
+	TotalArmy += _ttoi(winText) * 12;
 	LavaHound.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*30;
+	TotalArmy += _ttoi(winText) * 30;
 	BowLer.GetWindowTextA(winText);
-	TotalArmy += _ttoi(winText)*6;
+	TotalArmy += _ttoi(winText) * 6;
+	IceGolem.GetWindowTextA(winText);
+	TotalArmy += _ttoi(winText) * 15;
+	Headhunter.GetWindowTextA(winText);
+	TotalArmy += _ttoi(winText) * 6;
+
 	winText.Format("%d", TotalArmy);
 	AllCount.SetWindowTextA(winText);
+}
+
+void TabTrain::OnEnChangeEdit1()
+{
+	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit2()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit3()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit4()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit5()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit6()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit7()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit8()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit9()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit10()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit11()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit12()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit13()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit14()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit15()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit16()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit17()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit18()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnEnChangeEdit19()
 {
-	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
-	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
-	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
-	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
-
-	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	TotalInput();
 }
 
 
 void TabTrain::OnPaint()
 {
-	CPaintDC dc(this); // device context for painting
-					   // TODO: ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂë
-					   // ²»Îª»æÍ¼ÏûÏ¢µ÷ÓÃ CDialog::OnPaint()
-	//CRect rect;
-	//GetClientRect(rect);
-	//dc.FillSolidRect(rect, RGB(0Xc0, 0Xc0, 0Xc0));
-	//dc.FillPath();
+	CPaintDC dc(this);
 }
+
+
+void TabTrain::OnEnChangeEdit33()
+{
+	TotalInput();//ç”µé¾™
+}
+
+
+void TabTrain::OnEnChangeEdit32()
+{
+	TotalInput();//é›ªæ€ª
+}
+
+
+void TabTrain::OnEnChangeEdit34()
+{
+	TotalInput();//å†°çŸ³
+}
+
+
+void TabTrain::OnEnChangeEdit35()
+{
+	TotalInput();//çŒæ‰‹
+}
+
