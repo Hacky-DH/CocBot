@@ -49,6 +49,8 @@ public:
 	CEdit EarthquakeSpell;
 	CEdit HasteSpell;
 	CEdit SkeletonSpell;
+	CEdit InvisibilitySpell;
+	CEdit BatSpell;
 	// army train speed up
 	CButton IsSpeedUp;
 	CEdit SpeedUpBegin;

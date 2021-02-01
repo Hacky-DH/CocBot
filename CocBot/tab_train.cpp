@@ -66,6 +66,8 @@ void TabTrain::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT32, Yeti);
 	DDX_Control(pDX, IDC_EDIT34, IceGolem);
 	DDX_Control(pDX, IDC_EDIT35, Headhunter);
+	DDX_Control(pDX, IDC_EDIT36, InvisibilitySpell);
+	DDX_Control(pDX, IDC_EDIT37, BatSpell);
 }
 
 

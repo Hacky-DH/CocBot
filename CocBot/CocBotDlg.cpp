@@ -218,6 +218,10 @@ void CcocBotDlg::SaveConfig(CString fileName)
 	SetConfig1("训练设置", "SpeedUpBegin", winText, fileName);
 	train.SpeedUpEnd.GetWindowText(winText);
 	SetConfig1("训练设置", "SpeedUpEnd", winText, fileName);
+	train.InvisibilitySpell.GetWindowText(winText);
+	SetConfig1("训练设置", "InvisibilitySpell", winText, fileName);
+	train.BatSpell.GetWindowText(winText);
+	SetConfig1("训练设置", "BatSpell", winText, fileName);
 	//3.搜索设置
 	pag3.MinTroopRet.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "MinTroopRet", winText, fileName);
@@ -422,6 +426,8 @@ void CcocBotDlg::UpdateWindowSet()
 	train.EarthquakeSpell.SetWindowText(script[0].coc.getSets("EarthquakeSpell"));
 	train.HasteSpell.SetWindowText(script[0].coc.getSets("HasteSpell"));
 	train.SkeletonSpell.SetWindowText(script[0].coc.getSets("SkeletonSpell"));
+	train.InvisibilitySpell.SetWindowText(script[0].coc.getSets("InvisibilitySpell"));
+	train.BatSpell.SetWindowText(script[0].coc.getSets("BatSpell"));
 	pag3.MinTroopRet.SetWindowText(script[0].coc.getSets("MinTroopRet"));
 	pag3.SearchMinGold.SetWindowText(script[0].coc.getSets("SearchMinGold"));
 	pag3.SearchMinElixir.SetWindowText(script[0].coc.getSets("SearchMinElixir"));
