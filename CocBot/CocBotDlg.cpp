@@ -604,7 +604,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	main_tab.InsertItem(8, TEXT("实时日志"));
 	main_tab.InsertItem(9, TEXT("关于"));
 	quickset.Create(IDD_DIALOG_QUICKSET, this);
-	pag2.Create(IDD_DIALOG2, this);
+	pag2.Create(IDD_DIALOG_TRAIN, this);
 	pag3.Create(IDD_DIALOG3, this);
 	pag4.Create(IDD_DIALOG4, this);
 	pag5.Create(IDD_DIALOG5, this);

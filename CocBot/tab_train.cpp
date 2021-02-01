@@ -1,29 +1,29 @@
-// page2.cpp : 实现文件
+// TabTrain.cpp : 实现文件
 //
 
 #include "stdafx.h"
 #include "cocBot.h"
-#include "page2.h"
+#include "tab_train.h"
 #include "afxdialogex.h"
 
 
-// page2 对话框
+// TabTrain 对话框
 
-IMPLEMENT_DYNAMIC(page2, CDialog)
+IMPLEMENT_DYNAMIC(TabTrain, CDialog)
 
-page2::page2(CWnd* pParent /*=NULL*/)
-	: CDialog(page2::IDD, pParent)
+TabTrain::TabTrain(CWnd* pParent /*=NULL*/)
+	: CDialog(TabTrain::IDD, pParent)
 	,m_strLine(_T(""))
 	,m_ptOrigin(0)
 {
 
 }
 
-page2::~page2()
+TabTrain::~TabTrain()
 {
 }
 
-void page2::DoDataExchange(CDataExchange* pDX)
+void TabTrain::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_COMBO1, TrainArmyStyle);
@@ -65,35 +65,35 @@ void page2::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(page2, CDialog)
-	ON_EN_CHANGE(IDC_EDIT1, &page2::OnEnChangeEdit1)
-	ON_EN_CHANGE(IDC_EDIT2, &page2::OnEnChangeEdit2)
-	ON_EN_CHANGE(IDC_EDIT3, &page2::OnEnChangeEdit3)
-	ON_EN_CHANGE(IDC_EDIT4, &page2::OnEnChangeEdit4)
-	ON_EN_CHANGE(IDC_EDIT5, &page2::OnEnChangeEdit5)
-	ON_EN_CHANGE(IDC_EDIT6, &page2::OnEnChangeEdit6)
-	ON_EN_CHANGE(IDC_EDIT7, &page2::OnEnChangeEdit7)
-	ON_EN_CHANGE(IDC_EDIT8, &page2::OnEnChangeEdit8)
-	ON_EN_CHANGE(IDC_EDIT9, &page2::OnEnChangeEdit9)
-	ON_EN_CHANGE(IDC_EDIT10, &page2::OnEnChangeEdit10)
-	ON_EN_CHANGE(IDC_EDIT11, &page2::OnEnChangeEdit11)
-	ON_EN_CHANGE(IDC_EDIT12, &page2::OnEnChangeEdit12)
-	ON_EN_CHANGE(IDC_EDIT13, &page2::OnEnChangeEdit13)
-	ON_EN_CHANGE(IDC_EDIT14, &page2::OnEnChangeEdit14)
-	ON_EN_CHANGE(IDC_EDIT15, &page2::OnEnChangeEdit15)
-	ON_EN_CHANGE(IDC_EDIT16, &page2::OnEnChangeEdit16)
-	ON_EN_CHANGE(IDC_EDIT17, &page2::OnEnChangeEdit17)
-	ON_EN_CHANGE(IDC_EDIT18, &page2::OnEnChangeEdit18)
-	ON_EN_CHANGE(IDC_EDIT19, &page2::OnEnChangeEdit19)
+BEGIN_MESSAGE_MAP(TabTrain, CDialog)
+	ON_EN_CHANGE(IDC_EDIT1, &TabTrain::OnEnChangeEdit1)
+	ON_EN_CHANGE(IDC_EDIT2, &TabTrain::OnEnChangeEdit2)
+	ON_EN_CHANGE(IDC_EDIT3, &TabTrain::OnEnChangeEdit3)
+	ON_EN_CHANGE(IDC_EDIT4, &TabTrain::OnEnChangeEdit4)
+	ON_EN_CHANGE(IDC_EDIT5, &TabTrain::OnEnChangeEdit5)
+	ON_EN_CHANGE(IDC_EDIT6, &TabTrain::OnEnChangeEdit6)
+	ON_EN_CHANGE(IDC_EDIT7, &TabTrain::OnEnChangeEdit7)
+	ON_EN_CHANGE(IDC_EDIT8, &TabTrain::OnEnChangeEdit8)
+	ON_EN_CHANGE(IDC_EDIT9, &TabTrain::OnEnChangeEdit9)
+	ON_EN_CHANGE(IDC_EDIT10, &TabTrain::OnEnChangeEdit10)
+	ON_EN_CHANGE(IDC_EDIT11, &TabTrain::OnEnChangeEdit11)
+	ON_EN_CHANGE(IDC_EDIT12, &TabTrain::OnEnChangeEdit12)
+	ON_EN_CHANGE(IDC_EDIT13, &TabTrain::OnEnChangeEdit13)
+	ON_EN_CHANGE(IDC_EDIT14, &TabTrain::OnEnChangeEdit14)
+	ON_EN_CHANGE(IDC_EDIT15, &TabTrain::OnEnChangeEdit15)
+	ON_EN_CHANGE(IDC_EDIT16, &TabTrain::OnEnChangeEdit16)
+	ON_EN_CHANGE(IDC_EDIT17, &TabTrain::OnEnChangeEdit17)
+	ON_EN_CHANGE(IDC_EDIT18, &TabTrain::OnEnChangeEdit18)
+	ON_EN_CHANGE(IDC_EDIT19, &TabTrain::OnEnChangeEdit19)
 	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 
-// page2 消息处理程序
+// TabTrain 消息处理程序
 
 
 
-void page2::OnEnChangeEdit1()
+void TabTrain::OnEnChangeEdit1()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -105,7 +105,7 @@ void page2::OnEnChangeEdit1()
 }
 
 
-void page2::TotalInput()
+void TabTrain::TotalInput()
 {
 	CString winText;
 	int TotalArmy = 0;
@@ -153,7 +153,7 @@ void page2::TotalInput()
 }
 
 
-void page2::OnEnChangeEdit2()
+void TabTrain::OnEnChangeEdit2()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -165,7 +165,7 @@ void page2::OnEnChangeEdit2()
 }
 
 
-void page2::OnEnChangeEdit3()
+void TabTrain::OnEnChangeEdit3()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -177,7 +177,7 @@ void page2::OnEnChangeEdit3()
 }
 
 
-void page2::OnEnChangeEdit4()
+void TabTrain::OnEnChangeEdit4()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -189,7 +189,7 @@ void page2::OnEnChangeEdit4()
 }
 
 
-void page2::OnEnChangeEdit5()
+void TabTrain::OnEnChangeEdit5()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -201,7 +201,7 @@ void page2::OnEnChangeEdit5()
 }
 
 
-void page2::OnEnChangeEdit6()
+void TabTrain::OnEnChangeEdit6()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -213,7 +213,7 @@ void page2::OnEnChangeEdit6()
 }
 
 
-void page2::OnEnChangeEdit7()
+void TabTrain::OnEnChangeEdit7()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -225,7 +225,7 @@ void page2::OnEnChangeEdit7()
 }
 
 
-void page2::OnEnChangeEdit8()
+void TabTrain::OnEnChangeEdit8()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -237,7 +237,7 @@ void page2::OnEnChangeEdit8()
 }
 
 
-void page2::OnEnChangeEdit9()
+void TabTrain::OnEnChangeEdit9()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -249,7 +249,7 @@ void page2::OnEnChangeEdit9()
 }
 
 
-void page2::OnEnChangeEdit10()
+void TabTrain::OnEnChangeEdit10()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -261,7 +261,7 @@ void page2::OnEnChangeEdit10()
 }
 
 
-void page2::OnEnChangeEdit11()
+void TabTrain::OnEnChangeEdit11()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -273,7 +273,7 @@ void page2::OnEnChangeEdit11()
 }
 
 
-void page2::OnEnChangeEdit12()
+void TabTrain::OnEnChangeEdit12()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -285,7 +285,7 @@ void page2::OnEnChangeEdit12()
 }
 
 
-void page2::OnEnChangeEdit13()
+void TabTrain::OnEnChangeEdit13()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -297,7 +297,7 @@ void page2::OnEnChangeEdit13()
 }
 
 
-void page2::OnEnChangeEdit14()
+void TabTrain::OnEnChangeEdit14()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -309,7 +309,7 @@ void page2::OnEnChangeEdit14()
 }
 
 
-void page2::OnEnChangeEdit15()
+void TabTrain::OnEnChangeEdit15()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -321,7 +321,7 @@ void page2::OnEnChangeEdit15()
 }
 
 
-void page2::OnEnChangeEdit16()
+void TabTrain::OnEnChangeEdit16()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -333,7 +333,7 @@ void page2::OnEnChangeEdit16()
 }
 
 
-void page2::OnEnChangeEdit17()
+void TabTrain::OnEnChangeEdit17()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -345,7 +345,7 @@ void page2::OnEnChangeEdit17()
 }
 
 
-void page2::OnEnChangeEdit18()
+void TabTrain::OnEnChangeEdit18()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -357,7 +357,7 @@ void page2::OnEnChangeEdit18()
 }
 
 
-void page2::OnEnChangeEdit19()
+void TabTrain::OnEnChangeEdit19()
 {
 	// TODO:  如果该控件是 RICHEDIT 控件，它将不
 	// 发送此通知，除非重写 CDialog::OnInitDialog()
@@ -369,7 +369,7 @@ void page2::OnEnChangeEdit19()
 }
 
 
-void page2::OnPaint()
+void TabTrain::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 					   // TODO: 在此处添加消息处理程序代码

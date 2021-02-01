@@ -1,19 +1,16 @@
 #pragma once
 #include "afxwin.h"
 
-
-// page2 对话框
-
-class page2 : public CDialog
+class TabTrain : public CDialog
 {
-	DECLARE_DYNAMIC(page2)
+	DECLARE_DYNAMIC(TabTrain)
 
 public:
-	page2(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~page2();
+	TabTrain(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~TabTrain();
 
 // 对话框数据
-	enum { IDD = IDD_DIALOG2 };
+	enum { IDD = IDD_DIALOG_TRAIN };
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持

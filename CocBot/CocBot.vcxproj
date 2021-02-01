@@ -218,7 +218,7 @@
     <ClInclude Include="lua_func.h" />
     <ClInclude Include="tab_quickset.h" />
     <ClInclude Include="page10.h" />
-    <ClInclude Include="page2.h" />
+    <ClInclude Include="tab_train.h" />
     <ClInclude Include="page3.h" />
     <ClInclude Include="page4.h" />
     <ClInclude Include="page5.h" />
@@ -245,7 +245,7 @@
     <ClCompile Include="lua_func.cpp" />
     <ClCompile Include="tab_quickset.cpp" />
     <ClCompile Include="page10.cpp" />
-    <ClCompile Include="page2.cpp" />
+    <ClCompile Include="tab_train.cpp" />
     <ClCompile Include="page3.cpp" />
     <ClCompile Include="page4.cpp" />
     <ClCompile Include="page5.cpp" />
