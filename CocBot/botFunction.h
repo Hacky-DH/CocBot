@@ -88,12 +88,12 @@ public:
 
 struct ArmyInfo
 {
-	unsigned int giant;
-	unsigned int babarin;
-	unsigned int archer;
-	unsigned int goblin;
-	unsigned int wallbreaker;
-	unsigned int wizard;
+	int giant;
+	int babarin;
+	int archer;
+	int goblin;
+	int wallbreaker;
+	int wizard;
 };
 
 

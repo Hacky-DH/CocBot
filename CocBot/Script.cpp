@@ -454,7 +454,7 @@ int CScript::CheckArmyNum(int* trainT)
 	Split(armyStr, vstr, "/");
 	AllCount = vstr.size() == 2 ?  _ttoi(vstr[1]) : army_capacity;
 	NowCount = _ttoi(vstr[0]);
-	float ret = AllCount > 0 ? (((float)NowCount * 100) / (float)AllCount) : 0.0;
+	float ret = AllCount > 0 ? (((float)NowCount * 100) / (float)AllCount) : 0.0f;
 	LootRecord[SwitchNo].ArmyRet = ret;
 	int pos = ret > 100 ? 0 : (int)ret;
 	if (pProgress) pProgress->SetPos(pos);
@@ -582,7 +582,8 @@ int CScript::MakeArmy()
 	{
 		LeftClick(retx, rety);
 	}
-	else {
+	else
+	{
 		LeftClick(39, 517);
 	}
 	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
@@ -591,7 +592,7 @@ int CScript::MakeArmy()
 		return -1;
 	}
 	//士兵数量
-	unsigned int purple_army_num[] = {
+	int purple_army_num[] = {
 		_ttoi(coc.getSets("Barbarin")),
 		_ttoi(coc.getSets("Archer")),
 		_ttoi(coc.getSets("Giant")),
@@ -607,7 +608,7 @@ int CScript::MakeArmy()
 		_ttoi(coc.getSets("ElectroDragon")),
 		_ttoi(coc.getSets("Yeti")),
 	};
-	unsigned int dark_army_num[] = {
+	int dark_army_num[] = {
 		_ttoi(coc.getSets("Minion")),
 		_ttoi(coc.getSets("HogRider")),
 		_ttoi(coc.getSets("Valkyrie")),
@@ -618,7 +619,7 @@ int CScript::MakeArmy()
 		_ttoi(coc.getSets("IceGolem")),
 		_ttoi(coc.getSets("Headhunter")),
 	};
-	unsigned int spell_num[] = { 
+	int spell_num[] = { 
 		_ttoi(coc.getSets("LightingSpell")),
 		_ttoi(coc.getSets("HealingSpell")),
 		_ttoi(coc.getSets("RageSpell")),
@@ -642,7 +643,7 @@ int CScript::MakeArmy()
 
 	unsigned int army_num[30] = { 0 };
 	/*打开训练页*/
-	SetPath("Pic\\others\\");
+	SetPath("\\Pic\\others\\");
 	ImageLoc(259, 82, 342, 109, "army_view_2.bmp", 0.95, retx, rety);
 	if (retx > 0)
 		LeftClick(retx, rety);
