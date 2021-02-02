@@ -590,44 +590,57 @@ int CScript::MakeArmy()
 		SetLog("找不到 close_view.bmp.");
 		return -1;
 	}
-	
-	unsigned int army_num[30] = { 0 };/*士兵数量*/
-	army_num[1] = _ttoi(coc.getSets("Barbarin"));
-	army_num[2] = _ttoi(coc.getSets("Archer"));
-	army_num[3] = _ttoi(coc.getSets("Giant"));
-	army_num[4] = _ttoi(coc.getSets("Goblin"));
-	army_num[5] = _ttoi(coc.getSets("WallBreaker"));
-	army_num[6] = _ttoi(coc.getSets("Ballon"));
-	army_num[7] = _ttoi(coc.getSets("Wizard"));
-	army_num[8] = _ttoi(coc.getSets("Healer"));
-	army_num[9] = _ttoi(coc.getSets("Dragon"));
-	army_num[10] = _ttoi(coc.getSets("Peka"));
-	army_num[11] = _ttoi(coc.getSets("BabyDragon"));
-	army_num[12] = _ttoi(coc.getSets("Miner"));
-	army_num[13] = _ttoi(coc.getSets("Minion"));//dark
-	army_num[14] = _ttoi(coc.getSets("HogRider"));
-	army_num[15] = _ttoi(coc.getSets("Valkyrie"));
-	army_num[16] = _ttoi(coc.getSets("Golem"));
-	army_num[17] = _ttoi(coc.getSets("Witch"));
-	army_num[18] = _ttoi(coc.getSets("LavaHound"));
-	army_num[19] = _ttoi(coc.getSets("BowLer"));
-	army_num[20] = _ttoi(coc.getSets("LightingSpell"));//spell
-	army_num[21] = _ttoi(coc.getSets("HealingSpell"));
-	army_num[22] = _ttoi(coc.getSets("RageSpell"));
-	army_num[23] = _ttoi(coc.getSets("JumpSpell"));
-	army_num[24] = _ttoi(coc.getSets("FreezeSpell"));
-	army_num[25] = _ttoi(coc.getSets("CloneSpell"));
-	army_num[26] = _ttoi(coc.getSets("PoisonSpell"));
-	army_num[27] = _ttoi(coc.getSets("EarthquakeSpell"));
-	army_num[28] = _ttoi(coc.getSets("HasteSpell"));
-	army_num[29] = _ttoi(coc.getSets("SkeletonSpell"));
+	//士兵数量
+	unsigned int purple_army_num[] = {
+		_ttoi(coc.getSets("Barbarin")),
+		_ttoi(coc.getSets("Archer")),
+		_ttoi(coc.getSets("Giant")),
+		_ttoi(coc.getSets("Goblin")),
+		_ttoi(coc.getSets("WallBreaker")),
+		_ttoi(coc.getSets("Ballon")),
+		_ttoi(coc.getSets("Wizard")),
+		_ttoi(coc.getSets("Healer")),
+		_ttoi(coc.getSets("Dragon")),
+		_ttoi(coc.getSets("Peka")),
+		_ttoi(coc.getSets("BabyDragon")),
+		_ttoi(coc.getSets("Miner")),
+		_ttoi(coc.getSets("ElectroDragon")),
+		_ttoi(coc.getSets("Yeti")),
+	};
+	unsigned int dark_army_num[] = {
+		_ttoi(coc.getSets("Minion")),
+		_ttoi(coc.getSets("HogRider")),
+		_ttoi(coc.getSets("Valkyrie")),
+		_ttoi(coc.getSets("Golem")),
+		_ttoi(coc.getSets("Witch")),
+		_ttoi(coc.getSets("LavaHound")),
+		_ttoi(coc.getSets("BowLer")),
+		_ttoi(coc.getSets("IceGolem")),
+		_ttoi(coc.getSets("Headhunter")),
+	};
+	unsigned int spell_num[] = { 
+		_ttoi(coc.getSets("LightingSpell")),
+		_ttoi(coc.getSets("HealingSpell")),
+		_ttoi(coc.getSets("RageSpell")),
+		_ttoi(coc.getSets("JumpSpell")),
+		_ttoi(coc.getSets("FreezeSpell")),
+		_ttoi(coc.getSets("CloneSpell")),
+		_ttoi(coc.getSets("InvisibilitySpell")),
+		_ttoi(coc.getSets("PoisonSpell")),
+		_ttoi(coc.getSets("EarthquakeSpell")),
+		_ttoi(coc.getSets("HasteSpell")),
+		_ttoi(coc.getSets("SkeletonSpell")),
+		_ttoi(coc.getSets("BatSpell")),
+	};
 	//**************造兵***************//
-	attackArmy.babarin = army_num[1];
-	attackArmy.archer = army_num[2];
-	attackArmy.giant = army_num[3];
-	attackArmy.goblin = army_num[4];
-	attackArmy.wallbreaker = army_num[5];
+	attackArmy.babarin = purple_army_num[0];
+	attackArmy.archer = purple_army_num[1];
+	attackArmy.giant = purple_army_num[2];
+	attackArmy.goblin = purple_army_num[3];
+	attackArmy.wallbreaker = purple_army_num[4];
+	attackArmy.wizard = purple_army_num[5];
 
+	unsigned int army_num[30] = { 0 };
 	/*打开训练页*/
 	SetPath("Pic\\others\\");
 	ImageLoc(259, 82, 342, 109, "army_view_2.bmp", 0.95, retx, rety);

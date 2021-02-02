@@ -85,14 +85,15 @@ public:
 	bool IsFirstRecord;
 	bool IsRecordSuccess;
 };
+
 struct ArmyInfo
 {
-	int giant;
-	int babarin;
-	int archer;
-	int goblin;
-	int wallbreaker;
-	int wizard;
+	unsigned int giant;
+	unsigned int babarin;
+	unsigned int archer;
+	unsigned int goblin;
+	unsigned int wallbreaker;
+	unsigned int wizard;
 };
 
 
