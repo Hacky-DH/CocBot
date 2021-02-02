@@ -366,11 +366,11 @@ int CScript::WaitForMainScreen()
 		if (waitTime % 10 == 0)
 		{
 			checkScreenError();
-			SetLog(showStr, true, BLUECOLOR, false);
+			SetLog(showStr, true, BLACKCOLOR, false);
 		}
 		else
 		{
-			SetLog(showStr, false, BLUECOLOR, false);
+			SetLog(showStr, false, BLACKCOLOR, false);
 		}
 		if (waitTime >= 300)
 		{
@@ -426,8 +426,8 @@ int CScript::RequestHelp()
 
 int CScript::CheckArmyNum(int* trainT)
 {
+	SetLog("查看军队情况", true, BLUECOLOR, false);
 	VARIANT x, y;
-	// 点击查看军队
 	SetPath("\\Pic\\others");
 	int retx, rety;
 	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
@@ -438,12 +438,13 @@ int CScript::CheckArmyNum(int* trainT)
 	else {
 		LeftClick(39, 517);
 	}
+	Delay(500);
 	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
 	{
-		SetLog("找不到 close_view.bmp.");
+		SetLog("找不到 close_view.bmp.", true, REDCOLOR);
 		return -1;
 	}
-	CString armyStr, M_time, time_str, spells_str, clancastle_str, clan_spell, ret_str;
+	CString armyStr, siege_str, M_time, time_str, spells_str, clancastle_str, clan_spell, clan_siege, ret_str;
 	int NowCount = 0, AllCount = 1;
 	dm.UseDict(0);
 	Delay(200);
@@ -459,9 +460,11 @@ int CScript::CheckArmyNum(int* trainT)
 	int pos = ret > 100 ? 0 : (int)ret;
 	if (pProgress) pProgress->SetPos(pos);
 	M_time = dm.Ocr(730, 137, 831, 153, "ffffff-050505", 0.85);
+	siege_str = dm.Ocr(674, 133, 709, 153, "ffffff-050505", 0.85);
 	spells_str = dm.Ocr(75, 283, 125, 302, "ffffff-050505", 0.85);
-	clancastle_str = dm.Ocr(184, 436, 238, 456, "ffffff-050505", 0.85);
-	clan_spell = dm.Ocr(522, 433, 560, 452, "ffffff-050505", 0.85);
+	clancastle_str = dm.Ocr(125, 435, 175, 456, "ffffff-050505", 0.85);
+	clan_spell = dm.Ocr(467, 431, 506, 450, "ffffff-050505", 0.85);
+	clan_siege = dm.Ocr(640, 429, 675, 449, "ffffff-050505", 0.85);
 	dm.FindPic(730, 137, 831, 153, "minutes_1.bmp|minutes_1.bmp", "0f0f0f", 0.9, 0, &x, &y);
 	if (M_time.IsEmpty())
 	{
@@ -480,10 +483,11 @@ int CScript::CheckArmyNum(int* trainT)
 		}
 	}
 	*trainT = _ttoi(time_str);
-	ret_str.Format("[兵营人口] %s(%0.2f%%) [造兵时间]%s", armyStr, ret, M_time);
-	SetLog(ret_str, true, BLUECOLOR, false);
-	ret_str.Format("[法术] %s [部落援军] %s [部落法术] %s", spells_str, clancastle_str, clan_spell);
-	SetLog(ret_str, true, BLUECOLOR, false);
+	ret_str.Format("[部队] %s(%0.2f%%) [造兵时间]%s [攻城机器] %s", armyStr, ret, M_time, siege_str);
+	SetLog(ret_str, true, BLACKCOLOR, false);
+	ret_str.Format("[法术] %s [部落援军] %s [部落法术] %s [部落攻城机器] %s", 
+		spells_str, clancastle_str, clan_spell, clan_siege);
+	SetLog(ret_str, true, BLACKCOLOR, false);
 	if (_ttoi(coc.getSets("RequestArmy")) == 1)
 	{
 		RequestHelp();
@@ -492,7 +496,7 @@ int CScript::CheckArmyNum(int* trainT)
 	SetPath("\\Pic\\others\\");
 	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, true))
 	{
-		SetLog("找不到 close_view.bmp.");
+		SetLog("找不到 close_view.bmp.", true, REDCOLOR);
 		return -1;
 	}
 	ImageLoc(797, 75, 835, 110, "close_view.bmp", 0.95, retx, rety);
@@ -574,7 +578,7 @@ int CScript::MakeArmy()
 {
 	int retx, rety;
 	VARIANT x, y;
-	// 打开训练界面
+	// 打开军队
 	Delay(1000);
 	SetPath("\\Pic\\others");
 	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
@@ -2999,7 +3003,7 @@ int CScript::LaunchAppPlayer(int wParam)
 		break;
 	}
 
-	SetLog("打开模拟器", true, REDCOLOR, false);
+	SetLog("打开模拟器", true, BLUECOLOR, false);
 	return 1;
 }
 
