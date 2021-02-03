@@ -709,19 +709,18 @@ int CScript::MakeArmy()
 		}
 		adbSwipe(798, 499, 50, 467);
 		Delay(1000);
-		for (int i = 13; i <= 19; i++)/*黑水兵*/
+		for (int i = 1; i <= 9; i++)//黑水兵
 		{
-			if (army_num[i] == 0)
+			if (dark_army_num[i] == 0)
 			{
 				continue;
 			}
-			pic_name.Format("solider_%d.bmp", i);
-			//dm.FindPic(21, 335, 839, 548, pic_name, "0f0f0f", 0.85, 0, &x, &y);
+			pic_name.Format("dark_solider_%d.bmp", i);
 			ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
 			if (retx > 0)
 			{
 				dm.MoveTo(retx, rety);
-				for (unsigned int j = 1; j <= army_num[i]; j++)
+				for (int j = 1; j <= dark_army_num[i]; j++)
 				{
 
 					Delay(50);
@@ -730,9 +729,8 @@ int CScript::MakeArmy()
 			}
 			else
 			{
-				SetLog("Not Find  " + pic_name, true, REDCOLOR, false);
+				SetLog("找不到  " + pic_name, true, REDCOLOR, false);
 			}
-
 			Delay(200);
 		}
 	}
