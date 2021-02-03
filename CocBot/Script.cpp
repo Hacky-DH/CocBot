@@ -362,7 +362,7 @@ int CScript::WaitForMainScreen()
 		{
 			return 1;
 		}
-		showStr.Format("加载村庄中,请等待：%ds", 300 - waitTime);
+		showStr.Format("加载村庄中,最长等待：%ds", 300 - waitTime);
 		if (waitTime % 10 == 0)
 		{
 			checkScreenError();
@@ -576,6 +576,7 @@ int CScript::SpeedTrain()
 
 int CScript::MakeArmy()
 {
+	SetLog("准备造兵");
 	int retx, rety;
 	VARIANT x, y;
 	//士兵数量
@@ -639,25 +640,18 @@ int CScript::MakeArmy()
 	{
 		LeftClick(39, 517);
 	}
-	Delay(500);
 	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
 	{
-		SetLog("找不到 close_view.bmp.");
+		SetLog("找不到 close_view.bmp.", true, REDCOLOR);
 		return -1;
 	}
 	//打开训练页
-	SetPath("\\Pic\\others\\");
 	ImageLoc(259, 82, 342, 109, "army_view_2.bmp", 0.95, retx, rety);
 	if (retx > 0)
 		LeftClick(retx, rety);
 	else
 		LeftClick(238, 100);
 	Delay(500);
-	if (WaitPic(259, 82, 342, 109, "army_view_2_click.bmp", 2000, true) != 1)
-	{
-		SetLog("找不到 army_view_2_click.bmp");
-		return -1;
-	}
 	dm.UseDict(0);
 	CString str, now, right;
 	int IsClear = _ttoi(coc.getSets("IsClearArmy"));
@@ -3370,6 +3364,8 @@ int CScript::script_main()
 	//资源搜集
 	CollectResource();
 	if (false == IsThreadRun) return 0;
+	MakeArmy();
+	return 0;
 	//杯段调整
 	ControlTroophs();
 	if (scriptInfo == ShouldRestart) return -1;
