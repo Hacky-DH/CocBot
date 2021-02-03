@@ -832,18 +832,12 @@ int CScript::MakeArmy()
 
 int CScript::adbCmd(CString strCmd)
 {
-
-	CString   strOut;
+	CString strOut;
 	const int max_size = 512;
 	char buffer[max_size] = { 0 };
-
-	using namespace std;
-	vector<string> vstr;
 	//这里确定模拟器种类，并获得对应参数
 	if (AppPlayerType == APP_PLAYER_LIGHTING)
 	{
-		//::SendMessage(hParennt, TH_UPDATA_APP_PLAYER_INFO, 0, 0);
-		//Delay(1000);
 		//雷电专用
 		adbCmd(AppPlayerIndex, strCmd);
 		return 0;
@@ -908,23 +902,21 @@ int CScript::adbCmd(int index, CString cmd)
 	adb.start(appPlayerInstallDir + "\\dnconsole.exe" + str);
 	adb.stop();
 	out = adb.get_result();
-	SetLog(out,true,RGB(0xff,0,0),true);
 	if (out.Find("error: device not found") >= 0)
 	{
-		SetLog(_T("error: device not found,try to kill adb.exe!"), true, RGB(0xff, 0x00, 0x00), true);
+		SetLog(_T("error: device not found,try to kill adb.exe!"), true, REDCOLOR, true);
 		if (KillAdb())
 		{
-			SetLog(_T("kill adb.exe is ok, try to restart adb server"), true, RGB(0xff, 0x00, 0x00), true);
+			SetLog(_T("kill adb.exe is ok, try to restart adb server"), true, REDCOLOR, true);
 		}
 		else
 		{
-			SetLog(_T("error:kill adb.exe 失败 请检查Adb 路径！ "), true, RGB(0xff, 0x00, 0x00), true);
+			SetLog(_T("error:kill adb.exe 失败 请检查Adb 路径！ "), true, REDCOLOR, true);
 		}
 		adb.start(appPlayerInstallDir + "\\dnconsole.exe" + str);
 		adb.stop();
 		out = adb.get_result();
 		SetLog(out);
-
 	}
 	return 0;
 }
@@ -2550,12 +2542,10 @@ int CScript::ZoomOut()
 	{
 		if (IsThreadRun == false)
 		{
-
 			return 0;
 		}
 		dm.KeyPress(40);
 		Delay(100);
-
 	}
 	adbSwipe(400, 100, 400, 600);
 	return 1;
