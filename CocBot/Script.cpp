@@ -578,23 +578,6 @@ int CScript::MakeArmy()
 {
 	int retx, rety;
 	VARIANT x, y;
-	// 打开军队
-	Delay(1000);
-	SetPath("\\Pic\\others");
-	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
-	if (retx > 0)
-	{
-		LeftClick(retx, rety);
-	}
-	else
-	{
-		LeftClick(39, 517);
-	}
-	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
-	{
-		SetLog("找不到 close_view.bmp.");
-		return -1;
-	}
 	//士兵数量
 	int purple_army_num[] = {
 		_ttoi(coc.getSets("Barbarin")),
@@ -644,80 +627,86 @@ int CScript::MakeArmy()
 	attackArmy.goblin = purple_army_num[3];
 	attackArmy.wallbreaker = purple_army_num[4];
 	attackArmy.wizard = purple_army_num[5];
-
-	unsigned int army_num[30] = { 0 };
-	/*打开训练页*/
+	// 打开军队
+	Delay(1000);
+	SetPath("\\Pic\\others");
+	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
+	if (retx > 0)
+	{
+		LeftClick(retx, rety);
+	}
+	else
+	{
+		LeftClick(39, 517);
+	}
+	Delay(500);
+	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
+	{
+		SetLog("找不到 close_view.bmp.");
+		return -1;
+	}
+	//打开训练页
 	SetPath("\\Pic\\others\\");
 	ImageLoc(259, 82, 342, 109, "army_view_2.bmp", 0.95, retx, rety);
 	if (retx > 0)
 		LeftClick(retx, rety);
 	else
-	{
-		SetLog("cant loc army_view btn.");
-		return -1;
-	}
+		LeftClick(238, 100);
+	Delay(500);
 	if (WaitPic(259, 82, 342, 109, "army_view_2_click.bmp", 2000, true) != 1)
 	{
-		SetLog("wait view 2 time out.");
+		SetLog("找不到 army_view_2_click.bmp");
 		return -1;
 	}
-	/*ocr*/
 	dm.UseDict(0);
 	CString str, now, right;
-	float NowCount = 0, AllCount = 1;
-	int IsClear = 0;
-	IsClear = _ttoi(coc.getSets("IsClearArmy"));
+	int IsClear = _ttoi(coc.getSets("IsClearArmy"));
 	str = dm.Ocr(43, 125, 128, 152, "ffffff-050505", 0.85);
-
 	now = str.Left(str.Find("/"));
 	right = str.Right(str.GetLength() - str.Find("/") - 1);
-	NowCount = _ttoi(now);
-	AllCount = _ttoi(right);
+	int NowCount = _ttoi(now);
+	int AllCount = _ttoi(right);
 	if (AllCount == 0)
 	{
 		AllCount = 1;
 	}
 	if (NowCount * 100 / AllCount >= _ttoi(coc.getSets("MinTroopRet")))
 	{
-		dm.MoveTo(814, 53);
-		Delay(20);
-		dm.LeftClick();
+		LeftClick(814, 95); // 关闭军队
 		checkScreenError();
 		return 1;
 	}
-	ClearArmy();
-
+	if (IsClear == 1)
+		ClearArmy();
 	int TrainArmyStyle = 0;
 	TrainArmyStyle = _ttoi(coc.getSets("TrainArmyStyle"));
 	CString pic_name;
+	unsigned int army_num[30] = { 0 };
 	if (TrainArmyStyle == 0)/*自定义造兵*/
 	{
-		SetPath("Pic\\others\\solider\\");
-		for (int i = 1; i <= 12; i++)
+		SetPath("\\Pic\\others\\solider\\");
+		for (int i = 1; i <= 14; i++)
 		{
-			if (army_num[i] == 0)/*无需此造兵*/
+			if (purple_army_num[i] == 0)//无需造此兵
 			{
 				continue;
 			}
-			pic_name.Format("solider_%d.bmp", i);
-			//dm.FindPic(21, 335, 839, 548, pic_name, "0f0f0f", 0.85, 0, &x, &y);
+			pic_name.Format("purple_solider_%d.bmp", i);
 			ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
 			if (retx > 0)
 			{
 				dm.MoveTo(retx, rety);
-				for (unsigned int j = 1; j <= army_num[i]; j++)
+				for (int j = 1; j <= purple_army_num[i]; j++)
 				{
-
 					Delay(50);
 					dm.LeftClick();
 				}
 			}
 			else
 			{
-				SetLog("Not Find  " + pic_name, true, REDCOLOR, false);
+				SetLog("找不到  " + pic_name, true, REDCOLOR, false);
 			}
 		}
-		//adbCmd("input swipe 798 499 50 467");
 		adbSwipe(798, 499, 50, 467);
 		Delay(1000);
 		for (int i = 13; i <= 19; i++)/*黑水兵*/
