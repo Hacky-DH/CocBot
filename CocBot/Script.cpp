@@ -646,12 +646,13 @@ int CScript::MakeArmy()
 		return -1;
 	}
 	//打开训练页
+	Delay(1000);
 	ImageLoc(259, 82, 342, 109, "army_view_2.bmp", 0.95, retx, rety);
 	if (retx > 0)
 		LeftClick(retx, rety);
 	else
 		LeftClick(238, 100);
-	Delay(500);
+	Delay(1000);
 	dm.UseDict(0);
 	CString str, now, right;
 	int IsClear = _ttoi(coc.getSets("IsClearArmy"));
@@ -667,7 +668,6 @@ int CScript::MakeArmy()
 	if (NowCount * 100 / AllCount >= _ttoi(coc.getSets("MinTroopRet")))
 	{
 		LeftClick(814, 95); // 关闭军队
-		checkScreenError();
 		return 1;
 	}
 	if (IsClear == 1)
