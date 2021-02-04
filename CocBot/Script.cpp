@@ -427,22 +427,17 @@ int CScript::RequestHelp()
 int CScript::CheckArmyNum(int* trainT)
 {
 	SetLog("查看军队情况", true, BLUECOLOR, false);
-	VARIANT x, y;
 	SetPath("\\Pic\\others");
 	int retx, rety;
-	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
-	if (retx > 0)
-	{
-		LeftClick(retx, rety);
-	}
-	else {
-		LeftClick(39, 517);
-	}
-	Delay(500);
-	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
-	{
-		SetLog("找不到 close_view.bmp.", true, REDCOLOR);
-		return -1;
+	while (true) {
+		Delay(500);
+		ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
+		if (retx > 0 && rety > 0)
+			LeftClick(retx, rety);
+		else
+			LeftClick(39, 517);
+		if (1 == WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
+			break;
 	}
 	CString armyStr, siege_str, M_time, time_str, spells_str, clancastle_str, clan_spell, clan_siege, ret_str;
 	int NowCount = 0, AllCount = 1;
@@ -465,6 +460,7 @@ int CScript::CheckArmyNum(int* trainT)
 	clancastle_str = dm.Ocr(125, 435, 175, 456, "ffffff-050505", 0.85);
 	clan_spell = dm.Ocr(467, 431, 506, 450, "ffffff-050505", 0.85);
 	clan_siege = dm.Ocr(640, 429, 675, 449, "ffffff-050505", 0.85);
+	VARIANT x, y;
 	dm.FindPic(730, 137, 831, 153, "minutes_1.bmp|minutes_1.bmp", "0f0f0f", 0.9, 0, &x, &y);
 	if (M_time.IsEmpty())
 	{
@@ -577,7 +573,6 @@ int CScript::MakeArmy()
 {
 	SetLog("准备造兵");
 	int retx, rety;
-	VARIANT x, y;
 	//士兵数量
 	int purple_army_num[] = {
 		_ttoi(coc.getSets("Barbarin")),
@@ -628,21 +623,16 @@ int CScript::MakeArmy()
 	attackArmy.wallbreaker = purple_army_num[4];
 	attackArmy.wizard = purple_army_num[5];
 	// 打开军队
-	Delay(1000);
 	SetPath("\\Pic\\others");
-	ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
-	if (retx > 0)
-	{
-		LeftClick(retx, rety);
-	}
-	else
-	{
-		LeftClick(39, 517);
-	}
-	if (1 != WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
-	{
-		SetLog("找不到 close_view.bmp.", true, REDCOLOR);
-		return -1;
+	while (true) {
+		Delay(500);
+		ImageLoc(19, 501, 60, 542, "army_view.bmp", 0.95, retx, rety);
+		if (retx > 0 && rety > 0)
+			LeftClick(retx, rety);
+		else
+			LeftClick(39, 517);
+		if (1 == WaitPic(797, 75, 835, 110, "close_view.bmp", 3000, false))
+			break;
 	}
 	//打开训练页
 	Delay(1000);
@@ -731,6 +721,7 @@ int CScript::MakeArmy()
 	{
 		SpeedTrain();
 	}
+	VARIANT x, y;
 	if (TrainArmyStyle >= 1)
 	{
 		dm.SetPath("\\Pic\\others");
