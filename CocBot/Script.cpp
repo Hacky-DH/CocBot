@@ -506,10 +506,12 @@ int CScript::CheckArmyNum(int* trainT)
 
 void CScript::ClearArmy()
 {
+	SetLog("准备强制清兵");
 	dm.UseDict(0);
 	CString str;
 	std::vector<CString> vstr;
-	int cur=-1, total;
+	int cur = -1, total, retx, rety;
+	SetPath("\\Pic\\others");
 	do
 	{
 		// 识别备用的兵的数量
@@ -522,11 +524,14 @@ void CScript::ClearArmy()
 		// 当前的兵数量减去总兵数的一半是要清理的数
 		cur = cur - total / 2;
 		if (cur > 0) {
-			str.Format("总兵数: %d，需要清兵: %d", total, cur);
-			SetLog(str, true, BLACKCOLOR, true);
 			for (int i = 0; i < cur; i++)
 			{
-				LeftClick(810, 170);
+				ImageLoc(797, 156, 830, 185, "clear_army.bmp", 0.95, retx, rety);
+				if (retx > 0 && rety > 0)
+					LeftClick(retx, rety);
+				else
+					break;
+				//LeftClick(810, 170);
 				Delay(100);
 			}
 		}
@@ -709,11 +714,11 @@ int CScript::MakeArmy()
 			Delay(500);
 		}
 	}
-	return 0;
 	if (_ttoi(coc.getSets("IsSpeedUp")) == 1)
 	{
 		SpeedTrain();
 	}
+	return 0;
 	VARIANT x, y;
 	if (TrainArmyStyle >= 1)
 	{
