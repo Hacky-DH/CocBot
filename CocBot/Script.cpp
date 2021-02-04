@@ -506,30 +506,31 @@ int CScript::CheckArmyNum(int* trainT)
 
 void CScript::ClearArmy()
 {
-	VARIANT x, y;
+	dm.UseDict(0);
+	CString str;
+	std::vector<CString> vstr;
+	int cur=-1, total;
 	do
 	{
-		dm.FindColor(18, 150, 833, 185, "de0306-0f0f0f", 1.0, 0, &x, &y);
-		if (x.lVal < 0)
-		{
-			Delay(500);
-		}
-		dm.FindColor(18, 150, 833, 185, "de0306-0f0f0f", 1.0, 0, &x, &y);
-		if (x.lVal < 0)
-		{
-			break;
-		}
-		else
-		{
-			dm.FindColor(18, 150, 833, 185, "de0306-0f0f0f", 1.0, 0, &x, &y);
-			dm.MoveTo(x.lVal, y.lVal);
-			for (int i = 0; i <= 10; i++)
+		// 识别备用的兵的数量
+		Delay(500);
+		str = dm.Ocr(44, 126, 114, 144, "ffffff-050505", 0.85);
+		Split(str, vstr, "/");
+		if (vstr.size() < 2) continue;
+		cur = _ttoi(vstr[0]);
+		total = _ttoi(vstr[1]);
+		// 当前的兵数量减去总兵数的一半是要清理的数
+		cur = cur - total / 2;
+		if (cur > 0) {
+			str.Format("总兵数: %d，需要清兵: %d", total, cur);
+			SetLog(str, true, BLACKCOLOR, true);
+			for (int i = 0; i < cur; i++)
 			{
-				Delay(50);
-				dm.LeftClick();
+				LeftClick(810, 170);
+				Delay(100);
 			}
 		}
-	} while (true);
+	} while (cur <= 0);
 	SetLog("完成强制清兵");
 }
 
@@ -571,7 +572,6 @@ int CScript::SpeedTrain()
 
 int CScript::MakeArmy()
 {
-	SetLog("准备造兵");
 	int retx, rety;
 	//士兵数量
 	int purple_army_num[] = {
@@ -643,13 +643,12 @@ int CScript::MakeArmy()
 		LeftClick(238, 100);
 	Delay(1000);
 	dm.UseDict(0);
-	CString str, now, right;
-	int IsClear = _ttoi(coc.getSets("IsClearArmy"));
-	str = dm.Ocr(43, 125, 128, 152, "ffffff-050505", 0.85);
-	now = str.Left(str.Find("/"));
-	right = str.Right(str.GetLength() - str.Find("/") - 1);
-	int NowCount = _ttoi(now);
-	int AllCount = _ttoi(right);
+	CString str;
+	std::vector<CString> vstr;
+	str = dm.Ocr(44, 126, 114, 144, "ffffff-050505", 0.85);
+	Split(str, vstr, "/");
+	int NowCount = _ttoi(vstr[0]);
+	int AllCount = _ttoi(vstr[1]);
 	if (AllCount == 0)
 	{
 		AllCount = 1;
@@ -659,8 +658,10 @@ int CScript::MakeArmy()
 		LeftClick(814, 95); // 关闭军队
 		return 1;
 	}
+	int IsClear = _ttoi(coc.getSets("IsClearArmy"));
 	if (IsClear == 1)
 		ClearArmy();
+	SetLog("准备造兵");
 	int TrainArmyStyle = 0;
 	TrainArmyStyle = _ttoi(coc.getSets("TrainArmyStyle"));
 	CString pic_name;
@@ -702,18 +703,17 @@ int CScript::MakeArmy()
 			ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
 			if (retx > 0)
 			{
-				dm.MoveTo(retx, rety);
 				for (int j = 1; j <= dark_army_num[i - 1]; j++)
 				{
-					Delay(50);
-					dm.LeftClick();
+					LeftClick(retx, rety);
+					Delay(150);
 				}
 			}
 			else
 			{
 				SetLog("找不到  " + pic_name, true, REDCOLOR, false);
 			}
-			Delay(200);
+			Delay(500);
 		}
 	}
 	return 0;
