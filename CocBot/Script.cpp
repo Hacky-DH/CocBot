@@ -538,10 +538,8 @@ void CScript::ClearArmy()
 int CScript::SpeedTrain()
 {
 	CString str_begin, str_end;
-	//pag2.SpeedUpBegin.GetWindowText(str_begin);
 	str_begin = coc.getSets("SpeedUpBegin");
-	str_end = coc.getSets("str_end");
-	//pag2.SpeedUpEnd.GetWindowText(str_end);
+	str_end = coc.getSets("SpeedUpEnd");
 	int nowh = _ttoi(coc.GetNowTime(3).Left(2));
 	if (nowh >= _ttoi(str_begin) && nowh <= _ttoi(str_end))
 	{
@@ -550,22 +548,17 @@ int CScript::SpeedTrain()
 		dm.FindPic(695, 262, 831, 328, "speed_1.bmp", "0f0f0f", 0.85, 0, &x, &y);
 		if (x.lVal > 0)
 		{
-			dm.MoveTo(x.lVal, y.lVal);
-			Delay(20);
-			dm.LeftClick();
+			LeftClick(x.lVal, y.lVal);
 			Delay(2500);
 		}
 		dm.FindPic(347, 372, 514, 454, "speed_2.bmp", "0f0f0f", 0.85, 0, &x, &y);
 		if (x.lVal > 0)
 		{
-			dm.MoveTo(x.lVal, y.lVal);
-			Delay(20);
-			dm.LeftClick();
+			LeftClick(x.lVal, y.lVal);
 			Delay(2500);
 			return 1;
 		}
 	}
-
 	return 0;
 }
 
