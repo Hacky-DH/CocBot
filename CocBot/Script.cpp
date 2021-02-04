@@ -529,11 +529,11 @@ void CScript::ClearArmy()
 			dm.MoveTo(x.lVal, y.lVal);
 			for (int i = 0; i <= 10; i++)
 			{
-				Delay(25);
+				Delay(50);
 				dm.LeftClick();
 			}
 		}
-	} while (x.lVal > 0);
+	} while (true);
 	SetLog("完成强制清兵");
 }
 
@@ -680,7 +680,7 @@ int CScript::MakeArmy()
 		SetPath("\\Pic\\others\\solider\\");
 		for (int i = 1; i <= 14; i++)
 		{
-			if (purple_army_num[i] == 0)//无需造此兵
+			if (purple_army_num[i - 1] == 0)//无需造此兵
 			{
 				continue;
 			}
@@ -688,23 +688,23 @@ int CScript::MakeArmy()
 			ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
 			if (retx > 0)
 			{
-				dm.MoveTo(retx, rety);
-				for (int j = 1; j <= purple_army_num[i]; j++)
+				for (int j = 1; j <= purple_army_num[i - 1]; j++)
 				{
-					Delay(50);
-					dm.LeftClick();
+					LeftClick(retx, rety);
+					Delay(150);
 				}
 			}
 			else
 			{
 				SetLog("找不到  " + pic_name, true, REDCOLOR, false);
 			}
+			Delay(500);
 		}
 		adbSwipe(798, 499, 50, 467);
 		Delay(1000);
 		for (int i = 1; i <= 9; i++)//黑水兵
 		{
-			if (dark_army_num[i] == 0)
+			if (dark_army_num[i - 1] == 0)
 			{
 				continue;
 			}
@@ -713,9 +713,8 @@ int CScript::MakeArmy()
 			if (retx > 0)
 			{
 				dm.MoveTo(retx, rety);
-				for (int j = 1; j <= dark_army_num[i]; j++)
+				for (int j = 1; j <= dark_army_num[i - 1]; j++)
 				{
-
 					Delay(50);
 					dm.LeftClick();
 				}
@@ -727,6 +726,7 @@ int CScript::MakeArmy()
 			Delay(200);
 		}
 	}
+	return 0;
 	if (_ttoi(coc.getSets("IsSpeedUp")) == 1)
 	{
 		SpeedTrain();
