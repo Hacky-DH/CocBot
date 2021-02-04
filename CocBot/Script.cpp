@@ -533,9 +533,8 @@ void CScript::ClearArmy()
 				dm.LeftClick();
 			}
 		}
-
-
 	} while (x.lVal > 0);
+	SetLog("完成强制清兵");
 }
 
 
