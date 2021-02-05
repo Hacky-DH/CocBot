@@ -663,7 +663,6 @@ int CScript::MakeArmy()
 	int TrainArmyStyle = 0;
 	TrainArmyStyle = _ttoi(coc.getSets("TrainArmyStyle"));
 	CString pic_name;
-	unsigned int army_num[30] = { 0 };
 	if (TrainArmyStyle == 0)/*自定义造兵*/
 	{
 		SetPath("\\Pic\\others\\solider\\");
@@ -710,6 +709,37 @@ int CScript::MakeArmy()
 			else
 			{
 				SetLog("找不到  " + pic_name, true, REDCOLOR, false);
+			}
+			Delay(500);
+		}
+		//打开 spell
+		SetPath("Pic\\others\\");
+		ImageLoc(445, 83, 559, 114, "army_view_3.bmp", 0.95, retx, rety);
+		if (retx > 0)
+			LeftClick(retx, rety);
+		else
+			LeftClick(387, 100);//548
+		Delay(1000);
+		SetPath("\\Pic\\others\\solider");
+		for (int i = 1; i <= 12; i++)
+		{
+			if (spell_num[i - 1] <= 0)
+			{
+				continue;
+			}
+			pic_name.Format("spell_%d.bmp", i);
+			ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
+			if (retx > 0)
+			{
+				for (int j = 1; j <= spell_num[i - 1]; j++)
+				{
+					LeftClick(retx, rety);
+					Delay(150);
+				}
+			}
+			else
+			{
+				//SetLog("找不到  " + pic_name, true, REDCOLOR, false);
 			}
 			Delay(500);
 		}
@@ -763,45 +793,7 @@ int CScript::MakeArmy()
 		}
 	}
 
-	/*打开 spell 页*/
-	SetPath("Pic\\others\\");
-	ImageLoc(445, 83, 559, 114, "army_view_3.bmp", 0.95, retx, rety);
-	if (retx > 0)
-		LeftClick(retx, rety);
-	else
-	{
-		SetLog("cant loc army_view 3 btn.");
-		return -1;
-	}
-	if (WaitPic(445, 83, 559, 114, "army_view_3_click.bmp", 2000, true) != 1)
-	{
-		SetLog("wait view 3 time out.");
-		return -1;
-	}
-	dm.SetPath("\\Pic\\others\\solider");
-	for (int i = 20; i <= 29; i++)/*make spell*/
-	{
-		if (army_num[i] == 0)
-		{
-			continue;
-		}
-		pic_name.Format("spell_%d.bmp", i - 19);
-		dm.FindPic(21, 335, 839, 548, pic_name, "0f0f0f", 0.85, 0, &x, &y);
-		if (army_num[i] != 0 && x.lVal > 0)
-		{
-			dm.MoveToEx(x.lVal, y.lVal, 5, 5);
-			for (unsigned int j = 1; j <= army_num[i]; j++)
-			{
-
-				Delay(50);
-				dm.LeftClick();
-			}
-		}
-		else
-		{
-			//SetLog("[r]Not Find  " + str);
-		}
-	}
+	
 
 	WaitPic(795, 72, 841, 116, "close_view.bmp", 2000, true);
 	Delay(1000);
