@@ -645,11 +645,14 @@ int CScript::MakeArmy()
 	std::vector<CString> vstr;
 	str = dm.Ocr(44, 126, 114, 144, "ffffff-050505", 0.85);
 	Split(str, vstr, "/");
-	int NowCount = _ttoi(vstr[0]);
-	int AllCount = _ttoi(vstr[1]);
-	if (AllCount == 0)
+	int NowCount = 0, AllCount = army_capacity * 2;
+	if (vstr.size() > 1) {
+		NowCount = _ttoi(vstr[0]);
+		AllCount = _ttoi(vstr[1]);
+	}
+	if (AllCount <= 0)
 	{
-		AllCount = 1;
+		AllCount = army_capacity * 2;
 	}
 	if (NowCount * 100 / AllCount >= _ttoi(coc.getSets("MinTroopRet")))
 	{
@@ -659,12 +662,12 @@ int CScript::MakeArmy()
 	int IsClear = _ttoi(coc.getSets("IsClearArmy"));
 	if (IsClear == 1)
 		ClearArmy();
-	SetLog("准备造兵");
 	int TrainArmyStyle = 0;
 	TrainArmyStyle = _ttoi(coc.getSets("TrainArmyStyle"));
 	CString pic_name;
-	if (TrainArmyStyle == 0)/*自定义造兵*/
+	if (TrainArmyStyle == 0)
 	{
+		SetLog("自定义造兵");
 		SetPath("\\Pic\\others\\solider\\");
 		for (int i = 1; i <= 14; i++)
 		{
@@ -688,7 +691,7 @@ int CScript::MakeArmy()
 			}
 			Delay(500);
 		}
-		adbSwipe(798, 499, 50, 467);
+		adbSwipe(800, 440, 200, 440); //向右拖拉
 		Delay(1000);
 		for (int i = 1; i <= 9; i++)//黑水兵
 		{
@@ -748,58 +751,81 @@ int CScript::MakeArmy()
 	{
 		SpeedTrain();
 	}
-	return 0;
-	VARIANT x, y;
 	if (TrainArmyStyle >= 1)
 	{
-		dm.SetPath("\\Pic\\others");
-		dm.MoveTo(697, 96);
-		Delay(20);
-		dm.LeftClick();
-		Delay(1500);
+		SetLog("一键训练");
+		SetPath("\\Pic\\others\\");
+		ImageLoc(636, 77, 781, 117, "army_view_5.bmp", 0.95, retx, rety);
+		if (retx > 0)
+			LeftClick(retx, rety);
+		else
+			LeftClick(710, 100);
+		Delay(1000);
 		switch (TrainArmyStyle)
 		{
 		case 1:
-			dm.FindPic(719, 304, 829, 346, "onekey_train_2.bmp", "0f0f0f", 0.85, 0, &x, &y);
-			if (x.lVal > 0)
+			ImageLoc(690, 239, 823, 340, "onekey_train.bmp", 0.80, retx, rety);
+			if (retx > 0)
 			{
-				dm.MoveTo(x.lVal, y.lVal);
-				Delay(20);
-				dm.LeftClick();
+				retx = 750;
+				rety = 310;
 			}
+			LeftClick(retx, rety);
 			break;
 		case 2:
-			dm.FindPic(719, 420, 828, 466, "onekey_train_2.bmp", "0f0f0f", 0.85, 0, &x, &y);
-			if (x.lVal > 0)
+			ImageLoc(708, 346, 823, 439, "onekey_train.bmp", 0.95, retx, rety);
+			if (retx > 0)
 			{
-				dm.MoveTo(x.lVal, y.lVal);
-				Delay(20);
-				dm.LeftClick();
+				retx = 750;
+				rety = 420;
 			}
+			LeftClick(retx, rety);
 			break;
 		case 3:
-			dm.FindPic(718, 538, 827, 577, "onekey_train_2.bmp", "0f0f0f", 0.85, 0, &x, &y);
-			if (x.lVal > 0)
+			ImageLoc(708, 454, 823, 550, "onekey_train.bmp", 0.95, retx, rety);
+			if (retx > 0)
 			{
-				dm.MoveTo(x.lVal, y.lVal);
-				Delay(20);
-				dm.LeftClick();
+				retx = 750;
+				rety = 520;
 			}
+			LeftClick(retx, rety);
+			break;
+		case 4:
+			adbSwipe(400, 580, 400, 100); //向上拖拉
+			Delay(1000);
+			ImageLoc(708, 300, 823, 370, "onekey_train.bmp", 0.95, retx, rety);
+			if (retx > 0)
+			{
+				retx = 750;
+				rety = 340;
+			}
+			LeftClick(retx, rety);
+			break;
+		case 5:
+			adbSwipe(400, 580, 400, 100); //向上拖拉
+			Delay(1000);
+			ImageLoc(708, 420, 823, 470, "onekey_train.bmp", 0.95, retx, rety);
+			if (retx > 0)
+			{
+				retx = 750;
+				rety = 450;
+			}
+			LeftClick(retx, rety);
+			break;
+		case 6:
+			adbSwipe(400, 580, 400, 100); //向上拖拉
+			Delay(1000);
+			ImageLoc(708, 530, 823, 580, "onekey_train.bmp", 0.95, retx, rety);
+			if (retx > 0)
+			{
+				retx = 750;
+				rety = 550;
+			}
+			LeftClick(retx, rety);
 			break;
 		}
-		if (x.lVal <= 0)
-		{
-			SetLog("error:bad one key train!", false, REDCOLOR, false);
-		}
 	}
-
-	
-
-	WaitPic(795, 72, 841, 116, "close_view.bmp", 2000, true);
-	Delay(1000);
-
-
-
+	LeftClick(814, 95); // 关闭军队
 	return 0;
 }
 
