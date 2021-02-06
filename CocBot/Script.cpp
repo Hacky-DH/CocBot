@@ -1857,7 +1857,7 @@ int CScript::SearchFish()
 	long SearchCount = 0;
 	long SearchMaxCount = 0;
 	int DeBugSearchShoot = 0;
-	CString str1, str2, str3, G_gold, G_water, G_oil, SearchCount_str;
+	CString str1, str2, str3, G_gold, G_water, G_oil;
 	CString showStr;
 	str1 = coc.getSets("SearchMinGold");
 	str2 = coc.getSets("SearchMinElixir");
@@ -1876,6 +1876,10 @@ int CScript::SearchFish()
 	do
 	{
 		SearchCount++;
+		if (SearchCount > SearchMaxCount) {
+			showStr.Format("ËÑË÷´ÎÊý³¬¹ý%d", SearchMaxCount);
+			return 0;
+		}
 		search_i = 0;
 		do
 		{
@@ -1900,9 +1904,9 @@ int CScript::SearchFish()
 		G_gold = dm.Ocr(46, 65, 121, 84, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.8);
 		G_water = dm.Ocr(44, 96, 121, 114, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.8);
 		G_oil = dm.Ocr(44, 117, 113, 145, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.8);
-		SearchCount_str.Format("No.[%ld] ½ð±Ò[%s] Ê¥Ë®[%s] ºÚÓÍ[%s]", SearchCount,
+		showStr.Format("No.[%ld] ½ð±Ò[%s] Ê¥Ë®[%s] ºÚÓÍ[%s]", SearchCount,
 			G_gold, G_water, G_oil);
-		SetLog(SearchCount_str, true, BLACKCOLOR, false);
+		SetLog(showStr, true, BLACKCOLOR, false);
 		if (SearchResult(T_gold, T_water, _ttoi(G_gold), _ttoi(G_water), type) > 0
 			&& _ttoi(G_oil) >= T_oil)
 		{
@@ -1924,8 +1928,8 @@ int CScript::SearchFish()
 				if (DeBugSearchShoot == 1)
 				{
 					dm.SetPath("\\Debug\\Search");
-					SearchCount_str.Format("%ld", SearchCount);
-					dm.Capture(0, 0, 840, 650, SearchCount_str + ".bmp");
+					showStr.Format("%ld", SearchCount);
+					dm.Capture(0, 0, 840, 650, showStr + ".bmp");
 				}
 				fight_value = 0;
 				dm.MoveTo(767, 517);
