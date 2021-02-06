@@ -50,4 +50,5 @@ public:
 	CEdit SearchMaxCount;
 	CButton IsWaitSpell;
 	afx_msg void OnPaint();
+	CButton OnlySearch;
 };

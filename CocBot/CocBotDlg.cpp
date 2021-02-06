@@ -264,6 +264,7 @@ void CcocBotDlg::SaveConfig(CString fileName)
 	SetConfig2("搜索设置", "XBowLevel", search.XBowLevel.GetCurSel(), fileName);
 	SetConfig2("搜索设置", "InfernoLevel", search.InfernoLevel.GetCurSel(), fileName);
 	SetConfig2("搜索设置", "EagleArtilleryLevel", search.EagleArtilleryLevel.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "OnlySearch", search.OnlySearch.GetCheck(), fileName);
 	//4.攻击设置
 	SetConfig2("攻击设置", "AttackSpeed", pag4.AttackSpeed.GetCurSel(), fileName);
 	SetConfig2("攻击设置", "AttackGird", pag4.AttackGird.GetCurSel(), fileName);
@@ -459,6 +460,7 @@ void CcocBotDlg::UpdateWindowSet()
 	search.XBowLevel.SetCurSel(_ttoi(script[0].coc.getSets("XBowLevel")));
 	search.InfernoLevel.SetCurSel(_ttoi(script[0].coc.getSets("InfernoLevel")));
 	search.EagleArtilleryLevel.SetCurSel(_ttoi(script[0].coc.getSets("EagleArtilleryLevel")));
+	search.OnlySearch.SetCheck(_ttoi(script[0].coc.getSets("OnlySearch")));
 	pag4.AttackSpeed.SetCurSel(_ttoi(script[0].coc.getSets("AttackSpeed")));//attackCount
 	pag4.attackCount.SetCurSel(_ttoi(script[0].coc.getSets("attackCount")));//AttackGird
 	pag4.AttackGird.SetCurSel(_ttoi(script[0].coc.getSets("AttackGird")));

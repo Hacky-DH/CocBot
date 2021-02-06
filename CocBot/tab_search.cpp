@@ -50,6 +50,7 @@ void TabSearch::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT5, SearchDelay);
 	DDX_Control(pDX, IDC_EDIT6, SearchWait);
 	DDX_Control(pDX, IDC_EDIT7, SearchMaxCount);
+	DDX_Control(pDX, IDC_CHECK_ONLY_SEARCH, OnlySearch);
 }
 
 
