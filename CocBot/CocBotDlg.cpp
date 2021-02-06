@@ -244,7 +244,7 @@ void CcocBotDlg::SaveConfig(CString fileName)
 	SetConfig2("搜索设置", "IsWaitBarbarinKing", search.IsWaitBarbarinKing.GetCheck(), fileName);
 	SetConfig2("搜索设置", "IsWaitGrandKing", search.IsWaitGrandKing.GetCheck(), fileName);
 	SetConfig2("搜索设置", "IsWaitArcherKing", search.IsWaitArcherKing.GetCheck(), fileName);
-	SetConfig2("搜索设置", "IsWaitClanCastleTroopsAndSpells", search.IsWaitClanCastleTroopsAndSpells.GetCheck(), fileName);
+	SetConfig2("搜索设置", "IsWaitClanCastleTroops", search.IsWaitClanCastleTroops.GetCheck(), fileName);
 	SetConfig2("搜索设置", "IsWaitSpell", search.IsWaitSpell.GetCheck(), fileName);
 	SetConfig2("搜索设置", "ArcherTower", search.ArcherTower.GetCheck(), fileName);
 	SetConfig2("搜索设置", "Mortar", search.Mortar.GetCheck(), fileName);
@@ -440,7 +440,7 @@ void CcocBotDlg::UpdateWindowSet()
 	search.IsWaitBarbarinKing.SetCheck(_ttoi(script[0].coc.getSets("IsWaitBarbarinKing")));
 	search.IsWaitArcherKing.SetCheck(_ttoi(script[0].coc.getSets("IsWaitArcherKing")));
 	search.IsWaitGrandKing.SetCheck(_ttoi(script[0].coc.getSets("IsWaitGrandKing")));
-	search.IsWaitClanCastleTroopsAndSpells.SetCheck(_ttoi(script[0].coc.getSets("IsWaitClanCastleTroopsAndSpells")));
+	search.IsWaitClanCastleTroops.SetCheck(_ttoi(script[0].coc.getSets("IsWaitClanCastleTroops")));
 	search.IsWaitSpell.SetCheck(_ttoi(script[0].coc.getSets("IsWaitSpell")));
 	search.ArcherTower.SetCheck(_ttoi(script[0].coc.getSets("ArcherTower")));
 	search.Mortar.SetCheck(_ttoi(script[0].coc.getSets("Mortar")));

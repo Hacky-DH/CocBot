@@ -22,7 +22,7 @@ public:
 	CButton IsWaitArcherKing;
 	// yongwang
 	CButton IsWaitGrandKing;
-	CButton IsWaitClanCastleTroopsAndSpells;
+	CButton IsWaitClanCastleTroops;
 	CEdit MinTroophs;
 	CEdit MaxTroophs;
 	CEdit SearchMinGold;

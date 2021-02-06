@@ -23,7 +23,8 @@ void TabSearch::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK1, IsWaitBarbarinKing);
 	DDX_Control(pDX, IDC_CHECK2, IsWaitArcherKing);
 	DDX_Control(pDX, IDC_CHECK3, IsWaitGrandKing);
-	DDX_Control(pDX, IDC_CHECK4, IsWaitClanCastleTroopsAndSpells);
+	DDX_Control(pDX, IDC_CHECK4, IsWaitClanCastleTroops);
+	DDX_Control(pDX, IDC_CHECK5, IsWaitSpell);
 	DDX_Control(pDX, IDC_EDIT8, MinTroophs);
 	DDX_Control(pDX, IDC_EDIT9, MaxTroophs);
 	DDX_Control(pDX, IDC_EDIT2, SearchMinGold);
@@ -49,7 +50,6 @@ void TabSearch::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT5, SearchDelay);
 	DDX_Control(pDX, IDC_EDIT6, SearchWait);
 	DDX_Control(pDX, IDC_EDIT7, SearchMaxCount);
-	DDX_Control(pDX, IDC_CHECK5, IsWaitSpell);
 }
 
 
