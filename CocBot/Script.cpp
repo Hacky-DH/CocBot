@@ -753,7 +753,8 @@ int CScript::MakeArmy()
 	}
 	if (TrainArmyStyle >= 1)
 	{
-		SetLog("Ò»¼üÑµÁ·");
+		str.Format("Ò»¼üÑµÁ·£¬Ê¹ÓÃÅäÖÃ%d", TrainArmyStyle);
+		SetLog(str);
 		SetPath("\\Pic\\others\\");
 		ImageLoc(636, 77, 781, 117, "army_view_5.bmp", 0.95, retx, rety);
 		if (retx > 0)
