@@ -1874,6 +1874,7 @@ int CScript::SearchFish()
 	type = _ttoi(coc.getSets("SearchType"));
 	long SearchDelay = _ttoi(coc.getSets("SearchDelay")) * 1000;
 	long SearchWait = _ttoi(coc.getSets("SearchWait")) * 5;
+	int OnlySearch = _ttoi(coc.getSets("OnlySearch"));
 	if (SearchWait / 5 < 20)
 	{
 		SearchWait = 20 * 5;
@@ -1917,6 +1918,11 @@ int CScript::SearchFish()
 		if (SearchResult(T_gold, T_water, _ttoi(G_gold), _ttoi(G_water), type) > 0
 			&& _ttoi(G_oil) >= T_oil)
 		{
+			if (OnlySearch == 1) {
+				Notify();
+				SetLog(_T("搜索到大鱼，手动进攻"), true, BLUECOLOR, false);
+				return 1;
+			}
 			if (CheckDeadbase() == 1)
 			{
 				fight_value = 1;
@@ -3147,6 +3153,12 @@ int CScript::Attack()
 	Ret = SearchFish();
 	if (Ret == 1)/*搜索成功*/
 	{
+		int OnlySearch = _ttoi(coc.getSets("OnlySearch"));
+		if (OnlySearch == 1) {
+			SetLog(_T("等待手动进攻完成，3分钟"), true, BLUECOLOR, false);
+			Delay(330000);
+			return WaitForReturnHome();
+		}
 		int AttackType = _ttoi(coc.getSets("AttackDeadbaseStyle"));
 		switch (AttackType)
 		{
