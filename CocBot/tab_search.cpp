@@ -4,8 +4,6 @@
 #include "afxdialogex.h"
 
 
-// TabSearch 对话框
-
 IMPLEMENT_DYNAMIC(TabSearch, CDialog)
 
 TabSearch::TabSearch(CWnd* pParent /*=NULL*/)
@@ -65,11 +63,5 @@ END_MESSAGE_MAP()
 
 void TabSearch::OnPaint()
 {
-	CPaintDC dc(this); // device context for painting
-					   // TODO: 在此处添加消息处理程序代码
-					   // 不为绘图消息调用 CDialog::OnPaint()
-	//CRect rect;
-	//GetClientRect(rect);
-	//dc.FillSolidRect(rect, RGB(0Xc0, 0Xc0, 0Xc0));
-	//dc.FillPath();
+	CPaintDC dc(this);
 }

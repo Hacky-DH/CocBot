@@ -2,17 +2,14 @@
 #include "afxwin.h"
 
 
-// TabSearch 对话框
-
 class TabSearch : public CDialog
 {
 	DECLARE_DYNAMIC(TabSearch)
 
 public:
-	TabSearch(CWnd* pParent = NULL);   // 标准构造函数
+	TabSearch(CWnd* pParent = NULL);
 	virtual ~TabSearch();
 
-// 对话框数据
 	enum { IDD = IDD_DIALOG_SEARCH };
 
 protected:
