@@ -1845,26 +1845,12 @@ int CScript::SearchResult(long InputGold, long IputElixir, long gold, long Elixi
 int CScript::SearchFish()
 {
 	SetLog(_T("搜鱼"), true, BLUECOLOR, false);
-	//进攻按钮
-	VARIANT x, y;
-	dm.MoveTo(59, 601);
-	Delay(200);
-	dm.LeftClick();
+	LeftClick(63, 610, 200);// 点击进攻按钮
 	Delay(2000);
-	//搜索按钮
-	dm.FindMultiColor(128, 476, 326, 563, "e85d0d-0a0800", "44|1|e75d0d-0a0800,105|-3|e55d0d-0a0800,-11|12|dd590d-0a0800,120|14|dd590d-0a0800", 0.95, 0, &x, &y);
-	if (x.lVal > 0)
-	{
-		dm.MoveTo(x.lVal, y.lVal);
-		Delay(200);
-		dm.LeftClick();
-	}
-	else
-	{
-		SetLog("error,can't find search button!", true, REDCOLOR, false);
-		return -1;
-	}
+	LeftClick(675, 413, 200);// 点击搜索按钮
 	Delay(200);
+
+	VARIANT x, y;
 	const int maxStrLen = 7;
 	int search_i = 0;
 	int type = 0;
@@ -3143,11 +3129,10 @@ int CScript::SwitchCoc()
 int CScript::Attack()
 {
 	int Ret = 0;
-	Delay(3000);
 	if (_ttoi(coc.getSets("Attack")) != 1) return 0;
-	SetLog("Attack");
+	Delay(2000);
 	MakeArmy();
-	Delay(3000);
+	Delay(2000);
 	if (IsThreadRun == false)  return 0;
 	Ret = SearchFish();
 	if (Ret == 1)/*搜索成功*/
@@ -3371,8 +3356,6 @@ int CScript::script_main()
 	//资源搜集
 	CollectResource();
 	if (false == IsThreadRun) return 0;
-	MakeArmy();
-	return 0;
 	//杯段调整
 	ControlTroophs();
 	if (scriptInfo == ShouldRestart) return -1;
