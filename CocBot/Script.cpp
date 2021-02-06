@@ -454,19 +454,18 @@ int CScript::CheckArmyNum(int* trainT)
 	LootRecord[SwitchNo].ArmyRet = ret;
 	int pos = ret > 100 ? 0 : (int)ret;
 	if (pProgress) pProgress->SetPos(pos);
-	M_time = dm.Ocr(730, 137, 831, 153, "ffffff-050505", 0.85);
+	M_time = dm.Ocr(470, 126, 580, 156, "ffffff-050505", 0.85);
 	siege_str = dm.Ocr(674, 133, 709, 153, "ffffff-050505", 0.85);
 	spells_str = dm.Ocr(75, 283, 125, 302, "ffffff-050505", 0.85);
 	clancastle_str = dm.Ocr(125, 435, 175, 456, "ffffff-050505", 0.85);
 	clan_spell = dm.Ocr(467, 431, 506, 450, "ffffff-050505", 0.85);
 	clan_siege = dm.Ocr(640, 429, 675, 449, "ffffff-050505", 0.85);
-	VARIANT x, y;
-	dm.FindPic(730, 137, 831, 153, "minutes_1.bmp|minutes_1.bmp", "0f0f0f", 0.9, 0, &x, &y);
+	ImageLoc(470, 126, 580, 156, "minutes_1.bmp", 0.8, retx, rety);
 	if (M_time.IsEmpty())
 	{
 		 M_time = time_str = "0";
 	}
-	M_time += x.lVal > 0 ?  _T("分钟") : _T("秒");
+	M_time += retx > 0 ?  _T("分钟") : _T("秒");
 	if (M_time.Find(_T("分钟")) != -1)
 	{
 		time_str = M_time.Left(M_time.Find(_T("分钟")));
@@ -479,7 +478,8 @@ int CScript::CheckArmyNum(int* trainT)
 		}
 	}
 	*trainT = _ttoi(time_str);
-	ret_str.Format("[部队] %s(%0.2f%%) [造兵时间]%s [攻城机器] %s", armyStr, ret, M_time, siege_str);
+	ret_str.Format("[部队] %s(%0.2f%%) [造兵时间]%s [攻城机器] %s",
+		armyStr, ret, M_time, siege_str);
 	SetLog(ret_str, true, BLACKCOLOR, false);
 	ret_str.Format("[法术] %s [部落援军] %s [部落法术] %s [部落攻城机器] %s", 
 		spells_str, clancastle_str, clan_spell, clan_siege);
