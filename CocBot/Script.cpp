@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Script.h"
+#include <mmsystem.h>
 #include "lua_func.h"
 #include "ImageLib.h"
 #define AVOID_ZERO(x) ((x)==0?1:(x))
@@ -27,6 +28,12 @@ CScript::~CScript()
 
 }
 
+
+void CScript::Notify() {
+	CString file = GetCurrentPath() + "\\notify.wav";
+	if (PathFileExists(file))
+		PlaySound(file, NULL, SND_FILENAME | SND_ASYNC);
+}
 
 long CScript::GetScriptState()
 {

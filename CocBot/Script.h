@@ -217,6 +217,7 @@ public://功能函数
 	int SetBindHwnd();
 	/*设置文件路径*/
 	void SetPath(const CString& path);
+	void Notify();
 };
 
 
