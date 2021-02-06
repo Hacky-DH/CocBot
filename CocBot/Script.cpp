@@ -510,15 +510,15 @@ void CScript::ClearArmy()
 	dm.UseDict(0);
 	CString str;
 	std::vector<CString> vstr;
-	int cur = -1, total, retx, rety;
+	int cur = 1, total, retx, rety;
 	SetPath("\\Pic\\others");
 	do
 	{
 		// 识别备用的兵的数量
-		Delay(500);
+		Delay(1000);
 		str = dm.Ocr(44, 126, 114, 144, "ffffff-050505", 0.85);
 		Split(str, vstr, "/");
-		if (vstr.size() < 2) continue;
+		if (vstr.size() < 2) return;
 		cur = _ttoi(vstr[0]);
 		total = _ttoi(vstr[1]);
 		// 当前的兵数量减去总兵数的一半是要清理的数
@@ -535,7 +535,7 @@ void CScript::ClearArmy()
 				Delay(100);
 			}
 		}
-	} while (cur <= 0);
+	} while (cur > 0);
 	SetLog("完成强制清兵");
 }
 
@@ -766,7 +766,7 @@ int CScript::MakeArmy()
 		{
 		case 1:
 			ImageLoc(690, 239, 823, 340, "onekey_train.bmp", 0.80, retx, rety);
-			if (retx > 0)
+			if (retx < 0)
 			{
 				retx = 750;
 				rety = 310;
@@ -774,8 +774,8 @@ int CScript::MakeArmy()
 			LeftClick(retx, rety);
 			break;
 		case 2:
-			ImageLoc(708, 346, 823, 439, "onekey_train.bmp", 0.95, retx, rety);
-			if (retx > 0)
+			ImageLoc(708, 346, 823, 439, "onekey_train.bmp", 0.80, retx, rety);
+			if (retx < 0)
 			{
 				retx = 750;
 				rety = 420;
@@ -783,8 +783,8 @@ int CScript::MakeArmy()
 			LeftClick(retx, rety);
 			break;
 		case 3:
-			ImageLoc(708, 454, 823, 550, "onekey_train.bmp", 0.95, retx, rety);
-			if (retx > 0)
+			ImageLoc(708, 454, 823, 550, "onekey_train.bmp", 0.80, retx, rety);
+			if (retx < 0)
 			{
 				retx = 750;
 				rety = 520;
@@ -793,9 +793,9 @@ int CScript::MakeArmy()
 			break;
 		case 4:
 			adbSwipe(400, 580, 400, 100); //向上拖拉
-			Delay(1000);
-			ImageLoc(708, 300, 823, 370, "onekey_train.bmp", 0.95, retx, rety);
-			if (retx > 0)
+			Delay(1500);
+			ImageLoc(708, 300, 823, 370, "onekey_train.bmp", 0.80, retx, rety);
+			if (retx < 0)
 			{
 				retx = 750;
 				rety = 340;
@@ -804,9 +804,9 @@ int CScript::MakeArmy()
 			break;
 		case 5:
 			adbSwipe(400, 580, 400, 100); //向上拖拉
-			Delay(1000);
-			ImageLoc(708, 420, 823, 470, "onekey_train.bmp", 0.95, retx, rety);
-			if (retx > 0)
+			Delay(1500);
+			ImageLoc(708, 420, 823, 470, "onekey_train.bmp", 0.80, retx, rety);
+			if (retx < 0)
 			{
 				retx = 750;
 				rety = 450;
@@ -815,9 +815,9 @@ int CScript::MakeArmy()
 			break;
 		case 6:
 			adbSwipe(400, 580, 400, 100); //向上拖拉
-			Delay(1000);
-			ImageLoc(708, 530, 823, 580, "onekey_train.bmp", 0.95, retx, rety);
-			if (retx > 0)
+			Delay(1500);
+			ImageLoc(708, 530, 823, 580, "onekey_train.bmp", 0.80, retx, rety);
+			if (retx < 0)
 			{
 				retx = 750;
 				rety = 550;
