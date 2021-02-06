@@ -1850,7 +1850,6 @@ int CScript::SearchFish()
 	LeftClick(675, 413, 200);// 点击搜索按钮
 	Delay(200);
 
-	VARIANT x, y;
 	const int maxStrLen = 7;
 	int search_i = 0;
 	int type = 0;
@@ -1873,7 +1872,7 @@ int CScript::SearchFish()
 		SearchWait = 20 * 5;
 	}
 	long T_gold = _ttoi(str1), T_water = _ttoi(str2), T_oil = _ttoi(str3);
-
+	VARIANT x, y;
 	do
 	{
 		SearchCount++;
@@ -1884,28 +1883,28 @@ int CScript::SearchFish()
 			{
 				return 0;
 			}
-			dm.FindMultiColor(702, 481, 840, 544, "f0b028-0f0f0f", "71|-4|f0b028-0f0f0f,3|31|d84d00-0f0f0f,87|34|d84800-0f0f0f", 0.9, 0, &x, &y);
+			dm.FindMultiColor(702, 481, 840, 544, "f0b028-0f0f0f", "71|-4|f0b028-0f0f0f,3|31|d84d00-0f0f0f,87|34|d84800-0f0f0f",
+				0.9, 0, &x, &y);
 			if (search_i >= SearchWait)
 			{
 				SetLog(_T("卡白云时间过长！尝试重新启动"), true, REDCOLOR, false);
 				scriptInfo = -2;
-				//IsThreadRun = false;
 				return 0;
 			}
 			search_i = search_i + 1;
 			Delay(200);
 		} while (x.lVal < 0);
 		Delay(100);
-		SearchCount_str.Format("%ld", SearchCount);
-		dm.UseDict(1);
 		Delay(SearchDelay);
+		dm.UseDict(1);
 		G_gold = dm.Ocr(46, 65, 121, 84, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.8);
 		G_water = dm.Ocr(44, 96, 121, 114, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.8);
 		G_oil = dm.Ocr(44, 117, 113, 145, "fffbcc-030303|ffe8fd-030303|f3f3f3-030303", 0.8);
-		showStr = SearchCount_str + " [G] " + G_gold + "[W]" + G_water + "[D]" + G_oil;
-		showStr.Format("[S] %3ld [G] %8ld [W] %8ld [D] %8ld", SearchCount, _ttoi(G_gold), _ttoi(G_water), _ttoi(G_oil));
-		SetLog(showStr, true, BLUECOLOR, false);
-		if (SearchResult(T_gold, T_water, _ttoi(G_gold), _ttoi(G_water), type) > 0 && _ttoi(G_oil) >= T_oil)
+		SearchCount_str.Format("No.[%ld] 金币[%s] 圣水[%s] 黑油[%s]", SearchCount,
+			G_gold, G_water, G_oil);
+		SetLog(SearchCount_str, true, BLACKCOLOR, false);
+		if (SearchResult(T_gold, T_water, _ttoi(G_gold), _ttoi(G_water), type) > 0
+			&& _ttoi(G_oil) >= T_oil)
 		{
 			if (CheckDeadbase() == 1)
 			{
