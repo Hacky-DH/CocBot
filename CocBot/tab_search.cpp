@@ -1,27 +1,24 @@
-// page3.cpp : 实现文件
-//
-
 #include "stdafx.h"
 #include "cocBot.h"
-#include "page3.h"
+#include "tab_search.h"
 #include "afxdialogex.h"
 
 
-// page3 对话框
+// TabSearch 对话框
 
-IMPLEMENT_DYNAMIC(page3, CDialog)
+IMPLEMENT_DYNAMIC(TabSearch, CDialog)
 
-page3::page3(CWnd* pParent /*=NULL*/)
-	: CDialog(page3::IDD, pParent)
+TabSearch::TabSearch(CWnd* pParent /*=NULL*/)
+	: CDialog(TabSearch::IDD, pParent)
 {
 
 }
 
-page3::~page3()
+TabSearch::~TabSearch()
 {
 }
 
-void page3::DoDataExchange(CDataExchange* pDX)
+void TabSearch::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT1, MinTroopRet);
@@ -58,15 +55,15 @@ void page3::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(page3, CDialog)
+BEGIN_MESSAGE_MAP(TabSearch, CDialog)
 	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 
-// page3 消息处理程序
+// TabSearch 消息处理程序
 
 
-void page3::OnPaint()
+void TabSearch::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 					   // TODO: 在此处添加消息处理程序代码

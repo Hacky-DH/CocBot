@@ -223,47 +223,47 @@ void CcocBotDlg::SaveConfig(CString fileName)
 	train.BatSpell.GetWindowText(winText);
 	SetConfig1("训练设置", "BatSpell", winText, fileName);
 	//3.搜索设置
-	pag3.MinTroopRet.GetWindowTextA(winText);
+	search.MinTroopRet.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "MinTroopRet", winText, fileName);
-	pag3.SearchMinGold.GetWindowTextA(winText);
+	search.SearchMinGold.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "SearchMinGold", winText, fileName);
-	pag3.SearchMinElixir.GetWindowTextA(winText);
+	search.SearchMinElixir.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "SearchMinElixir", winText, fileName);
-	pag3.SearchMinDarkElixir.GetWindowTextA(winText);
+	search.SearchMinDarkElixir.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "SearchMinDarkElixir", winText, fileName);
-	pag3.SearchDelay.GetWindowTextA(winText);
+	search.SearchDelay.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "SearchDelay", winText, fileName);
-	pag3.SearchWait.GetWindowTextA(winText);
+	search.SearchWait.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "SearchWait", winText, fileName);
-	pag3.SearchMaxCount.GetWindowTextA(winText);
+	search.SearchMaxCount.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "SearchMaxCount", winText, fileName);
-	pag3.MinTroophs.GetWindowTextA(winText);
+	search.MinTroophs.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "MinTroophs", winText, fileName);
-	pag3.MaxTroophs.GetWindowTextA(winText);
+	search.MaxTroophs.GetWindowTextA(winText);
 	SetConfig1("搜索设置", "MaxTroophs", winText, fileName);
-	SetConfig2("搜索设置", "IsWaitBarbarinKing", pag3.IsWaitBarbarinKing.GetCheck(), fileName);
-	SetConfig2("搜索设置", "IsWaitGrandKing", pag3.IsWaitGrandKing.GetCheck(), fileName);
-	SetConfig2("搜索设置", "IsWaitArcherKing", pag3.IsWaitArcherKing.GetCheck(), fileName);
-	SetConfig2("搜索设置", "IsWaitClanCastleTroopsAndSpells", pag3.IsWaitClanCastleTroopsAndSpells.GetCheck(), fileName);
-	SetConfig2("搜索设置", "IsWaitSpell", pag3.IsWaitSpell.GetCheck(), fileName);
-	SetConfig2("搜索设置", "ArcherTower", pag3.ArcherTower.GetCheck(), fileName);
-	SetConfig2("搜索设置", "Mortar", pag3.Mortar.GetCheck(), fileName);
-	SetConfig2("搜索设置", "WizardTower", pag3.WizardTower.GetCheck(), fileName);
-	SetConfig2("搜索设置", "AirDefense", pag3.AirDefense.GetCheck(), fileName);
-	SetConfig2("搜索设置", "XBow", pag3.XBow.GetCheck(), fileName);
-	SetConfig2("搜索设置", "Inferno", pag3.Inferno.GetCheck(), fileName);
-	SetConfig2("搜索设置", "EagleArtillery", pag3.EagleArtillery.GetCheck(), fileName);
-	SetConfig2("搜索设置", "SearchType", pag3.SearchType.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "SearchDeadbaseGoldCollector", pag3.SearchDeadbaseGoldCollector.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "SearchDeadbaseElixir", pag3.SearchDeadbaseElixir.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "SearchType", pag3.SearchType.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "ArcherTowerLevel", pag3.ArcherTowerLevel.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "MortarLevel", pag3.MortarLevel.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "WizardTowerLevel", pag3.WizardTowerLevel.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "AirDefenseLevel", pag3.AirDefenseLevel.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "XBowLevel", pag3.XBowLevel.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "InfernoLevel", pag3.InfernoLevel.GetCurSel(), fileName);
-	SetConfig2("搜索设置", "EagleArtilleryLevel", pag3.EagleArtilleryLevel.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "IsWaitBarbarinKing", search.IsWaitBarbarinKing.GetCheck(), fileName);
+	SetConfig2("搜索设置", "IsWaitGrandKing", search.IsWaitGrandKing.GetCheck(), fileName);
+	SetConfig2("搜索设置", "IsWaitArcherKing", search.IsWaitArcherKing.GetCheck(), fileName);
+	SetConfig2("搜索设置", "IsWaitClanCastleTroopsAndSpells", search.IsWaitClanCastleTroopsAndSpells.GetCheck(), fileName);
+	SetConfig2("搜索设置", "IsWaitSpell", search.IsWaitSpell.GetCheck(), fileName);
+	SetConfig2("搜索设置", "ArcherTower", search.ArcherTower.GetCheck(), fileName);
+	SetConfig2("搜索设置", "Mortar", search.Mortar.GetCheck(), fileName);
+	SetConfig2("搜索设置", "WizardTower", search.WizardTower.GetCheck(), fileName);
+	SetConfig2("搜索设置", "AirDefense", search.AirDefense.GetCheck(), fileName);
+	SetConfig2("搜索设置", "XBow", search.XBow.GetCheck(), fileName);
+	SetConfig2("搜索设置", "Inferno", search.Inferno.GetCheck(), fileName);
+	SetConfig2("搜索设置", "EagleArtillery", search.EagleArtillery.GetCheck(), fileName);
+	SetConfig2("搜索设置", "SearchType", search.SearchType.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "SearchDeadbaseGoldCollector", search.SearchDeadbaseGoldCollector.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "SearchDeadbaseElixir", search.SearchDeadbaseElixir.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "SearchType", search.SearchType.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "ArcherTowerLevel", search.ArcherTowerLevel.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "MortarLevel", search.MortarLevel.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "WizardTowerLevel", search.WizardTowerLevel.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "AirDefenseLevel", search.AirDefenseLevel.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "XBowLevel", search.XBowLevel.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "InfernoLevel", search.InfernoLevel.GetCurSel(), fileName);
+	SetConfig2("搜索设置", "EagleArtilleryLevel", search.EagleArtilleryLevel.GetCurSel(), fileName);
 	//4.攻击设置
 	SetConfig2("攻击设置", "AttackSpeed", pag4.AttackSpeed.GetCurSel(), fileName);
 	SetConfig2("攻击设置", "AttackGird", pag4.AttackGird.GetCurSel(), fileName);
@@ -428,37 +428,37 @@ void CcocBotDlg::UpdateWindowSet()
 	train.SkeletonSpell.SetWindowText(script[0].coc.getSets("SkeletonSpell"));
 	train.InvisibilitySpell.SetWindowText(script[0].coc.getSets("InvisibilitySpell"));
 	train.BatSpell.SetWindowText(script[0].coc.getSets("BatSpell"));
-	pag3.MinTroopRet.SetWindowText(script[0].coc.getSets("MinTroopRet"));
-	pag3.SearchMinGold.SetWindowText(script[0].coc.getSets("SearchMinGold"));
-	pag3.SearchMinElixir.SetWindowText(script[0].coc.getSets("SearchMinElixir"));
-	pag3.SearchMinDarkElixir.SetWindowText(script[0].coc.getSets("SearchMinDarkElixir"));
-	pag3.SearchDelay.SetWindowText(script[0].coc.getSets("SearchDelay"));
-	pag3.SearchWait.SetWindowText(script[0].coc.getSets("SearchWait"));
-	pag3.SearchMaxCount.SetWindowText(script[0].coc.getSets("SearchMaxCount"));
-	pag3.MinTroophs.SetWindowText(script[0].coc.getSets("MinTroophs"));
-	pag3.MaxTroophs.SetWindowText(script[0].coc.getSets("MaxTroophs"));
-	pag3.IsWaitBarbarinKing.SetCheck(_ttoi(script[0].coc.getSets("IsWaitBarbarinKing")));
-	pag3.IsWaitArcherKing.SetCheck(_ttoi(script[0].coc.getSets("IsWaitArcherKing")));
-	pag3.IsWaitGrandKing.SetCheck(_ttoi(script[0].coc.getSets("IsWaitGrandKing")));
-	pag3.IsWaitClanCastleTroopsAndSpells.SetCheck(_ttoi(script[0].coc.getSets("IsWaitClanCastleTroopsAndSpells")));
-	pag3.IsWaitSpell.SetCheck(_ttoi(script[0].coc.getSets("IsWaitSpell")));
-	pag3.ArcherTower.SetCheck(_ttoi(script[0].coc.getSets("ArcherTower")));
-	pag3.Mortar.SetCheck(_ttoi(script[0].coc.getSets("Mortar")));
-	pag3.WizardTower.SetCheck(_ttoi(script[0].coc.getSets("WizardTower")));
-	pag3.AirDefense.SetCheck(_ttoi(script[0].coc.getSets("AirDefense")));
-	pag3.XBow.SetCheck(_ttoi(script[0].coc.getSets("XBow")));
-	pag3.Inferno.SetCheck(_ttoi(script[0].coc.getSets("Inferno")));
-	pag3.EagleArtillery.SetCheck(_ttoi(script[0].coc.getSets("EagleArtillery")));
-	pag3.SearchType.SetCurSel(_ttoi(script[0].coc.getSets("SearchType")));
-	pag3.SearchDeadbaseGoldCollector.SetCurSel(_ttoi(script[0].coc.getSets("SearchDeadbaseGoldCollector")));
-	pag3.SearchDeadbaseElixir.SetCurSel(_ttoi(script[0].coc.getSets("SearchDeadbaseElixir")));
-	pag3.ArcherTowerLevel.SetCurSel(_ttoi(script[0].coc.getSets("ArcherTowerLevel")));
-	pag3.MortarLevel.SetCurSel(_ttoi(script[0].coc.getSets("MortarLevel")));
-	pag3.WizardTowerLevel.SetCurSel(_ttoi(script[0].coc.getSets("WizardTowerLevel")));
-	pag3.AirDefenseLevel.SetCurSel(_ttoi(script[0].coc.getSets("AirDefenseLevel")));
-	pag3.XBowLevel.SetCurSel(_ttoi(script[0].coc.getSets("XBowLevel")));
-	pag3.InfernoLevel.SetCurSel(_ttoi(script[0].coc.getSets("InfernoLevel")));
-	pag3.EagleArtilleryLevel.SetCurSel(_ttoi(script[0].coc.getSets("EagleArtilleryLevel")));
+	search.MinTroopRet.SetWindowText(script[0].coc.getSets("MinTroopRet"));
+	search.SearchMinGold.SetWindowText(script[0].coc.getSets("SearchMinGold"));
+	search.SearchMinElixir.SetWindowText(script[0].coc.getSets("SearchMinElixir"));
+	search.SearchMinDarkElixir.SetWindowText(script[0].coc.getSets("SearchMinDarkElixir"));
+	search.SearchDelay.SetWindowText(script[0].coc.getSets("SearchDelay"));
+	search.SearchWait.SetWindowText(script[0].coc.getSets("SearchWait"));
+	search.SearchMaxCount.SetWindowText(script[0].coc.getSets("SearchMaxCount"));
+	search.MinTroophs.SetWindowText(script[0].coc.getSets("MinTroophs"));
+	search.MaxTroophs.SetWindowText(script[0].coc.getSets("MaxTroophs"));
+	search.IsWaitBarbarinKing.SetCheck(_ttoi(script[0].coc.getSets("IsWaitBarbarinKing")));
+	search.IsWaitArcherKing.SetCheck(_ttoi(script[0].coc.getSets("IsWaitArcherKing")));
+	search.IsWaitGrandKing.SetCheck(_ttoi(script[0].coc.getSets("IsWaitGrandKing")));
+	search.IsWaitClanCastleTroopsAndSpells.SetCheck(_ttoi(script[0].coc.getSets("IsWaitClanCastleTroopsAndSpells")));
+	search.IsWaitSpell.SetCheck(_ttoi(script[0].coc.getSets("IsWaitSpell")));
+	search.ArcherTower.SetCheck(_ttoi(script[0].coc.getSets("ArcherTower")));
+	search.Mortar.SetCheck(_ttoi(script[0].coc.getSets("Mortar")));
+	search.WizardTower.SetCheck(_ttoi(script[0].coc.getSets("WizardTower")));
+	search.AirDefense.SetCheck(_ttoi(script[0].coc.getSets("AirDefense")));
+	search.XBow.SetCheck(_ttoi(script[0].coc.getSets("XBow")));
+	search.Inferno.SetCheck(_ttoi(script[0].coc.getSets("Inferno")));
+	search.EagleArtillery.SetCheck(_ttoi(script[0].coc.getSets("EagleArtillery")));
+	search.SearchType.SetCurSel(_ttoi(script[0].coc.getSets("SearchType")));
+	search.SearchDeadbaseGoldCollector.SetCurSel(_ttoi(script[0].coc.getSets("SearchDeadbaseGoldCollector")));
+	search.SearchDeadbaseElixir.SetCurSel(_ttoi(script[0].coc.getSets("SearchDeadbaseElixir")));
+	search.ArcherTowerLevel.SetCurSel(_ttoi(script[0].coc.getSets("ArcherTowerLevel")));
+	search.MortarLevel.SetCurSel(_ttoi(script[0].coc.getSets("MortarLevel")));
+	search.WizardTowerLevel.SetCurSel(_ttoi(script[0].coc.getSets("WizardTowerLevel")));
+	search.AirDefenseLevel.SetCurSel(_ttoi(script[0].coc.getSets("AirDefenseLevel")));
+	search.XBowLevel.SetCurSel(_ttoi(script[0].coc.getSets("XBowLevel")));
+	search.InfernoLevel.SetCurSel(_ttoi(script[0].coc.getSets("InfernoLevel")));
+	search.EagleArtilleryLevel.SetCurSel(_ttoi(script[0].coc.getSets("EagleArtilleryLevel")));
 	pag4.AttackSpeed.SetCurSel(_ttoi(script[0].coc.getSets("AttackSpeed")));//attackCount
 	pag4.attackCount.SetCurSel(_ttoi(script[0].coc.getSets("attackCount")));//AttackGird
 	pag4.AttackGird.SetCurSel(_ttoi(script[0].coc.getSets("AttackGird")));
@@ -623,7 +623,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	main_tab.InsertItem(9, TEXT("关于"));
 	quickset.Create(IDD_DIALOG_QUICKSET, this);
 	train.Create(IDD_DIALOG_TRAIN, this);
-	pag3.Create(IDD_DIALOG3, this);
+	search.Create(IDD_DIALOG_SEARCH, this);
 	pag4.Create(IDD_DIALOG4, this);
 	pag5.Create(IDD_DIALOG5, this);
 	pag6.Create(IDD_DIALOG6, this);
@@ -642,7 +642,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	rc += CPoint(12,40);
 	quickset.MoveWindow(&rc);
 	train.MoveWindow(&rc);
-	pag3.MoveWindow(&rc);
+	search.MoveWindow(&rc);
 	pag4.MoveWindow(&rc);
 	pag5.MoveWindow(&rc);
 	pag6.MoveWindow(&rc);
@@ -652,7 +652,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	pag10.MoveWindow(&rc);
 	quickset.ShowWindow(true);
 	train.ShowWindow(FALSE);
-	pag3.ShowWindow(FALSE);
+	search.ShowWindow(FALSE);
 	pag4.ShowWindow(FALSE);
 	pag5.ShowWindow(FALSE);
 	pag6.ShowWindow(FALSE);
@@ -912,7 +912,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 0:
 		quickset.ShowWindow(true);
 		train.ShowWindow(FALSE);
-		pag3.ShowWindow(FALSE);
+		search.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
@@ -924,7 +924,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 1:
 		quickset.ShowWindow(FALSE);
 		train.ShowWindow(true);
-		pag3.ShowWindow(FALSE);
+		search.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
@@ -936,7 +936,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 2:
 		quickset.ShowWindow(FALSE);
 		train.ShowWindow(FALSE);
-		pag3.ShowWindow(true);
+		search.ShowWindow(true);
 		pag4.ShowWindow(FALSE);
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
@@ -948,7 +948,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 3:
 		quickset.ShowWindow(FALSE);
 		train.ShowWindow(FALSE);
-		pag3.ShowWindow(FALSE);
+		search.ShowWindow(FALSE);
 		pag4.ShowWindow(true);
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
@@ -960,7 +960,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 4:
 		quickset.ShowWindow(FALSE);
 		train.ShowWindow(FALSE);
-		pag3.ShowWindow(FALSE);
+		search.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
 		pag5.ShowWindow(true);
 		pag6.ShowWindow(FALSE);
@@ -972,7 +972,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 5:
 		quickset.ShowWindow(FALSE);
 		train.ShowWindow(FALSE);
-		pag3.ShowWindow(FALSE);
+		search.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(true);
@@ -984,7 +984,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 6:
 		quickset.ShowWindow(FALSE);
 		train.ShowWindow(FALSE);
-		pag3.ShowWindow(FALSE);
+		search.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
@@ -996,7 +996,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 7:
 		quickset.ShowWindow(FALSE);
 		train.ShowWindow(FALSE);
-		pag3.ShowWindow(FALSE);
+		search.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
@@ -1008,7 +1008,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 8:
 		quickset.ShowWindow(FALSE);
 		train.ShowWindow(FALSE);
-		pag3.ShowWindow(FALSE);
+		search.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
@@ -1020,7 +1020,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	case 9:
 		quickset.ShowWindow(FALSE);
 		train.ShowWindow(FALSE);
-		pag3.ShowWindow(FALSE);
+		search.ShowWindow(FALSE);
 		pag4.ShowWindow(FALSE);
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);

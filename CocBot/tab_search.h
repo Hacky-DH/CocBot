@@ -2,18 +2,18 @@
 #include "afxwin.h"
 
 
-// page3 对话框
+// TabSearch 对话框
 
-class page3 : public CDialog
+class TabSearch : public CDialog
 {
-	DECLARE_DYNAMIC(page3)
+	DECLARE_DYNAMIC(TabSearch)
 
 public:
-	page3(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~page3();
+	TabSearch(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~TabSearch();
 
 // 对话框数据
-	enum { IDD = IDD_DIALOG3 };
+	enum { IDD = IDD_DIALOG_SEARCH };
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
