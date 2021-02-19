@@ -2617,26 +2617,29 @@ int CScript::GetArmyMsg()
 		SetLog("识别军队信息：", true, BLUECOLOR, false);
 		dm.UseDict(6);
 		int x, y;
+		long x1 = 0, x2 = 0;
 		CString str;
 		CString result, first, next, sim;
 		CString army_num_str;
 		SetPath("\\Pic\\attack\\solider");
-		for (int i = 1; i <= 12; i++)
+		for (int i = 1; i <= ARMY_MAX; i++)
 		{
-			str.Format("solider_%d.bmp", i);
+			if (i > 14) {
+				str.Format("dark_solider_%d.bmp", i - 14);
+			}
+			else {
+				str.Format("purple_solider_%d.bmp", i);
+			}
 			ImageLoc(25, 570, 833, 650, str, 0.9, x, y);
-			long x1 = 0, x2 = 0;
+			x1 = 0, x2 = 0;
 			if (x > 0)
 			{
 				MakeRect(x, &x1, &x2);
 				army_num_str = dm.Ocr(x1, minY, x2, maxY, "ffffff-0f0f0f", 0.85);
-
 				if (army_num_str.GetLength() > 0)
 				{
-					str = ARMYNAME[i];
-					str += ":";
-					str += army_num_str;
-					SetLog(str, true, BLUECOLOR, false);
+					str.Format("%s:%s", ARMYNAME[i], army_num_str);
+					SetLog(str, true, BLACKCOLOR, false);
 					if (army_num_str.Left(1) == "x")
 					{
 						army_num_str = army_num_str.Right(army_num_str.GetLength() - 1);
@@ -2658,13 +2661,14 @@ int CScript::GetArmyMsg()
 					case 5:
 						attackArmy.wallbreaker = _ttoi(army_num_str);
 						break;
+					case 7:
+						attackArmy.wizard = _ttoi(army_num_str);
+						break;
 					default:
 						break;
 					}
 				}
-
 			}
-
 		}
 	}
 	if (type == 1)//固定为造兵的数量
