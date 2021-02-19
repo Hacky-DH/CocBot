@@ -147,12 +147,7 @@ int CScript::SelectSolider(int type)
 	int x, y;
 	CString str;
 	SetPath("\\Pic\\attack\\solider");
-	if (type > 14) {
-		str.Format("dark_solider_%d.bmp", type - 14);
-	}
-	else {
-		str.Format("purple_solider_%d.bmp", type);
-	}
+	str.Format("solider_%d.bmp|solider_%d_2.bmp", type, type);
 	int loc_ret = ImageLoc(25, 570, 833, 650, str, 0.9, x, y);
 	long x1 = 0, x2 = 0;
 	CString armyNum;
@@ -1122,7 +1117,6 @@ int CScript::WaitForReturnHome()
 
 int CScript::Attack_Intel()
 {
-
 	Delay(1000);
 	if (false == IsThreadRun) return -1;
 	long AttackSpeed = 10, AttackChangeDelay = 10;
@@ -1130,13 +1124,12 @@ int CScript::Attack_Intel()
 	AttackSpeed = (AttackSpeed + 1) * 10;
 	AttackChangeDelay = _ttoi(coc.getSets("AttackGird"));
 	AttackChangeDelay = (AttackChangeDelay + 1) * 10;
-	dm.SetPath(_T("\\Pic\\attack"));
+	SetPath("\\Pic\\attack");
 	SetLog(_T("定位下兵位置"));
 	//寻找所有下兵色块
-	//全部
 	CString res, str;
-
-	res = dm.FindColorBlockEx(35, 27, 794, 567, "a7b052-050f0f|9cb24a-0f0f0f|bad058-050f0f", 0.99, 70, 10, 10);
+	res = dm.FindColorBlockEx(35, 27, 794, 567, "a7b052-050f0f|9cb24a-0f0f0f|bad058-050f0f",
+		0.99, 70, 10, 10);
 	if (res.GetLength() <= 0) return -1;
 	//所有坐标
 	int nPos = dm.GetResultCount(res);
@@ -1159,7 +1152,8 @@ int CScript::Attack_Intel()
 
 	for (int i = 0; i < MAX_ARMY_COUNT; i++)
 	{
-		bestIndex = Array::FindNearestPos<long>(allx, ally, nPos, ATTACK_CIRCLE_X[i], ATTACK_CIRCLE_Y[i]);
+		bestIndex = Array::FindNearestPos<long>(allx, ally, nPos,
+			ATTACK_CIRCLE_X[i], ATTACK_CIRCLE_Y[i]);
 		x[i] = allx[bestIndex];
 		y[i] = ally[bestIndex];
 	}
@@ -1929,6 +1923,7 @@ int CScript::SearchFish()
 				SetLog(_T("搜索到大鱼，手动进攻"), true, BLUECOLOR, false);
 				return 1;
 			}
+			Attack_Intel();
 			if (CheckDeadbase() == 1)
 			{
 				fight_value = 1;
@@ -2624,12 +2619,7 @@ int CScript::GetArmyMsg()
 		SetPath("\\Pic\\attack\\solider");
 		for (int i = 1; i <= ARMY_MAX; i++)
 		{
-			if (i > 14) {
-				str.Format("dark_solider_%d.bmp", i - 14);
-			}
-			else {
-				str.Format("purple_solider_%d.bmp", i);
-			}
+			str.Format("solider_%d.bmp|solider_%d_2.bmp", i, i);
 			ImageLoc(25, 570, 833, 650, str, 0.9, x, y);
 			x1 = 0, x2 = 0;
 			if (x > 0)
@@ -2638,7 +2628,8 @@ int CScript::GetArmyMsg()
 				army_num_str = dm.Ocr(x1, minY, x2, maxY, "ffffff-0f0f0f", 0.85);
 				if (army_num_str.GetLength() > 0)
 				{
-					str.Format("%s:%s", ARMYNAME[i], army_num_str);
+					str = ARMYNAME[i - 1];
+					str += ":" + army_num_str;
 					SetLog(str, true, BLACKCOLOR, false);
 					if (army_num_str.Left(1) == "x")
 					{
@@ -2681,7 +2672,7 @@ int CScript::GetArmyMsg()
 
 int CScript::MakeRect(long srcX, long* x1, long* x2)
 {
-	const int minX = 26;
+	const int minX = 55;
 	const int dX = 66;
 	const int sX = 4;
 	for (int i = minX; i < 850; i = i + dX + sX)
