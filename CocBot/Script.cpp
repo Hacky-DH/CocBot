@@ -231,7 +231,7 @@ int CScript::SelectHero(int type)
 	if (x > 0)
 	{
 		LeftClick(x, y);
-		return 1;
+		return x;
 	}
 	return 0;
 }
@@ -1163,11 +1163,11 @@ int CScript::Attack_Intel()
 	delete[]allx, delete[]ally;
 	SetLog(_T("定位完成"));
 	//识别兵种数量
-	int solider_num, total_num = 0, retry=0;
+	int solider_num, total_num = 0, retry = 0;
 	GetArmyMsg();
 	//下兵间距
 	float distance = 1;
-	while (total_num < LootRecord[SwitchNo].CurrentArmyNum && retry < 3) {
+	while (retry < 3) {
 		/*巨人*/
 		solider_num = SelectSolider(GIANT);
 		total_num += solider_num * 5;
@@ -1253,23 +1253,32 @@ int CScript::Attack_Intel()
 	}
 	*/
 	// 释放王
-	if (SelectHero(1) != 0)
+	int xx = SelectHero(1);
+	if (xx > 0)
 	{
 		SetLog("释放蛮王");
 		Delay(200);
 		LeftClick(x[0], y[0]);
+		Delay(1000);
+		LeftClick(xx, 618);
 	}
-	if (SelectHero(2) != 0)
+	xx = SelectHero(2);
+	if (xx > 0)
 	{
 		SetLog("释放女王");
 		Delay(200);
 		LeftClick(x[120], y[120]);
+		Delay(1000);
+		LeftClick(xx, 618);
 	}
-	if (SelectHero(3) != 0)
+	xx = SelectHero(3);
+	if (xx > 0)
 	{
 		SetLog("释放守护者");
 		Delay(200);
 		LeftClick(x[180], y[180]);
+		Delay(1000);
+		LeftClick(xx, 618);
 	}
 	Delay(2000);
 	return 0;
