@@ -141,13 +141,19 @@ int CScript::KillAdb()
 
 int CScript::SelectSolider(int type)
 {
+	// type是兵编号
 	const int minY = 572;
 	const int maxY = 597;
 	int x, y;
 	CString str;
 	SetPath("\\Pic\\attack\\solider");
-	str.Format("solider_%d.bmp|solider_%d_2.bmp", type, type);
-	int loc_ret = ImageLoc(25, 570, 833, 650, str, 0.95, x, y);
+	if (type > 14) {
+		str.Format("dark_solider_%d.bmp", type - 14);
+	}
+	else {
+		str.Format("purple_solider_%d.bmp", type);
+	}
+	int loc_ret = ImageLoc(25, 570, 833, 650, str, 0.9, x, y);
 	long x1 = 0, x2 = 0;
 	CString armyNum;
 	int solider_num = 0;
@@ -2603,28 +2609,26 @@ int CScript::RepairAttackArmy(int oldArmyCount, int &distance)
 
 int CScript::GetArmyMsg()
 {
-
 	int type = _ttoi(coc.getSets("attackCount"));
 	if (type == 0)//进行识别
 	{
-
 		const int minY = 572;
 		const int maxY = 597;
 		SetLog("识别军队信息：", true, BLUECOLOR, false);
 		dm.UseDict(6);
-		VARIANT x, y;
+		int x, y;
 		CString str;
 		CString result, first, next, sim;
 		CString army_num_str;
+		SetPath("\\Pic\\attack\\solider");
 		for (int i = 1; i <= 12; i++)
 		{
 			str.Format("solider_%d.bmp", i);
-			dm.SetPath("\\Pic\\attack\\solider");
-			dm.FindPic(25, 570, 833, 644, str, "0f0f0f", 0.9, 0, &x, &y);
+			ImageLoc(25, 570, 833, 650, str, 0.9, x, y);
 			long x1 = 0, x2 = 0;
-			if (x.lVal > 0)
+			if (x > 0)
 			{
-				MakeRect(x.lVal, &x1, &x2);
+				MakeRect(x, &x1, &x2);
 				army_num_str = dm.Ocr(x1, minY, x2, maxY, "ffffff-0f0f0f", 0.85);
 
 				if (army_num_str.GetLength() > 0)
@@ -2662,8 +2666,6 @@ int CScript::GetArmyMsg()
 			}
 
 		}
-
-
 	}
 	if (type == 1)//固定为造兵的数量
 	{
