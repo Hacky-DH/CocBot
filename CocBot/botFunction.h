@@ -75,6 +75,7 @@ public:
 	long StartDarkElixir;
 	long StartTroophs;
 	float ArmyRet;
+	int CurrentArmyNum;
 	long SetStartResource(long _in_StartGold,long _in_StartElixir,long _in_StartDarkElixir,long _in_StartTroophs);
 	long SetNowResource(long _in_NowGold,long _in_NowElixir,long _in_NowDarkElixir,long _in_NowTroophs);
 	long GetLootGold();

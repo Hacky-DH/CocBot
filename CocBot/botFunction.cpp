@@ -335,6 +335,7 @@ CGameInfo::CGameInfo()
 	StartTime = 0;
 	StartDarkElixir = 0;
 	ArmyRet = 0;
+	CurrentArmyNum = 0;
 }
 void CGameInfo::InitlizeDetail()
 {

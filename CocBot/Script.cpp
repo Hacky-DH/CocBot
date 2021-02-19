@@ -460,6 +460,7 @@ int CScript::CheckArmyNum(int* trainT)
 	NowCount = _ttoi(vstr[0]);
 	float ret = AllCount > 0 ? (((float)NowCount * 100) / (float)AllCount) : 0.0f;
 	LootRecord[SwitchNo].ArmyRet = ret;
+	LootRecord[SwitchNo].CurrentArmyNum = NowCount;
 	int pos = ret > 100 ? 0 : (int)ret;
 	if (pProgress) pProgress->SetPos(pos);
 	M_time = dm.Ocr(470, 126, 580, 156, "ffffff-050505", 0.85);
@@ -1162,209 +1163,113 @@ int CScript::Attack_Intel()
 	delete[]allx, delete[]ally;
 	SetLog(_T("定位完成"));
 	//识别兵种数量
-	float solider_num;
+	int solider_num, total_num = 0, retry=0;
 	GetArmyMsg();
 	//下兵间距
 	float distance = 1;
-	/*巨人*/
-	solider_num = SelectSolider(GIANT);
-	if (solider_num > 0.0001)
-	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+	while (total_num < LootRecord[SwitchNo].CurrentArmyNum && retry < 3) {
+		/*巨人*/
+		solider_num = SelectSolider(GIANT);
+		total_num += solider_num * 5;
+		if (solider_num > 0)
 		{
-			LeftClick(x[i], y[i]);
+			distance = MAX_ARMY_COUNT / solider_num;
+			if (distance <= 0.0001)distance = 1;
+			for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+			{
+				LeftClick(x[i], y[i]);
+			}
 		}
-	}
-	Delay(AttackChangeDelay);
-	/*野蛮人*/
-	solider_num = SelectSolider(BARBARIN);
-	if (solider_num > 0)
-	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+		Delay(AttackChangeDelay);
+		/*野蛮人*/
+		solider_num = SelectSolider(BARBARIN);
+		total_num += solider_num;
+		if (solider_num > 0)
 		{
-			LeftClick(x[i], y[i]);
-			Delay(AttackSpeed);
+			distance = MAX_ARMY_COUNT / solider_num;
+			if (distance <= 0.0001)distance = 1;
+			for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+			{
+				LeftClick(x[i], y[i]);
+				Delay(AttackSpeed);
+			}
 		}
-	}
-	Delay(AttackChangeDelay);
-	/*炸弹人*/
-	solider_num = SelectSolider(WALLBREAKER);
-	if (solider_num > 0)
-	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+		Delay(AttackChangeDelay);
+		/*炸弹人*/
+		solider_num = SelectSolider(WALLBREAKER);
+		total_num += solider_num * 2;
+		if (solider_num > 0)
 		{
-			LeftClick(x[i], y[i]);
-			Delay(AttackSpeed);
+			distance = MAX_ARMY_COUNT / solider_num;
+			if (distance <= 0.0001)distance = 1;
+			for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+			{
+				LeftClick(x[i], y[i]);
+				Delay(AttackSpeed);
+			}
 		}
-	}
-	Delay(AttackChangeDelay);
-	/*弓箭手*/
-	solider_num = SelectSolider(ARCHER);
-	if (solider_num > 0)
-	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+		Delay(AttackChangeDelay);
+		/*弓箭手*/
+		solider_num = SelectSolider(ARCHER);
+		total_num += solider_num;
+		if (solider_num > 0)
 		{
-			LeftClick(x[i], y[i]);
-			Delay(AttackSpeed);
+			distance = MAX_ARMY_COUNT / solider_num;
+			if (distance <= 0.0001)distance = 1;
+			for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+			{
+				LeftClick(x[i], y[i]);
+				Delay(AttackSpeed);
+			}
 		}
-	}
-	Delay(AttackChangeDelay);
-	/*哥布林*/
-	solider_num = SelectSolider(GOBLIN);
-	if (solider_num > 0)
-	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+		Delay(AttackChangeDelay);
+		/*哥布林*/
+		solider_num = SelectSolider(GOBLIN);
+		total_num += solider_num;
+		if (solider_num > 0)
 		{
-			LeftClick(x[i], y[i]);
-			Delay(AttackSpeed);
+			distance = MAX_ARMY_COUNT / solider_num;
+			if (distance <= 0.0001)distance = 1;
+			for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
+			{
+				LeftClick(x[i], y[i]);
+				Delay(AttackSpeed);
+			}
 		}
+		retry++;
 	}
-	/*释放 援军双王*/
+	if (total_num < LootRecord[SwitchNo].CurrentArmyNum) {
+		str.Format("错误：实际下兵数量%d小于总兵数%d", total_num,
+			LootRecord[SwitchNo].CurrentArmyNum);
+		SetLog(str, true, REDCOLOR, true);
+		return -1;
+	}
+	/*释放援军
 	VARIANT vx, vy;
 	dm.FindMultiColor(25, 570, 827, 652, "84bce0-0f0f0f", "-26|22|5f97ce-0f0f0f,27|24|6297cc-0f0f0f,-11|45|4b6e8f-0f0f0f,17|42|4a6f95-0f0f0f", 0.9, 1, &vx, &vy);//释放 援军
 	if (vx.lVal > 0)
 	{
 		SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0], y[0]); Delay(20); dm.LeftClick();
 	}
-	dm.FindMultiColor(18, 568, 834, 617, "e7b463-0f0f0f", "21|13|e8a540-0f0f0f,-7|13|e0bf76-0f0f0f,4|9|e89268-0f0f0f,8|10|ea946e-0f0f0f", 0.9, 1, &vx, &vy);//bar barin king
-	if (vx.lVal > 0)
+	*/
+	// 释放王
+	if (SelectHero(1) != 0)
 	{
-		SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0], y[0]); Delay(20); dm.LeftClick();
-	}
-
-	dm.FindMultiColor(18, 568, 834, 617, "6C4CB4-040404", "0|0|6C4CB4-040404,4|-1|7253BC-060704,-8|16|D59486-0B1012,7|15|E48A61-040202,8|12|F39A6E-030503,11|12|F4A074-040404,23|13|6C44B6-040202,26|21|6840B0,31|21|6C48BB-040303", 0.9, 1, &vx, &vy);//archer king
-	if (vx.lVal > 0)
-	{
-		SetLog("释放女王", true, BLUECOLOR, false);
-		dm.MoveTo(vx.lVal, vy.lVal);
-		Delay(20);
-		dm.LeftClick();
+		SetLog("释放蛮王");
 		Delay(200);
-		dm.MoveTo(x[120], y[120]);
-		Delay(20);
-		dm.LeftClick();
+		LeftClick(x[0], y[0]);
 	}
-	dm.FindMultiColor(18, 568, 834, 617, GRAND_WARDEN_COLOR1, GRAND_WARDEN_COLOR2, 0.9, 0, &vx, &vy);
-	if (vx.lVal > 0)
+	if (SelectHero(2) != 0)
 	{
-		SetLog("守护者", true, BLUECOLOR, false);
-		dm.MoveTo(vx.llVal, vy.lVal);
-		Delay(20);
-		dm.LeftClick();
+		SetLog("释放女王");
 		Delay(200);
-		dm.MoveTo(x[180], y[180]);
-		Delay(20);
-		dm.LeftClick();
+		LeftClick(x[120], y[120]);
 	}
-	/************************* 再检查一下哪些还没下完 ***********************************/
-	/*巨人*/
-	solider_num = SelectSolider(GIANT);
-	if (solider_num > 0)
+	if (SelectHero(3) != 0)
 	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
-		{
-			LeftClick(x[i], y[i]);
-		}
-	}
-	Delay(AttackChangeDelay);
-	/*野蛮人*/
-	solider_num = SelectSolider(BARBARIN);
-	if (solider_num > 0)
-	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
-		{
-			LeftClick(x[i], y[i]);
-			Delay(AttackSpeed);
-		}
-	}
-	Delay(AttackChangeDelay);
-	/*炸弹人*/
-	solider_num = SelectSolider(WALLBREAKER);
-	if (solider_num > 0)
-	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
-		{
-			LeftClick(x[i], y[i]);
-			Delay(AttackSpeed);
-		}
-	}
-	Delay(AttackChangeDelay);
-	/*弓箭手*/
-	solider_num = SelectSolider(ARCHER);
-	if (solider_num > 0)
-	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
-		{
-			LeftClick(x[i], y[i]);
-			Delay(AttackSpeed);
-		}
-	}
-	Delay(AttackChangeDelay);
-	/*哥布林*/
-	solider_num = SelectSolider(GOBLIN);
-	if (solider_num > 0)
-	{
-		distance = MAX_ARMY_COUNT / solider_num;
-		if (distance <= 0.0001)distance = 1;
-		for (int i = 0; i < MAX_ARMY_COUNT; i += distance)
-		{
-			LeftClick(x[i], y[i]);
-			Delay(AttackSpeed);
-		}
-	}
-	/*释放 援军双王*/
-	dm.FindMultiColor(25, 570, 827, 652, "84bce0-0f0f0f", "-26|22|5f97ce-0f0f0f,27|24|6297cc-0f0f0f,-11|45|4b6e8f-0f0f0f,17|42|4a6f95-0f0f0f", 0.9, 1, &vx, &vy);//释放 援军
-	if (vx.lVal > 0)
-	{
-		SetLog("释放援军", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0], y[0]); Delay(20); dm.LeftClick();
-	}
-	dm.FindMultiColor(18, 568, 834, 617, "e7b463-0f0f0f", "21|13|e8a540-0f0f0f,-7|13|e0bf76-0f0f0f,4|9|e89268-0f0f0f,8|10|ea946e-0f0f0f", 0.9, 1, &vx, &vy);//bar barin king
-	if (vx.lVal > 0)
-	{
-		SetLog("释放蛮王", true, BLUECOLOR, false); dm.MoveTo(vx.lVal, vy.lVal); Delay(20); dm.LeftClick(); Delay(200); dm.MoveTo(x[0], y[0]); Delay(20); dm.LeftClick();
-	}
-
-	dm.FindMultiColor(18, 568, 834, 617, "6C4CB4-040404", "0|0|6C4CB4-040404,4|-1|7253BC-060704,-8|16|D59486-0B1012,7|15|E48A61-040202,8|12|F39A6E-030503,11|12|F4A074-040404,23|13|6C44B6-040202,26|21|6840B0,31|21|6C48BB-040303", 0.9, 1, &vx, &vy);//archer king
-	if (vx.lVal > 0)
-	{
-		SetLog("释放女王", true, BLUECOLOR, false);
-		dm.MoveTo(vx.lVal, vy.lVal);
-		Delay(20);
-		dm.LeftClick();
+		SetLog("释放守护者");
 		Delay(200);
-		dm.MoveTo(x[120], y[120]);
-		Delay(20);
-		dm.LeftClick();
-	}
-	dm.FindMultiColor(18, 568, 834, 617, GRAND_WARDEN_COLOR1, GRAND_WARDEN_COLOR2, 0.9, 0, &vx, &vy);
-	if (vx.lVal > 0)
-	{
-		SetLog("守护者", true, BLUECOLOR, false);
-		dm.MoveTo(vx.llVal, vy.lVal);
-		Delay(20);
-		dm.LeftClick();
-		Delay(200);
-		dm.MoveTo(x[180], y[180]);
-		Delay(20);
-		dm.LeftClick();
+		LeftClick(x[180], y[180]);
 	}
 	Delay(2000);
 	return 0;
@@ -1923,7 +1828,6 @@ int CScript::SearchFish()
 				SetLog(_T("搜索到大鱼，手动进攻"), true, BLUECOLOR, false);
 				return 1;
 			}
-			Attack_Intel();
 			if (CheckDeadbase() == 1)
 			{
 				fight_value = 1;
