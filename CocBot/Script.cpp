@@ -659,7 +659,7 @@ int CScript::MakeArmy()
 		NowCount = _ttoi(vstr[0]);
 		AllCount = _ttoi(vstr[1]);
 	}
-	if (AllCount <= 0)
+	if (AllCount <= 0) 
 	{
 		AllCount = army_capacity * 2;
 	}
@@ -721,37 +721,6 @@ int CScript::MakeArmy()
 			else
 			{
 				SetLog("找不到  " + pic_name, true, REDCOLOR, false);
-			}
-			Delay(500);
-		}
-		//打开 spell
-		SetPath("Pic\\others\\");
-		ImageLoc(445, 83, 559, 114, "army_view_3.bmp", 0.95, retx, rety);
-		if (retx > 0)
-			LeftClick(retx, rety);
-		else
-			LeftClick(387, 100);//548
-		Delay(1000);
-		SetPath("\\Pic\\others\\solider");
-		for (int i = 1; i <= 12; i++)
-		{
-			if (spell_num[i - 1] <= 0)
-			{
-				continue;
-			}
-			pic_name.Format("spell_%d.bmp", i);
-			ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
-			if (retx > 0)
-			{
-				for (int j = 1; j <= spell_num[i - 1]; j++)
-				{
-					LeftClick(retx, rety);
-					Delay(150);
-				}
-			}
-			else
-			{
-				//SetLog("找不到  " + pic_name, true, REDCOLOR, false);
 			}
 			Delay(500);
 		}
@@ -834,6 +803,37 @@ int CScript::MakeArmy()
 			LeftClick(retx, rety);
 			break;
 		}
+	}
+	//打开 spell
+	SetPath("Pic\\others\\");
+	ImageLoc(445, 83, 559, 114, "army_view_3.bmp", 0.95, retx, rety);
+	if (retx > 0)
+		LeftClick(retx, rety);
+	else
+		LeftClick(387, 100);//548
+	Delay(1000);
+	SetPath("\\Pic\\others\\solider");
+	for (int i = 1; i <= 12; i++)
+	{
+		if (spell_num[i - 1] <= 0)
+		{
+			continue;
+		}
+		pic_name.Format("spell_%d.bmp", i);
+		ImageLoc(21, 335, 839, 548, pic_name, 0.95, retx, rety);
+		if (retx > 0)
+		{
+			for (int j = 1; j <= spell_num[i - 1]; j++)
+			{
+				LeftClick(retx, rety);
+				Delay(150);
+			}
+		}
+		else
+		{
+			//SetLog("找不到  " + pic_name, true, REDCOLOR, false);
+		}
+		Delay(500);
 	}
 	LeftClick(814, 95); // 关闭军队
 	return 0;
