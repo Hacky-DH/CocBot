@@ -630,7 +630,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	pag5.Create(IDD_DIALOG5, this);
 	pag6.Create(IDD_DIALOG6, this);
 	pag7.Create(IDD_DIALOG7, this);
-	pag8.Create(IDD_DIALOG8, this);
+	pag8.Create(IDD_DIALOG_STATS, this);
 	pag9.Create(IDD_DIALOG9, this);
 	pag10.Create(IDD_DIALOG10, this);
 	m_graphic.Create(IDD_DIALOG_GRAPHIC, this);

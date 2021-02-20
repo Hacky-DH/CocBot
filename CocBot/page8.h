@@ -14,7 +14,7 @@ public:
 	virtual ~page8();
 
 // 对话框数据
-	enum { IDD = IDD_DIALOG8 };
+	enum { IDD = IDD_DIALOG_STATS };
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
