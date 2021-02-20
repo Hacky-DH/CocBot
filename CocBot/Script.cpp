@@ -1163,11 +1163,12 @@ int CScript::Attack_Intel()
 	delete[]allx, delete[]ally;
 	SetLog(_T("定位完成"));
 	//识别兵种数量
-	int solider_num, total_num = 0, retry = 0;
+	int solider_num, total_num = 0, retry = 3;
 	GetArmyMsg();
 	//下兵间距
 	float distance = 1;
-	while (retry < 3) {
+	int currentArmyNum = LootRecord[SwitchNo].CurrentArmyNum;
+	while (retry > 0) {
 		/*巨人*/
 		solider_num = SelectSolider(GIANT);
 		total_num += solider_num * 5;
@@ -1236,14 +1237,14 @@ int CScript::Attack_Intel()
 				Delay(AttackSpeed);
 			}
 		}
-		retry++;
+		if (total_num < currentArmyNum) {
+			str.Format("实际下兵数量%d小于总兵数%d", total_num, currentArmyNum);
+			SetLog(str, true, REDCOLOR, true);
+			if (total_num <= 0) total_num = 1;
+			retry = currentArmyNum % total_num;
+		}
+		retry--;
 		Delay(1000);
-	}
-	if (total_num < LootRecord[SwitchNo].CurrentArmyNum) {
-		str.Format("错误：实际下兵数量%d小于总兵数%d", total_num,
-			LootRecord[SwitchNo].CurrentArmyNum);
-		SetLog(str, true, REDCOLOR, true);
-		return -1;
 	}
 	/*释放援军
 	VARIANT vx, vy;
@@ -1254,33 +1255,33 @@ int CScript::Attack_Intel()
 	}
 	*/
 	// 释放王
-	int xx = SelectHero(1);
-	if (xx > 0)
+	int king1x = SelectHero(1);
+	if (king1x > 0)
 	{
-		SetLog("释放蛮王");
+		SetLog("释放蛮王", true, BLACKCOLOR);
 		Delay(200);
 		LeftClick(x[0], y[0]);
-		Delay(1000);
-		LeftClick(xx, 618);
 	}
-	xx = SelectHero(2);
-	if (xx > 0)
+	int king2x = SelectHero(2);
+	if (king2x > 0)
 	{
-		SetLog("释放女王");
+		SetLog("释放女王", true, BLACKCOLOR);
 		Delay(200);
 		LeftClick(x[120], y[120]);
-		Delay(1000);
-		LeftClick(xx, 618);
 	}
-	xx = SelectHero(3);
-	if (xx > 0)
+	int king3x = SelectHero(3);
+	if (king3x > 0)
 	{
-		SetLog("释放守护者");
+		SetLog("释放守护者", true, BLACKCOLOR);
 		Delay(200);
 		LeftClick(x[180], y[180]);
-		Delay(1000);
-		LeftClick(xx, 618);
 	}
+	Delay(2000);
+	LeftClick(king1x, 618);
+	Delay(1000);
+	LeftClick(king2x, 618);
+	Delay(1000);
+	LeftClick(king3x, 618);
 	Delay(2000);
 	return 0;
 }
