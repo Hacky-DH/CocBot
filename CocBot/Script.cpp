@@ -157,8 +157,8 @@ int CScript::SelectSolider(int type)
 		dm.UseDict(DICT_COC_ATTACKARMY);
 		MakeRect(x, &x1, &x2);
 		armyNum = dm.Ocr(x1, minY, x2, maxY, "ffffff-0f0f0f", 0.85);
-		str.Format("%s\t%s", ARMYNAME[type - 1], armyNum);
-		SetLog(str);
+		str.Format("Ñ¡Ôñ %s\t%s", ARMYNAME[type - 1], armyNum);
+		SetLog(str, true, BLACKCOLOR);
 		if (armyNum.GetLength() > 0)
 		{
 			if (armyNum.Left(1) == "x")
