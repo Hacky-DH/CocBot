@@ -336,7 +336,10 @@ CGameInfo::CGameInfo()
 	StartDarkElixir = 0;
 	ArmyRet = 0;
 	CurrentArmyNum = 0;
+	AttackCount = 0;
+	SearchCount = 0;
 }
+
 void CGameInfo::InitlizeDetail()
 {
 	IsFirstRecord = true;

@@ -85,6 +85,8 @@ public:
 	long GetRunTime();
 	bool IsFirstRecord;
 	bool IsRecordSuccess;
+	int AttackCount;
+	int SearchCount;
 };
 
 struct ArmyInfo

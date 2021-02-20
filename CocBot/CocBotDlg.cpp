@@ -1534,6 +1534,11 @@ LRESULT CcocBotDlg::Statistics(WPARAM wParam, LPARAM lParam)
 	{
 		stats.m_ListCtrl1.SetItemText(i + 1 + py, 5, str[i]);
 	}
+	CString sstr;
+	sstr.Format("攻击次数：%d", LootRecord->AttackCount);
+	stats.AttackCount.SetWindowTextA(sstr);
+	sstr.Format("搜索次数：%d", LootRecord->SearchCount);
+	stats.SearchCount.SetWindowTextA(sstr);
 	return 0;
 }
 
