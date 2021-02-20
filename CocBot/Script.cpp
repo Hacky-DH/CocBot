@@ -1237,6 +1237,7 @@ int CScript::Attack_Intel()
 			}
 		}
 		retry++;
+		Delay(1000);
 	}
 	if (total_num < LootRecord[SwitchNo].CurrentArmyNum) {
 		str.Format("错误：实际下兵数量%d小于总兵数%d", total_num,
