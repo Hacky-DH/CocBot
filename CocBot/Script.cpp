@@ -1163,7 +1163,7 @@ int CScript::Attack_Intel()
 	delete[]allx, delete[]ally;
 	SetLog(_T("定位完成"));
 	//识别兵种数量
-	int solider_num, total_num = 0, retry = 3;
+	int solider_num, total_num = 0, retry = 3, total_retry = 0;
 	GetArmyMsg();
 	//下兵间距
 	float distance = 1;
@@ -1244,7 +1244,11 @@ int CScript::Attack_Intel()
 			retry = currentArmyNum % total_num;
 		}
 		retry--;
+		total_retry++;
 		Delay(1000);
+		if (total_retry > 10) {
+			break;
+		}
 	}
 	/*释放援军
 	VARIANT vx, vy;
