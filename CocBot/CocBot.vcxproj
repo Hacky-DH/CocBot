@@ -224,7 +224,7 @@
     <ClInclude Include="page5.h" />
     <ClInclude Include="page6.h" />
     <ClInclude Include="page7.h" />
-    <ClInclude Include="page8.h" />
+    <ClInclude Include="tab_stats.h" />
     <ClInclude Include="page9.h" />
     <ClInclude Include="pipeshell.h" />
     <ClInclude Include="Resource.h" />
@@ -251,7 +251,7 @@
     <ClCompile Include="page5.cpp" />
     <ClCompile Include="page6.cpp" />
     <ClCompile Include="page7.cpp" />
-    <ClCompile Include="page8.cpp" />
+    <ClCompile Include="tab_stats.cpp" />
     <ClCompile Include="page9.cpp" />
     <ClCompile Include="pipshell.cpp" />
     <ClCompile Include="Script.cpp" />

@@ -3,15 +3,15 @@
 #include "afxwin.h"
 
 
-// page8 对话框
+// TabStats 对话框
 
-class page8 : public CDialog
+class TabStats : public CDialog
 {
-	DECLARE_DYNAMIC(page8)
+	DECLARE_DYNAMIC(TabStats)
 
 public:
-	page8(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~page8();
+	TabStats(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~TabStats();
 
 // 对话框数据
 	enum { IDD = IDD_DIALOG_STATS };

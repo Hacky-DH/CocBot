@@ -8,7 +8,7 @@
 #include "page5.h"
 #include "page6.h"
 #include "page7.h"
-#include "page8.h"
+#include "tab_stats.h"
 #include "page9.h"
 #include "page10.h"
 #include "Graphic.h"
@@ -38,7 +38,7 @@ private:
 	page5 pag5;   //捐兵请求
 	page6 pag6;   //升级设置
 	page7 pag7;   //高级设置
-	page8 pag8;   //统计
+	TabStats stats;   //统计
 	page9 pag9;   //实时日志
 	page10 pag10; //关于
 	Graphic m_graphic;

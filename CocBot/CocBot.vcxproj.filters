@@ -104,9 +104,6 @@
     <ClInclude Include="page7.h">
       <Filter>UI\头文件</Filter>
     </ClInclude>
-    <ClInclude Include="page8.h">
-      <Filter>UI\头文件</Filter>
-    </ClInclude>
     <ClInclude Include="page9.h">
       <Filter>UI\头文件</Filter>
     </ClInclude>
@@ -152,6 +149,9 @@
     <ClInclude Include="tab_search.h">
       <Filter>UI\头文件</Filter>
     </ClInclude>
+    <ClInclude Include="tab_stats.h">
+      <Filter>UI\头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cocBotDlg.cpp">
@@ -182,9 +182,6 @@
       <Filter>UI\源文件</Filter>
     </ClCompile>
     <ClCompile Include="page7.cpp">
-      <Filter>UI\源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="page8.cpp">
       <Filter>UI\源文件</Filter>
     </ClCompile>
     <ClCompile Include="page9.cpp">
@@ -221,6 +218,9 @@
       <Filter>UI\源文件</Filter>
     </ClCompile>
     <ClCompile Include="tab_search.cpp">
+      <Filter>UI\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tab_stats.cpp">
       <Filter>UI\源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -630,7 +630,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	pag5.Create(IDD_DIALOG5, this);
 	pag6.Create(IDD_DIALOG6, this);
 	pag7.Create(IDD_DIALOG7, this);
-	pag8.Create(IDD_DIALOG_STATS, this);
+	stats.Create(IDD_DIALOG_STATS, this);
 	pag9.Create(IDD_DIALOG9, this);
 	pag10.Create(IDD_DIALOG10, this);
 	m_graphic.Create(IDD_DIALOG_GRAPHIC, this);
@@ -649,7 +649,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	pag5.MoveWindow(&rc);
 	pag6.MoveWindow(&rc);
 	pag7.MoveWindow(&rc);
-	pag8.MoveWindow(&rc);
+	stats.MoveWindow(&rc);
 	pag9.MoveWindow(&rc);
 	pag10.MoveWindow(&rc);
 	quickset.ShowWindow(true);
@@ -659,7 +659,7 @@ BOOL CcocBotDlg::OnInitDialog()
 	pag5.ShowWindow(FALSE);
 	pag6.ShowWindow(FALSE);
 	pag7.ShowWindow(FALSE);
-	pag8.ShowWindow(FALSE);
+	stats.ShowWindow(FALSE);
 	pag9.ShowWindow(FALSE);
 	pag10.ShowWindow(FALSE);
 	//父窗口句柄
@@ -919,7 +919,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
 		pag7.ShowWindow(FALSE);
-		pag8.ShowWindow(FALSE);
+		stats.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
 		break;
@@ -931,7 +931,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
 		pag7.ShowWindow(FALSE);
-		pag8.ShowWindow(FALSE);
+		stats.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
 		break;
@@ -943,7 +943,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
 		pag7.ShowWindow(FALSE);
-		pag8.ShowWindow(FALSE);
+		stats.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
 		break;
@@ -955,7 +955,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
 		pag7.ShowWindow(FALSE);
-		pag8.ShowWindow(FALSE);
+		stats.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
 		break;
@@ -967,7 +967,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(true);
 		pag6.ShowWindow(FALSE);
 		pag7.ShowWindow(FALSE);
-		pag8.ShowWindow(FALSE);
+		stats.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
 		break;
@@ -979,7 +979,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(true);
 		pag7.ShowWindow(FALSE);
-		pag8.ShowWindow(FALSE);
+		stats.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
 		break;
@@ -991,7 +991,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
 		pag7.ShowWindow(true);
-		pag8.ShowWindow(FALSE);
+		stats.ShowWindow(FALSE);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
 		break;
@@ -1003,7 +1003,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
 		pag7.ShowWindow(FALSE);
-		pag8.ShowWindow(true);
+		stats.ShowWindow(true);
 		pag9.ShowWindow(FALSE);
 		pag10.ShowWindow(FALSE);
 		break;
@@ -1015,7 +1015,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
 		pag7.ShowWindow(FALSE);
-		pag8.ShowWindow(FALSE);
+		stats.ShowWindow(FALSE);
 		pag9.ShowWindow(true);
 		pag10.ShowWindow(FALSE);
 		break;
@@ -1027,7 +1027,7 @@ void CcocBotDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		pag5.ShowWindow(FALSE);
 		pag6.ShowWindow(FALSE);
 		pag7.ShowWindow(FALSE);
-		pag8.ShowWindow(FALSE);
+		stats.ShowWindow(FALSE);
 		pag9.ShowWindow(false);
 		pag10.ShowWindow(true);
 		break;
@@ -1134,22 +1134,22 @@ void CcocBotDlg::InitlizeList(void)
 		pag5.ListKeyWord.SetItemText(i, 2, ARMYNAME[i]);
 	}
 	//************** loot **************//
-	pag8.m_ListCtrl1.SetExtendedStyle(LVS_ICON | LVS_REPORT);
-	pag8.m_ListCtrl1.InsertColumn(0, _T(""), LVCFMT_CENTER, 60);
-	pag8.m_ListCtrl1.InsertColumn(1, _T("开始资源"), LVCFMT_RIGHT, 100);
-	pag8.m_ListCtrl1.InsertColumn(2, _T("当前资源"), LVCFMT_RIGHT, 100);
-	pag8.m_ListCtrl1.InsertColumn(3, _T("掠夺资源"), LVCFMT_RIGHT, 100);
-	pag8.m_ListCtrl1.InsertColumn(4, _T("时均效率"), LVCFMT_RIGHT, 100);
-	pag8.m_ListCtrl1.InsertColumn(5, _T("天均效率"), LVCFMT_RIGHT, 100);
+	stats.m_ListCtrl1.SetExtendedStyle(LVS_ICON | LVS_REPORT);
+	stats.m_ListCtrl1.InsertColumn(0, _T(""), LVCFMT_CENTER, 60);
+	stats.m_ListCtrl1.InsertColumn(1, _T("开始资源"), LVCFMT_RIGHT, 100);
+	stats.m_ListCtrl1.InsertColumn(2, _T("当前资源"), LVCFMT_RIGHT, 100);
+	stats.m_ListCtrl1.InsertColumn(3, _T("掠夺资源"), LVCFMT_RIGHT, 100);
+	stats.m_ListCtrl1.InsertColumn(4, _T("时均效率"), LVCFMT_RIGHT, 100);
+	stats.m_ListCtrl1.InsertColumn(5, _T("天均效率"), LVCFMT_RIGHT, 100);
 	for (int i = 0; i < MAX_THREAD_COUNT * 3; i++)
 	{
 		i % 3 == 0 ? str.Format("主账号:%d", i / 3) : str.Format("子账号:%d", i % 3);
 		i *= 5;
-		pag8.m_ListCtrl1.InsertItem(0 + i, str);
-		pag8.m_ListCtrl1.InsertItem(1 + i, "金币");
-		pag8.m_ListCtrl1.InsertItem(2 + i, "圣水");
-		pag8.m_ListCtrl1.InsertItem(3 + i, "黑油");
-		pag8.m_ListCtrl1.InsertItem(4 + i, "奖杯");
+		stats.m_ListCtrl1.InsertItem(0 + i, str);
+		stats.m_ListCtrl1.InsertItem(1 + i, "金币");
+		stats.m_ListCtrl1.InsertItem(2 + i, "圣水");
+		stats.m_ListCtrl1.InsertItem(3 + i, "黑油");
+		stats.m_ListCtrl1.InsertItem(4 + i, "奖杯");
 		i = i / 5;
 	}
 
@@ -1204,7 +1204,7 @@ void CcocBotDlg::OnTimer(UINT_PTR nIDEvent)
 			bigTime = (tm.GetDay() - script[0].coc.tm.GetDay()) * 86400 + (tm.GetHour() - script[0].coc.tm.GetHour()) * 3600
 				+ (tm.GetMinute() - script[0].coc.tm.GetMinute()) * 60 + tm.GetSecond() - script[0].coc.tm.GetSecond();
 			str.Format("运行时间：%d d %d h %d m %d s ", bigTime / 86400, (bigTime % 86400) / 3600, (bigTime % 3600) / 60, bigTime % 60);
-			pag8.RunTime.SetWindowTextA(str);
+			stats.RunTime.SetWindowTextA(str);
 			WinText = "CocBot 当前版本:<<";
 			WinText += cocBotVer;
 			WinText += ">>";
@@ -1496,7 +1496,7 @@ LRESULT CcocBotDlg::Statistics(WPARAM wParam, LPARAM lParam)
 	str[3].Format("%ld", LootRecord->StartTroophs);
 	for (int i = 0; i <= 3; i++)
 	{
-		pag8.m_ListCtrl1.SetItemText(i + 1 + py, 1, str[i]);
+		stats.m_ListCtrl1.SetItemText(i + 1 + py, 1, str[i]);
 	}
 	//当前
 	str[0].Format("%ld", LootRecord->NowGold);
@@ -1505,7 +1505,7 @@ LRESULT CcocBotDlg::Statistics(WPARAM wParam, LPARAM lParam)
 	str[3].Format("%ld", LootRecord->NowTroophs);
 	for (int i = 0; i <= 3; i++)
 	{
-		pag8.m_ListCtrl1.SetItemText(i + 1 + py, 2, str[i]);
+		stats.m_ListCtrl1.SetItemText(i + 1 + py, 2, str[i]);
 	}
 	//获取
 	str[0].Format("%ld", LootGold);
@@ -1514,7 +1514,7 @@ LRESULT CcocBotDlg::Statistics(WPARAM wParam, LPARAM lParam)
 	str[3].Format("%ld", LootTroophs);
 	for (int i = 0; i <= 3; i++)
 	{
-		pag8.m_ListCtrl1.SetItemText(i + 1 + py, 3, str[i]);
+		stats.m_ListCtrl1.SetItemText(i + 1 + py, 3, str[i]);
 	}
 	//时均
 	str[0].Format("%ld", LootGold * 60 / RunTime);
@@ -1523,7 +1523,7 @@ LRESULT CcocBotDlg::Statistics(WPARAM wParam, LPARAM lParam)
 	str[3].Format("%ld", LootTroophs * 60 / RunTime);
 	for (int i = 0; i <= 3; i++)
 	{
-		pag8.m_ListCtrl1.SetItemText(i + 1 + py, 4, str[i]);
+		stats.m_ListCtrl1.SetItemText(i + 1 + py, 4, str[i]);
 	}
 	//天均
 	str[0].Format("%ld", (LootGold * 24 / RunTime) * 60);
@@ -1532,7 +1532,7 @@ LRESULT CcocBotDlg::Statistics(WPARAM wParam, LPARAM lParam)
 	str[3].Format("%ld", (LootTroophs * 24 / RunTime) * 60);
 	for (int i = 0; i <= 3; i++)
 	{
-		pag8.m_ListCtrl1.SetItemText(i + 1 + py, 5, str[i]);
+		stats.m_ListCtrl1.SetItemText(i + 1 + py, 5, str[i]);
 	}
 	return 0;
 }
