@@ -1808,6 +1808,7 @@ int CScript::SearchFish()
 			showStr.Format("搜索次数超过%d", SearchMaxCount);
 			return 0;
 		}
+		LootRecord[SwitchNo].SearchCount++;
 		search_i = 0;
 		do
 		{
@@ -3094,6 +3095,7 @@ int CScript::Attack()
 			break;
 
 		}
+		LootRecord[SwitchNo].AttackCount++;
 		/*等待返回*/
 		Ret = WaitForReturnHome();
 		return Ret;
