@@ -1063,12 +1063,11 @@ int CScript::WaitForReturnHome()
 		if (ntGold == nbGold&&ntElixir == nbElixir&&ntDark == nbDark)
 		{
 			nTime++;
-			if (nTime % 2 == 0)
+			if (nTime % 5 == 0)
 			{
 				str_t.Format("%d", AttackMinWaitTime - nTime);
-				SetLog("战斗将在" + str_t + "秒后结束", true, RGB(0x00, 0x00, 0xff), false);
+				SetLog("战斗将在" + str_t + "秒后结束", true, BLACKCOLOR, false);
 			}
-
 		}
 		else
 		{
