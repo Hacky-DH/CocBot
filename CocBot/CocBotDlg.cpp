@@ -1654,15 +1654,13 @@ void CcocBotDlg::OnNMRClickList1(NMHDR *pNMHDR, LRESULT *pResult)
 
 void CcocBotDlg::OnLaunch()
 {
-	// TODO: 在此添加命令处理程序代码
-	script[MAX_THREAD_COUNT].LaunchAppPlayer(row);
+	script[row].LaunchAppPlayer(row);
 }
 
 
 void CcocBotDlg::OnQuit()
 {
-	// TODO: 在此添加命令处理程序代码
-	script[MAX_THREAD_COUNT].QuitAppPlayer(row);
+	script[row].QuitAppPlayer(row);
 }
 
 
@@ -1730,14 +1728,14 @@ void CcocBotDlg::OnBnClickedUpdataList()
 			if (vstr1[i].length() <= 1) break;
 			_split(vstr1[i], vstr2, ",");
 			n = _ttoi(vstr2[0].c_str());
-			/*for (int j = 1; j < vstr2.Size(); j++)
-			{
-			m_list.SetItemText(n, j, vstr2[j]);
-			}*/
 			m_list.SetItemText(n, 0, vstr2[0].c_str());/* index */
 			m_list.SetItemText(n, 1, vstr2[1].c_str());/* title */
 			m_list.SetItemText(n, 4, vstr2[2].c_str());/* handle */
 		}
+		multi_player_num = vstr1.size();
+	}
+	else {
+		multi_player_num = 1;
 	}
 }
 

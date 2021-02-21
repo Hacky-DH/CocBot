@@ -45,6 +45,8 @@ private:
 	bool IsInit;
 	
 	SCRIPT_STATE contorl_script = SCRIPT_STATE::NOTSTART;
+
+	size_t multi_player_num;
 //  µœ÷
 protected:
 	HICON m_hIcon; //Õº∆¨
