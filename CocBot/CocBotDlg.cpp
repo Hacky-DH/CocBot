@@ -98,7 +98,7 @@ BEGIN_MESSAGE_MAP(CcocBotDlg, CDialogEx)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST1, &CcocBotDlg::OnNMRClickList1)
 	ON_COMMAND(IDM_LAUNCH, &CcocBotDlg::OnLaunch)
 	ON_COMMAND(IDM_QUIT, &CcocBotDlg::OnQuit)
-	ON_COMMAND(IDM_START_ONE_SCRIPT, &CcocBotDlg::OnPauseOneScript)
+	ON_COMMAND(IDM_START_ONE_SCRIPT, &CcocBotDlg::OnStartOneScript)
 	ON_COMMAND(IDM_PAUSE_ONE_SCRIPT, &CcocBotDlg::OnPauseOneScript)
 	ON_COMMAND(IDM_STOP_ONE_SCRIPT, &CcocBotDlg::OnStopOneScript)
 	ON_BN_CLICKED(IDC_UPDATA_LIST, &CcocBotDlg::OnBnClickedUpdataList)
@@ -1686,11 +1686,14 @@ void CcocBotDlg::OnStartOneScript()
 
 void CcocBotDlg::OnPauseOneScript()
 {
-	// TODO: 在此添加命令处理程序代码
-	CString str;
-	menu.GetMenuString(row, str, MF_BYCOMMAND);
-	AfxMessageBox(str);
+	if (script[row].IsThreadRunSuspend) {
 
+		ResumOneScript(&script[row]);
+	}
+	else {
+
+		SuspendOneScript(&script[row]);
+	}
 }
 
 

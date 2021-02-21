@@ -46,6 +46,7 @@ public:
 	int SwitchNo;								//切换编号
 	int trainTime;								//训练时间
 	bool IsThreadRun;							//线程函数运行标志
+	bool IsThreadRunSuspend;
 	int AppPlayerIndex;							//模拟器编号
 	int AppCocID;								//coc 编号
 	int AppPlayerType;							//模拟器类型

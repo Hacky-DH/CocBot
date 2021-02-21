@@ -20,6 +20,7 @@ CScript::CScript()
 	AppCocID = 0;
 	AppPlayerType = 0;
 	IsSwitch = false;
+	IsThreadRunSuspend = false;
 }
 
 
@@ -3437,6 +3438,7 @@ BOOL SuspendOneScript(CScript* script_info)
 {
 	if (script_info == NULL) return FALSE;
 	script_info->pThread->SuspendThread();
+	script_info->IsThreadRunSuspend = true;
 	return TRUE;
 }
 
@@ -3444,6 +3446,7 @@ BOOL ResumOneScript(CScript* script_info)
 {
 	if (script_info == NULL) return FALSE;
 	script_info->pThread->ResumeThread();
+	script_info->IsThreadRunSuspend = false;
 	return TRUE;
 }
 
@@ -3453,6 +3456,7 @@ BOOL SuspendAllScript(CScript* script_info[])
 	{
 		if (script_info == NULL) continue;;
 		script_info[i]->pThread->SuspendThread();
+		script_info[i]->IsThreadRunSuspend = true;
 	}
 	return TRUE;
 }
@@ -3463,6 +3467,7 @@ BOOL ResumAllScript(CScript* script_info[])
 	{
 		if (script_info == NULL) continue;
 		script_info[i]->pThread->ResumeThread();
+		script_info[i]->IsThreadRunSuspend = false;
 	}
 	return TRUE;
 }
