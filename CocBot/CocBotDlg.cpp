@@ -1424,13 +1424,12 @@ LRESULT CcocBotDlg::SetLog(WPARAM wParam, LPARAM lParam)
 	SEND_INFO* info = (SEND_INFO*)lParam;
 	//coc.State_str = logStr;
 	m_list.SetItemText(wParam, 3, info->logStr);
-	if (wParam != 0) return NULL;
 	CString strTime, keytime, WriteStr;
 	CTime tm;
 	tm = CTime::GetCurrentTime();
 	strTime = tm.Format("%y-%m-%d");
 	keytime = tm.Format("%X");
-	WriteStr = _T("[") + keytime + _T("]") + info->logStr + _T("\r\n");
+	WriteStr.Format("[%d][%s] %s\r\n", wParam, keytime, info->logStr);
 	if (info->IsShow == true)
 	{
 		//***********RICH EDIT********************//
@@ -1443,7 +1442,6 @@ LRESULT CcocBotDlg::SetLog(WPARAM wParam, LPARAM lParam)
 		cf.crTextColor = info->color;
 		cf.yHeight = 12 * 12;
 		strcpy_s(cf.szFaceName, 32, _T("宋体"));
-		WriteStr = _T("[") + keytime + _T("]") + info->logStr + _T("\r\n");
 		if (nLineCounts >= 1000)
 		{
 			pag9.m_RichEdit1.SetWindowText("");
